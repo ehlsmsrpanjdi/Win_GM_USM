@@ -1,9 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="EngineCore.h" />
+    <ClInclude Include="Level.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="NameObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TickObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineCore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Object\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EngineCore.cpp" />
+    <ClCompile Include="Level.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="NameObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TickObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineCore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Object\Actor</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{ff2a4eaa-f731-40eb-8a96-01702f5c37eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{d669f8fc-5864-4824-9665-e047e226e332}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor">
+      <UniqueIdentifier>{0e16644a-b6d4-42bc-8f1a-15f76a4d7826}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

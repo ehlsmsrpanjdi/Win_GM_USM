@@ -86,7 +86,7 @@ void EngineWindow::Open(std::string_view _Title /*= "Title"*/)
 
 }
 
-unsigned __int64 EngineWindow::WindowMessageLoop()
+unsigned __int64 EngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)())
 {
 	MSG msg = {};
 
@@ -99,6 +99,17 @@ unsigned __int64 EngineWindow::WindowMessageLoop()
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
+
+		// 메세지 루프의 데드타임이라는 곳에서 실행됩니다.
+		if (nullptr != _Update)
+		{
+			_Update();
+		}
+	}
+
+	if (nullptr != _End)
+	{
+		_End();
 	}
 
 	return msg.wParam;
