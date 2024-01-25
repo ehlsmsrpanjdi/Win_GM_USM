@@ -5,11 +5,22 @@
     <ClInclude Include="Mario.h" />
     <ClInclude Include="PlayLevel.h" />
     <ClInclude Include="TitleLevel.h" />
+    <ClInclude Include="Fire.h">
+      <Filter>Fire</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="PlayLevel.cpp" />
     <ClCompile Include="TitleLevel.cpp" />
+    <ClCompile Include="Fire.cpp">
+      <Filter>Fire</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Fire">
+      <UniqueIdentifier>{5967437c-ee93-487a-937c-9c587b40ed97}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
