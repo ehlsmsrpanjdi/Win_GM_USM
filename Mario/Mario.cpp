@@ -61,11 +61,17 @@ void Mario::Tick(float _DeltaTime)
 		FVector AddedSpeed = AccelerateX * -1 * _DeltaTime;
 		AddSpeed(AddedSpeed);
 	}
+	else {
+
+	}
 
 	if (true == EngineInput::IsPress('D'))
 	{
 		FVector AddedSpeed = AccelerateX * _DeltaTime;
 		AddSpeed(AddedSpeed);
+	}
+	else {
+
 	}
 
 	if (true == EngineInput::IsPress('W'))
@@ -75,11 +81,13 @@ void Mario::Tick(float _DeltaTime)
 	}
 
 
+
 	if (true == EngineInput::IsPress('S'))
 	{
 		FVector AddedSpeed = AccelerateY * _DeltaTime;
 		AddSpeed(AddedSpeed);
 	}
+
 
 	AddActorLocation(CurSpeed * _DeltaTime);
 
@@ -93,4 +101,15 @@ void Mario::Tick(float _DeltaTime)
 	HDC WindowDC = GEngine->MainWindow.GetWindowDC();
 	FTransform Trans = GetTransform();
 	Rectangle(WindowDC, Trans.iLeft(), Trans.iTop(), Trans.iRight(), Trans.iBottom());
+}
+
+void Mario::AddSpeed(FVector _FVector) {
+
+	if (MaxSpeedX >= CurSpeed.X + _FVector.X && -MaxSpeedX <= CurSpeed.X + _FVector.X) {
+		CurSpeed.X += _FVector.X;
+	}
+
+	if (MaxSpeedY >= CurSpeed.Y + _FVector.Y && -MaxSpeedY <= CurSpeed.Y + _FVector.Y) {
+		CurSpeed.Y += _FVector.Y;
+	}
 }

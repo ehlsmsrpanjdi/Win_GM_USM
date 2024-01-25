@@ -20,22 +20,15 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	void AddSpeed(FVector _FVector) {
-
-		if (MaxSpeedX >= CurSpeed.X + _FVector.X && -MaxSpeedX <= CurSpeed.X + _FVector.X){
-			CurSpeed.X += _FVector.X;
-		}
-
-		if (MaxSpeedY >= CurSpeed.Y + _FVector.Y && -MaxSpeedY <= CurSpeed.Y + _FVector.Y) {
-			CurSpeed.Y += _FVector.Y;
-		}
+	void AddSpeed(FVector _FVector);
+	inline void NotMove() {
+		CurSpeed.X *= 0.6f;
 	}
-
 	FVector AccelerateX = { 500.f,0,0,0 };
 	FVector AccelerateY = { 0,500.f,0,0 };
 	FVector CurSpeed = { 0,0,0,0 };
-	float MaxSpeedX = 100.f;
-	float  MaxSpeedY = 100.f;
+	float MaxSpeedX = 500.f;
+	float  MaxSpeedY = 500.f;
 private:
 
 };
