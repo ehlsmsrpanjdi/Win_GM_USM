@@ -15,6 +15,7 @@ ContentsCore::~ContentsCore()
 // 게임시작
 void ContentsCore::BeginPlay()
 {
+	SetFrame(60);
 	// "Title Level" + "을 만들다가 에러가 났습니다";
 
 	CreateLevel<UTitleLevel>("TitleLevel");
