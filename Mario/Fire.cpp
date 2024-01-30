@@ -14,7 +14,7 @@ AFire::~AFire()
 void AFire::BeginPlay()
 {
 	UImageRenderer* Renderer = CreateImageRenderer(-10);
-	Renderer->SetImageToScale("CB2.bmp");
+	Renderer->SetImageToScale("AAA.png");
 
 	Destroy(2.0f);
 }
