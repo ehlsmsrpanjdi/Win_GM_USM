@@ -16,30 +16,7 @@ Mario::~Mario()
 
 void Mario::BeginPlay()
 {
-	//{
-	//	EngineTime NewTime;
-	//	NewTime.TimeCheckStart();
-	//	std::vector<int> NewInt;
-	//	for (int i = 0; i < 10000000; i++)
-	//	{
-	//		NewInt.push_back(i);
-	//	}
-	//	float Time = NewTime.TimeCheck();
-	//	int a = 0;
-	//}
-	//{
-	//	EngineTime NewTime;
-	//	NewTime.TimeCheckStart();
-	//	std::list<int> NewInt;
-	//	for (int i = 0; i < 10000000; i++)
-	//	{
-	//		NewInt.push_back(i);
-	//	}
-	//	float Time = NewTime.TimeCheck();
-	//	int a = 0;
-	//}
-
-
+	AActor::BeginPlay();
 
 	SetActorLocation({ 100, 100 });
 	SetActorScale({ 100, 100 });
@@ -88,6 +65,12 @@ void Mario::Tick(float _DeltaTime)
 		AddSpeed(AddedSpeed);
 	}
 
+	if (true == EngineInput::IsPress('T'))
+	{
+		GEngine->End();
+	}
+
+
 
 	AddActorLocation(CurSpeed * _DeltaTime);
 
@@ -97,10 +80,6 @@ void Mario::Tick(float _DeltaTime)
 		NewFire->SetActorLocation(GetActorLocation());
 		NewFire->SetDir(FVector::Right);
 	}
-
-	HDC WindowDC = GEngine->MainWindow.GetWindowDC();
-	FTransform Trans = GetTransform();
-	Rectangle(WindowDC, Trans.iLeft(), Trans.iTop(), Trans.iRight(), Trans.iBottom());
 }
 
 void Mario::AddSpeed(FVector _FVector) {

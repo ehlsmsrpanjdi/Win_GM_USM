@@ -25,6 +25,12 @@
     <ClInclude Include="EnginePath.h">
       <Filter>IO</Filter>
     </ClInclude>
+    <ClInclude Include="PathObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="NameObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineString.cpp">
@@ -51,6 +57,12 @@
     <ClCompile Include="EnginePath.cpp">
       <Filter>IO</Filter>
     </ClCompile>
+    <ClCompile Include="PathObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="NameObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="String">
@@ -67,6 +79,9 @@
     </Filter>
     <Filter Include="IO">
       <UniqueIdentifier>{9063753d-0da3-443e-934a-2f513bfe502e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{41ff610c-cc39-49fb-bf26-3b771fda8872}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

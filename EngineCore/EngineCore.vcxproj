@@ -169,16 +169,11 @@
     </ClInclude>
     <ClInclude Include="EngineCore.h" />
     <ClInclude Include="EngineResourcesManager.h" />
-    <ClInclude Include="Image.h" />
     <ClInclude Include="ImageRenderer.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="NameObject.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -202,16 +197,11 @@
     </ClCompile>
     <ClCompile Include="EngineCore.cpp" />
     <ClCompile Include="EngineResourcesManager.cpp" />
-    <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageRenderer.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="Level.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="NameObject.cpp">
       <SubType>
       </SubType>
     </ClCompile>
