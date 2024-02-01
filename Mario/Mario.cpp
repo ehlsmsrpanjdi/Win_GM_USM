@@ -17,9 +17,8 @@ Mario::~Mario()
 void Mario::BeginPlay()
 {
 	AActor::BeginPlay();
-
 	SetActorLocation({ 100, 100 });
-	SetActorScale({ 100, 100 });
+
 }
 
 void Mario::Tick(float _DeltaTime)

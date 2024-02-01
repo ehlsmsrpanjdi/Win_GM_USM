@@ -10,23 +10,23 @@
 
 class ULevel;
 // 설명 :
-class EngineCore
+class UEngineCore
 {
 public:
-	~EngineCore();
+	~UEngineCore();
 
 	// delete Function
-	EngineCore(const EngineCore& _Other) = delete;
-	EngineCore(EngineCore&& _Other) noexcept = delete;
-	EngineCore& operator=(const EngineCore& _Other) = delete;
-	EngineCore& operator=(EngineCore&& _Other) noexcept = delete;
+	UEngineCore(const UEngineCore& _Other) = delete;
+	UEngineCore(UEngineCore&& _Other) noexcept = delete;
+	UEngineCore& operator=(const UEngineCore& _Other) = delete;
+	UEngineCore& operator=(UEngineCore&& _Other) noexcept = delete;
 
 	// 하나는 무조건 만들어지고 사라질일이 없을것이므ㅗ.
 	// 코어가 윈도우를 가지고
 	UEngineWindow MainWindow;
 	EngineTime MainTimer;
 
-	static void EngineStart(HINSTANCE _hInstance, EngineCore* _UserCore);
+	void EngineStart(HINSTANCE _hInstance);
 
 	void CoreInit(HINSTANCE _Init);
 
@@ -47,6 +47,7 @@ public:
 		LevelType* NewLevel = new LevelType();
 		LevelInit(NewLevel);
 		AllLevel.insert(std::pair<std::string, ULevel*>(UpperName, NewLevel));
+		// AllLevel[UpperName] = NewLevel;
 	}
 
 	void ChangeLevel(std::string_view _Name);
@@ -58,7 +59,7 @@ public:
 	}
 
 protected:
-	EngineCore();
+	UEngineCore();
 
 private:
 	int Frame = -1;
@@ -76,7 +77,7 @@ private:
 	void LevelInit(ULevel* _Level);
 };
 
-extern EngineCore* GEngine;
+extern UEngineCore* GEngine;
 
 
 #define ENGINESTART(USERCORE) \
@@ -87,5 +88,5 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, \
 { \
     LeakCheck; \
 	USERCORE NewUserCore = USERCORE(); \
-	EngineCore::EngineStart(hInstance, &NewUserCore); \
+	NewUserCore.EngineStart(hInstance); \
 }

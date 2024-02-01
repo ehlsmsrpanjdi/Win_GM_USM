@@ -4,7 +4,7 @@
 #include "PlayLevel.h"
 
 ContentsCore::ContentsCore()
-	: EngineCore()
+	: UEngineCore()
 {
 }
 

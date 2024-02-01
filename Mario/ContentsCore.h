@@ -2,7 +2,7 @@
 #include <EngineCore\EngineCore.h>
 
 // Ό³Έν :
-class ContentsCore : public EngineCore
+class ContentsCore : public UEngineCore
 {
 public:
 	// constrcuter destructer

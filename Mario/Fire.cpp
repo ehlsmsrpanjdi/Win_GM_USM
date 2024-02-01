@@ -13,8 +13,7 @@ AFire::~AFire()
 
 void AFire::BeginPlay()
 {
-	UImageRenderer* Renderer = CreateImageRenderer(-10);
-	Renderer->SetImageToScale("AAA.png");
+	UImageRenderer* Renderer = CreateImageRenderer();
 
 	Destroy(2.0f);
 }
