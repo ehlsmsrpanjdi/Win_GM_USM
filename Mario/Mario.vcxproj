@@ -35,6 +35,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Fire.h" />
+    <ClInclude Include="TitleLogo.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Mario.h">
       <SubType>
       </SubType>
@@ -54,6 +58,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Fire.cpp" />
+    <ClCompile Include="TitleLogo.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Mario.cpp">
       <SubType>
       </SubType>

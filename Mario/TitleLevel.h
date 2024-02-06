@@ -19,6 +19,5 @@ protected:
 	void BeginPlay() override;
 
 private:
-
 };
 

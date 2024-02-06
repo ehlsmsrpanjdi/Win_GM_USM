@@ -1,26 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="ContentsCore.h" />
-    <ClInclude Include="Mario.h" />
-    <ClInclude Include="PlayLevel.h" />
-    <ClInclude Include="TitleLevel.h" />
     <ClInclude Include="Fire.h">
-      <Filter>Fire</Filter>
+      <Filter>Actor\Fire</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel.h">
+      <Filter>Stage1</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsCore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Mario.h">
+      <Filter>Actor\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLogo.h">
+      <Filter>Actor\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLevel.h">
+      <Filter>Actor\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ContentsCore.cpp" />
-    <ClCompile Include="Mario.cpp" />
-    <ClCompile Include="PlayLevel.cpp" />
-    <ClCompile Include="TitleLevel.cpp" />
     <ClCompile Include="Fire.cpp">
-      <Filter>Fire</Filter>
+      <Filter>Actor\Fire</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel.cpp">
+      <Filter>Stage1</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsCore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Mario.cpp">
+      <Filter>Actor\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLogo.cpp">
+      <Filter>Actor\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>Actor\Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Fire">
+    <Filter Include="Actor">
+      <UniqueIdentifier>{6d948f19-da4e-433b-8724-ad634e478700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Fire">
       <UniqueIdentifier>{5967437c-ee93-487a-937c-9c587b40ed97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{e897857a-7cdf-4e99-8bd2-4d967cfc0fc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Mario">
+      <UniqueIdentifier>{57735b2c-00f7-4327-a0fc-08547a023f9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Title">
+      <UniqueIdentifier>{bd9602ee-0b27-48ba-a313-220877c35d51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stage1">
+      <UniqueIdentifier>{e1247206-7384-4814-9dfa-56d2e7cb058a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
