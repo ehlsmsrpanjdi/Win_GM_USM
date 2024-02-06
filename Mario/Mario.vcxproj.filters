@@ -19,6 +19,16 @@
     <ClInclude Include="TitleLevel.h">
       <Filter>Actor\Title</Filter>
     </ClInclude>
+    <ClInclude Include="MarioLevelBase.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionActor.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="MarioHelper.h" />
+    <ClInclude Include="Stage1_Map.h">
+      <Filter>Stage1</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -38,6 +48,16 @@
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Actor\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="MarioLevelBase.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionActor.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="MarioHelper.cpp" />
+    <ClCompile Include="Stage1_Map.cpp">
+      <Filter>Stage1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

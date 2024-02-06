@@ -97,7 +97,7 @@ void UImageRenderer::Render(float _DeltaTime)
 
 	// 컴포넌트의 위치는 부모에게서 상대적이기 때문에.
 	// 부모의 위치를 더해줘야 한다.
-	RendererTrans.AddPosition(ActorTrans.GetPosition());
+		RendererTrans.AddPosition(ActorTrans.GetPosition());
 
 	AActor* Actor = GetOwner();
 	ULevel* World = Actor->GetWorld();

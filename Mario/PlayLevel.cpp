@@ -3,6 +3,7 @@
 #include <EngineCore\EngineResourcesManager.h>
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
+#include "CollisionActor.h"
 
 UPlayLevel::UPlayLevel()
 {
@@ -33,16 +34,18 @@ void UPlayLevel::BeginPlay()
 
 	//// ULevel* const This = this;
 
-	UEngineDirectory NewPath;
+	UEngineDirectory NewDir;
 
 	// NewPath.Move("ContentsResources");
-	NewPath.MoveParent();
-
+	NewDir.MoveParent();
+	NewDir.Move("ContentsResources");
+	NewDir.Move("Map");
+	NewDir.Move("Stage1");
 	
 
 
 	// 확장자도 마찬가지 대소문자 구분을 무조건 대문자로 바꿔서 찾을것이다..
-	std::list<UEngineFile> AllFileList = NewPath.AllFile({ ".png", ".bmp" }, true);
+	std::list<UEngineFile> AllFileList = NewDir.AllFile({ ".png", ".bmp" }, true);
 
 	for (UEngineFile& File : AllFileList)
 	{
@@ -50,14 +53,13 @@ void UPlayLevel::BeginPlay()
 		// 싱글톤 잊지 말라고 일부러 GetInst를 사용하겠습니다.
 		UEngineResourcesManager::GetInst().LoadImg(FullPath);
 	}
+	Mario* TestMario;
+	BackGroundMap* Map;
+	TestMario = this->SpawnActor<Mario>();
+	Map = this->SpawnActor<BackGroundMap>();
+	//Map->SetCollisionActorImage(GetName());
+	Map->SetRenderImage(GetName() + ".PNG");
+	Map->SetColRenderImage(GetName() + "_Col.PNG");
+	TestMario->SetActorLocation({ 200,200 });
 
-	this->SpawnActor<Mario>();
-
-	// SpawnActor<Player>();
-
-	// 할일은 
-	// 플레이어
-	// 배경
-	// 몬스터
-	// 등등등을 코드로 여기서 다 만들어야 한다.
 }

@@ -30,11 +30,27 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CollisionActor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ContentsCore.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="MarioHelper.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Fire.h" />
+    <ClInclude Include="MarioLevelBase.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Stage1_Map.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TitleLogo.h">
       <SubType>
       </SubType>
@@ -53,11 +69,27 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CollisionActor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ContentsCore.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="MarioHelper.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Fire.cpp" />
+    <ClCompile Include="MarioLevelBase.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Stage1_Map.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
       <SubType>
       </SubType>

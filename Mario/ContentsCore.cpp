@@ -27,8 +27,8 @@ void ContentsCore::BeginPlay()
 	MainWindow.SetWindowPosition({ 800/* * 1.5f*/, 0/* * 1.5f*/ });
 	// 1200 
 	CreateLevel<UTitleLevel>("TitleLevel");
-
-	ChangeLevel("TitleLevel");
+	CreateLevel<UPlayLevel>("Stage1");
+	ChangeLevel("Stage1");
 }
 
 void ContentsCore::Tick(float _DeltaTime)
