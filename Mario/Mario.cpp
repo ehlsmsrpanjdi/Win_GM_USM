@@ -28,6 +28,7 @@ void Mario::BeginPlay()
 	Renderer->CreateAnimation("Idle_Left", "TestPlayer_Left.png", 0, 0, 0.1f, true);
 	Renderer->CreateAnimation("Move_Left", "TestPlayer_Left.png", 1, 3, 0.1f, true);
 	SetAnimation("Idle");
+	SetState(EPlayState::Idle);
 
 }
 
@@ -68,6 +69,9 @@ void Mario::StateUpdate(float _DeltaTime)
 	default:
 		break;
 	}
+
+	GravityCheck(_DeltaTime);
+
 }
 
 
@@ -85,8 +89,7 @@ void Mario::AddSpeed(FVector _FVector) {
 
 void Mario::SetState(EPlayState _State)
 {
-	// 이전상태와 지금 상태가 같지 않아
-// 이전에는 move 지금은 Idle
+
 	if (State != _State)
 	{
 		switch (_State)
@@ -132,10 +135,17 @@ void Mario::MoveStart()
 
 void Mario::JumpStart()
 {
+	//SetAnimation("Move");
 }
 
 void Mario::Idle(float _DeltaTime)
 {
+	if (true == EngineInput::IsDown(VK_LEFT) || true == EngineInput::IsDown(VK_RIGHT)) {
+		SetState(EPlayState::Move);
+	}
+
+
+
 }
 
 void Mario::Move(float _DeltaTime)
@@ -147,6 +157,8 @@ void Mario::Move(float _DeltaTime)
 		return;
 	}
 
+
+	
 }
 
 void Mario::Jump(float _DeltaTime)
