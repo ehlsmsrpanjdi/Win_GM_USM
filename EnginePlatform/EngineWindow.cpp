@@ -1,6 +1,8 @@
 #include "EngineWindow.h"
 #include <EngineBase\EngineDebug.h>
 #include "WindowImage.h"
+#include <EngineBase/EngineTime.h>
+#include <string>
 
 bool UEngineWindow::WindowLive = true;
 HINSTANCE UEngineWindow::hInstance;
@@ -8,6 +10,7 @@ HINSTANCE UEngineWindow::hInstance;
 
 LRESULT CALLBACK UEngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	std::string TestTimeString = std::to_string(EngineTime::TestTime);
 	switch (message)
 	{
 	case WM_PAINT:
@@ -21,6 +24,8 @@ LRESULT CALLBACK UEngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, 
 		WindowLive = false;
 		// PostQuitMessage(123213);
 		break;
+	case WM_LBUTTONDOWN:
+		SetWindowText(hWnd, TestTimeString.data());
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}
@@ -77,12 +82,6 @@ void UEngineWindow::Open(std::string_view _Title /*= "Title"*/)
 
 	RegisterClassExA(&wcex);
 
-	// const std::string& = 내부에 뭘들고 있다고 생각하라고 했나요?
-	// std::vector<char> 들고 있다고 생각하라고 했다.
-	// _Title[0] = char&를 리턴해준 것과 같다.
-	// _Title.c_str(); => 자연스럽게 내부에서 
-	// const char* Test = &_Title[0]
-	// return Test;
 
 	int Style = WS_OVERLAPPED |
 		WS_CAPTION |
@@ -90,12 +89,6 @@ void UEngineWindow::Open(std::string_view _Title /*= "Title"*/)
 		WS_THICKFRAME |
 		WS_MINIMIZEBOX |
 		WS_MAXIMIZEBOX;
-
-	// WS_OVERLAPPEDWINDOW
-
-	// void CreateWindow(bool IsTitle, bool IsMenu, bool IsMax, bool )
-	// bool IsTitle, 
-
 
 	hWnd = CreateWindowA("DefaultWindow", _Title.data(), Style,
 		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);

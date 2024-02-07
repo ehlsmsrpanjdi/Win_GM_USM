@@ -19,8 +19,6 @@ enum class EActorDir
 enum class EPlayState
 {
 	None,
-	CameraFreeMove,
-	FreeMove,
 	Idle,
 	Move,
 	Jump,
@@ -33,7 +31,7 @@ class MarioHelper
 {
 public:
 	static UWindowImage* ColMapImage;
-
+	static float Gravity;
 private:
 	// constrcuter destructer
 	MarioHelper();

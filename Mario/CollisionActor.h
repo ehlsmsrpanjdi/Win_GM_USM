@@ -16,13 +16,16 @@ public:
 	CollisionActor& operator=(CollisionActor&& _Other) noexcept = delete;
 
 	void SetRenderImage(std::string_view _MapImageName);
-	virtual void SetColRenderImage(std::string_view _MapImageName);
+	void SetColRenderImage(std::string_view _MapImageName);
 	void SetCollisionActorImage(std::string_view _MapImageName);
-	void BeginPlay() override;
+
+	void SwitchRender();
 
 protected:
 private:
 	UImageRenderer* Renderer = nullptr;
 	UImageRenderer* ColRenderer = nullptr;
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
 } typedef BackGroundMap;
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore\Actor.h>
+#include "MarioHelper.h"
 
 // Ό³Έν :
 class Mario : public AActor
@@ -19,8 +20,25 @@ public:
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-
+	void SetActorCameraPos();
+	void StateUpdate(float _DeltaTime);
 	void AddSpeed(FVector _FVector);
+	void SetState(EPlayState _State);
+	bool GravityCheck(float _DeltaTime);
+
+
+protected:
+	void IdleStart();
+	void MoveStart();
+	void JumpStart();
+	void Idle(float _DeltaTime);
+	void Move(float _DeltaTime);
+	void Jump(float _DeltaTime);
+
+
+	std::string GetAnimationName(std::string _Name);
+	void SetAnimation(std::string _Name);
+
 	inline void NotMove() {
 		CurSpeed.X *= 0.6f;
 	}
@@ -30,6 +48,9 @@ protected:
 	float MaxSpeedX = 500.f;
 	float  MaxSpeedY = 500.f;
 private:
-
+	UImageRenderer* Renderer = nullptr;
+	EPlayState State = EPlayState::None;
+	EActorDir DirState = EActorDir::Right;
+	std::string CurAnimationName = "None";
 };
 

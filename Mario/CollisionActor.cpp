@@ -41,3 +41,30 @@ void CollisionActor::BeginPlay()
 	ColRenderer->SetActive(false);
 }
 
+void CollisionActor::Tick(float _DeltaTime)
+{
+	AActor::Tick(_DeltaTime);
+
+
+	if (EngineInput::IsDown('O'))
+	{
+		SwitchRender();
+	}
+}
+
+void CollisionActor::SwitchRender()
+{
+
+	if (true == Renderer->IsActive())
+	{
+		Renderer->SetActive(false);
+		ColRenderer->SetActive(true);
+	}
+	else
+	{
+		Renderer->SetActive(true);
+		ColRenderer->SetActive(false);
+	}
+
+}
+

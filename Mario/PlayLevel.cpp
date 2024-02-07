@@ -63,3 +63,7 @@ void UPlayLevel::BeginPlay()
 	TestMario->SetActorLocation({ 200,200 });
 
 }
+
+void UPlayLevel::Tick(float _DeltaTime)
+{
+}
