@@ -153,6 +153,10 @@ void Mario::Idle(float _DeltaTime)
 		SetState(EPlayState::Move);
 	}
 
+	if (true == EngineInput::IsUp(VK_LEFT) || true == EngineInput::IsUp(VK_RIGHT)) {
+		SetState(EPlayState::Move);
+	}
+
 
 
 	if (EngineInput::IsDown(VK_SPACE)) {
@@ -210,9 +214,7 @@ void Mario::Move(float _DeltaTime)
 void Mario::Jump(float _DeltaTime)
 {
 
-	if (CurSpeed.Y == 0.f) {
-		SetState(EPlayState::Idle);
-	}
+
 
 	if (EngineInput::IsPress(VK_LEFT) == true) {
 		AddSpeed(-AccelerateX * _DeltaTime);
@@ -223,10 +225,17 @@ void Mario::Jump(float _DeltaTime)
 	}
 
 	if (EngineInput::IsPress(VK_SPACE) == true) {
-		AddSpeed(AccelerateY * _DeltaTime);
+		AddSpeed(-AccelerateY * _DeltaTime);
 	}
+	
+	if (EngineInput::IsUp(VK_SPACE) == true) {
+		CurSpeed.Y = StopSpeed.Y;
 
-
+	}
+	if (EngineInput::IsFree(VK_SPACE) == true) {
+		GravityCheck(_DeltaTime);
+	}
+	
 	SetAnimation("Jump");
 	AddActorLocation(CurSpeed * _DeltaTime);
 	SetActorCameraPos();
