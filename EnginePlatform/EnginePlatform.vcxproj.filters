@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="EngineInput.cpp">
+    <ClCompile Include="UEngineInput.cpp">
       <Filter>Input</Filter>
     </ClCompile>
     <ClCompile Include="EngineWindow.cpp">
@@ -12,7 +12,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EngineInput.h">
+    <ClInclude Include="UEngineInput.h">
       <Filter>Input</Filter>
     </ClInclude>
     <ClInclude Include="EngineWindow.h">

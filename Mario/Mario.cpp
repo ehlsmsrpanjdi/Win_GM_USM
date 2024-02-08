@@ -149,17 +149,17 @@ void Mario::Idle(float _DeltaTime)
 	GravityCheck(_DeltaTime);
 
 
-	if (true == EngineInput::IsDown(VK_LEFT) || true == EngineInput::IsDown(VK_RIGHT)) {
+	if (true == UEngineInput::IsDown(VK_LEFT) || true == UEngineInput::IsDown(VK_RIGHT)) {
 		SetState(EPlayState::Move);
 	}
 
-	if (true == EngineInput::IsUp(VK_LEFT) || true == EngineInput::IsUp(VK_RIGHT)) {
+	if (true == UEngineInput::IsUp(VK_LEFT) || true == UEngineInput::IsUp(VK_RIGHT)) {
 		SetState(EPlayState::Move);
 	}
 
 
 
-	if (EngineInput::IsDown(VK_SPACE)) {
+	if (UEngineInput::IsDown(VK_SPACE)) {
 		SetState(EPlayState::Jump);
 		return;
 	}
@@ -173,34 +173,34 @@ void Mario::Move(float _DeltaTime)
 	GravityCheck(_DeltaTime);
 
 
-	if (EngineInput::IsDown(VK_SPACE)) {
+	if (UEngineInput::IsDown(VK_SPACE)) {
 		SetState(EPlayState::Jump);
 		return;
 	}
-	if (true == EngineInput::IsPress(VK_LEFT) && true == EngineInput::IsPress(VK_RIGHT)) {
+	if (true == UEngineInput::IsPress(VK_LEFT) && true == UEngineInput::IsPress(VK_RIGHT)) {
 		NotMove(_DeltaTime);
 		return;
 	}
 
-	if (EngineInput::IsPress(VK_LEFT) == true) {
+	if (UEngineInput::IsPress(VK_LEFT) == true) {
 		AddSpeed(-AccelerateX * _DeltaTime);
 	}
 
-	if (EngineInput::IsPress(VK_RIGHT) == true) {
+	if (UEngineInput::IsPress(VK_RIGHT) == true) {
 		AddSpeed(AccelerateX * _DeltaTime);
 	}
 
-	if (EngineInput::IsFree(VK_LEFT) && EngineInput::IsFree(VK_RIGHT)) {
+	if (UEngineInput::IsFree(VK_LEFT) && UEngineInput::IsFree(VK_RIGHT)) {
 		NotMove(_DeltaTime);
 		return;
 	}
 
-	if (true == EngineInput::IsPress(VK_LEFT) && true == EngineInput::IsPress(VK_RIGHT)) {
+	if (true == UEngineInput::IsPress(VK_LEFT) && true == UEngineInput::IsPress(VK_RIGHT)) {
 		NotMove(_DeltaTime);
 		return;
 	}
 
-	if (EngineInput::IsFree(VK_LEFT) && EngineInput::IsFree(VK_RIGHT)) {
+	if (UEngineInput::IsFree(VK_LEFT) && UEngineInput::IsFree(VK_RIGHT)) {
 		NotMove(_DeltaTime);
 		return;
 	}
@@ -216,23 +216,23 @@ void Mario::Jump(float _DeltaTime)
 
 
 
-	if (EngineInput::IsPress(VK_LEFT) == true) {
+	if (UEngineInput::IsPress(VK_LEFT) == true) {
 		AddSpeed(-AccelerateX * _DeltaTime);
 	}
 
-	if (EngineInput::IsPress(VK_RIGHT) == true) {
+	if (UEngineInput::IsPress(VK_RIGHT) == true) {
 		AddSpeed(AccelerateX * _DeltaTime);
 	}
 
-	if (EngineInput::IsPress(VK_SPACE) == true) {
+	if (UEngineInput::IsPress(VK_SPACE) == true) {
 		AddSpeed(-AccelerateY * _DeltaTime);
 	}
 	
-	if (EngineInput::IsUp(VK_SPACE) == true) {
+	if (UEngineInput::IsUp(VK_SPACE) == true) {
 		CurSpeed.Y = StopSpeed.Y;
 
 	}
-	if (EngineInput::IsFree(VK_SPACE) == true) {
+	if (UEngineInput::IsFree(VK_SPACE) == true) {
 		GravityCheck(_DeltaTime);
 	}
 	
@@ -271,11 +271,11 @@ std::string Mario::GetAnimationName(std::string _Name)
 void Mario::SetAnimation(std::string _Name)
 {
 	EActorDir Dir = DirState;
-	if (EngineInput::IsPress(VK_LEFT) && EngineInput::IsFree(VK_RIGHT))
+	if (UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsFree(VK_RIGHT))
 	{
 		Dir = EActorDir::Left;
 	}
-	if (EngineInput::IsPress(VK_RIGHT) && EngineInput::IsFree(VK_LEFT))
+	if (UEngineInput::IsPress(VK_RIGHT) && UEngineInput::IsFree(VK_LEFT))
 	{
 		Dir = EActorDir::Right;
 	}

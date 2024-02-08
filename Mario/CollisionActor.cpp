@@ -46,7 +46,7 @@ void CollisionActor::Tick(float _DeltaTime)
 	AActor::Tick(_DeltaTime);
 
 
-	if (EngineInput::IsDown('O'))
+	if (UEngineInput::IsDown('O'))
 	{
 		SwitchRender();
 	}
