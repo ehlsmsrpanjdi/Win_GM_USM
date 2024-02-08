@@ -38,8 +38,10 @@ void UPlayLevel::BeginPlay()
 	Mario* TestMario;
 	BackGroundMap* Map;
 	TestMario = this->SpawnActor<Mario>();
+
 	Map = this->SpawnActor<BackGroundMap>();
 	Map->SetCollisionActorImage(GetName());
+
 	TestMario->SetActorLocation({ 200,200 });
 
 }

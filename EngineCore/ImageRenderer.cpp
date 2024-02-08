@@ -97,13 +97,15 @@ void UImageRenderer::Render(float _DeltaTime)
 
 	// 컴포넌트의 위치는 부모에게서 상대적이기 때문에.
 	// 부모의 위치를 더해줘야 한다.
-		RendererTrans.AddPosition(ActorTrans.GetPosition());
+	RendererTrans.AddPosition(ActorTrans.GetPosition());
 
-	AActor* Actor = GetOwner();
-	ULevel* World = Actor->GetWorld();
-	FVector CameraPos = World->GetCameraPos();
-	// RendererTrans.AddPosition(CameraPos *= -1.0f);
-	RendererTrans.AddPosition(-CameraPos);
+	if (true == CameraEffect)
+	{
+		AActor* Actor = GetOwner();
+		ULevel* World = Actor->GetWorld();
+		FVector CameraPos = World->GetCameraPos();
+		RendererTrans.AddPosition(-CameraPos);
+	}
 
 	// TransColor 원리 특정 색상과 1비트도 차이가 나지 않는 색상은 출력을 삭제한다.
 	// TransCopy 에서만 

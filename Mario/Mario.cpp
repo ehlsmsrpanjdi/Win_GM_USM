@@ -18,15 +18,18 @@ Mario::~Mario()
 void Mario::BeginPlay()
 {
 	AActor::BeginPlay();
-
+	SetName("Mario");
+	std::string test = GetName();
 	Renderer = CreateImageRenderer(MarioRenderOrder::Player);
 	Renderer->SetImage("TestPlayer_Right.png");
 	Renderer->SetTransform({ {0,0}, {256, 256} });
-	Renderer->CreateAnimation("Idle_Right", "TestPlayer_Right.png", 0, 0, 0.1f, true);
+	Renderer->CreateAnimation("Idle_Right", "TestPlayer_Right.png", 0, 0, 0.1f, false);
 	Renderer->CreateAnimation("Move_Right", "TestPlayer_Right.png", 1, 3, 0.1f, true);
+	Renderer->CreateAnimation("Jump_Right", "TestPlayer_Right.png", 5, 5, 0.1f, false);
 
-	Renderer->CreateAnimation("Idle_Left", "TestPlayer_Left.png", 0, 0, 0.1f, true);
+	Renderer->CreateAnimation("Idle_Left", "TestPlayer_Left.png", 0, 0, 0.1f, false);
 	Renderer->CreateAnimation("Move_Left", "TestPlayer_Left.png", 1, 3, 0.1f, true);
+	Renderer->CreateAnimation("Jump_Left", "TestPlayer_Left.png", 5, 5, 0.1f, false);
 	SetAnimation("Idle");
 	SetState(EPlayState::Idle);
 
@@ -55,7 +58,6 @@ void Mario::StateUpdate(float _DeltaTime)
 	switch (State)
 	{
 	case EPlayState::None:
-		
 		break;
 	case EPlayState::Idle:
 		Idle(_DeltaTime);
@@ -65,12 +67,11 @@ void Mario::StateUpdate(float _DeltaTime)
 		break;
 	case EPlayState::Jump:
 		Jump(_DeltaTime);
+
 		break;
 	default:
 		break;
 	}
-
-	GravityCheck(_DeltaTime);
 
 }
 
@@ -120,6 +121,10 @@ bool Mario::GravityCheck(float _DeltaTime)
 	{
 		AddActorLocation(FVector::Down * _DeltaTime * MarioHelper::Gravity);
 	}
+	else {
+		int a = 0;
+	}
+
 	return false;
 }
 
@@ -135,15 +140,25 @@ void Mario::MoveStart()
 
 void Mario::JumpStart()
 {
-	//SetAnimation("Move");
+	SetAnimation("Jump");
 }
 
 void Mario::Idle(float _DeltaTime)
 {
+
+	GravityCheck(_DeltaTime);
+
+
 	if (true == EngineInput::IsDown(VK_LEFT) || true == EngineInput::IsDown(VK_RIGHT)) {
 		SetState(EPlayState::Move);
 	}
 
+
+
+	if (EngineInput::IsDown(VK_SPACE)) {
+		SetState(EPlayState::Jump);
+		return;
+	}
 
 
 }
@@ -151,18 +166,75 @@ void Mario::Idle(float _DeltaTime)
 void Mario::Move(float _DeltaTime)
 {
 
-	if (true == EngineInput::IsFree(VK_LEFT) && EngineInput::IsFree(VK_RIGHT))
-	{
-		SetState(EPlayState::Idle);
+	GravityCheck(_DeltaTime);
+
+
+	if (EngineInput::IsDown(VK_SPACE)) {
+		SetState(EPlayState::Jump);
+		return;
+	}
+	if (true == EngineInput::IsPress(VK_LEFT) && true == EngineInput::IsPress(VK_RIGHT)) {
+		NotMove(_DeltaTime);
 		return;
 	}
 
+	if (EngineInput::IsPress(VK_LEFT) == true) {
+		AddSpeed(-AccelerateX * _DeltaTime);
+	}
 
-	
+	if (EngineInput::IsPress(VK_RIGHT) == true) {
+		AddSpeed(AccelerateX * _DeltaTime);
+	}
+
+	if (EngineInput::IsFree(VK_LEFT) && EngineInput::IsFree(VK_RIGHT)) {
+		NotMove(_DeltaTime);
+		return;
+	}
+
+	if (true == EngineInput::IsPress(VK_LEFT) && true == EngineInput::IsPress(VK_RIGHT)) {
+		NotMove(_DeltaTime);
+		return;
+	}
+
+	if (EngineInput::IsFree(VK_LEFT) && EngineInput::IsFree(VK_RIGHT)) {
+		NotMove(_DeltaTime);
+		return;
+	}
+
+	SetAnimation("Move");
+	AddActorLocation(CurSpeed * _DeltaTime);
+	SetActorCameraPos();
+
 }
 
 void Mario::Jump(float _DeltaTime)
 {
+
+	if (CurSpeed.Y == 0.f) {
+		SetState(EPlayState::Idle);
+	}
+
+	if (EngineInput::IsPress(VK_LEFT) == true) {
+		AddSpeed(-AccelerateX * _DeltaTime);
+	}
+
+	if (EngineInput::IsPress(VK_RIGHT) == true) {
+		AddSpeed(AccelerateX * _DeltaTime);
+	}
+
+	if (EngineInput::IsPress(VK_SPACE) == true) {
+		AddSpeed(AccelerateY * _DeltaTime);
+	}
+
+
+	SetAnimation("Jump");
+	AddActorLocation(CurSpeed * _DeltaTime);
+	SetActorCameraPos();
+
+
+
+
+
 }
 
 std::string Mario::GetAnimationName(std::string _Name)
@@ -190,17 +262,48 @@ std::string Mario::GetAnimationName(std::string _Name)
 void Mario::SetAnimation(std::string _Name)
 {
 	EActorDir Dir = DirState;
-	if (EngineInput::IsPress(VK_LEFT))
+	if (EngineInput::IsPress(VK_LEFT) && EngineInput::IsFree(VK_RIGHT))
 	{
 		Dir = EActorDir::Left;
 	}
-	if (EngineInput::IsPress(VK_RIGHT))
+	if (EngineInput::IsPress(VK_RIGHT) && EngineInput::IsFree(VK_LEFT))
 	{
 		Dir = EActorDir::Right;
 	}
+
 
 	DirState = Dir;
 	std::string Name = GetAnimationName(_Name);
 
 	Renderer->ChangeAnimation(Name);
 }
+
+void Mario::NotMove(float _DeltaTime)
+{
+	//if (CurSpeed.X > 0.f) {
+	//	AddSpeed(-AccelerateX * _DeltaTime);
+	//}
+	//else if (CurSpeed.X < 0.f) {
+	//	AddSpeed(AccelerateX * _DeltaTime);
+	//}
+
+
+	if (CurSpeed.X > 0.f) {
+		CurSpeed.X -= (AccelerateX.X * _DeltaTime);
+
+	}
+	else if (CurSpeed.X < 0.f) {
+		CurSpeed.X += (AccelerateX.X * _DeltaTime);
+	}
+
+	if (CurSpeed.X < 10.f && CurSpeed.X > -10.f) {
+		CurSpeed.X = 0;
+		SetState(EPlayState::Idle);
+	}
+	AddActorLocation(CurSpeed * _DeltaTime);
+	//float TempStopSpeed = (CurSpeed.X * _DeltaTime * 0.001f);
+	SetActorCameraPos();
+
+}
+
+

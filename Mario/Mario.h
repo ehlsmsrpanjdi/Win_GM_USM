@@ -39,12 +39,12 @@ protected:
 	std::string GetAnimationName(std::string _Name);
 	void SetAnimation(std::string _Name);
 
-	inline void NotMove() {
-		CurSpeed.X *= 0.6f;
-	}
-	FVector AccelerateX = { 500,0 };
-	FVector AccelerateY = {0,500 };
+	void NotMove(float _DeltaTime);
+
+	FVector AccelerateX = { 500.f,0.f,0.f,0.f };
+	FVector AccelerateY = { 0,500 };
 	FVector CurSpeed = { 0,0,0,0 };
+	FVector StopSpeed = { 0,0,0,0 };
 	float MaxSpeedX = 500.f;
 	float  MaxSpeedY = 500.f;
 private:
