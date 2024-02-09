@@ -72,6 +72,7 @@ void Mario::StateUpdate(float _DeltaTime)
 		break;
 	case MarioState::DirChange:
 		DirChange(_DeltaTime);
+		break;
 	default:
 	case MarioState::NotMove:
 		NotMove(_DeltaTime);
@@ -95,12 +96,12 @@ void Mario::AddSpeed(FVector _FVector) {
 
 void Mario::SubtractSpeed(FVector _FVector)
 {
-	if (-MaxSpeedX <= (CurSpeed.X -_FVector.X)) {
+	if (-MaxSpeedX <= (CurSpeed.X - _FVector.X)) {
 		CurSpeed.X -= _FVector.X;
 	}
 
 
-	if (-MaxSpeedY <= (CurSpeed.Y -_FVector.Y)) {
+	if (-MaxSpeedY <= (CurSpeed.Y - _FVector.Y)) {
 		CurSpeed.Y -= _FVector.Y;
 	}
 }
@@ -128,14 +129,12 @@ void Mario::SetState(MarioState _State)
 			break;
 		case MarioState::NotMove:
 			NotMoveStart();
+			break;
 		default:
 			break;
 		}
 	}
-
 	State = _State;
-
-
 }
 
 bool Mario::GravityCheck(float _DeltaTime)
@@ -240,7 +239,7 @@ void Mario::Jump(float _DeltaTime)
 
 
 	if (UEngineInput::IsPress(VK_LEFT) == true) {
-		AddSpeed(-AccelerateX * _DeltaTime);
+		SubtractSpeed(AccelerateX * _DeltaTime);
 	}
 
 	if (UEngineInput::IsPress(VK_RIGHT) == true) {
@@ -272,43 +271,47 @@ void Mario::Jump(float _DeltaTime)
 void Mario::DirChange(float _DeltaTime)
 {
 
-	if (CurSpeed.X > 0.f && UEngineInput::IsDown(VK_RIGHT)) {
-		SetState(MarioState::Move);
-		return;
-	}
 
-	else if (CurSpeed.X > 0.f && UEngineInput::IsPress(VK_LEFT)) {
-		CurSpeed.X += (-AccelerateX.X * _DeltaTime);
-		if (CurSpeed.X < 0 || UEngineInput::IsUp(VK_LEFT)) {
+	if (CurSpeed.X >= 3.f) {
+		if (UEngineInput::IsPress(VK_RIGHT)) {
 			SetState(MarioState::Move);
+			DirChangeing = false;
+			return;
+		}
+
+		else if (UEngineInput::IsPress(VK_LEFT)) {
+			DirChangeing = true;
+			SubtractSpeed(AccelerateX * _DeltaTime);
+
+			AddActorLocation(CurSpeed * _DeltaTime);
+			SetActorCameraPos();
 			return;
 		}
 	}
 
 
-	if (CurSpeed.X < 0.f && UEngineInput::IsDown(VK_LEFT)) {
-		SetState(MarioState::Move);
-		return;
-	}
-
-	else if (CurSpeed.X < 0.f && UEngineInput::IsPress(VK_RIGHT)) {
-		CurSpeed.X += (AccelerateX.X * _DeltaTime);
-		if (CurSpeed.X > 0 || UEngineInput::IsUp(VK_RIGHT)) {
+	else if (CurSpeed.X <= 3.f) {
+		if (UEngineInput::IsPress(VK_LEFT)) {
 			SetState(MarioState::Move);
+			DirChangeing = false;
 			return;
 		}
+
+		else if (UEngineInput::IsPress(VK_RIGHT)) {
+			DirChangeing = true;
+			AddSpeed(AccelerateX * _DeltaTime);
+
+			AddActorLocation(CurSpeed * _DeltaTime);
+			SetActorCameraPos();
+			return;
+		}
+
 	}
 
-
-
-
-	if (UEngineInput::IsDown(VK_SPACE) == true) {
-		SetState(MarioState::Jump);
+	else {
+		SetState(MarioState::Move);
 	}
-
 	SetAnimation("DirChange");
-	AddActorLocation(CurSpeed * _DeltaTime);
-	SetActorCameraPos();
 }
 
 std::string Mario::GetAnimationName(std::string _Name)
@@ -355,10 +358,12 @@ void Mario::SetAnimation(std::string _Name)
 void Mario::NotMove(float _DeltaTime)
 {
 
+
 	if (CurSpeed.X > 0.f) {
 		CurSpeed.X -= (AccelerateX.X * _DeltaTime);
 
 	}
+
 	else if (CurSpeed.X < 0.f) {
 		CurSpeed.X += (AccelerateX.X * _DeltaTime);
 	}
@@ -375,6 +380,7 @@ void Mario::NotMove(float _DeltaTime)
 			SetState(MarioState::DirChange);
 			return;
 		}
+
 	}
 
 

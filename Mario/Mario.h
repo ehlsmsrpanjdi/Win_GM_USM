@@ -23,7 +23,7 @@ protected:
 	void SetActorCameraPos();
 	void StateUpdate(float _DeltaTime);
 	void AddSpeed(FVector _FVector);
-	void SubtractSpeed(FVector _FVector)
+	void SubtractSpeed(FVector _FVector);
 	void SetState(MarioState _State);
 	bool GravityCheck(float _DeltaTime);
 
@@ -50,6 +50,7 @@ protected:
 	FVector StopSpeed = { 0,0,0,0 };
 	float MaxSpeedX = 500.f;
 	float  MaxSpeedY = 500.f;
+	bool DirChangeing = false;
 private:
 	UImageRenderer* Renderer = nullptr;
 	MarioState State = MarioState::None;
