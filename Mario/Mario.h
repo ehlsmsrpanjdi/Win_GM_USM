@@ -23,7 +23,8 @@ protected:
 	void SetActorCameraPos();
 	void StateUpdate(float _DeltaTime);
 	void AddSpeed(FVector _FVector);
-	void SetState(EPlayState _State);
+	void SubtractSpeed(FVector _FVector)
+	void SetState(MarioState _State);
 	bool GravityCheck(float _DeltaTime);
 
 
@@ -31,15 +32,17 @@ protected:
 	void IdleStart();
 	void MoveStart();
 	void JumpStart();
+	void DirChangeStart();
+	void NotMoveStart();
 	void Idle(float _DeltaTime);
 	void Move(float _DeltaTime);
 	void Jump(float _DeltaTime);
-
+	void DirChange(float _DeltaTime);
+	void NotMove(float _DeltaTime);
 
 	std::string GetAnimationName(std::string _Name);
 	void SetAnimation(std::string _Name);
 
-	void NotMove(float _DeltaTime);
 
 	FVector AccelerateX = { 500.f,0.f,0.f,0.f };
 	FVector AccelerateY = { 0,500 };
@@ -49,7 +52,7 @@ protected:
 	float  MaxSpeedY = 500.f;
 private:
 	UImageRenderer* Renderer = nullptr;
-	EPlayState State = EPlayState::None;
+	MarioState State = MarioState::None;
 	EActorDir DirState = EActorDir::Right;
 	std::string CurAnimationName = "None";
 };

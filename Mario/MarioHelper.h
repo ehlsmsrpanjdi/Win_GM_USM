@@ -18,12 +18,14 @@ enum class EActorDir
 	Right,
 };
 
-enum class EPlayState
+enum class MarioState
 {
 	None,
 	Idle,
 	Move,
 	Jump,
+	NotMove,
+	DirChange,
 };
 
 
@@ -36,7 +38,7 @@ class MarioHelper
 public:
 	static UWindowImage* ColMapImage;
 	static float Gravity;
-	static std::map<EPlayState, std::string> StateList;
+	static std::map<MarioState, std::string> StateList;
 private:
 	// constrcuter destructer
 	MarioHelper();

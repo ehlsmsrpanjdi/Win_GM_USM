@@ -21,6 +21,7 @@ UEngineResourcesManager::~UEngineResourcesManager()
 	}
 
 	Images.clear();
+	int a = 0;
 }
 
 UWindowImage* UEngineResourcesManager::LoadImg(std::string_view _Path)
