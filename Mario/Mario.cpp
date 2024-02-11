@@ -21,17 +21,15 @@ void Mario::BeginPlay()
 	SetName("Mario");
 	std::string test = GetName();
 	Renderer = CreateImageRenderer(MarioRenderOrder::Player);
-	Renderer->SetImage("TestPlayer_Right.png");
+	Renderer->SetImage("Mario_Right.png");
 	Renderer->SetTransform({ {0,0}, {256, 256} });
-	Renderer->CreateAnimation("Idle_Right", "TestPlayer_Right.png", 0, 0, 0.1f, false);
-	Renderer->CreateAnimation("Move_Right", "TestPlayer_Right.png", 1, 3, 0.1f, true);
-	Renderer->CreateAnimation("Jump_Right", "TestPlayer_Right.png", 5, 5, 0.1f, false);
-	Renderer->CreateAnimation("DirChange_Right", "TestPlayer_Right.png", 4, 4, 0.1f, false);
 
-	Renderer->CreateAnimation("Idle_Left", "TestPlayer_Left.png", 0, 0, 0.1f, false);
-	Renderer->CreateAnimation("Move_Left", "TestPlayer_Left.png", 1, 3, 0.1f, true);
-	Renderer->CreateAnimation("Jump_Left", "TestPlayer_Right.png", 5, 5, 0.1f, false);
-	Renderer->CreateAnimation("DirChange_Left", "TestPlayer_Left.png", 4, 4, 0.1f, false);
+	AnimationAuto(Renderer, "Idle", 0, 0);
+	AnimationAuto(Renderer, "Move", 1, 3);
+	AnimationAuto(Renderer, "DirChange", 4, 4);
+	AnimationAuto(Renderer, "Jump", 5, 5);
+
+
 	SetAnimation("Idle");
 	SetState(MarioState::Idle);
 
@@ -179,7 +177,6 @@ void Mario::JumpStart()
 
 void Mario::DirChangeStart()
 {
-	DirChanging = true;
 	SetAnimation("DirChange");
 }
 
@@ -235,8 +232,10 @@ void Mario::Move(float _DeltaTime)
 			return;
 		}
 		SubtractSpeed(_DeltaTime, StopAccelerateX);
+
 		return;
 	}
+
 
 	if (abs(CurSpeed.X) > 300) {
 		CurSpeedDirCheck();
@@ -249,7 +248,6 @@ void Mario::Move(float _DeltaTime)
 			return;
 		}
 	}
-
 	MoveFun(_DeltaTime, AccelerateX);
 }
 
@@ -354,23 +352,17 @@ std::string Mario::GetAnimationName(std::string _Name)
 void Mario::SetAnimation(std::string _Name)
 {
 	EActorDir Dir = DirState;
-	if (UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsFree(VK_RIGHT))
+	if ((UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsFree(VK_RIGHT)) ||
+		(UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsUp(VK_RIGHT)))
 	{
 		Dir = EActorDir::Left;
 	}
-	if (UEngineInput::IsPress(VK_RIGHT) && UEngineInput::IsFree(VK_LEFT))
+	if ((UEngineInput::IsPress(VK_RIGHT) && UEngineInput::IsFree(VK_LEFT)) ||
+		(UEngineInput::IsPress(VK_RIGHT) && UEngineInput::IsUp(VK_LEFT)))
 	{
 		Dir = EActorDir::Right;
 	}
-	if (true == DirChanging) {
-		if (Dir == EActorDir::Left) {
-			Dir = EActorDir::Right;
-		}
-		else {
-			Dir = EActorDir::Left;
-		}
-	}
-	DirChanging = false;
+
 
 	DirState = Dir;
 	std::string Name = GetAnimationName(_Name);
@@ -445,6 +437,27 @@ void Mario::CurSpeedDirCheck()
 		CurSpeedDir = 0;
 	}
 
+}
+/// <summary>
+/// 
+/// </summary>
+/// <param name="_Renderer"></param>
+/// <param name="_Name"></param>
+/// <param name="_Start"></param>
+/// <param name="_End"></param>
+/// <param name="_Time">0.1f</param>
+/// <param name="_DoubleWay">true</param>
+/// <param name="_Routine">true</param>
+void Mario::AnimationAuto(UImageRenderer* _Renderer, std::string _Name, int _Start, int _End, float _Time, bool _DoubleWay , bool _Routine)
+{
+	std::string CurName = GetName();
+	if (_DoubleWay == false) {
+		_Renderer->CreateAnimation(_Name, CurName + ".PNG", _Start, _End, _Time, _Routine);
+		return;
+	}
+	_Renderer->CreateAnimation(_Name + "_Right", CurName + "_Right.PNG", _Start, _End, _Time, _Routine);
+	_Renderer->CreateAnimation(_Name + "_Left", CurName + "_Left.PNG", _Start, _End, _Time, _Routine);
+	return;
 }
 
 

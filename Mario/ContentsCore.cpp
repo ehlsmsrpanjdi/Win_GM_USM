@@ -35,8 +35,8 @@ void ContentsCore::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadImg(File.GetFullPath());
 	}
 
-	UEngineResourcesManager::GetInst().CuttingImage("TestPlayer_Right.png", 5, 8);
-	UEngineResourcesManager::GetInst().CuttingImage("TestPlayer_Left.png", 5, 8);
+	UEngineResourcesManager::GetInst().CuttingImage("Mario_Right.png", 5, 8);
+	UEngineResourcesManager::GetInst().CuttingImage("Mario_Left.png", 5, 8);
 
 	MainWindow.SetWindowScale({ 256 * 4/* * 1.5f*/, 240 * 4/* * 1.5f*/ });
 	MainWindow.SetWindowPosition({ 800/* * 1.5f*/, 0/* * 1.5f*/ });

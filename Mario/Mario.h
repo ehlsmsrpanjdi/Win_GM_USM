@@ -41,6 +41,7 @@ protected:
 	void NotMove(float _DeltaTime);
 	void MoveFun(float _DeltaTime, FVector Acclerate);
 	void CurSpeedDirCheck();
+	void AnimationAuto(UImageRenderer* _Renderer, std::string _Name, int _Start = 0, int _End = 0, float _Time = 0.1f, bool _DoubleWay = true, bool _Routine = true);
 
 	std::string GetAnimationName(std::string _Name);
 	void SetAnimation(std::string _Name);
