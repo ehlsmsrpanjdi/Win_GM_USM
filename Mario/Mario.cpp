@@ -159,10 +159,6 @@ bool Mario::GravityCheck(float _DeltaTime)
 	{
 		AddActorLocation(FVector::Down * _DeltaTime * MarioHelper::Gravity);
 	}
-	else {
-		int a = 0;
-	}
-
 	return false;
 }
 
@@ -202,10 +198,12 @@ void Mario::Idle(float _DeltaTime)
 
 	if (true == UEngineInput::IsPress(VK_LEFT) || true == UEngineInput::IsPress(VK_RIGHT)) {
 		SetState(MarioState::Move);
+		return;
 	}
 
 	if (true == UEngineInput::IsUp(VK_LEFT) || true == UEngineInput::IsUp(VK_RIGHT)) {
 		SetState(MarioState::Move);
+		return;
 	}
 
 
@@ -244,9 +242,11 @@ void Mario::Move(float _DeltaTime)
 		CurSpeedDirCheck();
 		if (UEngineInput::IsPress(VK_LEFT) && CurSpeedDir == 1) {
 			SetState(MarioState::DirChange);
+			return;
 		}
 		if (UEngineInput::IsPress(VK_RIGHT) && CurSpeedDir == -1) {
 			SetState(MarioState::DirChange);
+			return;
 		}
 	}
 
