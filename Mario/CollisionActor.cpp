@@ -106,6 +106,10 @@ std::string CollisionActor::GetAnimationName(std::string _Name)
 		break;
 	}
 
+	if (NoDir) {
+		DirName = "";
+	}
+
 	CurAnimationName = _Name;
 
 	return _Name + DirName;

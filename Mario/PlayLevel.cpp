@@ -4,6 +4,7 @@
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
 #include "CollisionActor.h"
+#include "Goomba.h"
 
 UPlayLevel::UPlayLevel()
 {
@@ -36,13 +37,18 @@ void UPlayLevel::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadImg(FullPath);
 	}
 	Mario* TestMario;
-	BackGroundMap* Map;
 	TestMario = this->SpawnActor<Mario>();
 
+	Goomba* TestMonster;
+	TestMonster = this->SpawnActor<Goomba>();
+
+	BackGroundMap* Map;
 	Map = this->SpawnActor<BackGroundMap>();
 	Map->SetCollisionActorImage(GetName());
 
 	TestMario->SetActorLocation({ 200,200 });
+	TestMonster->SetActorLocation({ 400,400 });
+
 
 }
 

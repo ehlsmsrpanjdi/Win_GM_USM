@@ -34,6 +34,7 @@ protected:
 
 	void BeginPlay() override;
 	virtual void Tick(float _DeltaTime) override;
+	bool NoDir = false;
 
 
 private:
