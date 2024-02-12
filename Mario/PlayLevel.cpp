@@ -37,17 +37,17 @@ void UPlayLevel::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadImg(FullPath);
 	}
 	Mario* TestMario;
-	TestMario = this->SpawnActor<Mario>();
+	TestMario = this->SpawnActor<Mario>(2);
 
 	Goomba* TestMonster;
-	TestMonster = this->SpawnActor<Goomba>();
+	TestMonster = this->SpawnActor<Goomba>(1);
 
 	BackGroundMap* Map;
-	Map = this->SpawnActor<BackGroundMap>();
+	Map = this->SpawnActor<BackGroundMap>(0);
 	Map->SetCollisionActorImage(GetName());
 
 	TestMario->SetActorLocation({ 200,200 });
-	TestMonster->SetActorLocation({ 400,400 });
+	TestMonster->SetActorLocation({ 230,230 });
 
 
 }

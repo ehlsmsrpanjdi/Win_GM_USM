@@ -14,7 +14,7 @@ void Goomba::BeginPlay()
 {
 	SetName("Goomba");
 	NoDir = true;
-	UImageRenderer* Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
+	Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 	Renderer->SetImage("Goomba.png");
 	Renderer->SetTransform({ {0,0 }, { 256,256 } });
 	AnimationAuto(Renderer, "Default", 0, 1, false);

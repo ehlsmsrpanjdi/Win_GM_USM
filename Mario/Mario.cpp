@@ -19,7 +19,6 @@ void Mario::BeginPlay()
 {
 	AActor::BeginPlay();
 	SetName("Mario");
-	std::string test = GetName();
 	Renderer = CreateImageRenderer(MarioRenderOrder::Player);
 	Renderer->SetImage("Mario_Right.png");
 	Renderer->SetTransform({ {0,0}, {256, 256} });
