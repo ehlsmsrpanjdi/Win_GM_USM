@@ -1,9 +1,10 @@
 #pragma once
 #include <EngineCore\Actor.h>
 #include "MarioHelper.h"
+#include "CollisionActor.h"
 
 // Ό³Έν :
-class Mario : public AActor
+class Mario : public CollisionActor
 {
 public:
 	// constrcuter destructer
@@ -41,14 +42,13 @@ protected:
 	void NotMove(float _DeltaTime);
 	void MoveFun(float _DeltaTime, FVector Acclerate);
 	void CurSpeedDirCheck();
-	void AnimationAuto(UImageRenderer* _Renderer, std::string _Name, int _Start = 0, int _End = 0, float _Time = 0.1f, bool _DoubleWay = true, bool _Routine = true);
 
 	std::string GetAnimationName(std::string _Name);
 	void SetAnimation(std::string _Name);
 
 
 	FVector AccelerateX = { 500.f,0.f,0.f,0.f };
-	FVector AccelerateY = { 0.f,500.f,0.f,0.f };
+	FVector AccelerateY = { 0.f,2000.f,0.f,0.f };
 	FVector StopAccelerateX = AccelerateX * 2;
 	FVector DirChangeAccelerateX = StopAccelerateX * 2;
 	FVector CurSpeed = { 0,0,0,0 };
@@ -56,8 +56,11 @@ protected:
 	bool DirChanging = false;
 	float MinSpeed = 5.f;
 	float MaxSpeedX = 500.f;
-	float  MaxSpeedY = 500.f;
+	float  MaxSpeedY = 1000.f;
 	int CurSpeedDir = 0;
+	float JumpPower = -2000.f;
+	bool Jumping = false;
+
 private:
 	UImageRenderer* Renderer = nullptr;
 	MarioState State = MarioState::None;

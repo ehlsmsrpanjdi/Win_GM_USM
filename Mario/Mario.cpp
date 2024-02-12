@@ -152,11 +152,19 @@ void Mario::SetState(MarioState _State)
 
 bool Mario::GravityCheck(float _DeltaTime)
 {
-	Color8Bit Color = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
-	if (Color != Color8Bit(255, 0, 255, 0))
-	{
-		AddActorLocation(FVector::Down * _DeltaTime * MarioHelper::Gravity);
-	}
+	//Color8Bit Color = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+
+	//if (Color != Color8Bit(255, 0, 255, 0))
+	//{
+	//	AddSpeed(_DeltaTime, MarioHelper::Gravity);
+	//}
+	//else {
+	//	CurSpeed.Y = 0;
+	//	Jumping = false;
+	//	AddSpeed(_DeltaTime, MarioHelper::Gravity);
+	//}
+
+
 	return false;
 }
 
@@ -172,6 +180,8 @@ void Mario::MoveStart()
 
 void Mario::JumpStart()
 {
+	Jumping = true;
+	CurSpeed.Y = JumpPower;
 	SetAnimation("Jump");
 }
 
@@ -218,10 +228,10 @@ void Mario::Move(float _DeltaTime)
 
 	GravityCheck(_DeltaTime);
 
-	if (UEngineInput::IsDown(VK_SPACE)) {
-		SetState(MarioState::Jump);
-		return;
-	}
+	//if (UEngineInput::IsDown(VK_SPACE)) {
+	//	SetState(MarioState::Jump);
+	//	return;
+	//}
 
 	if ((UEngineInput::IsFree(VK_LEFT) && UEngineInput::IsFree(VK_RIGHT)) ||
 		UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsPress(VK_RIGHT))
@@ -254,35 +264,11 @@ void Mario::Move(float _DeltaTime)
 void Mario::Jump(float _DeltaTime)
 {
 
-
-
-	if (UEngineInput::IsPress(VK_LEFT) == true) {
-		SubtractSpeed(_DeltaTime, StopAccelerateX);
+	if (true == UEngineInput::IsUp(VK_SPACE)) {
+		Jumping = false;
+		CurSpeed.Y = 0;
 	}
-
-	if (UEngineInput::IsPress(VK_RIGHT) == true) {
-		AddSpeed(_DeltaTime, AccelerateX);
-	}
-
-	if (UEngineInput::IsPress(VK_SPACE) == true) {
-		AddSpeed(_DeltaTime, -AccelerateY);
-	}
-
-	if (UEngineInput::IsUp(VK_SPACE) == true) {
-		CurSpeed.Y = StopSpeed.Y;
-
-	}
-	if (UEngineInput::IsFree(VK_SPACE) == true) {
-		GravityCheck(_DeltaTime);
-	}
-
-	SetAnimation(CurAnimationName);
-	AddActorLocation(CurSpeed * _DeltaTime);
-	SetActorCameraPos();
-
-
-
-
+	GravityCheck(_DeltaTime);
 
 }
 
@@ -364,6 +350,7 @@ void Mario::SetAnimation(std::string _Name)
 	}
 
 
+
 	DirState = Dir;
 	std::string Name = GetAnimationName(_Name);
 
@@ -438,26 +425,6 @@ void Mario::CurSpeedDirCheck()
 	}
 
 }
-/// <summary>
-/// 
-/// </summary>
-/// <param name="_Renderer"></param>
-/// <param name="_Name"></param>
-/// <param name="_Start"></param>
-/// <param name="_End"></param>
-/// <param name="_Time">0.1f</param>
-/// <param name="_DoubleWay">true</param>
-/// <param name="_Routine">true</param>
-void Mario::AnimationAuto(UImageRenderer* _Renderer, std::string _Name, int _Start, int _End, float _Time, bool _DoubleWay , bool _Routine)
-{
-	std::string CurName = GetName();
-	if (_DoubleWay == false) {
-		_Renderer->CreateAnimation(_Name, CurName + ".PNG", _Start, _End, _Time, _Routine);
-		return;
-	}
-	_Renderer->CreateAnimation(_Name + "_Right", CurName + "_Right.PNG", _Start, _End, _Time, _Routine);
-	_Renderer->CreateAnimation(_Name + "_Left", CurName + "_Left.PNG", _Start, _End, _Time, _Routine);
-	return;
-}
+
 
 

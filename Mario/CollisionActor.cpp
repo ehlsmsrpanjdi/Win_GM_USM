@@ -68,3 +68,24 @@ void CollisionActor::SwitchRender()
 
 }
 
+/// <summary>
+/// 
+/// </summary>
+/// <param name="_Renderer"></param>
+/// <param name="_Name"></param>
+/// <param name="_Start"></param>
+/// <param name="_End"></param>
+/// <param name="_Time">0.1f</param>
+/// <param name="_DoubleWay">true</param>
+/// <param name="_Routine">true</param>
+void CollisionActor::AnimationAuto(UImageRenderer* _Renderer, std::string _Name, int _Start, int _End, bool _DoubleWay, float _Time, bool _Routine)
+{
+	std::string CurName = GetName();
+	if (_DoubleWay == false) {
+		_Renderer->CreateAnimation(_Name, CurName + ".PNG", _Start, _End, _Time, _Routine);
+		return;
+	}
+	_Renderer->CreateAnimation(_Name + "_Right", CurName + "_Right.PNG", _Start, _End, _Time, _Routine);
+	_Renderer->CreateAnimation(_Name + "_Left", CurName + "_Left.PNG", _Start, _End, _Time, _Routine);
+	return;
+}

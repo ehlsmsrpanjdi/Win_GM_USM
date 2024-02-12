@@ -37,7 +37,7 @@ class MarioHelper
 {
 public:
 	static UWindowImage* ColMapImage;
-	static float Gravity;
+	static FVector Gravity;
 	static std::map<MarioState, std::string> StateList;
 private:
 	// constrcuter destructer

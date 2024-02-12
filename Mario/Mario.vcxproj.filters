@@ -29,6 +29,9 @@
     <ClInclude Include="Stage1_Map.h">
       <Filter>Stage1</Filter>
     </ClInclude>
+    <ClInclude Include="Goomba.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -59,6 +62,9 @@
     <ClCompile Include="Stage1_Map.cpp">
       <Filter>Stage1</Filter>
     </ClCompile>
+    <ClCompile Include="Goomba.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Actor">
@@ -78,6 +84,9 @@
     </Filter>
     <Filter Include="Stage1">
       <UniqueIdentifier>{e1247206-7384-4814-9dfa-56d2e7cb058a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Monster">
+      <UniqueIdentifier>{a8601e0d-79e0-4a18-aa9a-945182360483}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -22,10 +22,18 @@ public:
 	void SwitchRender();
 
 protected:
-private:
+	void AnimationAuto(UImageRenderer* _Renderer, std::string _Name, int _Start = 0, int _End = 0, bool _DoubleWay = true, float _Time = 0.1f, bool _Routine = true);
+	virtual std::string GetAnimationName(std::string _Name);
+	virtual void SetAnimation(std::string _Name);
+	std::string CurAnimationName = "None";
+	void BeginPlay() override;
+	virtual void Tick(float _DeltaTime) override;
 	UImageRenderer* Renderer = nullptr;
 	UImageRenderer* ColRenderer = nullptr;
-	void BeginPlay() override;
-	void Tick(float _DeltaTime) override;
+	EActorDir DirState = EActorDir::Right;
+private:
+
+
+
 } typedef BackGroundMap;
 
