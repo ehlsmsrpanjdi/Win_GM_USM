@@ -313,27 +313,6 @@ void Mario::DirChange(float _DeltaTime)
 
 }
 
-std::string Mario::GetAnimationName(std::string _Name)
-{
-	std::string DirName = "";
-
-	switch (DirState)
-	{
-	case EActorDir::Left:
-		DirName = "_Left";
-		break;
-	case EActorDir::Right:
-		DirName = "_Right";
-		break;
-	default:
-		break;
-	}
-
-	CurAnimationName = _Name;
-
-	return _Name + DirName;
-}
-
 
 void Mario::SetAnimation(std::string _Name)
 {
@@ -353,8 +332,31 @@ void Mario::SetAnimation(std::string _Name)
 
 	DirState = Dir;
 	std::string Name = GetAnimationName(_Name);
+	std::string a =  GetName();
+
 
 	Renderer->ChangeAnimation(Name);
+}
+
+std::string Mario::GetAnimationName(std::string _Name)
+{
+	std::string DirName = "";
+
+	switch (DirState)
+	{
+	case EActorDir::Left:
+		DirName = "_Left";
+		break;
+	case EActorDir::Right:
+		DirName = "_Right";
+		break;
+	default:
+		break;
+	}
+
+	CurAnimationName = _Name;
+
+	return _Name + DirName;
 }
 
 void Mario::NotMove(float _DeltaTime)

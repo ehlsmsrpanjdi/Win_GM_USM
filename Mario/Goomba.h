@@ -16,7 +16,10 @@ public:
 
 protected:
 	void BeginPlay() override;
-	void Tickfloat _DeltaTime) override;
+	void Tick(float _DeltaTime) override;
+
+	void DeadStart();
+	void Default();
 
 private:
 

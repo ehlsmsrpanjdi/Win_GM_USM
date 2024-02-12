@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include <EngineCore\EngineResourcesManager.h>
+#include "MarioHelper.h"
 // Ό³Έν :
 class CollisionActor : public AActor
 {
@@ -25,12 +26,16 @@ protected:
 	void AnimationAuto(UImageRenderer* _Renderer, std::string _Name, int _Start = 0, int _End = 0, bool _DoubleWay = true, float _Time = 0.1f, bool _Routine = true);
 	virtual std::string GetAnimationName(std::string _Name);
 	virtual void SetAnimation(std::string _Name);
-	std::string CurAnimationName = "None";
-	void BeginPlay() override;
-	virtual void Tick(float _DeltaTime) override;
+
+	std::string CurAnimationName = "";
 	UImageRenderer* Renderer = nullptr;
 	UImageRenderer* ColRenderer = nullptr;
 	EActorDir DirState = EActorDir::Right;
+
+	void BeginPlay() override;
+	virtual void Tick(float _DeltaTime) override;
+
+
 private:
 
 

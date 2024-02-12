@@ -89,3 +89,33 @@ void CollisionActor::AnimationAuto(UImageRenderer* _Renderer, std::string _Name,
 	_Renderer->CreateAnimation(_Name + "_Left", CurName + "_Left.PNG", _Start, _End, _Time, _Routine);
 	return;
 }
+
+std::string CollisionActor::GetAnimationName(std::string _Name)
+{
+	std::string DirName = "";
+
+	switch (DirState)
+	{
+	case EActorDir::Left:
+		DirName = "_Left";
+		break;
+	case EActorDir::Right:
+		DirName = "_Right";
+		break;
+	default:
+		break;
+	}
+
+	CurAnimationName = _Name;
+
+	return _Name + DirName;
+}
+
+void CollisionActor::SetAnimation(std::string _Name)
+{
+	EActorDir Dir = DirState;
+
+	std::string Name = GetAnimationName(_Name);
+
+	Renderer->ChangeAnimation(Name);
+}

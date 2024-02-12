@@ -43,8 +43,8 @@ protected:
 	void MoveFun(float _DeltaTime, FVector Acclerate);
 	void CurSpeedDirCheck();
 
-	std::string GetAnimationName(std::string _Name);
-	void SetAnimation(std::string _Name);
+	void SetAnimation(std::string _Name) override;
+	std::string GetAnimationName(std::string _Name) override;
 
 
 	FVector AccelerateX = { 500.f,0.f,0.f,0.f };
@@ -64,7 +64,5 @@ protected:
 private:
 	UImageRenderer* Renderer = nullptr;
 	MarioState State = MarioState::None;
-	EActorDir DirState = EActorDir::Right;
-	std::string CurAnimationName = "None";
 };
 
