@@ -34,6 +34,10 @@ void CollisionActor::SetCollisionActorImage(std::string_view _MapImageName)
 	SetColRenderImage(Name + "_Col.PNG");
 }
 
+void CollisionActor::StateUpdate(float _DeltaTime)
+{
+}
+
 void CollisionActor::BeginPlay()
 {
 	Renderer = CreateImageRenderer(GetOrder());

@@ -18,8 +18,8 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	void DeadStart();
-	void Default();
+	virtual void DeadStart();
+	virtual void Idle();
 
 private:
 

@@ -22,7 +22,7 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void SetActorCameraPos();
-	void StateUpdate(float _DeltaTime);
+	void StateUpdate(float _DeltaTime) override;
 	void AddSpeed(float _DeltaTime, FVector _FVector);
 	void SubtractSpeed(float _DeltaTime, FVector _FVector);
 	void SetState(MarioState _State);

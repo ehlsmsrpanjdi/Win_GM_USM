@@ -17,12 +17,20 @@ void Goomba::BeginPlay()
 	Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 	Renderer->SetImage("Goomba.png");
 	Renderer->SetTransform({ {0,0 }, { 128,128 } });
-	AnimationAuto(Renderer, "Default", 0, 1, false, 0.2f);
-	SetAnimation("Default");
+	AnimationAuto(Renderer, "Idle", 0, 1, false, 0.2f);
+	SetAnimation("Idle");
 }
 
 void Goomba::Tick(float _DeltaTime)
 {
 	AutoMove(_DeltaTime);
+}
+
+void Goomba::DeadStart()
+{
+}
+
+void Goomba::Idle()
+{
 }
 

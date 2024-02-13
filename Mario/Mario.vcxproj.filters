@@ -33,6 +33,15 @@
       <Filter>Actor\Monster</Filter>
     </ClInclude>
     <ClInclude Include="TestLevel.h" />
+    <ClInclude Include="GreenTroopa.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Plant.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Koopa.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -67,6 +76,15 @@
       <Filter>Actor\Monster</Filter>
     </ClCompile>
     <ClCompile Include="TestLevel.cpp" />
+    <ClCompile Include="GreenTroopa.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Plant.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Koopa.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Actor">

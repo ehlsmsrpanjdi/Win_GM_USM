@@ -42,12 +42,24 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GreenTroopa.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Koopa.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MarioHelper.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Fire.h" />
     <ClInclude Include="MarioLevelBase.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Plant.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -89,12 +101,24 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GreenTroopa.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Koopa.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="MarioHelper.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="MarioLevelBase.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Plant.cpp">
       <SubType>
       </SubType>
     </ClCompile>

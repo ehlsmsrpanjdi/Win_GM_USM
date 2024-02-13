@@ -19,7 +19,7 @@ public:
 	void SetRenderImage(std::string_view _MapImageName);
 	void SetColRenderImage(std::string_view _MapImageName);
 	void SetCollisionActorImage(std::string_view _MapImageName);
-
+	virtual void StateUpdate(float _DeltaTime);
 	void SwitchRender();
 
 protected:
