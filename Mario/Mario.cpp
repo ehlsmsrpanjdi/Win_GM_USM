@@ -145,6 +145,7 @@ bool Mario::GravityCheck(float _DeltaTime)
 	if (Color != Color8Bit(255, 0, 255, 0))
 	{
 		CurSpeed += MarioHelper::Gravity * _DeltaTime;
+		return true;
 	}
 	else if(Jumping == false){
 		CurSpeed.Y = 0;
@@ -183,7 +184,9 @@ void Mario::NotMoveStart()
 void Mario::Idle(float _DeltaTime)
 {
 
-	GravityCheck(_DeltaTime);
+	if (GravityCheck(_DeltaTime)) {
+		ResultMove(_DeltaTime);
+	}
 
 	if (UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsPress(VK_RIGHT)) {
 		return;
