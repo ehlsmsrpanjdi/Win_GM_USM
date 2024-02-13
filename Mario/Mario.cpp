@@ -54,15 +54,6 @@ void Mario::SetActorCameraPos()
 
 void Mario::StateUpdate(float _DeltaTime)
 {
-	//if (UEngineInput::IsDown('x') || UEngineInput::IsDown('X')) {
-	//	AccelerateX *= 2.f;
-	//	MaxSpeedX *= 2.f;
-	//}
-	//if (UEngineInput::IsUp('x') || UEngineInput::IsUp('X')) {
-	//	AccelerateX.X /= 2.f;
-	//	MaxSpeedX /= 2.f;
-	//}
-
 
 	switch (State)
 	{
@@ -102,8 +93,7 @@ void Mario::AddSpeed(float _DeltaTime, FVector _FVector) {
 	if (MaxSpeedY >= NextFloatY) {
 		CurSpeed.Y += _FVector.Y * _DeltaTime;
 	}
-	AddActorLocation(CurSpeed * _DeltaTime);
-	SetActorCameraPos();
+	ResultMove(_DeltaTime);
 }
 
 void Mario::SubtractSpeed(float _DeltaTime, FVector _FVector)
@@ -114,8 +104,7 @@ void Mario::SubtractSpeed(float _DeltaTime, FVector _FVector)
 	else if (CurSpeedDir == 1) {
 		CurSpeed -= (_FVector * _DeltaTime);
 	}
-	AddActorLocation(CurSpeed * _DeltaTime);
-	SetActorCameraPos();
+	ResultMove(_DeltaTime);
 }
 
 
@@ -151,17 +140,15 @@ void Mario::SetState(MarioState _State)
 
 bool Mario::GravityCheck(float _DeltaTime)
 {
-	//Color8Bit Color = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	Color8Bit Color = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 
-	//if (Color != Color8Bit(255, 0, 255, 0))
-	//{
-	//	AddSpeed(_DeltaTime, MarioHelper::Gravity);
-	//}
-	//else {
-	//	CurSpeed.Y = 0;
-	//	Jumping = false;
-	//	AddSpeed(_DeltaTime, MarioHelper::Gravity);
-	//}
+	if (Color != Color8Bit(255, 0, 255, 0))
+	{
+		CurSpeed += MarioHelper::Gravity * _DeltaTime;
+	}
+	else if(Jumping == false){
+		CurSpeed.Y = 0;
+	}
 
 
 	return false;
@@ -268,6 +255,7 @@ void Mario::Jump(float _DeltaTime)
 		CurSpeed.Y = 0;
 	}
 	GravityCheck(_DeltaTime);
+	ResultMove(_DeltaTime);
 
 }
 
@@ -391,9 +379,7 @@ void Mario::NotMove(float _DeltaTime)
 		CurSpeed.X = 0;
 		SetState(MarioState::Idle);
 	}
-	AddActorLocation(CurSpeed * _DeltaTime);
-	//float TempStopSpeed = (CurSpeed.X * _DeltaTime * 0.001f);
-	SetActorCameraPos();
+	ResultMove(_DeltaTime);
 
 }
 
@@ -425,6 +411,12 @@ void Mario::CurSpeedDirCheck()
 		CurSpeedDir = 0;
 	}
 
+}
+
+void Mario::ResultMove(float _DeltaTime)
+{
+	AddActorLocation(CurSpeed * _DeltaTime);
+	SetActorCameraPos();
 }
 
 

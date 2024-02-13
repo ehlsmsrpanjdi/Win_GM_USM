@@ -42,6 +42,7 @@ protected:
 	void NotMove(float _DeltaTime);
 	void MoveFun(float _DeltaTime, FVector Acclerate);
 	void CurSpeedDirCheck();
+	void ResultMove(float _DeltaTime);
 
 	void SetAnimation(std::string _Name) override;
 	std::string GetAnimationName(std::string _Name) override;

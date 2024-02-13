@@ -45,8 +45,9 @@ void ContentsCore::BeginPlay()
 	MainWindow.SetWindowScale({ 256 * 4/* * 1.5f*/, 240 * 4/* * 1.5f*/ });
 	MainWindow.SetWindowPosition({ 800/* * 1.5f*/, 0/* * 1.5f*/ });
 
-	CreateLevel<TestLevel>("TestLevel");
-	ChangeLevel("TestLevel");
+
+	CreateLevel<UPlayLevel>("Stage1");
+	ChangeLevel("Stage1");
 }
 
 void ContentsCore::Tick(float _DeltaTime)
