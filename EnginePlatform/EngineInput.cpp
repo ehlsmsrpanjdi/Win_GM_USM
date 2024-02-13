@@ -59,7 +59,6 @@ UEngineInput::UEngineInput()
 
 UEngineInput::~UEngineInput()
 {
-	int a = 0;
 }
 
 void UEngineInput::InputInit()
@@ -232,9 +231,6 @@ public:
 	InputInitCreator()
 	{
 		UEngineInput::InputInit();
-	}
-	~InputInitCreator() {
-		int a = 0;
 	}
 };
 

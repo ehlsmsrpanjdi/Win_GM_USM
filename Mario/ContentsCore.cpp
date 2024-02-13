@@ -5,6 +5,7 @@
 #include <EngineBase/EngineDirectory.h>
 #include <EngineCore/EngineResourcesManager.h>
 #include <EngineBase\EngineFile.h>
+#include "TestLevel.h"
 
 ContentsCore::ContentsCore()
 	: UEngineCore()
@@ -37,14 +38,13 @@ void ContentsCore::BeginPlay()
 
 	UEngineResourcesManager::GetInst().CuttingImage("Mario_Right.png", 5, 8);
 	UEngineResourcesManager::GetInst().CuttingImage("Mario_Left.png", 5, 8);
-	UEngineResourcesManager::GetInst().CuttingImage("Goomba.png", 5, 8);
+	UEngineResourcesManager::GetInst().CuttingImage("Goomba.png", 3,1);
 
 	MainWindow.SetWindowScale({ 256 * 4/* * 1.5f*/, 240 * 4/* * 1.5f*/ });
 	MainWindow.SetWindowPosition({ 800/* * 1.5f*/, 0/* * 1.5f*/ });
-	// 1200 
-	CreateLevel<UTitleLevel>("TitleLevel");
-	CreateLevel<UPlayLevel>("Stage1");
-	ChangeLevel("Stage1");
+
+	CreateLevel<TestLevel>("TestLevel");
+	ChangeLevel("TestLevel");
 }
 
 void ContentsCore::Tick(float _DeltaTime)

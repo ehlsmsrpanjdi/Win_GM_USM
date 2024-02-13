@@ -36,6 +36,8 @@ protected:
 	virtual void Tick(float _DeltaTime) override;
 	bool NoDir = false;
 
+	void AutoMove(float _DeltaTime);
+
 
 private:
 

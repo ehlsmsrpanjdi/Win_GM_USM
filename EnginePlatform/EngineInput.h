@@ -12,7 +12,7 @@ class UEngineInput
 	friend class InputInitCreator;
 
 private:
-	class /*UEngineInput::*/EngineKey
+	class /*EngineInput::*/EngineKey
 	{
 		friend UEngineInput;
 

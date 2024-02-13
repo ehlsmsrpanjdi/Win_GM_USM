@@ -54,14 +54,14 @@ void Mario::SetActorCameraPos()
 
 void Mario::StateUpdate(float _DeltaTime)
 {
-	if (UEngineInput::IsDown('x') || UEngineInput::IsDown('X')) {
-		AccelerateX *= 2.f;
-		MaxSpeedX *= 2.f;
-	}
-	if (UEngineInput::IsUp('x') || UEngineInput::IsUp('X')) {
-		AccelerateX.X /= 2.f;
-		MaxSpeedX /= 2.f;
-	}
+	//if (UEngineInput::IsDown('x') || UEngineInput::IsDown('X')) {
+	//	AccelerateX *= 2.f;
+	//	MaxSpeedX *= 2.f;
+	//}
+	//if (UEngineInput::IsUp('x') || UEngineInput::IsUp('X')) {
+	//	AccelerateX.X /= 2.f;
+	//	MaxSpeedX /= 2.f;
+	//}
 
 
 	switch (State)

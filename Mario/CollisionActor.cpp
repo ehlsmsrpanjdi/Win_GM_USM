@@ -52,6 +52,14 @@ void CollisionActor::Tick(float _DeltaTime)
 	}
 }
 
+void CollisionActor::AutoMove(float _DeltaTime)
+{
+		FVector CurLocation = GetActorLocation();
+		FVector AddLocation = { static_cast<float>(DirState) * _DeltaTime, 0.f, 0.f, 0.f };
+		FVector NextLocation = CurLocation + AddLocation;
+		SetActorLocation(NextLocation);
+}
+
 void CollisionActor::SwitchRender()
 {
 

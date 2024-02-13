@@ -47,18 +47,20 @@ protected:
 	std::string GetAnimationName(std::string _Name) override;
 
 
-	FVector AccelerateX = { 500.f,0.f,0.f,0.f };
-	FVector AccelerateY = { 0.f,2000.f,0.f,0.f };
-	FVector StopAccelerateX = AccelerateX * 2;
-	FVector DirChangeAccelerateX = StopAccelerateX * 2;
+	const FVector AccelerateX = { 500.f,0.f,0.f,0.f };
+	const FVector AccelerateY = { 0.f,2000.f,0.f,0.f };
+	const FVector StopAccelerateX = AccelerateX * 2;
+	const FVector DirChangeAccelerateX = StopAccelerateX * 2;
+	const FVector StopSpeed = { 0,0,0,0 };
 	FVector CurSpeed = { 0,0,0,0 };
-	FVector StopSpeed = { 0,0,0,0 };
+
 	bool DirChanging = false;
-	float MinSpeed = 5.f;
-	float MaxSpeedX = 500.f;
-	float  MaxSpeedY = 1000.f;
+
+	const float MinSpeed = 5.f;
+	const float MaxSpeedX = 500.f;
+	const float  MaxSpeedY = 1000.f;
 	int CurSpeedDir = 0;
-	float JumpPower = -2000.f;
+	const float JumpPower = -2000.f;
 	bool Jumping = false;
 
 private:
