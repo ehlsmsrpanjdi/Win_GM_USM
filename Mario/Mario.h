@@ -26,7 +26,7 @@ protected:
 	void AddSpeed(float _DeltaTime, FVector _FVector);
 	void SubtractSpeed(float _DeltaTime, FVector _FVector);
 	void SetState(MarioState _State);
-	bool GravityCheck(float _DeltaTime);
+	bool GravityCheck(float _DeltaTime) override;
 
 
 protected:
@@ -47,7 +47,6 @@ protected:
 	void SetAnimation(std::string _Name) override;
 	std::string GetAnimationName(std::string _Name) override;
 
-
 	const FVector AccelerateX = { 500.f,0.f,0.f,0.f };
 	const FVector AccelerateY = { 0.f,2000.f,0.f,0.f };
 	const FVector StopAccelerateX = AccelerateX * 2;
@@ -63,7 +62,7 @@ protected:
 	int CurSpeedDir = 0;
 	const float JumpPower = -2000.f;
 	bool Jumping = false;
-
+	
 private:
 	UImageRenderer* Renderer = nullptr;
 	MarioState State = MarioState::None;

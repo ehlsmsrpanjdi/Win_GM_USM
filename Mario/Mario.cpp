@@ -9,6 +9,7 @@
 
 Mario::Mario()
 {
+	DirState = EActorDir::Right;
 }
 
 Mario::~Mario()
@@ -322,8 +323,6 @@ void Mario::SetAnimation(std::string _Name)
 
 	DirState = Dir;
 	std::string Name = GetAnimationName(_Name);
-	std::string a =  GetName();
-
 
 	Renderer->ChangeAnimation(Name);
 }

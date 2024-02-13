@@ -40,6 +40,7 @@ void CollisionActor::StateUpdate(float _DeltaTime)
 
 void CollisionActor::BeginPlay()
 {
+	AActor::BeginPlay();
 	Renderer = CreateImageRenderer(GetOrder());
 	ColRenderer = CreateImageRenderer(GetOrder());
 	ColRenderer->SetActive(false);
@@ -134,4 +135,23 @@ void CollisionActor::SetAnimation(std::string _Name)
 	std::string Name = GetAnimationName(_Name);
 
 	Renderer->ChangeAnimation(Name);
+}
+
+bool CollisionActor::GravityCheck(float _DeltaTime)
+{
+	Color8Bit Color = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+
+	if (Color != Color8Bit(255, 0, 255, 0))
+	{
+		AddActorLocation(MarioHelper::Gravity * _DeltaTime);
+		return true;
+	}
+
+	return false;
+}
+
+void CollisionActor::IsEdge(float _DeltaTime)
+{
+
+
 }

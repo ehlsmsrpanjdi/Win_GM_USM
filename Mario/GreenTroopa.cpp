@@ -25,3 +25,18 @@ void GreenTroopa::Tick(float _DeltaTime)
 	AutoMove(_DeltaTime);
 }
 
+void GreenTroopa::IsEdge(float _DeltaTime)
+{
+	Color8Bit Color = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+
+	if (Color != Color8Bit(255, 0, 255, 0))
+	{
+		if (EActorDir::Left == DirState) {
+			DirState = EActorDir::Right;
+		}
+		else {
+			DirState = EActorDir::Left;
+		}
+	}
+}
+
