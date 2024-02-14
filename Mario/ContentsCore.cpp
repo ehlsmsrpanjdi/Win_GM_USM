@@ -42,7 +42,7 @@ void ContentsCore::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("GreenTroopa_Left.png", 6, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("GreenTroopa_Right.png", 6, 1);
 
-	MainWindow.SetWindowScale({ 256 * 2/* * 1.5f*/, 240 * 2/* * 1.5f*/ });
+	MainWindow.SetWindowScale({ 256 * 4/* * 1.5f*/, 240 * 4/* * 1.5f*/ });
 	MainWindow.SetWindowPosition({ 800/* * 1.5f*/, 0/* * 1.5f*/ });
 
 

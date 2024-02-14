@@ -6,6 +6,7 @@
 #include <vector>
 #include <list>
 #include "MarioHelper.h"
+#include <string>
 
 Mario::Mario()
 {
@@ -87,12 +88,12 @@ void Mario::AddSpeed(float _DeltaTime, FVector _FVector) {
 
 	float NextFloatX = abs(CurSpeed.X + (_FVector.X * _DeltaTime));
 	if (MaxSpeedX >= NextFloatX) {
-		CurSpeed.X += _FVector.X * _DeltaTime;
+		SpeedX.X += _FVector.X * _DeltaTime;
 	}
 
 	float NextFloatY = abs(CurSpeed.Y + (_FVector.Y * _DeltaTime));
 	if (MaxSpeedY >= NextFloatY) {
-		CurSpeed.Y += _FVector.Y * _DeltaTime;
+		SpeedY.Y += _FVector.Y * _DeltaTime;
 	}
 	ResultMove(_DeltaTime);
 }
@@ -100,10 +101,10 @@ void Mario::AddSpeed(float _DeltaTime, FVector _FVector) {
 void Mario::SubtractSpeed(float _DeltaTime, FVector _FVector)
 {
 	if (CurSpeedDir == -1) {
-		CurSpeed += (_FVector * _DeltaTime);
+		SpeedX += (_FVector * _DeltaTime);
 	}
 	else if (CurSpeedDir == 1) {
-		CurSpeed -= (_FVector * _DeltaTime);
+		SpeedX -= (_FVector * _DeltaTime);
 	}
 	ResultMove(_DeltaTime);
 }
@@ -141,19 +142,20 @@ void Mario::SetState(MarioState _State)
 
 bool Mario::GravityCheck(float _DeltaTime)
 {
+
+	GravitySpeed += MarioHelper::Gravity * _DeltaTime;
+
 	Color8Bit Color = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 
-	if (Color != Color8Bit(255, 0, 255, 0))
+	if (Color == Color8Bit(255, 0, 255, 0))
 	{
-		CurSpeed += MarioHelper::Gravity * _DeltaTime;
-		return true;
-	}
-	else if(Jumping == false){
-		CurSpeed.Y = 0;
+		GravitySpeed = StopSpeed;
+		SpeedY = StopSpeed;
+		return false;
 	}
 
 
-	return false;
+	return true;
 }
 
 void Mario::IdleStart()
@@ -169,7 +171,7 @@ void Mario::MoveStart()
 void Mario::JumpStart()
 {
 	Jumping = true;
-	CurSpeed.Y = JumpPower;
+	SpeedY.Y = JumpPower;
 	SetAnimation("Jump");
 }
 
@@ -185,9 +187,8 @@ void Mario::NotMoveStart()
 void Mario::Idle(float _DeltaTime)
 {
 
-	if (GravityCheck(_DeltaTime)) {
-		ResultMove(_DeltaTime);
-	}
+	GravityCheck(_DeltaTime);
+	ResultMove(_DeltaTime);
 
 	if (UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsPress(VK_RIGHT)) {
 		return;
@@ -205,7 +206,7 @@ void Mario::Idle(float _DeltaTime)
 
 
 
-	if (UEngineInput::IsDown(VK_SPACE)) {
+ if (UEngineInput::IsDown(VK_SPACE) && false == Jumping) {
 		SetState(MarioState::Jump);
 		return;
 	}
@@ -215,13 +216,11 @@ void Mario::Idle(float _DeltaTime)
 
 void Mario::Move(float _DeltaTime)
 {
-
+ if (UEngineInput::IsDown(VK_SPACE) && false == Jumping) {
+		SetState(MarioState::Jump);
+		return;
+	}
 	GravityCheck(_DeltaTime);
-
-	//if (UEngineInput::IsDown(VK_SPACE)) {
-	//	SetState(MarioState::Jump);
-	//	return;
-	//}
 
 	if ((UEngineInput::IsFree(VK_LEFT) && UEngineInput::IsFree(VK_RIGHT)) ||
 		UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsPress(VK_RIGHT))
@@ -253,18 +252,37 @@ void Mario::Move(float _DeltaTime)
 
 void Mario::Jump(float _DeltaTime)
 {
-
-	if (true == UEngineInput::IsUp(VK_SPACE)) {
-		Jumping = false;
-		CurSpeed.Y = 0;
+	Jumping = true;
+	if (true == UEngineInput::IsUp(VK_SPACE) && SpeedY.Y < 0.f) {
+		SpeedY.Y = 0;
 	}
+
+	MoveFun(_DeltaTime, AccelerateX);
+
 	GravityCheck(_DeltaTime);
-	ResultMove(_DeltaTime);
+
+	if (StopSpeed.Y == SpeedY.Y && StopSpeed.Y == GravitySpeed.Y) {
+		if (abs(SpeedX.X) > 5) {
+			SetState(MarioState::Move);
+			Jumping = false;
+			return;
+		}
+		else {
+			SetState(MarioState::Idle);
+			Jumping = false;
+			return;
+		}
+	}
+
 
 }
 
 void Mario::DirChange(float _DeltaTime)
 {
+ if (UEngineInput::IsDown(VK_SPACE) && false == Jumping) {
+		SetState(MarioState::Jump);
+		return;
+	}
 	CurSpeedDirCheck();
 
 	if (CurSpeedDir == 1) {
@@ -319,7 +337,9 @@ void Mario::SetAnimation(std::string _Name)
 		Dir = EActorDir::Right;
 	}
 
-
+	if (true == Jumping) {
+		Dir = DirState;
+	}
 
 	DirState = Dir;
 	std::string Name = GetAnimationName(_Name);
@@ -398,25 +418,31 @@ void Mario::MoveFun(float _DeltaTime, FVector _FVector)
 		SetAnimation(CurAnimationName);
 		return;
 	}
+	ResultMove(_DeltaTime);
 }
 
 void Mario::CurSpeedDirCheck()
 {
-	if (CurSpeed.X > MinSpeed) {
+	if (SpeedX.X > MinSpeed) {
 		CurSpeedDir = 1;
 	}
 
-	else if (CurSpeed.X < -MinSpeed) {
+	else if (SpeedX.X < -MinSpeed) {
 		CurSpeedDir = -1;
 	}
 	else {
 		CurSpeedDir = 0;
+		SpeedX = StopSpeed;
 	}
 
 }
 
 void Mario::ResultMove(float _DeltaTime)
 {
+	CurSpeed = StopSpeed;
+	CurSpeed += SpeedX;
+	CurSpeed += SpeedY;
+	CurSpeed += GravitySpeed;
 	AddActorLocation(CurSpeed * _DeltaTime);
 	SetActorCameraPos();
 }

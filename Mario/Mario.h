@@ -53,6 +53,9 @@ protected:
 	const FVector DirChangeAccelerateX = StopAccelerateX * 2;
 	const FVector StopSpeed = { 0,0,0,0 };
 	FVector CurSpeed = { 0,0,0,0 };
+	FVector SpeedX = { 0,0,0,0 };
+	FVector SpeedY = { 0,0,0,0 };
+	FVector GravitySpeed = { 0,0,0,0 };
 
 	bool DirChanging = false;
 
@@ -60,9 +63,10 @@ protected:
 	const float MaxSpeedX = 500.f;
 	const float  MaxSpeedY = 1000.f;
 	int CurSpeedDir = 0;
-	const float JumpPower = -2000.f;
+	const float JumpPower = -1000.f;
 	bool Jumping = false;
 	
+
 private:
 	UImageRenderer* Renderer = nullptr;
 	MarioState State = MarioState::None;
