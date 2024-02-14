@@ -253,8 +253,9 @@ void Mario::Move(float _DeltaTime)
 void Mario::Jump(float _DeltaTime)
 {
 	Jumping = true;
-	if (true == UEngineInput::IsUp(VK_SPACE) && SpeedY.Y < 0.f) {
+	if (true == UEngineInput::IsUp(VK_SPACE) && CurSpeed.Y < 0.f) {
 		SpeedY.Y = 0;
+		GravitySpeed.Y = 0;
 	}
 
 	MoveFun(_DeltaTime, AccelerateX);
