@@ -18,7 +18,6 @@ void UImageRenderer::SetOrder(int _Order)
 	ULevel* Level = Owner->GetWorld();
 
 	std::map<int, std::list<UImageRenderer*>>& Renderers = Level->Renderers;
-
 	// 나의 오더가 바뀌기전에 혹시나 내가 어떤 그룹에 속해있다면
 	// 그 그룹에서 빠져 나온다.
 	Renderers[GetOrder()].remove(this);

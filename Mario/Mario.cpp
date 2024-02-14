@@ -143,6 +143,13 @@ void Mario::SetState(MarioState _State)
 bool Mario::GravityCheck(float _DeltaTime)
 {
 
+	FVector CurLocation = GetActorLocation();
+	//float EdgeLocation_Left = CurLocation.X - 32.f;
+	//float EdgeLocation_Right = CurLocation.X + 32.f;
+
+	//Color8Bit CheckColor_Left = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, CurLocation.iY(), Color8Bit::MagentaA);
+	//Color8Bit CheckColor_Right = MarioHelper::ColMapImage->GetColor(EdgeLocation_Right, CurLocation.iY(), Color8Bit::MagentaA);
+
 	GravitySpeed += MarioHelper::Gravity * _DeltaTime;
 
 	Color8Bit Color = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
@@ -259,7 +266,6 @@ void Mario::Jump(float _DeltaTime)
 	}
 
 	MoveFun(_DeltaTime, AccelerateX);
-
 	GravityCheck(_DeltaTime);
 
 	if (StopSpeed.Y == SpeedY.Y && StopSpeed.Y == GravitySpeed.Y) {
@@ -274,6 +280,7 @@ void Mario::Jump(float _DeltaTime)
 			return;
 		}
 	}
+
 
 
 }
@@ -408,13 +415,31 @@ void Mario::NotMove(float _DeltaTime)
 
 void Mario::MoveFun(float _DeltaTime, FVector _FVector)
 {
+	FVector CurLocation = GetActorLocation();
+	float EdgeLocation_Left = CurLocation.X - 32.f;
+	float EdgeLocation_Right = CurLocation.X + 32.f;
+	float EdgeLocation_Top = CurLocation.Y - 32.f;
+
+	Color8Bit CheckColor_Left = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Top, Color8Bit::MagentaA);
+	Color8Bit CheckColor_Right = MarioHelper::ColMapImage->GetColor(EdgeLocation_Right, EdgeLocation_Top, Color8Bit::MagentaA);
+
 	if (UEngineInput::IsPress(VK_LEFT) == true) {
+		if (Color8Bit(255, 0, 255, 0) == CheckColor_Left) {
+			SpeedX.X = 0;
+			ResultMove(_DeltaTime);
+			return;
+		}
 		AddSpeed(_DeltaTime, -_FVector);
 		SetAnimation(CurAnimationName);
 		return;
 	}
 
 	if (UEngineInput::IsPress(VK_RIGHT) == true) {
+		if (Color8Bit(255, 0, 255, 0) == CheckColor_Right) {
+			SpeedX.X = 0;
+			ResultMove(_DeltaTime);
+			return;
+		}
 		AddSpeed(_DeltaTime, _FVector);
 		SetAnimation(CurAnimationName);
 		return;

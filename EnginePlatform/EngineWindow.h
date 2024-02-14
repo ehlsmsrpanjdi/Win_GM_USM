@@ -23,6 +23,7 @@ public:
 	static void Init(HINSTANCE _hInst);
 	static unsigned __int64 WindowMessageLoop(void(*_Update)(), void(*_End)());
 
+
 	UWindowImage* GetWindowImage()
 	{
 		return WindowImage;
