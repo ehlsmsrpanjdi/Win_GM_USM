@@ -18,8 +18,11 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	void AutoMove(float _DeltaTime, FVector _SpeedX = { 200,0 });
+
 	virtual void DeadStart();
 	virtual void Idle();
+	bool IsDead = false;
 
 private:
 

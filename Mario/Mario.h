@@ -5,6 +5,7 @@
 #include <EngineCore\Collision.h>
 
 // Ό³Έν :
+class Goomba;
 class Mario : public CollisionActor
 {
 public:
@@ -12,6 +13,7 @@ public:
 	Mario();
 	~Mario();
 
+	friend Goomba;
 	// delete Function
 	Mario(const Mario& _Other) = delete;
 	Mario(Mario&& _Other) noexcept = delete;
@@ -36,12 +38,14 @@ protected:
 	void JumpStart();
 	void DirChangeStart();
 	void NotMoveStart();
+	void InteractiveStart();
 	void Idle(float _DeltaTime);
 	void Move(float _DeltaTime);
 	void Jump(float _DeltaTime);
 	void DirChange(float _DeltaTime);
 	void NotMove(float _DeltaTime);
 	void MoveFun(float _DeltaTime, FVector Acclerate);
+	void Interactive(float _DeltaTime);
 	void CurSpeedDirCheck();
 	void ResultMove(float _DeltaTime);
 

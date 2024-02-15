@@ -87,6 +87,9 @@ void Mario::StateUpdate(float _DeltaTime)
 	case MarioState::NotMove:
 		NotMove(_DeltaTime);
 		break;
+	case MarioState::Interactive:
+		Interactive(_DeltaTime);
+		break;
 	default:
 		break;
 	}
@@ -125,7 +128,7 @@ void Mario::SubtractSpeed(float _DeltaTime, FVector _FVector)
 void Mario::SetState(MarioState _State)
 {
 
-	if (State != _State)
+	if (State != _State || _State == MarioState::Interactive)
 	{
 		switch (_State)
 		{
@@ -143,6 +146,9 @@ void Mario::SetState(MarioState _State)
 			break;
 		case MarioState::NotMove:
 			NotMoveStart();
+			break;
+		case MarioState::Interactive:
+			InteractiveStart();
 			break;
 		default:
 			break;
@@ -200,6 +206,14 @@ void Mario::DirChangeStart()
 
 void Mario::NotMoveStart()
 {
+}
+
+void Mario::InteractiveStart()
+{
+	Jumping = true;
+	GravitySpeed.Y = 0;
+	SpeedY.Y = -500;
+	SetAnimation("Jump");
 }
 
 void Mario::Idle(float _DeltaTime)
@@ -460,6 +474,28 @@ void Mario::MoveFun(float _DeltaTime, FVector _FVector)
 	ResultMove(_DeltaTime);
 }
 
+void Mario::Interactive(float _DeltaTime)
+{
+	Jumping = true;
+
+	MoveFun(_DeltaTime, AccelerateX);
+	GravityCheck(_DeltaTime);
+
+	if (StopSpeed.Y == SpeedY.Y && StopSpeed.Y == GravitySpeed.Y) {
+		if (abs(SpeedX.X) > 5) {
+			SetState(MarioState::Move);
+			Jumping = false;
+			return;
+		}
+		else {
+			SetState(MarioState::Idle);
+			Jumping = false;
+			return;
+		}
+	}
+
+}
+
 void Mario::CurSpeedDirCheck()
 {
 	if (SpeedX.X > MinSpeed) {
@@ -483,6 +519,7 @@ void Mario::ResultMove(float _DeltaTime)
 	CurSpeed += SpeedY;
 	CurSpeed += GravitySpeed;
 	AddActorLocation(CurSpeed * _DeltaTime);
+
 	SetActorCameraPos();
 }
 

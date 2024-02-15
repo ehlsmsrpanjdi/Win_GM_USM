@@ -26,6 +26,7 @@ enum class MarioState
 	Jump,
 	NotMove,
 	DirChange,
+	Interactive,
 };
 
 
