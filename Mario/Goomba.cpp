@@ -41,13 +41,22 @@ void Goomba::Tick(float _DeltaTime)
 		UCollision* Collision = Result[0];
 		AActor* Ptr = Collision->GetOwner();
 		Mario* Player = dynamic_cast<Mario*>(Ptr);
+		FVector CurPlayerLocation = Player->GetActorLocation();
 
 		if (nullptr == Player)
 		{
 			MsgBoxAssert("터져야겠지....");
 		}
-		Player->SetState(MarioState::Interactive);
-		DeadStart();
+		FVector CurLocation = GetActorLocation();
+		if (CurPlayerLocation.Y < CurLocation.Y - 32) {
+			Player->SetState(MarioState::Interactive);
+			DeadStart();
+		}
+		else {
+			return;
+		}
+
+
 	}
 
 }
