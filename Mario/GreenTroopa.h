@@ -14,11 +14,13 @@ public:
 	GreenTroopa& operator=(const GreenTroopa& _Other) = delete;
 	GreenTroopa& operator=(GreenTroopa&& _Other) noexcept = delete;
 
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void IsEdge(float _DeltaTime);
+	void SetCrouch();
 private:
-
+	bool IsCrouch = false;
 };
 

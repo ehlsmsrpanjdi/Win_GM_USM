@@ -27,6 +27,7 @@ enum class MarioState
 	NotMove,
 	DirChange,
 	Interactive,
+	Dead,
 };
 
 

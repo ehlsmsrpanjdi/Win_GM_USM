@@ -5,6 +5,7 @@
 #include <EngineBase\EngineFile.h>
 #include "CollisionActor.h"
 #include "Goomba.h"
+#include "GreenTroopa.h"
 
 UPlayLevel::UPlayLevel()
 {
@@ -57,6 +58,12 @@ void UPlayLevel::BeginPlay()
 
 	TestGoomba = SpawnActor<Goomba>(MarioRenderOrder::Monster);
 	TestGoomba->SetActorLocation({ 1100,200 });
+
+	GreenTroopa* TestTroopa;
+	TestTroopa = SpawnActor<GreenTroopa>(MarioRenderOrder::Monster);
+	TestTroopa->SetActorLocation({ 1300,200 });
+
+
 
 }
 

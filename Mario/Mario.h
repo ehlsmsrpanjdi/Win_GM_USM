@@ -5,7 +5,7 @@
 #include <EngineCore\Collision.h>
 
 // Ό³Έν :
-class Goomba;
+
 class Mario : public CollisionActor
 {
 public:
@@ -13,13 +13,13 @@ public:
 	Mario();
 	~Mario();
 
-	friend Goomba;
+
 	// delete Function
 	Mario(const Mario& _Other) = delete;
 	Mario(Mario&& _Other) noexcept = delete;
 	Mario& operator=(const Mario& _Other) = delete;
 	Mario& operator=(Mario&& _Other) noexcept = delete;
-
+	void SetState(MarioState _State);
 
 protected:
 	void BeginPlay() override;
@@ -28,7 +28,7 @@ protected:
 	void StateUpdate(float _DeltaTime) override;
 	void AddSpeed(float _DeltaTime, FVector _FVector);
 	void SubtractSpeed(float _DeltaTime, FVector _FVector);
-	void SetState(MarioState _State);
+
 	bool GravityCheck(float _DeltaTime) override;
 
 
