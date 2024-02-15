@@ -45,6 +45,10 @@ void UPlayLevel::BeginPlay()
 
 	TestMario->SetActorLocation({ 200,200 });
 
+	Goomba* TestGoomba;
+	TestGoomba = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+
+	TestGoomba->SetActorLocation({ 800,200 });
 
 }
 

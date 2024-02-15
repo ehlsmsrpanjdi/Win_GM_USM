@@ -14,8 +14,8 @@ enum MarioRenderOrder
 
 enum class EActorDir
 {
-	Left,
-	Right,
+	Left = -1,
+	Right = 1,
 };
 
 enum class MarioState

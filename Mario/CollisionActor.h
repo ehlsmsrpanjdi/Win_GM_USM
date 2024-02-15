@@ -39,8 +39,8 @@ protected:
 	virtual void Tick(float _DeltaTime) override;
 	bool NoDir = false;
 
-	void AutoMove(float _DeltaTime);
-
+	void AutoMove(float _DeltaTime, FVector _SpeedX = { 200,0 });
+	float AutoMoveSpeed = 200;
 
 private:
 

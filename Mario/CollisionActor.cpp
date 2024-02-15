@@ -57,12 +57,13 @@ void CollisionActor::Tick(float _DeltaTime)
 	}
 }
 
-void CollisionActor::AutoMove(float _DeltaTime)
+void CollisionActor::AutoMove(float _DeltaTime, FVector _SpeedX)
 {
+		GravityCheck(_DeltaTime);
 		FVector CurLocation = GetActorLocation();
-		FVector AddLocation = { static_cast<float>(DirState) * _DeltaTime, 0.f, 0.f, 0.f };
-		FVector NextLocation = CurLocation + AddLocation;
-		SetActorLocation(NextLocation);
+		FVector XVector = (_SpeedX) * static_cast<float>(DirState) * _DeltaTime;
+		FVector NextVector = XVector + CurLocation;
+		SetActorLocation(NextVector);
 }
 
 void CollisionActor::SwitchRender()
