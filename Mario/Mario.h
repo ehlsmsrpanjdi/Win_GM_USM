@@ -2,6 +2,7 @@
 #include <EngineCore\Actor.h>
 #include "MarioHelper.h"
 #include "CollisionActor.h"
+#include <EngineCore\Collision.h>
 
 // Ό³Έν :
 class Mario : public CollisionActor
@@ -68,7 +69,9 @@ protected:
 	
 
 private:
-	UImageRenderer* Renderer = nullptr;
+
+
+
 	MarioState State = MarioState::None;
 };
 

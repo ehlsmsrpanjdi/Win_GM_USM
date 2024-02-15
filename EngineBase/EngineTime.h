@@ -27,8 +27,6 @@ public:
 		return DeltaTime;
 	}
 
-	 static double TestTime;
-
 protected:
 
 private:

@@ -52,7 +52,12 @@ void ContentsCore::BeginPlay()
 
 void ContentsCore::Tick(float _DeltaTime)
 {
+	UEngineCore::Tick(_DeltaTime);
 	// 플레이어 움직여야 한다.
+	if (true == UEngineInput::IsDown(VK_F2))
+	{
+		GEngine->EngineDebugSwitch();
+	}
 }
 
 void ContentsCore::End()

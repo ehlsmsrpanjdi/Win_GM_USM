@@ -30,6 +30,10 @@ void Mario::BeginPlay()
 	AnimationAuto(Renderer, "DirChange", 4, 4);
 	AnimationAuto(Renderer, "Jump", 5, 5);
 
+	Collision = CreateCollision(MarioCollisionOrder::Player);
+	Collision->SetColType(ECollisionType::Rect);
+	Collision->SetTransform({ { 0,-32 }, { 64, 64 } });
+
 
 	SetAnimation("Idle");
 	SetState(MarioState::Idle);
@@ -56,6 +60,13 @@ void Mario::SetActorCameraPos()
 
 void Mario::StateUpdate(float _DeltaTime)
 {
+
+	if (0 < abs(CurSpeed.Y)) {
+		Jumping = true;
+	}
+	else {
+		Jumping = false;
+	}
 
 	switch (State)
 	{
@@ -194,8 +205,10 @@ void Mario::NotMoveStart()
 void Mario::Idle(float _DeltaTime)
 {
 
+
 	GravityCheck(_DeltaTime);
 	ResultMove(_DeltaTime);
+
 
 	if (UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsPress(VK_RIGHT)) {
 		return;
@@ -213,7 +226,7 @@ void Mario::Idle(float _DeltaTime)
 
 
 
- if (UEngineInput::IsDown(VK_SPACE) && false == Jumping) {
+	if (UEngineInput::IsDown(VK_SPACE) && false == Jumping) {
 		SetState(MarioState::Jump);
 		return;
 	}
@@ -223,7 +236,7 @@ void Mario::Idle(float _DeltaTime)
 
 void Mario::Move(float _DeltaTime)
 {
- if (UEngineInput::IsDown(VK_SPACE) && false == Jumping) {
+	if (UEngineInput::IsDown(VK_SPACE) && false == Jumping) {
 		SetState(MarioState::Jump);
 		return;
 	}
@@ -287,7 +300,7 @@ void Mario::Jump(float _DeltaTime)
 
 void Mario::DirChange(float _DeltaTime)
 {
- if (UEngineInput::IsDown(VK_SPACE) && false == Jumping) {
+	if (UEngineInput::IsDown(VK_SPACE) && false == Jumping) {
 		SetState(MarioState::Jump);
 		return;
 	}

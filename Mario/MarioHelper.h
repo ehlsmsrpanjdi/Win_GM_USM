@@ -29,6 +29,12 @@ enum class MarioState
 };
 
 
+enum class MarioCollisionOrder
+{
+	PlayerBullet,
+	Monster,
+	Player
+};
 
 
 
