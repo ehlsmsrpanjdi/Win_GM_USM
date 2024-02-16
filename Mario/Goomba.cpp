@@ -25,6 +25,7 @@ void Goomba::BeginPlay()
 
 	BodyCollision= CreateCollision(MarioCollisionOrder::Monster);
 	BodyCollision->SetTransform({ { 0,-24 }, { 32, 48 } });
+	DirState = EActorDir::Right;
 
 	State = MonsterState::Idle;
 }
@@ -55,10 +56,21 @@ void Goomba::IdleStart()
 void Goomba::AutoMove(float _DeltaTime, FVector _SpeedX)
 {
 	GravityCheck(_DeltaTime);
+	IsEdge(_DeltaTime);
 	FVector CurLocation = GetActorLocation();
 	FVector XVector = (_SpeedX) * static_cast<float>(DirState) * _DeltaTime;
 	FVector NextVector = XVector + CurLocation;
 	SetActorLocation(NextVector);
+}
+
+void Goomba::InteractiveDirCheck()
+{
+	if (Mario::PlayerLocation.X < GetActorLocation().X) {
+		DirState = EActorDir::Right;
+	}
+	else {
+		DirState = EActorDir::Left;
+	}
 }
 
 void Goomba::StateUpdate(float _DeltaTime)

@@ -19,6 +19,9 @@ public:
 	Mario& operator=(Mario&& _Other) noexcept = delete;
 	void SetState(MarioState _State);
 
+
+	static FVector PlayerLocation;
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

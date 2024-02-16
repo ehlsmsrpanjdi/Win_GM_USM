@@ -59,9 +59,9 @@ void UPlayLevel::BeginPlay()
 	//TestGoomba = SpawnActor<Goomba>(MarioRenderOrder::Monster);
 	//TestGoomba->SetActorLocation({ 1100,200 });
 
-	GreenTroopa* TestTroopa;
-	TestTroopa = SpawnActor<GreenTroopa>(MarioRenderOrder::Monster);
-	TestTroopa->SetActorLocation({ 2000,200 });
+	//GreenTroopa* TestTroopa;
+	//TestTroopa = SpawnActor<GreenTroopa>(MarioRenderOrder::Monster);
+	//TestTroopa->SetActorLocation({ 1000,200 });
 
 
 

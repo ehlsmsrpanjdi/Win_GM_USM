@@ -20,6 +20,8 @@ protected:
 
 	void AutoMove(float _DeltaTime, FVector _SpeedX = { 200,0 });
 
+	virtual void InteractiveDirCheck();
+
 	virtual void StateUpdate(float _DeltaTime);
 	virtual void SetState(MonsterState _State);
 	virtual void CollisionEvent(MonsterState _MonsterState);

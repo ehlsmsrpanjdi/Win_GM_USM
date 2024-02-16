@@ -55,6 +55,7 @@ void GreenTroopa::IsEdge(float _DeltaTime)
 
 void GreenTroopa::CrouchStart()
 {
+	BodyCollision->SetScale({ 32,36 });
 	SetAnimation("Crouch");
 }
 
@@ -104,7 +105,9 @@ void GreenTroopa::CollisionEvent(MonsterState _MonsterState)
 
 		FVector CurLocation = GetActorLocation();
 		if (CurPlayerLocation.Y < CurLocation.Y - 32) {
+
 			Player->SetState(MarioState::Interactive);
+
 			switch (_MonsterState)
 			{
 			case MonsterState::None:
@@ -125,6 +128,11 @@ void GreenTroopa::CollisionEvent(MonsterState _MonsterState)
 			}
 			return;
 		}
+
+		if (MonsterState::Crouch == _MonsterState) {
+			SetState(MonsterState::CrouchMove);
+			return;
+		}
 		else {
 			Player->Destroy();
 			return;
@@ -135,11 +143,13 @@ void GreenTroopa::CollisionEvent(MonsterState _MonsterState)
 
 void GreenTroopa::CrouchMoveStart()
 {
+	BodyCollision->SetScale({ 32,48} );
 }
 
 void GreenTroopa::CrouchMove(float _DeltaTime)
 {
-	AutoMove(_DeltaTime, { 400.f,0.f });
+	InteractiveDirCheck();
+	AutoMove(_DeltaTime, { 600.f,0.f });
 }
 
 void GreenTroopa::StateUpdate(float _DeltaTime)

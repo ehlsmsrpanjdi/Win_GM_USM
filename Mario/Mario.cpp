@@ -8,6 +8,8 @@
 #include "MarioHelper.h"
 #include <string>
 
+FVector Mario::PlayerLocation = {};
+
 Mario::Mario()
 {
 	DirState = EActorDir::Right;
@@ -43,6 +45,8 @@ void Mario::BeginPlay()
 void Mario::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
+
+	PlayerLocation = GetActorLocation();
 
 	StateUpdate(_DeltaTime);
 
