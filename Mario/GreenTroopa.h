@@ -20,7 +20,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 	void IsEdge(float _DeltaTime);
 	void CrouchStart();
-	void SetState(MonsterState _State) override;
+	void SetState(MonsterState _State);
 	void CollisionEvent(MonsterState _MonsterState) override;
 	void CrouchMoveStart();
 	void CrouchMove(float _DeltaTime);

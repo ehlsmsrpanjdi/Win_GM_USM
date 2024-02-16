@@ -75,7 +75,7 @@ void Goomba::InteractiveDirCheck()
 
 void Goomba::StateUpdate(float _DeltaTime)
 {
-
+	
 	switch (State)
 	{
 	case MonsterState::None:
