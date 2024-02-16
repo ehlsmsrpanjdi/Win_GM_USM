@@ -22,13 +22,13 @@ protected:
 
 	virtual void StateUpdate(float _DeltaTime);
 	virtual void SetState(MonsterState _State);
-	virtual void CollisionEvent();
+	virtual void CollisionEvent(MonsterState _MonsterState);
 
 
 
 	virtual void DeadStart();
 	virtual void Idle();
-	bool IsDead = false;
+	virtual void IdleStart();
 	MonsterState State = MonsterState::None;
 
 

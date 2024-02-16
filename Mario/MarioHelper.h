@@ -35,6 +35,7 @@ enum class MonsterState {
 	Idle,
 	Crouch,
 	Dead,
+	CrouchMove,
 
 };
 

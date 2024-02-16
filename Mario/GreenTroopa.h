@@ -19,8 +19,13 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void IsEdge(float _DeltaTime);
-	void SetCrouch();
+	void CrouchStart();
+	void SetState(MonsterState _State) override;
+	void CollisionEvent(MonsterState _MonsterState) override;
+	void CrouchMoveStart();
+	void CrouchMove(float _DeltaTime);
+	void StateUpdate(float _DeltaTime) override;
 private:
-	bool IsCrouch = false;
+
 };
 

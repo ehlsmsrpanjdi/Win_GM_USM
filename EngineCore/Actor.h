@@ -74,6 +74,8 @@ public:
 
 	void ActiveUpdate(float _DeltaTime) override;
 
+	void CheckReleaseChild();
+
 protected:
 	void Tick(float _DeltaTime) override;
 

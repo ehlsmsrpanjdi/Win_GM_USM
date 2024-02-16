@@ -34,18 +34,21 @@ void Goomba::Tick(float _DeltaTime)
 
 	StateUpdate(_DeltaTime);
 
-	CollisionEvent();
+	CollisionEvent(State);
 
 }
 
 void Goomba::DeadStart()
 {
-	IsDead = true;
 	SetAnimation("Dead");
 	Destroy(1.f);
 }
 
 void Goomba::Idle()
+{
+}
+
+void Goomba::IdleStart()
 {
 }
 
@@ -68,8 +71,6 @@ void Goomba::StateUpdate(float _DeltaTime)
 	case MonsterState::Idle:
 		AutoMove(_DeltaTime);
 		break;
-	case MonsterState::Crouch:
-		break;
 	case MonsterState::Dead:
 		break;
 	default:
@@ -89,8 +90,6 @@ void Goomba::SetState(MonsterState _State)
 		break;
 	case MonsterState::Idle:
 		break;
-	case MonsterState::Crouch:
-		break;
 	case MonsterState::Dead:
 		DeadStart();
 		break;
@@ -100,11 +99,8 @@ void Goomba::SetState(MonsterState _State)
 
 }
 
-void Goomba::CollisionEvent()
+void Goomba::CollisionEvent(MonsterState _MonsterState)
 {
-	if (IsDead) {
-		return;
-	}
 	std::vector<UCollision*> Result;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
 	{
@@ -123,6 +119,7 @@ void Goomba::CollisionEvent()
 			Player->SetState(MarioState::Interactive);
 			BodyCollision->Destroy();
 			SetState(MonsterState::Dead);
+			return;
 		}
 		else {
 			Player->Destroy();

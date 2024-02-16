@@ -219,9 +219,9 @@ void Mario::InteractiveStart()
 void Mario::Idle(float _DeltaTime)
 {
 
-
-	GravityCheck(_DeltaTime);
 	ResultMove(_DeltaTime);
+	GravityCheck(_DeltaTime);
+
 
 
 	if (UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsPress(VK_RIGHT)) {
@@ -265,7 +265,7 @@ void Mario::Move(float _DeltaTime)
 			return;
 		}
 		SubtractSpeed(_DeltaTime, StopAccelerateX);
-
+		
 		return;
 	}
 
