@@ -22,8 +22,8 @@ void GreenTroopa::BeginPlay()
 	SetAnimation("Idle");
 	AnimationAuto(Renderer, "Crouch", 4, 4, true);
 
-	Collision = CreateCollision(MarioRenderOrder::Monster);
-	Collision->SetTransform({ {0,-24},{32,48} });
+	BodyCollision = CreateCollision(MarioRenderOrder::Monster);
+	BodyCollision->SetTransform({ {0,-24},{32,48} });
 }
 
 void GreenTroopa::Tick(float _DeltaTime)
@@ -34,7 +34,7 @@ void GreenTroopa::Tick(float _DeltaTime)
 	
 
 	std::vector<UCollision*> Result;
-	if (true == Collision->CollisionCheck(MarioCollisionOrder::Player, Result))
+	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
 	{
 		if (IsDead) {
 			return;
@@ -56,6 +56,7 @@ void GreenTroopa::Tick(float _DeltaTime)
 		}
 
 		if (CurPlayerLocation.Y < CurLocation.Y - 32) {
+
 			Player->SetState(MarioState::Interactive);
 			SetCrouch();
 		}

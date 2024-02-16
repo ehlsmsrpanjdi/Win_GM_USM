@@ -20,9 +20,17 @@ protected:
 
 	void AutoMove(float _DeltaTime, FVector _SpeedX = { 200,0 });
 
+	virtual void StateUpdate(float _DeltaTime);
+	virtual void SetState(MonsterState _State);
+	virtual void CollisionEvent();
+
+
+
 	virtual void DeadStart();
 	virtual void Idle();
 	bool IsDead = false;
+	MonsterState State = MonsterState::None;
+
 
 private:
 

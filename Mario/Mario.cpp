@@ -30,9 +30,9 @@ void Mario::BeginPlay()
 	AnimationAuto(Renderer, "DirChange", 4, 4);
 	AnimationAuto(Renderer, "Jump", 5, 5);
 
-	Collision = CreateCollision(MarioCollisionOrder::Player);
-	Collision->SetColType(ECollisionType::Rect);
-	Collision->SetTransform({ { 0,-32 }, { 64, 64 } });
+	BodyCollision = CreateCollision(MarioCollisionOrder::Player);
+	BodyCollision->SetColType(ECollisionType::Rect);
+	BodyCollision->SetTransform({ { 0,-32 }, { 64, 64 } });
 
 
 	SetAnimation("Idle");

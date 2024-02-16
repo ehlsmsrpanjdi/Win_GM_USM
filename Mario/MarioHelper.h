@@ -30,6 +30,14 @@ enum class MarioState
 	Dead,
 };
 
+enum class MonsterState {
+	None,
+	Idle,
+	Crouch,
+	Dead,
+
+};
+
 
 enum class MarioCollisionOrder
 {

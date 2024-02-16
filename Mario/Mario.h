@@ -5,14 +5,12 @@
 #include <EngineCore\Collision.h>
 
 // Ό³Έν :
-
 class Mario : public CollisionActor
 {
 public:
 	// constrcuter destructer
 	Mario();
 	~Mario();
-
 
 	// delete Function
 	Mario(const Mario& _Other) = delete;

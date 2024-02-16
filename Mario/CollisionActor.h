@@ -32,7 +32,7 @@ protected:
 	std::string CurAnimationName = "";
 	UImageRenderer* Renderer = nullptr;
 	UImageRenderer* ColRenderer = nullptr;
-	UCollision* Collision = nullptr;
+	UCollision* BodyCollision = nullptr;
 	EActorDir DirState = EActorDir::Left;
 
 	void BeginPlay() override;

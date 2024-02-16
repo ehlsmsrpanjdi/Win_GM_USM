@@ -23,41 +23,18 @@ void Goomba::BeginPlay()
 
 	AnimationAuto(Renderer, "Dead", 2, 2, false, 1.f);
 
-	Collision = CreateCollision(MarioCollisionOrder::Monster);
-	Collision->SetTransform({ { 0,-24 }, { 32, 48 } });
+	BodyCollision= CreateCollision(MarioCollisionOrder::Monster);
+	BodyCollision->SetTransform({ { 0,-24 }, { 32, 48 } });
+
+	State = MonsterState::Idle;
 }
 
 void Goomba::Tick(float _DeltaTime)
 {
-	AutoMove(_DeltaTime);
 
-	std::vector<UCollision*> Result;
-	if (true == Collision->CollisionCheck(MarioCollisionOrder::Player, Result))
-	{
-		if (IsDead) {
-			return;
-		}
-		// 이런식으로 상대를 사용할수 있다.
-		UCollision* Collision = Result[0];
-		AActor* Ptr = Collision->GetOwner();
-		Mario* Player = dynamic_cast<Mario*>(Ptr);
-		FVector CurPlayerLocation = Player->GetActorLocation();
+	StateUpdate(_DeltaTime);
 
-		if (nullptr == Player)
-		{
-			MsgBoxAssert("터져야겠지....");
-		}
-		FVector CurLocation = GetActorLocation();
-		if (CurPlayerLocation.Y < CurLocation.Y - 32) {
-			Player->SetState(MarioState::Interactive);
-			DeadStart();
-		}
-		else {
-			return;
-		}
-
-
-	}
+	CollisionEvent();
 
 }
 
@@ -74,12 +51,83 @@ void Goomba::Idle()
 
 void Goomba::AutoMove(float _DeltaTime, FVector _SpeedX)
 {
-	if (IsDead) {
-		return;
-	}
 	GravityCheck(_DeltaTime);
 	FVector CurLocation = GetActorLocation();
 	FVector XVector = (_SpeedX) * static_cast<float>(DirState) * _DeltaTime;
 	FVector NextVector = XVector + CurLocation;
 	SetActorLocation(NextVector);
+}
+
+void Goomba::StateUpdate(float _DeltaTime)
+{
+
+	switch (State)
+	{
+	case MonsterState::None:
+		break;
+	case MonsterState::Idle:
+		AutoMove(_DeltaTime);
+		break;
+	case MonsterState::Crouch:
+		break;
+	case MonsterState::Dead:
+		break;
+	default:
+		break;
+	}
+}
+
+void Goomba::SetState(MonsterState _State)
+{
+	if (State != _State) {
+		State = _State;
+	}
+
+	switch (State)
+	{
+	case MonsterState::None:
+		break;
+	case MonsterState::Idle:
+		break;
+	case MonsterState::Crouch:
+		break;
+	case MonsterState::Dead:
+		DeadStart();
+		break;
+	default:
+		break;
+	}
+
+}
+
+void Goomba::CollisionEvent()
+{
+	if (IsDead) {
+		return;
+	}
+	std::vector<UCollision*> Result;
+	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
+	{
+		// 이런식으로 상대를 사용할수 있다.
+		UCollision* Collision = Result[0];
+		AActor* Ptr = Collision->GetOwner();
+		Mario* Player = dynamic_cast<Mario*>(Ptr);
+		FVector CurPlayerLocation = Player->GetActorLocation();
+
+		if (nullptr == Player)
+		{
+			MsgBoxAssert("터져야겠지....");
+		}
+		FVector CurLocation = GetActorLocation();
+		if (CurPlayerLocation.Y < CurLocation.Y - 32) {
+			Player->SetState(MarioState::Interactive);
+			BodyCollision->Destroy();
+			SetState(MonsterState::Dead);
+		}
+		else {
+			Player->Destroy();
+			return;
+		}
+	}
+
 }
