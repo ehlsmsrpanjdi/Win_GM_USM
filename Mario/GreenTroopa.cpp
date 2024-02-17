@@ -17,7 +17,7 @@ void GreenTroopa::BeginPlay()
 	SetName("GreenTroopa");
 	Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 	Renderer->SetImage("GreenTroopa_Right.png");
-	Renderer->SetTransform({ {0,0 }, { 256,256} });
+	Renderer->SetTransform({ {0,0 }, { 512,512} });
 	AnimationAuto(Renderer, "Idle", 0, 1, true, 0.2f);
 	SetAnimation("Idle");
 	AnimationAuto(Renderer, "Crouch", 4, 4, true);
@@ -34,23 +34,22 @@ void GreenTroopa::Tick(float _DeltaTime)
 	StateUpdate(_DeltaTime);
 
 	CollisionEvent(State);
-
-
 }
 
 void GreenTroopa::IsEdge(float _DeltaTime)
 {
-	Color8Bit Color = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 
-	if (Color != Color8Bit(255, 0, 255, 0))
+	EActorDir Dir = DirState;
+
+	Color8Bit Color_Right = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() + 5, GetActorLocation().iY() - 20, Color8Bit::MagentaA);
+	Color8Bit Color_Left = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() - 5, GetActorLocation().iY() - 20, Color8Bit::MagentaA);
+
+	if (Color_Right == Color8Bit(255, 0, 255, 0) || Color_Left == Color8Bit(255, 0, 255, 0))
 	{
-		if (EActorDir::Left == DirState) {
-			DirState = EActorDir::Right;
-		}
-		else {
-			DirState = EActorDir::Left;
-		}
+		ReverseDir();
+		return;
 	}
+
 }
 
 void GreenTroopa::CrouchStart()
@@ -139,16 +138,27 @@ void GreenTroopa::CollisionEvent(MonsterState _MonsterState)
 		}
 	}
 
+	else if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Monster, Result))
+	{
+		for (UCollision* Collision : Result) {
+			if (Collision != this->BodyCollision) {
+				this->ReverseDir();
+			}
+			else {
+				int a = 0;
+			}
+		}
+	}
+
 }
 
 void GreenTroopa::CrouchMoveStart()
 {
-	BodyCollision->SetScale({ 32,48} );
+	InteractiveDirCheck();
 }
 
 void GreenTroopa::CrouchMove(float _DeltaTime)
 {
-	InteractiveDirCheck();
 	AutoMove(_DeltaTime, { 600.f,0.f });
 }
 
@@ -172,6 +182,18 @@ void GreenTroopa::StateUpdate(float _DeltaTime)
 		break;
 	default:
 		break;
+	}
+
+}
+
+
+void GreenTroopa::InteractiveDirCheck()
+{
+	if (Mario::PlayerLocation.X < GetActorLocation().X) {
+		DirState = EActorDir::Right;
+	}
+	else {
+		DirState = EActorDir::Left;
 	}
 
 }

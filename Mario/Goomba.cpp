@@ -17,15 +17,14 @@ void Goomba::BeginPlay()
 	NoDir = true;
 	Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 	Renderer->SetImage("Goomba.png");
-	Renderer->SetTransform({ {0,0 }, { 128,128 } });
+	Renderer->SetTransform({ {0,0 }, { 512,512 } });
 	AnimationAuto(Renderer, "Idle", 0, 1, false, 0.2f);
 	SetAnimation("Idle");
 
 	AnimationAuto(Renderer, "Dead", 2, 2, false, 1.f);
 
 	BodyCollision= CreateCollision(MarioCollisionOrder::Monster);
-	BodyCollision->SetTransform({ { 0,-24 }, { 32, 48 } });
-	DirState = EActorDir::Right;
+	BodyCollision->SetTransform({ { 0,-24 }, { 64, 64} });
 
 	State = MonsterState::Idle;
 }
@@ -45,8 +44,9 @@ void Goomba::DeadStart()
 	Destroy(1.f);
 }
 
-void Goomba::Idle()
+void Goomba::Idle(float _DeltaTime)
 {
+	AutoMove(_DeltaTime);
 }
 
 void Goomba::IdleStart()
@@ -58,20 +58,12 @@ void Goomba::AutoMove(float _DeltaTime, FVector _SpeedX)
 	GravityCheck(_DeltaTime);
 	IsEdge(_DeltaTime);
 	FVector CurLocation = GetActorLocation();
-	FVector XVector = (_SpeedX) * static_cast<float>(DirState) * _DeltaTime;
-	FVector NextVector = XVector + CurLocation;
+	FVector CurVector = (_SpeedX) * static_cast<float>(DirState) * _DeltaTime;
+	FVector NextVector = CurVector + CurLocation;
 	SetActorLocation(NextVector);
 }
 
-void Goomba::InteractiveDirCheck()
-{
-	if (Mario::PlayerLocation.X < GetActorLocation().X) {
-		DirState = EActorDir::Right;
-	}
-	else {
-		DirState = EActorDir::Left;
-	}
-}
+
 
 void Goomba::StateUpdate(float _DeltaTime)
 {
@@ -81,7 +73,7 @@ void Goomba::StateUpdate(float _DeltaTime)
 	case MonsterState::None:
 		break;
 	case MonsterState::Idle:
-		AutoMove(_DeltaTime);
+		Idle(_DeltaTime);
 		break;
 	case MonsterState::Dead:
 		break;
@@ -136,6 +128,18 @@ void Goomba::CollisionEvent(MonsterState _MonsterState)
 		else {
 			Player->Destroy();
 			return;
+		}
+	}
+
+	else if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Monster, Result))
+	{
+		for (UCollision* Collision : Result) {
+			if (Collision != this->BodyCollision) {
+				this->ReverseDir();
+			}
+			else {
+				int a = 0;
+			}
 		}
 	}
 

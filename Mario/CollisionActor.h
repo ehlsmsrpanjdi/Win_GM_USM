@@ -38,10 +38,7 @@ protected:
 	void BeginPlay() override;
 	virtual void Tick(float _DeltaTime) override;
 	bool NoDir = false;
-
-
-
-	float AutoMoveSpeed = 200;
+	void ReverseDir();
 
 private:
 

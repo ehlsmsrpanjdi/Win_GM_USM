@@ -25,6 +25,7 @@ protected:
 	void CrouchMoveStart();
 	void CrouchMove(float _DeltaTime);
 	void StateUpdate(float _DeltaTime) override;
+	virtual void InteractiveDirCheck();
 private:
 
 };

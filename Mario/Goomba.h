@@ -18,9 +18,9 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	void AutoMove(float _DeltaTime, FVector _SpeedX = { 200,0 });
+	virtual void AutoMove(float _DeltaTime, FVector _SpeedX = { 200,0 });
 
-	virtual void InteractiveDirCheck();
+
 
 	virtual void StateUpdate(float _DeltaTime);
 	virtual void SetState(MonsterState _State);
@@ -29,10 +29,11 @@ protected:
 
 
 	virtual void DeadStart();
-	virtual void Idle();
+	virtual void Idle(float _DeltaTime);
 	virtual void IdleStart();
 	MonsterState State = MonsterState::None;
 
+	float AutoMoveSpeed = 200;
 
 private:
 

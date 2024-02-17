@@ -57,6 +57,19 @@ void CollisionActor::Tick(float _DeltaTime)
 	}
 }
 
+void CollisionActor::ReverseDir()
+{
+	if (DirState == EActorDir::Left) {
+		DirState = EActorDir::Right;
+	}
+
+	else if (DirState == EActorDir::Right) {
+		DirState = EActorDir::Left;
+	}
+
+	SetAnimation(CurAnimationName);
+}
+
 
 void CollisionActor::SwitchRender()
 {
@@ -145,19 +158,23 @@ bool CollisionActor::GravityCheck(float _DeltaTime)
 
 void CollisionActor::IsEdge(float _DeltaTime)
 {
+
+	EActorDir Dir = DirState;
+
 	Color8Bit Color_Right = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() + 5, GetActorLocation().iY() - 20, Color8Bit::MagentaA);
 	Color8Bit Color_Left = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() - 5, GetActorLocation().iY() - 20, Color8Bit::MagentaA);
 
 	if (Color_Right == Color8Bit(255, 0, 255, 0))
 	{
-		DirState = EActorDir::Left;
+		ReverseDir();
 		return;
 	}
 	
 	if (Color_Left== Color8Bit(255, 0, 255, 0))
 	{
-		DirState = EActorDir::Right;
+		ReverseDir();
 		return;
 	}
+
 
 }
