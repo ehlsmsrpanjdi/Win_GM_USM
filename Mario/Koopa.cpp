@@ -19,7 +19,7 @@ void Koopa::BeginPlay()
 	Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 	Renderer->SetImage("Goomba.png");
 	Renderer->SetTransform({ {0,0 }, { 128,128 } });
-	AnimationAuto(Renderer, "Default", 0, 1, false, 0.2f);
+	AnimationAuto(Renderer, "Default", 0, 1);
 	SetAnimation("Default");
 }
 

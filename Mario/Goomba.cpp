@@ -20,7 +20,7 @@ void Goomba::BeginPlay()
 	Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 	Renderer->SetImage("Goomba.png");
 	Renderer->SetTransform({ {0,0 }, { 512,512 } });
-	AnimationAuto(Renderer, "Idle", 0, 1, false, 0.2f);
+	AnimationAuto(Renderer, "Idle", 0, 1,0.2f);
 	SetAnimation("Idle");
 
 	AnimationAuto(Renderer, "Dead", 2, 2);

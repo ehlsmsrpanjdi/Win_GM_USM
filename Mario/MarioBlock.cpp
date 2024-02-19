@@ -1,33 +1,38 @@
-#include "Block.h"
+#include "MarioBlock.h"
 #include <EngineCore/EngineResourcesManager.h>
 #include "MarioHelper.h"
 #include "Mario.h"
 #include "PhysicsActor.h"
-Block::Block()
+MarioBlock::MarioBlock()
 {
 	NoDir = true;
 }
 
-Block::~Block()
+MarioBlock::~MarioBlock()
 {
 }
 
-void Block::BeginPlay()
+void MarioBlock::BeginPlay()
 {
-	SetName("Block");
+	SetName("MarioBlock");
 	Renderer = CreateImageRenderer(MarioRenderOrder::Block);
-	Renderer->SetImage("Block.png");
-	Renderer->SetTransform({ {0,0 }, { 512,512 } });
-	AnimationAuto(Renderer, "Idle", 0, 1, false, 0.2f);
+	Renderer->SetImage("MarioBlock.png");
+	Renderer->SetTransform({ {0,400 }, { 1024,1024 } });
+	AnimationAuto(Renderer, "Idle", 0, 3, 0.2f);
 	SetAnimation("Idle");
 
+	ColRenderer = CreateImageRenderer(MarioRenderOrder::Block);
+	ColRenderer->SetImage("BlockCollision.png");
+	ColRenderer->SetTransform({ {0, 368 }, { 128,128 } });
+	ColRenderer->SetActive(false);
 
 	BodyCollision = CreateCollision(MarioCollisionOrder::Block);
-	BodyCollision->SetTransform({ { 0,-24 }, { 64, 64} });
+	BodyCollision->SetTransform({ { 0, 368 }, { 64, 64} });
+
 
 }
 
-void Block::Tick(float _DeltaTime)
+void MarioBlock::Tick(float _DeltaTime)
 {
 	StateUpdate(_DeltaTime);
 
@@ -35,7 +40,7 @@ void Block::Tick(float _DeltaTime)
 
 }
 
-void Block::StateUpdate(float _DeltaTime)
+void MarioBlock::StateUpdate(float _DeltaTime)
 {
 	switch (State)
 	{
@@ -48,7 +53,7 @@ void Block::StateUpdate(float _DeltaTime)
 	}
 }
 
-void Block::SetBoxState(BlockState _BlockState)
+void MarioBlock::SetBoxState(BlockState _MarioBlockState)
 {
 	switch (State)
 	{
@@ -63,7 +68,7 @@ void Block::SetBoxState(BlockState _BlockState)
 	}
 }
 
-void Block::BoxCollisionEvent(BlockState _BlockState)
+void MarioBlock::BoxCollisionEvent(BlockState _MarioBlockState)
 {
 	std::vector<UCollision*> Result;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
@@ -82,12 +87,12 @@ void Block::BoxCollisionEvent(BlockState _BlockState)
 	}
 }
 
-void Block::ItemStart()
+void MarioBlock::ItemStart()
 {
 
 }
 
-void Block::NoneStart()
+void MarioBlock::NoneStart()
 {
 
 	//SetAnimation("");

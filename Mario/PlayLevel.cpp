@@ -7,6 +7,7 @@
 #include "Goomba.h"
 #include "GreenTroopa.h"
 #include "Plant.h"
+#include "MarioBlock.h"
 
 UPlayLevel::UPlayLevel()
 {
@@ -54,6 +55,11 @@ void UPlayLevel::BeginPlay()
 	GreenTroopa* TestTroopa;
 	TestTroopa = SpawnActor<GreenTroopa>(MarioRenderOrder::Monster);
 	TestTroopa->SetActorLocation({ 1000,200 });
+
+	MarioBlock* TestBlock;
+	TestBlock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
+	TestBlock->SetActorLocation({ 1000,200 });
+
 
 	//Plant* TestPlant;
 	//TestPlant = SpawnActor<Plant>(MarioRenderOrder::Monster);

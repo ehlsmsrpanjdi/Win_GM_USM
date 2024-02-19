@@ -26,7 +26,7 @@ void Mario::BeginPlay()
 	AActor::BeginPlay();
 	SetName("Mario");
 	Renderer = CreateImageRenderer(MarioRenderOrder::Player);
-	//Renderer->SetImage("Mario_Right.png");
+	Renderer->SetImage("Mario_Right.png");
 	Renderer->SetTransform({ {0,0}, {256, 256} });
 
 	AnimationAuto(Renderer, "Idle", 0, 0);
@@ -384,9 +384,9 @@ bool Mario::LeftEdgeCheck()
 {
 
 	FVector CurLocation = GetActorLocation();
-	int EdgeLocation_Left = CurLocation.X - 32.f;
-	int EdgeLocation_Top = CurLocation.Y - 32.f;
-	int EdgeLocation_Bottom = CurLocation.Y - 3.f;
+	int EdgeLocation_Left = static_cast<int>(CurLocation.X - 32.f);
+	int EdgeLocation_Top = static_cast<int>(CurLocation.Y - 32.f);
+	int EdgeLocation_Bottom = static_cast<int>(CurLocation.Y - 3.f);
 
 	Color8Bit CheckColor_LeftTop = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Top, Color8Bit::MagentaA);
 	Color8Bit CheckColor_LeftBottom = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Bottom, Color8Bit::MagentaA);
@@ -406,9 +406,9 @@ bool Mario::RightEdgeCheck()
 {
 
 	FVector CurLocation = GetActorLocation();
-	int EdgeLocation_Right = CurLocation.X + 32.f;
-	int EdgeLocation_Top = CurLocation.Y - 32.f;
-	int EdgeLocation_Bottom = CurLocation.Y - 3.f;
+	int EdgeLocation_Right = static_cast<int>(CurLocation.X + 32.f);
+	int EdgeLocation_Top = static_cast<int>(CurLocation.Y - 32.f);
+	int EdgeLocation_Bottom = static_cast<int>(CurLocation.Y - 3.f);
 
 	Color8Bit CheckColor_RightTop = MarioHelper::ColMapImage->GetColor(EdgeLocation_Right, EdgeLocation_Top, Color8Bit::MagentaA);
 	Color8Bit CheckColor_RightBottom = MarioHelper::ColMapImage->GetColor(EdgeLocation_Right, EdgeLocation_Bottom, Color8Bit::MagentaA);

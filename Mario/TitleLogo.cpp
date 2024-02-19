@@ -16,8 +16,8 @@ void TitleLogo::BeginPlay()
 
 	Renderer->SetImage("Title.png");
 	// 이미지가 나올 위치
-	int a = GEngine->MainWindow.GetWindowScale().hX();
-	int b = GEngine->MainWindow.GetWindowScale().hY();
+	float a = GEngine->MainWindow.GetWindowScale().hX();
+	float  b = GEngine->MainWindow.GetWindowScale().hY();
 	SetActorLocation({a, b });
 	Renderer->SetTransform({ {0,0}, {257* 4, 267*4} });
 	//Renderer->SetImageCuttingTransform({ {0,0}, {200, 200} });

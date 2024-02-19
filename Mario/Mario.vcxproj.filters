@@ -45,7 +45,7 @@
     <ClInclude Include="PhysicsActor.h">
       <Filter>Actor</Filter>
     </ClInclude>
-    <ClInclude Include="Block.h">
+    <ClInclude Include="MarioBlock.h">
       <Filter>Actor\Block</Filter>
     </ClInclude>
   </ItemGroup>
@@ -94,7 +94,7 @@
     <ClCompile Include="PhysicsActor.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Block.cpp">
+    <ClCompile Include="MarioBlock.cpp">
       <Filter>Actor\Block</Filter>
     </ClCompile>
   </ItemGroup>

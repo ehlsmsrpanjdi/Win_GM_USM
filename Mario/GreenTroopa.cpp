@@ -18,9 +18,9 @@ void GreenTroopa::BeginPlay()
 	Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 	Renderer->SetImage("GreenTroopa_Right.png");
 	Renderer->SetTransform({ {0,0 }, { 512,512} });
-	AnimationAuto(Renderer, "Idle", 0, 1, true, 0.2f);
+	AnimationAuto(Renderer, "Idle", 0, 1, 0.2f);
 	SetAnimation("Idle");
-	AnimationAuto(Renderer, "Crouch", 4, 4, true);
+	AnimationAuto(Renderer, "Crouch", 4, 4);
 
 	BodyCollision = CreateCollision(MarioRenderOrder::Monster);
 	BodyCollision->SetTransform({ {0,-24},{32,48} });

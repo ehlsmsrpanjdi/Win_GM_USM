@@ -30,7 +30,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Block.h">
+    <ClInclude Include="MarioBlock.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -97,7 +97,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Block.cpp">
+    <ClCompile Include="MarioBlock.cpp">
       <SubType>
       </SubType>
     </ClCompile>

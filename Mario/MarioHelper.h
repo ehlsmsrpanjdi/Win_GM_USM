@@ -50,8 +50,9 @@ enum class MarioCollisionOrder
 {
 	PlayerBullet,
 	Monster,
-	Player,
 	Block,
+	Player,
+
 };
 
 
