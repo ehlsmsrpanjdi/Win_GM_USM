@@ -26,7 +26,7 @@ void Mario::BeginPlay()
 	AActor::BeginPlay();
 	SetName("Mario");
 	Renderer = CreateImageRenderer(MarioRenderOrder::Player);
-	Renderer->SetImage("Mario_Right.png");
+	//Renderer->SetImage("Mario_Right.png");
 	Renderer->SetTransform({ {0,0}, {256, 256} });
 
 	AnimationAuto(Renderer, "Idle", 0, 0);

@@ -8,8 +8,9 @@
 enum MarioRenderOrder
 {
 	Map,
+	Block,
 	Monster,
-	Player
+	Player,
 };
 
 enum class EActorDir
@@ -39,12 +40,18 @@ enum class MonsterState {
 	Critical,
 };
 
+enum class BlockState {
+	Item,
+	None,
+
+};
 
 enum class MarioCollisionOrder
 {
 	PlayerBullet,
 	Monster,
-	Player
+	Player,
+	Block,
 };
 
 

@@ -29,10 +29,11 @@ protected:
 	virtual void StateUpdate(float _DeltaTime) {};
 	virtual void SetState(MonsterState _State) {};
 	virtual void CollisionEvent(MonsterState _MonsterState) {};
-
+	virtual void BoxCollisionEvent(BlockState _BlockState) {};
 
 	std::string CurAnimationName = "";
 	UImageRenderer* Renderer = nullptr;
+	UImageRenderer* ColRenderer = nullptr;
 	UCollision* BodyCollision = nullptr;
 	EActorDir DirState = EActorDir::Right;
 
