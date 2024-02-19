@@ -22,47 +22,7 @@ std::wstring UEngineString::AnsiToUniCode(std::string_view _View)
 
 	// 1바이트이거나 2바이트인 문자열 => 멀티바이트
 	// 무조건 2바이트 하는 => 유니코드
-	// 바이트 사이즈가 바뀔겁니다.#pragma once
-#include "NameObject.h"
-#include "EnginePath.h"
-
-// 설명 :
-	class UPathObject : public UNameObject
-	{
-	public:
-		// constrcuter destructer
-		UPathObject();
-		~UPathObject();
-
-		// delete Function
-		UPathObject(const UPathObject& _Other) = delete;
-		UPathObject(UPathObject&& _Other) noexcept = delete;
-		UPathObject& operator=(const UPathObject& _Other) = delete;
-		UPathObject& operator=(UPathObject&& _Other) noexcept = delete;
-
-		void SetPath(std::string_view _View)
-		{
-			Path = _View;
-		}
-
-		std::string GetPath()
-		{
-			return Path;
-		}
-
-		UEnginePath GetEnginePath()
-		{
-			return UEnginePath(std::filesystem::path(Path));
-		}
-
-	protected:
-
-	private:
-		std::string Path;
-
-	};
-
-
+	// 바이트 사이즈가 바뀔겁니다.
 
 	// char Arr[5000] => 멀티바이트 문자열
 	// wchar_t wArr[] => 그걸 변환한걸 받을 wide바이트 배열 ??????????
