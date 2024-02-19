@@ -23,7 +23,7 @@ void Goomba::BeginPlay()
 	AnimationAuto(Renderer, "Idle", 0, 1, false, 0.2f);
 	SetAnimation("Idle");
 
-	AnimationAuto(Renderer, "Dead", 2, 2, false, 1.f);
+	AnimationAuto(Renderer, "Dead", 2, 2);
 
 	BodyCollision= CreateCollision(MarioCollisionOrder::Monster);
 	BodyCollision->SetTransform({ { 0,-24 }, { 64, 64} });

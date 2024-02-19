@@ -39,10 +39,10 @@ void PhysicsActor::Tick(float _DeltaTime)
 /// <param name="_Time">0.1f</param>
 /// <param name="_DoubleWay">true</param>
 /// <param name="_Routine">true</param>
-void PhysicsActor::AnimationAuto(UImageRenderer* _Renderer, std::string _Name, int _Start, int _End, bool _DoubleWay, float _Time, bool _Routine)
+void PhysicsActor::AnimationAuto(UImageRenderer* _Renderer, std::string _Name, int _Start, int _End, float _Time, bool _Routine)
 {
 	std::string CurName = GetName();
-	if (_DoubleWay == false) {
+	if (NoDir) {
 		_Renderer->CreateAnimation(_Name, CurName + ".PNG", _Start, _End, _Time, _Routine);
 		return;
 	}
@@ -50,6 +50,7 @@ void PhysicsActor::AnimationAuto(UImageRenderer* _Renderer, std::string _Name, i
 	_Renderer->CreateAnimation(_Name + "_Left", CurName + "_Left.PNG", _Start, _End, _Time, _Routine);
 	return;
 }
+
 
 std::string PhysicsActor::GetAnimationName(std::string _Name)
 {
@@ -78,10 +79,7 @@ std::string PhysicsActor::GetAnimationName(std::string _Name)
 
 void PhysicsActor::SetAnimation(std::string _Name)
 {
-	EActorDir Dir = DirState;
-
 	std::string Name = GetAnimationName(_Name);
-
 	Renderer->ChangeAnimation(Name);
 }
 

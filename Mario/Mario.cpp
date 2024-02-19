@@ -188,7 +188,8 @@ void Mario::Idle(float _DeltaTime)
 {
 
 	ResultMove(_DeltaTime);
-	//GravityCheck(_DeltaTime);
+
+
 	if (0 == CurSpeedDir) {
 		SpeedX.X = 0;
 	}
@@ -360,7 +361,7 @@ void Mario::MoveFun(float _DeltaTime, FVector _FVector)
 void Mario::Interactive(float _DeltaTime)
 {
 	Jumping = true;
-
+	GravityCheck(_DeltaTime);
 	MoveFun(_DeltaTime, AccelerateX);
 	//	GravityCheck(_DeltaTime);
 

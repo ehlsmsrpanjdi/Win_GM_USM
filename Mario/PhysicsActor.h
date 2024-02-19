@@ -19,7 +19,7 @@ public:
 	PhysicsActor& operator=(PhysicsActor&& _Other) noexcept = delete;
 
 protected:
-	void AnimationAuto(UImageRenderer* _Renderer, std::string _Name, int _Start = 0, int _End = 0, bool _DoubleWay = true, float _Time = 0.1f, bool _Routine = true);
+	void AnimationAuto(UImageRenderer* _Renderer, std::string _Name, int _Start = 0, int _End = 0, float _Time = 0.1f, bool _Routine = true);
 	virtual std::string GetAnimationName(std::string _Name);
 	virtual void SetAnimation(std::string _Name);
 
