@@ -36,26 +36,23 @@ void GreenTroopa::Tick(float _DeltaTime)
 	CollisionEvent(State);
 }
 
-void GreenTroopa::IsEdge(float _DeltaTime)
+
+void GreenTroopa::Crouch(float _DeltaTime)
 {
-
-	EActorDir Dir = DirState;
-
-	Color8Bit Color_Right = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() + 5, GetActorLocation().iY() - 20, Color8Bit::MagentaA);
-	Color8Bit Color_Left = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() - 5, GetActorLocation().iY() - 20, Color8Bit::MagentaA);
-
-	if (Color_Right == Color8Bit(255, 0, 255, 0) || Color_Left == Color8Bit(255, 0, 255, 0))
-	{
-		ReverseDir();
-		return;
-	}
-
 }
 
 void GreenTroopa::CrouchStart()
 {
 	BodyCollision->SetScale({ 32,36 });
 	SetAnimation("Crouch");
+}
+
+void GreenTroopa::CrouchMove(float _DeltaTime)
+{
+	IsEdge(_DeltaTime);
+	SpeedX.X = CrouchDefaultMoveSpeed * static_cast<int>(DirState);
+	GravityCheck(_DeltaTime);
+	ResultMove(_DeltaTime);
 }
 
 
@@ -102,65 +99,53 @@ void GreenTroopa::CollisionEvent(MonsterState _MonsterState)
 			MsgBoxAssert("터져야겠지....");
 		}
 
-		FVector CurLocation = GetActorLocation();
-		if (CurPlayerLocation.Y < CurLocation.Y - 32) {
-
-			Player->SetState(MarioState::Interactive);
-
-			switch (_MonsterState)
-			{
-			case MonsterState::None:
-				break;
-			case MonsterState::Idle:
+		switch (State)
+		{
+		case MonsterState::None:
+			break;
+		case MonsterState::Idle:
+		{
+			FVector CurLocation = GetActorLocation();
+			if (CurPlayerLocation.Y < CurLocation.Y - 32) {
+				Player->SetState(MarioState::Interactive);
 				SetState(MonsterState::Crouch);
-				break;
-			case MonsterState::Crouch:
-				SetState(MonsterState::CrouchMove);
-				break;
-			case MonsterState::CrouchMove:
-				SetState(MonsterState::Crouch);
-				break;
-			case MonsterState::Dead:
-				break;
-			default:
-				break;
-			}
-			return;
-		}
-
-		if (MonsterState::Crouch == _MonsterState) {
-			SetState(MonsterState::CrouchMove);
-			return;
-		}
-		else {
-			Player->Destroy();
-			return;
-		}
-	}
-
-	else if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Monster, Result))
-	{
-		for (UCollision* Collision : Result) {
-			if (Collision != this->BodyCollision) {
-				this->ReverseDir();
+				return;
 			}
 			else {
-				int a = 0;
+				Player->Destroy();
+				return;
 			}
 		}
+		break;
+		case MonsterState::Crouch:
+			SetState(MonsterState::CrouchMove);
+			break;
+		case MonsterState::CrouchMove:
+		{
+			FVector CurLocation = GetActorLocation();
+			if (CurPlayerLocation.Y < CurLocation.Y - 32) {
+				Player->SetState(MarioState::Interactive);
+				SetState(MonsterState::Crouch);
+				return;
+			}
+			else {
+				Player->Destroy();
+				return;
+			}
+			break;
+		}
+		case MonsterState::Dead:
+			break;
+		default:
+			break;
+		}
 	}
-
 }
-
 void GreenTroopa::CrouchMoveStart()
 {
 	InteractiveDirCheck();
 }
 
-void GreenTroopa::CrouchMove(float _DeltaTime)
-{
-	AutoMove(_DeltaTime, { 600.f,0.f });
-}
 
 void GreenTroopa::StateUpdate(float _DeltaTime)
 {
@@ -169,16 +154,15 @@ void GreenTroopa::StateUpdate(float _DeltaTime)
 	case MonsterState::None:
 		break;
 	case MonsterState::Idle:
-		AutoMove(_DeltaTime);
+		Idle(_DeltaTime);
 		break;
 	case MonsterState::Crouch:
-
+		Crouch(_DeltaTime);
 		break;
 	case MonsterState::CrouchMove:
 		CrouchMove(_DeltaTime);
 		break;
 	case MonsterState::Dead:
-
 		break;
 	default:
 		break;
@@ -186,14 +170,3 @@ void GreenTroopa::StateUpdate(float _DeltaTime)
 
 }
 
-
-void GreenTroopa::InteractiveDirCheck()
-{
-	if (Mario::PlayerLocation.X < GetActorLocation().X) {
-		DirState = EActorDir::Right;
-	}
-	else {
-		DirState = EActorDir::Left;
-	}
-
-}

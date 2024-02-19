@@ -7,6 +7,8 @@
 #include <list>
 #include "MarioHelper.h"
 #include <string>
+#include "PhysicsActor.h"
+
 
 FVector Mario::PlayerLocation = {};
 
@@ -44,7 +46,7 @@ void Mario::BeginPlay()
 
 void Mario::Tick(float _DeltaTime)
 {
-	AActor::Tick(_DeltaTime);
+	PhysicsActor::Tick(_DeltaTime);
 
 	PlayerLocation = GetActorLocation();
 
@@ -72,24 +74,26 @@ void Mario::StateUpdate(float _DeltaTime)
 		Jumping = false;
 	}
 
+
+	DirCheck();
 	switch (State)
 	{
 	case MarioState::None:
 		break;
 	case MarioState::Idle:
+		GravityCheck(_DeltaTime);
 		Idle(_DeltaTime);
 		break;
 	case MarioState::Move:
+		GravityCheck(_DeltaTime);
 		Move(_DeltaTime);
 		break;
 	case MarioState::Jump:
 		Jump(_DeltaTime);
 		break;
 	case MarioState::DirChange:
+		GravityCheck(_DeltaTime);
 		DirChange(_DeltaTime);
-		break;
-	case MarioState::NotMove:
-		NotMove(_DeltaTime);
 		break;
 	case MarioState::Interactive:
 		Interactive(_DeltaTime);
@@ -113,7 +117,6 @@ void Mario::AddSpeed(float _DeltaTime, FVector _FVector) {
 	if (MaxSpeedY >= NextFloatY) {
 		SpeedY.Y += _FVector.Y * _DeltaTime;
 	}
-	ResultMove(_DeltaTime);
 }
 
 void Mario::SubtractSpeed(float _DeltaTime, FVector _FVector)
@@ -124,7 +127,6 @@ void Mario::SubtractSpeed(float _DeltaTime, FVector _FVector)
 	else if (CurSpeedDir == 1) {
 		SpeedX -= (_FVector * _DeltaTime);
 	}
-	ResultMove(_DeltaTime);
 }
 
 
@@ -148,9 +150,6 @@ void Mario::SetState(MarioState _State)
 		case MarioState::DirChange:
 			DirChangeStart();
 			break;
-		case MarioState::NotMove:
-			NotMoveStart();
-			break;
 		case MarioState::Interactive:
 			InteractiveStart();
 			break;
@@ -159,31 +158,6 @@ void Mario::SetState(MarioState _State)
 		}
 	}
 	State = _State;
-}
-
-bool Mario::GravityCheck(float _DeltaTime)
-{
-
-	FVector CurLocation = GetActorLocation();
-	//float EdgeLocation_Left = CurLocation.X - 32.f;
-	//float EdgeLocation_Right = CurLocation.X + 32.f;
-
-	//Color8Bit CheckColor_Left = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, CurLocation.iY(), Color8Bit::MagentaA);
-	//Color8Bit CheckColor_Right = MarioHelper::ColMapImage->GetColor(EdgeLocation_Right, CurLocation.iY(), Color8Bit::MagentaA);
-
-	GravitySpeed += MarioHelper::Gravity * _DeltaTime;
-
-	Color8Bit Color = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
-
-	if (Color == Color8Bit(255, 0, 255, 0))
-	{
-		GravitySpeed = StopSpeed;
-		SpeedY = StopSpeed;
-		return false;
-	}
-
-
-	return true;
 }
 
 void Mario::IdleStart()
@@ -200,6 +174,8 @@ void Mario::JumpStart()
 {
 	Jumping = true;
 	SpeedY.Y = JumpPower;
+	GravitySpeed.Y = 0;
+	AddActorLocation({ 0.f,-1.f });
 	SetAnimation("Jump");
 }
 
@@ -208,9 +184,6 @@ void Mario::DirChangeStart()
 	SetAnimation("DirChange");
 }
 
-void Mario::NotMoveStart()
-{
-}
 
 void Mario::InteractiveStart()
 {
@@ -224,7 +197,10 @@ void Mario::Idle(float _DeltaTime)
 {
 
 	ResultMove(_DeltaTime);
-	GravityCheck(_DeltaTime);
+	//GravityCheck(_DeltaTime);
+	if (0 == CurSpeedDir) {
+		SpeedX.X = 0;
+	}
 
 
 
@@ -258,24 +234,23 @@ void Mario::Move(float _DeltaTime)
 		SetState(MarioState::Jump);
 		return;
 	}
-	GravityCheck(_DeltaTime);
+
+	//	GravityCheck(_DeltaTime);
 
 	if ((UEngineInput::IsFree(VK_LEFT) && UEngineInput::IsFree(VK_RIGHT)) ||
 		UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsPress(VK_RIGHT))
 	{
-		CurSpeedDirCheck();
 		if (CurSpeedDir == 0) {
 			SetState(MarioState::Idle);
 			return;
 		}
 		SubtractSpeed(_DeltaTime, StopAccelerateX);
-		
+		ResultMove(_DeltaTime);
 		return;
 	}
 
 
 	if (abs(CurSpeed.X) > 300) {
-		CurSpeedDirCheck();
 		if (UEngineInput::IsPress(VK_LEFT) && CurSpeedDir == 1) {
 			SetState(MarioState::DirChange);
 			return;
@@ -298,6 +273,7 @@ void Mario::Jump(float _DeltaTime)
 
 	MoveFun(_DeltaTime, AccelerateX);
 	GravityCheck(_DeltaTime);
+	//GravityCheck(_DeltaTime);
 
 	if (StopSpeed.Y == SpeedY.Y && StopSpeed.Y == GravitySpeed.Y) {
 		if (abs(SpeedX.X) > 5) {
@@ -311,9 +287,6 @@ void Mario::Jump(float _DeltaTime)
 			return;
 		}
 	}
-
-
-
 }
 
 void Mario::DirChange(float _DeltaTime)
@@ -322,11 +295,11 @@ void Mario::DirChange(float _DeltaTime)
 		SetState(MarioState::Jump);
 		return;
 	}
-	CurSpeedDirCheck();
 
 	if (CurSpeedDir == 1) {
 		if (UEngineInput::IsPress(VK_LEFT)) {
 			SubtractSpeed(_DeltaTime, StopAccelerateX);
+			ResultMove(_DeltaTime);
 			return;
 		}
 		else if (UEngineInput::IsPress(VK_RIGHT)) {
@@ -335,6 +308,7 @@ void Mario::DirChange(float _DeltaTime)
 		}
 		else if (UEngineInput::IsFree(VK_LEFT)) {
 			SubtractSpeed(_DeltaTime, StopAccelerateX);
+			ResultMove(_DeltaTime);
 			return;
 		}
 	}
@@ -342,6 +316,7 @@ void Mario::DirChange(float _DeltaTime)
 	else if (CurSpeedDir == -1) {
 		if (UEngineInput::IsPress(VK_RIGHT)) {
 			SubtractSpeed(_DeltaTime, StopAccelerateX);
+			ResultMove(_DeltaTime);
 			return;
 		}
 		else if (UEngineInput::IsPress(VK_LEFT)) {
@@ -350,6 +325,7 @@ void Mario::DirChange(float _DeltaTime)
 		}
 		else if (UEngineInput::IsFree(VK_RIGHT)) {
 			SubtractSpeed(_DeltaTime, StopAccelerateX);
+			ResultMove(_DeltaTime);
 			return;
 		}
 	}
@@ -364,118 +340,31 @@ void Mario::DirChange(float _DeltaTime)
 
 void Mario::SetAnimation(std::string _Name)
 {
-	EActorDir Dir = DirState;
-	if ((UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsFree(VK_RIGHT)) ||
-		(UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsUp(VK_RIGHT)))
-	{
-		Dir = EActorDir::Left;
-	}
-	if ((UEngineInput::IsPress(VK_RIGHT) && UEngineInput::IsFree(VK_LEFT)) ||
-		(UEngineInput::IsPress(VK_RIGHT) && UEngineInput::IsUp(VK_LEFT)))
-	{
-		Dir = EActorDir::Right;
-	}
-
-	if (true == Jumping) {
-		Dir = DirState;
-	}
-
-	DirState = Dir;
 	std::string Name = GetAnimationName(_Name);
 
 	Renderer->ChangeAnimation(Name);
 }
 
-std::string Mario::GetAnimationName(std::string _Name)
-{
-	std::string DirName = "";
-
-	switch (DirState)
-	{
-	case EActorDir::Left:
-		DirName = "_Left";
-		break;
-	case EActorDir::Right:
-		DirName = "_Right";
-		break;
-	default:
-		break;
-	}
-
-	CurAnimationName = _Name;
-
-	return _Name + DirName;
-}
-
-void Mario::NotMove(float _DeltaTime)
-{
-
-
-	if (CurSpeed.X > 0.f) {
-		CurSpeed.X -= (AccelerateX.X * _DeltaTime);
-
-	}
-
-	else if (CurSpeed.X < 0.f) {
-		CurSpeed.X += (AccelerateX.X * _DeltaTime);
-	}
-
-	if (UEngineInput::IsFree(VK_LEFT) && UEngineInput::IsPress(VK_RIGHT)) {
-		if (CurSpeed.X < 0) {
-			SetState(MarioState::DirChange);
-			return;
-		}
-	}
-
-	if (UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsFree(VK_RIGHT)) {
-		if (CurSpeed.X > 0) {
-			SetState(MarioState::DirChange);
-			return;
-		}
-
-	}
-
-
-	if (CurSpeed.X < 10.f && CurSpeed.X > -10.f) {
-		CurSpeed.X = 0;
-		SetState(MarioState::Idle);
-	}
-	ResultMove(_DeltaTime);
-
-}
 
 void Mario::MoveFun(float _DeltaTime, FVector _FVector)
 {
-	FVector CurLocation = GetActorLocation();
-	float EdgeLocation_Left = CurLocation.X - 32.f;
-	float EdgeLocation_Right = CurLocation.X + 32.f;
-	float EdgeLocation_Top = CurLocation.Y - 32.f;
-
-	Color8Bit CheckColor_Left = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Top, Color8Bit::MagentaA);
-	Color8Bit CheckColor_Right = MarioHelper::ColMapImage->GetColor(EdgeLocation_Right, EdgeLocation_Top, Color8Bit::MagentaA);
-
 	if (UEngineInput::IsPress(VK_LEFT) == true) {
-		if (Color8Bit(255, 0, 255, 0) == CheckColor_Left) {
-			SpeedX.X = 0;
-			ResultMove(_DeltaTime);
-			return;
-		}
 		AddSpeed(_DeltaTime, -_FVector);
 		SetAnimation(CurAnimationName);
+		DirCheck();
+		ResultMove(_DeltaTime);
 		return;
 	}
 
 	if (UEngineInput::IsPress(VK_RIGHT) == true) {
-		if (Color8Bit(255, 0, 255, 0) == CheckColor_Right) {
-			SpeedX.X = 0;
-			ResultMove(_DeltaTime);
-			return;
-		}
 		AddSpeed(_DeltaTime, _FVector);
 		SetAnimation(CurAnimationName);
+		ResultMove(_DeltaTime);
 		return;
 	}
+	SetAnimation(CurAnimationName);
 	ResultMove(_DeltaTime);
+	return;
 }
 
 void Mario::Interactive(float _DeltaTime)
@@ -483,7 +372,7 @@ void Mario::Interactive(float _DeltaTime)
 	Jumping = true;
 
 	MoveFun(_DeltaTime, AccelerateX);
-	GravityCheck(_DeltaTime);
+	//	GravityCheck(_DeltaTime);
 
 	if (StopSpeed.Y == SpeedY.Y && StopSpeed.Y == GravitySpeed.Y) {
 		if (abs(SpeedX.X) > 5) {
@@ -500,32 +389,96 @@ void Mario::Interactive(float _DeltaTime)
 
 }
 
-void Mario::CurSpeedDirCheck()
+bool Mario::LeftEdgeCheck()
 {
-	if (SpeedX.X > MinSpeed) {
-		CurSpeedDir = 1;
+
+	FVector CurLocation = GetActorLocation();
+	int EdgeLocation_Left = CurLocation.X - 32.f;
+	int EdgeLocation_Top = CurLocation.Y - 32.f;
+	int EdgeLocation_Bottom = CurLocation.Y - 3.f;
+
+	Color8Bit CheckColor_LeftTop = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Top, Color8Bit::MagentaA);
+	Color8Bit CheckColor_LeftBottom = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Bottom, Color8Bit::MagentaA);
+
+	bool FirstCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_LeftBottom);
+	bool SecondCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_LeftTop);
+
+	if (FirstCondition || SecondCondition) {
+		SpeedX.X = 0;
+		return false;
+	}
+	return true;
+}
+
+bool Mario::RightEdgeCheck()
+{
+
+	FVector CurLocation = GetActorLocation();
+	int EdgeLocation_Right = CurLocation.X + 32.f;
+	int EdgeLocation_Top = CurLocation.Y - 32.f;
+	int EdgeLocation_Bottom = CurLocation.Y - 3.f;
+
+	Color8Bit CheckColor_RightTop = MarioHelper::ColMapImage->GetColor(EdgeLocation_Right, EdgeLocation_Top, Color8Bit::MagentaA);
+	Color8Bit CheckColor_RightBottom = MarioHelper::ColMapImage->GetColor(EdgeLocation_Right, EdgeLocation_Bottom, Color8Bit::MagentaA);
+
+	bool FirstCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_RightBottom);
+	bool SecondCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_RightTop);
+
+	if (FirstCondition || SecondCondition) {
+		SpeedX.X = 0;
+		return false;
+	}
+	return true;
+}
+
+void Mario::DirCheck()
+{
+	EActorDir Dir = DirState;
+
+	if (true == UEngineInput::IsPress(VK_LEFT) && false == UEngineInput::IsPress(VK_RIGHT)) {
+		DirState = EActorDir::Left;
 	}
 
-	else if (SpeedX.X < -MinSpeed) {
+	else if (true == UEngineInput::IsPress(VK_RIGHT) && false == UEngineInput::IsPress(VK_LEFT)) {
+		DirState = EActorDir::Right;
+	}
+
+	if (true == Jumping) {
+		Dir = DirState;
+	}
+
+
+	if (CurSpeed.X > MinSpeed) {
+		CurSpeedDir = 1;
+	}
+	else if (CurSpeed.X < -MinSpeed) {
 		CurSpeedDir = -1;
 	}
 	else {
 		CurSpeedDir = 0;
-		SpeedX = StopSpeed;
 	}
-
 }
+
 
 void Mario::ResultMove(float _DeltaTime)
 {
+
+	if (1 == CurSpeedDir) {
+		RightEdgeCheck();
+	}
+	else if (-1 == CurSpeedDir) {
+		LeftEdgeCheck();
+	}
+
+
 	CurSpeed = StopSpeed;
 	CurSpeed += SpeedX;
 	CurSpeed += SpeedY;
 	CurSpeed += GravitySpeed;
-	AddActorLocation(CurSpeed * _DeltaTime);
 
+
+	AddActorLocation(CurSpeed * _DeltaTime);
 	SetActorCameraPos();
 }
-
 
 

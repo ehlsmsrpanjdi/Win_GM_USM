@@ -20,7 +20,6 @@ protected:
 	void Tick(float _DeltaTime) override;
 	void StateUpdate(float _DeltaTime) override;
 	void CollisionEvent(MonsterState _State);
-	void AutoMove(float _DeltaTime, FVector _SpeedX = { 200,0 }) override;
 private:
 
 };

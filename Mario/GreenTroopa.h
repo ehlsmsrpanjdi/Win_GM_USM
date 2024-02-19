@@ -18,14 +18,16 @@ public:
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-	void IsEdge(float _DeltaTime);
-	void CrouchStart();
-	void SetState(MonsterState _State);
-	void CollisionEvent(MonsterState _MonsterState) override;
-	void CrouchMoveStart();
-	void CrouchMove(float _DeltaTime);
 	void StateUpdate(float _DeltaTime) override;
-	virtual void InteractiveDirCheck();
+	void SetState(MonsterState _State);
+
+	void Crouch(float _DeltaTime);
+	void CrouchStart();
+	void CrouchMove(float _DeltaTime);
+	void CrouchMoveStart();
+	void CollisionEvent(MonsterState _MonsterState) override;
+
+	float CrouchDefaultMoveSpeed = 600.f;
 private:
 
 };

@@ -6,6 +6,7 @@
 #include "TitleLogo.h"
 #include "Goomba.h"
 #include "GreenTroopa.h"
+#include "PhysicsActor.h"
 
 TestLevel::TestLevel()
 {

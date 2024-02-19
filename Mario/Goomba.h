@@ -1,12 +1,14 @@
 #pragma once
-#include "CollisionActor.h"
+#include "PhysicsActor.h"
+#include "MarioHelper.h"
+
 // Ό³Έν :
-class Goomba : public CollisionActor
+class Goomba : public PhysicsActor
 {
 public:
 	// constrcuter destructer
 	Goomba();
-	~Goomba();
+	virtual ~Goomba();
 
 	// delete Function
 	Goomba(const Goomba& _Other) = delete;
@@ -18,9 +20,8 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	virtual void AutoMove(float _DeltaTime, FVector _SpeedX = { 200,0 });
-
-
+	virtual void IsEdge(float _DeltaTime);
+	void ReverseDir();
 
 	virtual void StateUpdate(float _DeltaTime);
 	virtual void SetState(MonsterState _State);
@@ -33,7 +34,8 @@ protected:
 	virtual void IdleStart();
 	MonsterState State = MonsterState::None;
 
-	float AutoMoveSpeed = 200;
+
+	float MonsterDefaultSpeed = 200.f;
 
 private:
 

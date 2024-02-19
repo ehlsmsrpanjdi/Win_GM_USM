@@ -15,6 +15,7 @@ enum MarioRenderOrder
 enum class EActorDir
 {
 	Left = -1,
+	None = 0,
 	Right = 1,
 };
 
@@ -24,7 +25,6 @@ enum class MarioState
 	Idle,
 	Move,
 	Jump,
-	NotMove,
 	DirChange,
 	Interactive,
 	Dead,
@@ -36,7 +36,7 @@ enum class MonsterState {
 	Crouch,
 	Dead,
 	CrouchMove,
-
+	Critical,
 };
 
 

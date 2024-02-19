@@ -42,6 +42,9 @@
     <ClInclude Include="Koopa.h">
       <Filter>Actor\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsActor.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -84,6 +87,9 @@
     </ClCompile>
     <ClCompile Include="Koopa.cpp">
       <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsActor.cpp">
+      <Filter>Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

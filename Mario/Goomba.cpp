@@ -2,9 +2,11 @@
 #include <EngineCore/EngineResourcesManager.h>
 #include "MarioHelper.h"
 #include "Mario.h"
+#include "PhysicsActor.h"
 
 Goomba::Goomba()
 {
+	DirState = EActorDir::Left;
 }
 
 Goomba::~Goomba()
@@ -38,6 +40,40 @@ void Goomba::Tick(float _DeltaTime)
 
 }
 
+void Goomba::IsEdge(float _DeltaTime)
+{
+	EActorDir Dir = DirState;
+
+	Color8Bit Color_Right = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() + 5, GetActorLocation().iY() - 20, Color8Bit::MagentaA);
+	Color8Bit Color_Left = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() - 5, GetActorLocation().iY() - 20, Color8Bit::MagentaA);
+
+	if (Color_Right == Color8Bit(255, 0, 255, 0))
+	{
+		ReverseDir();
+		return;
+	}
+
+	if (Color_Left == Color8Bit(255, 0, 255, 0))
+	{
+		ReverseDir();
+		return;
+	}
+
+}
+
+void Goomba::ReverseDir()
+{
+	if (DirState == EActorDir::Left) {
+		DirState = EActorDir::Right;
+	}
+
+	else if (DirState == EActorDir::Right) {
+		DirState = EActorDir::Left;
+	}
+
+	SetAnimation(CurAnimationName);
+}
+
 void Goomba::DeadStart()
 {
 	SetAnimation("Dead");
@@ -46,24 +82,15 @@ void Goomba::DeadStart()
 
 void Goomba::Idle(float _DeltaTime)
 {
-	AutoMove(_DeltaTime);
+	IsEdge(_DeltaTime);
+	SpeedX.X = MonsterDefaultSpeed * static_cast<int>(DirState);
+	GravityCheck(_DeltaTime);
+	ResultMove(_DeltaTime);
 }
 
 void Goomba::IdleStart()
 {
 }
-
-void Goomba::AutoMove(float _DeltaTime, FVector _SpeedX)
-{
-	GravityCheck(_DeltaTime);
-	IsEdge(_DeltaTime);
-	FVector CurLocation = GetActorLocation();
-	FVector CurVector = (_SpeedX) * static_cast<float>(DirState) * _DeltaTime;
-	FVector NextVector = CurVector + CurLocation;
-	SetActorLocation(NextVector);
-}
-
-
 
 void Goomba::StateUpdate(float _DeltaTime)
 {

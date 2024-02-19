@@ -2,6 +2,8 @@
 
 #include <EngineCore/EngineResourcesManager.h>
 #include "MarioHelper.h"
+#include "PhysicsActor.h"
+
 Koopa::Koopa() 
 {
 }

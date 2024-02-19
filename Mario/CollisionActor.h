@@ -19,26 +19,17 @@ public:
 	void SetRenderImage(std::string_view _MapImageName);
 	void SetColRenderImage(std::string_view _MapImageName);
 	void SetCollisionActorImage(std::string_view _MapImageName);
-	virtual void StateUpdate(float _DeltaTime);
 	void SwitchRender();
 
 protected:
-	void AnimationAuto(UImageRenderer* _Renderer, std::string _Name, int _Start = 0, int _End = 0, bool _DoubleWay = true, float _Time = 0.1f, bool _Routine = true);
-	virtual std::string GetAnimationName(std::string _Name);
-	virtual void SetAnimation(std::string _Name);
-	virtual bool GravityCheck(float _DeltaTime);
-	virtual void IsEdge(float _DeltaTime);
-
 	std::string CurAnimationName = "";
 	UImageRenderer* Renderer = nullptr;
 	UImageRenderer* ColRenderer = nullptr;
-	UCollision* BodyCollision = nullptr;
-	EActorDir DirState = EActorDir::Left;
+
 
 	void BeginPlay() override;
 	virtual void Tick(float _DeltaTime) override;
-	bool NoDir = false;
-	void ReverseDir();
+
 
 private:
 
