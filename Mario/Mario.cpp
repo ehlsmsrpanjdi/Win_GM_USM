@@ -394,6 +394,7 @@ bool Mario::LeftEdgeCheck()
 	bool SecondCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_LeftTop);
 
 	if (FirstCondition || SecondCondition) {
+		AddActorLocation({ 0.5f, 0.f });
 		SpeedX.X = 0;
 		return false;
 	}
@@ -415,6 +416,7 @@ bool Mario::RightEdgeCheck()
 	bool SecondCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_RightTop);
 
 	if (FirstCondition || SecondCondition) {
+		AddActorLocation({ -0.5f, 0.f });
 		SpeedX.X = 0;
 		return false;
 	}
