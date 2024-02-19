@@ -85,61 +85,70 @@ void GreenTroopa::SetState(MonsterState _State)
 
 void GreenTroopa::CollisionEvent(MonsterState _MonsterState)
 {
-	std::vector<UCollision*> Result;
-	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
+	//std::vector<UCollision*> Result;
+	//if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
+	//{
+	//	// 이런식으로 상대를 사용할수 있다.
+	//	UCollision* Collision = Result[0];
+	//	AActor* Ptr = Collision->GetOwner();
+	//	Mario* Player = dynamic_cast<Mario*>(Ptr);
+	//	FVector CurPlayerLocation = Player->GetActorLocation();
+
+	//	if (nullptr == Player)
+	//	{
+	//		MsgBoxAssert("터져야겠지....");
+	//	}
+
+	//	switch (State)
+	//	{
+	//	case MonsterState::None:
+	//		break;
+	//	case MonsterState::Idle:
+	//	{
+	//		FVector CurLocation = GetActorLocation();
+	//		if (CurPlayerLocation.Y < CurLocation.Y - 32) {
+	//			Player->SetState(MarioState::Interactive);
+	//			SetState(MonsterState::Crouch);
+	//			return;
+	//		}
+	//		else {
+	//			Player->Destroy();
+	//			return;
+	//		}
+	//	}
+	//	break;
+	//	case MonsterState::Crouch:
+	//		SetState(MonsterState::CrouchMove);
+	//		break;
+	//	case MonsterState::CrouchMove:
+	//	{
+	//		FVector CurLocation = GetActorLocation();
+	//		if (CurPlayerLocation.Y < CurLocation.Y - 32) {
+	//			Player->SetState(MarioState::Interactive);
+	//			SetState(MonsterState::Crouch);
+	//			return;
+	//		}
+	//		else {
+	//			Player->SetState(MarioState::Dead);
+	//			return;
+	//		}
+	//		break;
+	//	}
+	//	case MonsterState::Dead:
+	//		break;
+	//	default:
+	//		break;
+	//	}
+	//}
+
+	std::vector<UCollision*> MonsterResult;
+	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Monster, MonsterResult))
 	{
-		// 이런식으로 상대를 사용할수 있다.
-		UCollision* Collision = Result[0];
-		AActor* Ptr = Collision->GetOwner();
-		Mario* Player = dynamic_cast<Mario*>(Ptr);
-		FVector CurPlayerLocation = Player->GetActorLocation();
-
-		if (nullptr == Player)
-		{
-			MsgBoxAssert("터져야겠지....");
-		}
-
-		switch (State)
-		{
-		case MonsterState::None:
-			break;
-		case MonsterState::Idle:
-		{
-			FVector CurLocation = GetActorLocation();
-			if (CurPlayerLocation.Y < CurLocation.Y - 32) {
-				Player->SetState(MarioState::Interactive);
-				SetState(MonsterState::Crouch);
-				return;
-			}
-			else {
-				Player->Destroy();
-				return;
-			}
-		}
-		break;
-		case MonsterState::Crouch:
-			SetState(MonsterState::CrouchMove);
-			break;
-		case MonsterState::CrouchMove:
-		{
-			FVector CurLocation = GetActorLocation();
-			if (CurPlayerLocation.Y < CurLocation.Y - 32) {
-				Player->SetState(MarioState::Interactive);
-				SetState(MonsterState::Crouch);
-				return;
-			}
-			else {
-				Player->Destroy();
-				return;
-			}
-			break;
-		}
-		case MonsterState::Dead:
-			break;
-		default:
-			break;
+		for (UCollision* Collision : MonsterResult) {
+			this->ReverseDir();
 		}
 	}
+
 }
 void GreenTroopa::CrouchMoveStart()
 {

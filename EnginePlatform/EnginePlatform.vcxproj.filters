@@ -10,6 +10,9 @@
     <ClCompile Include="EngineInput.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="EngineSound.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineWindow.h">
@@ -21,6 +24,9 @@
     <ClInclude Include="EngineInput.h">
       <Filter>Input</Filter>
     </ClInclude>
+    <ClInclude Include="EngineSound.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Input">
@@ -28,6 +34,12 @@
     </Filter>
     <Filter Include="Window">
       <UniqueIdentifier>{72b0ff96-e75a-487b-ac2c-8c4bac8f0164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{c9d8a702-8804-4aef-9882-adbdfa092df7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{9df635a7-5cba-485d-a51b-392c79aacd02}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

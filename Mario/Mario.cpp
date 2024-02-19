@@ -33,6 +33,7 @@ void Mario::BeginPlay()
 	AnimationAuto(Renderer, "Move", 1, 3);
 	AnimationAuto(Renderer, "DirChange", 4, 4);
 	AnimationAuto(Renderer, "Jump", 5, 5);
+	AnimationAuto(Renderer, "Dead", 6, 6);
 
 	BodyCollision = CreateCollision(MarioCollisionOrder::Player);
 	BodyCollision->SetColType(ECollisionType::Rect);
@@ -89,6 +90,8 @@ void Mario::StateUpdate(float _DeltaTime)
 	case MarioState::Interactive:
 		Interactive(_DeltaTime);
 		break;
+	case MarioState::Dead:
+		Dead(_DeltaTime);
 	default:
 		break;
 	}
@@ -144,6 +147,8 @@ void Mario::SetState(MarioState _State)
 		case MarioState::Interactive:
 			InteractiveStart();
 			break;
+		case MarioState::Dead:
+			DeadStart();
 		default:
 			break;
 		}
@@ -220,6 +225,15 @@ void Mario::Idle(float _DeltaTime)
 
 }
 
+void Mario::DeadStart()
+{
+	GravitySpeed.Y = 0.f;
+	SpeedX.X = 0.f;
+	SpeedY.Y = -500.f;
+	SetAnimation("Dead");
+	BodyCollision->Destroy();
+}
+
 void Mario::Move(float _DeltaTime)
 {
 	if (UEngineInput::IsDown(VK_SPACE) && false == Jumping) {
@@ -253,6 +267,18 @@ void Mario::Move(float _DeltaTime)
 		}
 	}
 	MoveFun(_DeltaTime, AccelerateX);
+}
+
+void Mario::Dead(float _DeltaTime) {
+
+	if (DeadTime < 0.f) {
+	GravitySpeed += MarioHelper::Gravity * _DeltaTime;
+	ResultMove(_DeltaTime);
+	Destroy(3.f);
+	}
+	else {
+		DeadTime -= _DeltaTime;
+	}
 }
 
 void Mario::Jump(float _DeltaTime)
@@ -473,5 +499,6 @@ void Mario::ResultMove(float _DeltaTime)
 	AddActorLocation(CurSpeed * _DeltaTime);
 	SetActorCameraPos();
 }
+
 
 

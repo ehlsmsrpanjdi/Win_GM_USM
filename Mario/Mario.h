@@ -36,12 +36,14 @@ protected:
 	void JumpStart();
 	void DirChangeStart();
 	void InteractiveStart();
+	void DeadStart();
 	void Idle(float _DeltaTime);
 	void Move(float _DeltaTime);
 	void Jump(float _DeltaTime);
 	void DirChange(float _DeltaTime);
 	void MoveFun(float _DeltaTime, FVector Acclerate);
 	void Interactive(float _DeltaTime);
+	void Dead(float _DeltaTime);
 	//void EdgeCheck();
 	bool LeftEdgeCheck();
 	bool RightEdgeCheck();
@@ -66,6 +68,7 @@ protected:
 	const float JumpPower = -1000.f;
 	bool Jumping = false;
 	
+	float DeadTime = .5f;
 
 private:
 	MarioState State = MarioState::None;

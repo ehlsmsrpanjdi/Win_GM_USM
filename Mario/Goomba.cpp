@@ -153,21 +153,18 @@ void Goomba::CollisionEvent(MonsterState _MonsterState)
 			return;
 		}
 		else {
-			Player->Destroy();
+			Player->SetState(MarioState::Dead);
 			return;
 		}
 	}
 
-	else if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Monster, Result))
+	std::vector<UCollision*> MonsterResult;
+	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Monster, MonsterResult))
 	{
-		for (UCollision* Collision : Result) {
-			if (Collision != this->BodyCollision) {
-				this->ReverseDir();
-			}
-			else {
-				int a = 0;
-			}
+		for (UCollision* Collision : MonsterResult) {
+			this->ReverseDir();
 		}
 	}
+
 
 }
