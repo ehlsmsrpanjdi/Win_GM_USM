@@ -27,6 +27,30 @@
     <ClInclude Include="EngineSound.h">
       <Filter>Sound</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc\fmod.h">
+      <Filter>ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc\fmod.hpp">
+      <Filter>ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc\fmod_codec.h">
+      <Filter>ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc\fmod_dsp.h">
+      <Filter>ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc\fmod_dsp_effects.h">
+      <Filter>ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc\fmod_errors.h">
+      <Filter>ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc\fmod_output.h">
+      <Filter>ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc\fmod_common.h">
+      <Filter>ThirdParty</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Input">
