@@ -75,6 +75,16 @@ void UPlayLevel::BeginPlay()
 	TestBlock->SetActorLocation({ 800,200 });
 
 
+	TestBlock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
+	TestBlock->SetActorLocation({ 864,200 });
+
+	TestBlock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
+	TestBlock->SetActorLocation({ 928,200 });
+
+	TestBlock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
+	TestBlock->SetActorLocation({ 992,200 });
+
+
 	//Plant* TestPlant;
 	//TestPlant = SpawnActor<Plant>(MarioRenderOrder::Monster);
 	//TestPlant->StartLocation = { 600,600 };

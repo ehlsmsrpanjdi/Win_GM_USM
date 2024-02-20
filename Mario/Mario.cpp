@@ -417,7 +417,7 @@ bool Mario::LeftEdgeCheck()
 	int EdgeLocation_Bottom = static_cast<int>(CurLocation.Y - 3.f);
 
 	Color8Bit CheckColor_LeftTop = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Top, Color8Bit::MagentaA);
-	Color8Bit CheckColor_LeftBottom = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Bottom, Color8Bit::MagentaA);
+	Color8Bit CheckColor_LeftBottom = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Bottom -2, Color8Bit::MagentaA);
 
 	bool FirstCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_LeftBottom);
 	bool SecondCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_LeftTop);
@@ -439,7 +439,7 @@ bool Mario::RightEdgeCheck()
 	int EdgeLocation_Bottom = static_cast<int>(CurLocation.Y - 3.f);
 
 	Color8Bit CheckColor_RightTop = MarioHelper::ColMapImage->GetColor(EdgeLocation_Right, EdgeLocation_Top, Color8Bit::MagentaA);
-	Color8Bit CheckColor_RightBottom = MarioHelper::ColMapImage->GetColor(EdgeLocation_Right, EdgeLocation_Bottom, Color8Bit::MagentaA);
+	Color8Bit CheckColor_RightBottom = MarioHelper::ColMapImage->GetColor(EdgeLocation_Right, EdgeLocation_Bottom - 2, Color8Bit::MagentaA);
 
 	bool FirstCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_RightBottom);
 	bool SecondCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_RightTop);
