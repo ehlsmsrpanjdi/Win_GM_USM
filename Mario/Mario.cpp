@@ -150,6 +150,7 @@ void Mario::SetState(MarioState _State)
 			break;
 		case MarioState::Dead:
 			DeadStart();
+			break;
 		default:
 			break;
 		}
