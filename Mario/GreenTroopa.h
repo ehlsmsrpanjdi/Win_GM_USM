@@ -26,8 +26,7 @@ protected:
 	void CrouchMove(float _DeltaTime);
 	void CrouchMoveStart();
 	void CollisionEvent(MonsterState _MonsterState) override;
-	void DeadStart() override;
-	void Dead(float _DeltaTime);
+	void ExcuteStart() override;
 
 	float CrouchDefaultMoveSpeed = 600.f;
 private:

@@ -49,6 +49,8 @@ protected:
 	bool RightEdgeCheck();
 	void DirCheck();
 
+	void MarioCollisionEvent(float _DeltaTime);
+
 	void ResultMove(float _DeltaTime) override;
 
 	void SetAnimation(std::string _Name) override;

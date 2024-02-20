@@ -77,6 +77,9 @@ void GreenTroopa::SetState(MonsterState _State)
 	case MonsterState::Dead:
 		DeadStart();
 		break;
+	case MonsterState::Excute:
+		ExcuteStart();
+		break;
 	default:
 		break;
 	}
@@ -158,11 +161,9 @@ void GreenTroopa::CollisionEvent(MonsterState _MonsterState)
 				break;
 			case MonsterState::CrouchMove:
 			{
-				GreenTroopa* Test = dynamic_cast<GreenTroopa*>(Collision->GetOwner());
-				Test->SetState(MonsterState::Dead);
+				Goomba* Test = (Goomba*)(Collision->GetOwner());
+ 				Test->SetState(MonsterState::Excute);
 			}
-				break;
-			case MonsterState::Critical:
 				break;
 			default:
 				break;
@@ -172,19 +173,17 @@ void GreenTroopa::CollisionEvent(MonsterState _MonsterState)
 	}
 
 }
-void GreenTroopa::DeadStart()
+
+void GreenTroopa::ExcuteStart()
 {
 	GravitySpeed.Y = 0.f;
 	SpeedX.X = 0.f;
 	SpeedY.Y = -500.f;
 	BodyCollision->Destroy();
+	int a = 0;
+	//animation dead
 }
-void GreenTroopa::Dead(float _DeltaTime)
-{
-	GravitySpeed += MarioHelper::Gravity * _DeltaTime;
-	ResultMove(_DeltaTime);
-	Destroy(3.f);
-}
+
 void GreenTroopa::CrouchMoveStart()
 {
 	InteractiveDirCheck();
@@ -209,6 +208,8 @@ void GreenTroopa::StateUpdate(float _DeltaTime)
 	case MonsterState::Dead:
 		Dead(_DeltaTime);
 		break;
+	case MonsterState::Excute:
+		Excute(_DeltaTime);
 	default:
 		break;
 	}

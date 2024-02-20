@@ -173,7 +173,7 @@ void Mario::JumpStart()
 	Jumping = true;
 	SpeedY.Y = JumpPower;
 	GravitySpeed.Y = 0;
-	AddActorLocation({ 0.f,-1.f });
+	AddActorLocation({ 0.f,-4.f });
 	SetAnimation("Jump");
 }
 
@@ -274,9 +274,9 @@ void Mario::Move(float _DeltaTime)
 void Mario::Dead(float _DeltaTime) {
 
 	if (DeadTime < 0.f) {
-	GravitySpeed += MarioHelper::Gravity * _DeltaTime;
-	ResultMove(_DeltaTime);
-	Destroy(3.f);
+		GravitySpeed += MarioHelper::Gravity * _DeltaTime;
+		ResultMove(_DeltaTime);
+		Destroy(3.f);
 	}
 	else {
 		DeadTime -= _DeltaTime;
@@ -480,10 +480,55 @@ void Mario::DirCheck()
 	}
 }
 
+void Mario::MarioCollisionEvent(float _DeltaTime)
+{
+	FVector ThisPosition = this->GetActorLocation();
+	std::vector<UCollision*> Result;
+	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, Result))
+	{
+		UCollision* Collision = Result[0];
+		FTransform CollisionTransform = Collision->GetActorBaseTransform();
+
+		float LeftX = CollisionTransform.GetPosition().X - CollisionTransform.GetScale().hX();
+		float RightX = CollisionTransform.GetPosition().X + CollisionTransform.GetScale().hX();
+		float TopY = CollisionTransform.GetPosition().Y - CollisionTransform.GetScale().hY();
+		float BottomY = CollisionTransform.GetPosition().Y + CollisionTransform.GetScale().hY();
+
+		if (LeftX < ThisPosition.X + 24 && RightX > ThisPosition.X - 24) {
+			if (TopY < ThisPosition.Y && 0 < (SpeedY.Y + GravitySpeed.Y)) {
+				GravitySpeed.Y = 0.f;
+				SpeedY.Y = 0;
+				IsCollision = true;
+			}
+
+		}
+
+		if (LeftX < ThisPosition.X + 28 && CurSpeedDir == 1) {
+			if (TopY > ThisPosition.Y - 2 || BottomY < ThisPosition.Y - 64) {
+				int a = 0;
+			}
+			else {
+				SpeedX.X = 0;
+			}
+		}
+
+		if (LeftX < ThisPosition.X - 28 && CurSpeedDir == -1) {
+			if (TopY > ThisPosition.Y - 2 || BottomY < ThisPosition.Y - 64) {
+				int a = 0;
+			}
+			else {
+				SpeedX.X = 0;
+			}
+		}
+
+	}
+	else {
+		IsCollision = false;
+	}
+}
 
 void Mario::ResultMove(float _DeltaTime)
 {
-
 	if (1 == CurSpeedDir) {
 		RightEdgeCheck();
 	}
@@ -491,6 +536,7 @@ void Mario::ResultMove(float _DeltaTime)
 		LeftEdgeCheck();
 	}
 
+	MarioCollisionEvent(_DeltaTime);
 
 	CurSpeed = StopSpeed;
 	CurSpeed += SpeedX;
@@ -501,6 +547,3 @@ void Mario::ResultMove(float _DeltaTime)
 	AddActorLocation(CurSpeed * _DeltaTime);
 	SetActorCameraPos();
 }
-
-
-

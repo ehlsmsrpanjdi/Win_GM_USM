@@ -37,7 +37,7 @@ enum class MonsterState {
 	Crouch,
 	Dead,
 	CrouchMove,
-	Critical,
+	Excute,
 };
 
 enum class BlockState {
@@ -48,10 +48,10 @@ enum class BlockState {
 
 enum class MarioCollisionOrder
 {
-	PlayerBullet,
+	Map,
 	Monster,
-	Block,
 	Player,
+	Block,
 
 };
 

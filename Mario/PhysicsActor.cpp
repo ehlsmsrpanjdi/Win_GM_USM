@@ -92,7 +92,7 @@ bool PhysicsActor::GravityCheck(float _DeltaTime)
 	Color8Bit Color_Right = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() + 28, GetActorLocation().iY(), Color8Bit::MagentaA);
 	Color8Bit Color_Left = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() - 28, GetActorLocation().iY(), Color8Bit::MagentaA);
 
-	if (Color_Right == Color8Bit(255, 0, 255, 0) || Color_Left == Color8Bit(255, 0, 255, 0))
+	if (Color_Right == Color8Bit(255, 0, 255, 0) || Color_Left == Color8Bit(255, 0, 255, 0) || IsCollision == true)
 	{
 		GravitySpeed = StopSpeed;
 		SpeedY = StopSpeed;

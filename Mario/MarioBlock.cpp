@@ -70,21 +70,19 @@ void MarioBlock::SetBoxState(BlockState _MarioBlockState)
 
 void MarioBlock::BoxCollisionEvent(BlockState _MarioBlockState)
 {
-	std::vector<UCollision*> Result;
-	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
-	{
-		UCollision* Collision = Result[0];
-		AActor* Ptr = Collision->GetOwner();
-		Mario* Player = dynamic_cast<Mario*>(Ptr);
-		FVector CurPlayerLocation = Player->GetActorLocation();
+	//FVector ThisPosition = this->BodyCollision->GetActorBaseTransform().GetPosition();
 
-		if (nullptr == Player)
-		{
-			MsgBoxAssert("터져야겠지....");
-		}
-		FVector CurLocation = GetActorLocation();
-		return;
-	}
+	//std::vector<UCollision*> Result;
+	//if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
+	//{
+	//	UCollision* Collision = Result[0];
+	//	FVector CollisionPosition = Collision->GetActorBaseTransform().GetPosition();
+
+	//	ThisPosition.X 
+
+
+
+	//}
 }
 
 void MarioBlock::ItemStart()

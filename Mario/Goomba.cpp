@@ -80,6 +80,21 @@ void Goomba::DeadStart()
 	Destroy(1.f);
 }
 
+void Goomba::Excute(float _DeltaTime)
+{
+	GravitySpeed += MarioHelper::Gravity * _DeltaTime;
+	ResultMove(_DeltaTime);
+	Destroy(3.f);
+}
+
+void Goomba::ExcuteStart()
+{
+	GravitySpeed.Y = 0.f;
+	SpeedX.X = 0.f;
+	SpeedY.Y = -500.f;
+	BodyCollision->Destroy();
+}
+
 void Goomba::Idle(float _DeltaTime)
 {
 	IsEdge(_DeltaTime);
@@ -104,6 +119,8 @@ void Goomba::StateUpdate(float _DeltaTime)
 		break;
 	case MonsterState::Dead:
 		break;
+	case MonsterState::Excute:
+		Excute(_DeltaTime);
 	default:
 		break;
 	}
@@ -124,6 +141,8 @@ void Goomba::SetState(MonsterState _State)
 	case MonsterState::Dead:
 		DeadStart();
 		break;
+	case MonsterState::Excute:
+		ExcuteStart();
 	default:
 		break;
 	}

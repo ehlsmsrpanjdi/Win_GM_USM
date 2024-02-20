@@ -15,6 +15,7 @@ public:
 	Goomba(Goomba&& _Other) noexcept = delete;
 	Goomba& operator=(const Goomba& _Other) = delete;
 	Goomba& operator=(Goomba&& _Other) noexcept = delete;
+	virtual void SetState(MonsterState _State);
 
 protected:
 	void BeginPlay() override;
@@ -24,12 +25,15 @@ protected:
 	void ReverseDir();
 
 	virtual void StateUpdate(float _DeltaTime);
-	virtual void SetState(MonsterState _State);
 	virtual void CollisionEvent(MonsterState _MonsterState);
 
 
 
 	virtual void DeadStart();
+	virtual void Dead(float _DeltaTime) {};
+	virtual void Excute(float _DeltaTime);
+	virtual void ExcuteStart();
+
 	virtual void Idle(float _DeltaTime);
 	virtual void IdleStart();
 	MonsterState State = MonsterState::None;
