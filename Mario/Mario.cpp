@@ -92,6 +92,7 @@ void Mario::StateUpdate(float _DeltaTime)
 		break;
 	case MarioState::Dead:
 		Dead(_DeltaTime);
+		break;
 	default:
 		break;
 	}
