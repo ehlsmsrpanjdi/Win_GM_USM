@@ -8,6 +8,7 @@
 #include "GreenTroopa.h"
 #include "Plant.h"
 #include "MarioBlock.h"
+#include "MarioBrick.h"
 
 UPlayLevel::UPlayLevel()
 {
@@ -83,6 +84,9 @@ void UPlayLevel::BeginPlay()
 
 	TestBlock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
 	TestBlock->SetActorLocation({ 992,200 });
+
+	TestBlock = SpawnActor<MarioBrick>(MarioRenderOrder::Block);
+	TestBlock->SetActorLocation({ 1200,200 });
 
 
 	//Plant* TestPlant;

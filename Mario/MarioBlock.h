@@ -17,18 +17,30 @@ public:
 	MarioBlock& operator=(MarioBlock&& _Other) noexcept = delete;
 
 protected:
-	void BeginPlay() override;
+	virtual void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void StateUpdate(float _DeltaTime) override;
 	void SetBoxState(BlockState _MarioBlockState);
 	void BoxCollisionEvent(BlockState _MarioBlockState);
 
 	void ItemStart();
+	void BrickStart();
 	void NoneStart();
+	void BreakStart();
+
+
+	void Item(float _DeltaTime);
+	void Brick(float _DeltaTime);
+	void None(float _DeltaTime);
+	void Break(float _DeltaTime);
+
 
 	BlockState State = BlockState::Item;
 
-	UImageRenderer* ColRenderer = nullptr;
+	float DeltaTime = 0.f;
+	float UpForce = -10.f;
+	float DownForce = 50.f;
+
 
 private:
 

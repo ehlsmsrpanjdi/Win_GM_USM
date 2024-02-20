@@ -48,6 +48,9 @@
     <ClInclude Include="MarioBlock.h">
       <Filter>Actor\Block</Filter>
     </ClInclude>
+    <ClInclude Include="MarioBrick.h">
+      <Filter>Actor\Block</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -95,6 +98,9 @@
       <Filter>Actor</Filter>
     </ClCompile>
     <ClCompile Include="MarioBlock.cpp">
+      <Filter>Actor\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="MarioBrick.cpp">
       <Filter>Actor\Block</Filter>
     </ClCompile>
   </ItemGroup>

@@ -42,8 +42,9 @@ enum class MonsterState {
 
 enum class BlockState {
 	Item,
+	Brick,
 	None,
-
+	Break,
 };
 
 enum class MarioCollisionOrder
