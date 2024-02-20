@@ -495,12 +495,14 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 		float BottomY = CollisionTransform.GetPosition().Y + CollisionTransform.GetScale().hY();
 
 		if (LeftX < ThisPosition.X + 24 && RightX > ThisPosition.X - 24) {
-			if (TopY < ThisPosition.Y && 0 < (SpeedY.Y + GravitySpeed.Y)) {
+			if (TopY < ThisPosition.Y && 0 < (SpeedY.Y + GravitySpeed.Y) && TopY > ThisPosition.Y - 10) {
 				GravitySpeed.Y = 0.f;
 				SpeedY.Y = 0;
 				IsCollision = true;
 			}
-
+   			else if ((SpeedY.Y + GravitySpeed.Y < 0) && BottomY < ThisPosition.Y - 32) {
+				SpeedY.Y = 0;
+			}
 		}
 
 		if (LeftX < ThisPosition.X + 28 && CurSpeedDir == 1) {
