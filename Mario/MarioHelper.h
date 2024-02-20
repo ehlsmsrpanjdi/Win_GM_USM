@@ -8,9 +8,9 @@
 enum MarioRenderOrder
 {
 	Map,
-	Block,
 	Monster,
 	Player,
+	Block,
 };
 
 enum class EActorDir

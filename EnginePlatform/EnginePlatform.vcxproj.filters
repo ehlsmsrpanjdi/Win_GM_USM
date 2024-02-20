@@ -27,28 +27,28 @@
     <ClInclude Include="EngineSound.h">
       <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc\fmod.h">
+    <ClInclude Include="ThirdParty\FMOD\inc\fmod_common.h">
       <Filter>ThirdParty\Fmod\inc</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc\fmod.hpp">
+    <ClInclude Include="ThirdParty\FMOD\inc\fmod_dsp.h">
       <Filter>ThirdParty\Fmod\inc</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc\fmod_codec.h">
+    <ClInclude Include="ThirdParty\FMOD\inc\fmod_dsp_effects.h">
       <Filter>ThirdParty\Fmod\inc</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc\fmod_common.h">
+    <ClInclude Include="ThirdParty\FMOD\inc\fmod_errors.h">
       <Filter>ThirdParty\Fmod\inc</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc\fmod_dsp.h">
+    <ClInclude Include="ThirdParty\FMOD\inc\fmod_output.h">
       <Filter>ThirdParty\Fmod\inc</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc\fmod_dsp_effects.h">
+    <ClInclude Include="ThirdParty\FMOD\inc\fmod.h">
       <Filter>ThirdParty\Fmod\inc</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc\fmod_errors.h">
+    <ClInclude Include="ThirdParty\FMOD\inc\fmod.hpp">
       <Filter>ThirdParty\Fmod\inc</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc\fmod_output.h">
+    <ClInclude Include="ThirdParty\FMOD\inc\fmod_codec.h">
       <Filter>ThirdParty\Fmod\inc</Filter>
     </ClInclude>
   </ItemGroup>
@@ -79,17 +79,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64\fmodL.dll">
+    <Library Include="ThirdParty\FMOD\Debug\fmod_vc.lib">
       <Filter>ThirdParty\Fmod\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64\fmodL_vc.lib">
+    </Library>
+    <Library Include="ThirdParty\FMOD\Debug\fmodL_vc.lib">
       <Filter>ThirdParty\Fmod\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64\fmod.dll">
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ThirdParty\FMOD\Release\fmod.dll">
       <Filter>ThirdParty\Fmod\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64\fmod_vc.lib">
+    </None>
+    <None Include="ThirdParty\FMOD\Release\fmodL.dll">
       <Filter>ThirdParty\Fmod\Release</Filter>
-    </CopyFileToFolders>
+    </None>
   </ItemGroup>
 </Project>
