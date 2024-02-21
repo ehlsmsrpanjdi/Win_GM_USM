@@ -10,6 +10,7 @@ enum MarioRenderOrder
 	Map,
 	Monster,
 	Player,
+	Item,
 	Block,
 };
 
@@ -38,6 +39,7 @@ enum class MonsterState {
 	Dead,
 	CrouchMove,
 	Excute,
+	Critical,
 };
 
 enum class BlockState {
@@ -45,6 +47,7 @@ enum class BlockState {
 	Brick,
 	None,
 	Break,
+	Interactive,
 };
 
 enum class MarioCollisionOrder
@@ -52,8 +55,8 @@ enum class MarioCollisionOrder
 	Map,
 	Monster,
 	Player,
+	Item,
 	Block,
-
 };
 
 

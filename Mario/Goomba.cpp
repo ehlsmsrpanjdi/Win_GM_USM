@@ -121,6 +121,7 @@ void Goomba::StateUpdate(float _DeltaTime)
 		break;
 	case MonsterState::Excute:
 		Excute(_DeltaTime);
+		break;
 	default:
 		break;
 	}
@@ -143,6 +144,7 @@ void Goomba::SetState(MonsterState _State)
 		break;
 	case MonsterState::Excute:
 		ExcuteStart();
+		break;
 	default:
 		break;
 	}
@@ -159,6 +161,10 @@ void Goomba::CollisionEvent(MonsterState _MonsterState)
 		AActor* Ptr = Collision->GetOwner();
 		Mario* Player = dynamic_cast<Mario*>(Ptr);
 		FVector CurPlayerLocation = Player->GetActorLocation();
+
+		if (State == MonsterState::Critical) {
+			Player->SetState(MarioState::Dead);
+		}
 
 		if (nullptr == Player)
 		{

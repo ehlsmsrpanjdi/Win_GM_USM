@@ -30,6 +30,8 @@ protected:
 	virtual void SetState(MonsterState _State) {};
 	virtual void CollisionEvent(MonsterState _MonsterState) {};
 	virtual void BoxCollisionEvent(BlockState _BlockState) {};
+	virtual void ItemCollisionEvent() {};
+
 
 	std::string CurAnimationName = "";
 	UImageRenderer* Renderer = nullptr;
@@ -39,7 +41,7 @@ protected:
 
 
 	void InteractiveDirCheck();
-	void BeginPlay() = 0;
+	virtual void BeginPlay() = 0;
 	virtual void Tick(float _DeltaTime) = 0;
 	bool NoDir = false;
 	bool IsCollision = false;

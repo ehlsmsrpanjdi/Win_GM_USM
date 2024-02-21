@@ -3,6 +3,8 @@
 #include "MarioHelper.h"
 #include "Mario.h"
 #include "PhysicsActor.h"
+#include "MushRoom.h"
+
 MarioBlock::MarioBlock()
 {
 	NoDir = true;
@@ -17,14 +19,14 @@ void MarioBlock::BeginPlay()
 	SetName("MarioBlock");
 	Renderer = CreateImageRenderer(MarioRenderOrder::Block);
 	Renderer->SetImage("MarioBlock.png");
-	Renderer->SetTransform({ {0,400 }, { 1024,1024 } });
+	Renderer->SetTransform({ {0,0 }, { 1024,1024 } });
 	AnimationAuto(Renderer, "Item", 0, 3, 0.2f);
 	SetAnimation("Item");
 
 	AnimationAuto(Renderer, "None", 4, 4, 0.1f, false);
 
 	BodyCollision = CreateCollision(MarioCollisionOrder::Block);
-	BodyCollision->SetTransform({ { 0, 368 }, { 64, 64} });
+	BodyCollision->SetTransform({ { 0, -32 }, { 64, 64} });
 
 	State = BlockState::Item;
 }
@@ -35,11 +37,6 @@ void MarioBlock::Tick(float _DeltaTime)
 
 	BoxCollisionEvent(State);
 
-	if (DeltaTime > 0.f) {
-		UpForce += DownForce * _DeltaTime;
-		DeltaTime -= _DeltaTime;
-		AddActorLocation({ 0.f, UpForce  });
-	}
 }
 
 void MarioBlock::StateUpdate(float _DeltaTime)
@@ -56,6 +53,10 @@ void MarioBlock::StateUpdate(float _DeltaTime)
 		break;
 	case BlockState::Break:
 		Break(_DeltaTime);
+		break;
+	case BlockState::Interactive:
+		Interactive(_DeltaTime);
+		break;
 	default:
 		break;
 	}
@@ -80,6 +81,10 @@ void MarioBlock::SetBoxState(BlockState _MarioBlockState)
 		break;
 	case BlockState::Break:
 		BreakStart();
+		break;
+	case BlockState::Interactive:
+		InteractiveStart();
+		break;
 	default:
 		break;
 	}
@@ -90,14 +95,19 @@ void MarioBlock::BoxCollisionEvent(BlockState _MarioBlockState)
 	std::vector<UCollision*> Result;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
 	{
-		UCollision* Collision = Result[0];
-
 		switch (State)
 		{
 		case BlockState::Item:
-			SetBoxState(BlockState::None);
-			break;
+		{
+			if (Mario::PlayerLocation.Y> this->GetActorLocation().Y) {
+				SetBoxState(BlockState::Interactive);
+			}
+		}
+		break;
 		case BlockState::Brick:
+			if (Mario::PlayerLocation.Y> this->GetActorLocation().Y) {
+				SetBoxState(BlockState::Interactive);
+			}
 			break;
 		case BlockState::None:
 			break;
@@ -122,12 +132,17 @@ void MarioBlock::BrickStart()
 
 void MarioBlock::NoneStart()
 {
-	DeltaTime = 0.2f;
 	SetAnimation("None");
 }
 
 void MarioBlock::BreakStart()
 {
+}
+
+void MarioBlock::InteractiveStart()
+{
+	DeltaTime = 0.1f;
+	DefaultLocation = GetActorLocation();
 }
 
 void MarioBlock::Item(float _DeltaTime)
@@ -144,5 +159,29 @@ void MarioBlock::None(float _DeltaTime)
 
 void MarioBlock::Break(float _DeltaTime)
 {
+}
+
+void MarioBlock::Interactive(float _DeltaTime)
+{
+	if (DeltaTime > -0.1f) {
+		UpForce += DownForce * _DeltaTime;
+		DeltaTime -= _DeltaTime;
+		AddActorLocation({ 0.f, UpForce });
+	}
+
+	else if(BlockState::Brick == StartState){
+		SetActorLocation(DefaultLocation);
+		DeltaTime = 0.1f;
+		UpForce = -2.f;
+		SetBoxState(BlockState::Brick);
+	}
+	else {
+		SetActorLocation(DefaultLocation);
+		SetBoxState(BlockState::None);
+
+		MushRoom* TestMushRoom;
+		TestMushRoom = this->GetWorld()->SpawnActor<MushRoom>(MarioRenderOrder::Item);
+		TestMushRoom->SetActorLocation(this->DefaultLocation);
+	}
 }
 

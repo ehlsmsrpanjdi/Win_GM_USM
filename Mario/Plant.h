@@ -13,13 +13,23 @@ public:
 	Plant(Plant&& _Other) noexcept = delete;
 	Plant& operator=(const Plant& _Other) = delete;
 	Plant& operator=(Plant&& _Other) noexcept = delete;
-	FVector StartLocation = {};
-	float Time = 1.f;
+
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-	void StateUpdate(float _DeltaTime) override;
-	void CollisionEvent(MonsterState _State);
+	void Update(float _DeltaTime);
+	//void StateUpdate(float _DeltaTime) override;
+	//void CollisionEvent(MonsterState _State);
+
+	FVector StartLocation = { 0.f,0.f,0.f,0.f };
+	FVector NextLocation = {};
+	float SpawnTime = -64.f;
+	float TotalMove = 2.f;
+
+	bool IsUp = true;
+
+
 private:
 
 };

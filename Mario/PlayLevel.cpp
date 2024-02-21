@@ -9,6 +9,7 @@
 #include "Plant.h"
 #include "MarioBlock.h"
 #include "MarioBrick.h"
+#include "MushRoom.h"
 
 UPlayLevel::UPlayLevel()
 {
@@ -49,6 +50,10 @@ void UPlayLevel::BeginPlay()
 
 	TestMario->SetActorLocation({ 200,200 });
 
+	//MushRoom* TestItem;
+	//TestItem = SpawnActor<MushRoom>(MarioRenderOrder::Item);
+	//TestItem->SetActorLocation({ 800,200 });
+
 	//Goomba* TestGoomba;
 	//TestGoomba = SpawnActor<Goomba>(MarioRenderOrder::Monster);
 	//TestGoomba->SetActorLocation({ 600,200 });
@@ -72,28 +77,35 @@ void UPlayLevel::BeginPlay()
 	//TestTroopa->SetActorLocation({ 1400,200 });
 
 	MarioBlock* TestBlock;
-	TestBlock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
-	TestBlock->SetActorLocation({ 800,200 });
-
 
 	TestBlock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
-	TestBlock->SetActorLocation({ 864,200 });
+	TestBlock->SetActorLocation({ 864,600 });
 
 	TestBlock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
-	TestBlock->SetActorLocation({ 928,200 });
+	TestBlock->SetActorLocation({ 940,600 });
 
 	TestBlock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
-	TestBlock->SetActorLocation({ 992,200 });
+	TestBlock->SetActorLocation({ 1100,600 });
+
+	//TestBlock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
+	//TestBlock->SetActorLocation({ 928,600 });
+
+	//TestBlock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
+	//TestBlock->SetActorLocation({ 992,600 });
 
 	TestBlock = SpawnActor<MarioBrick>(MarioRenderOrder::Block);
-	TestBlock->SetActorLocation({ 1200,200 });
+	TestBlock->SetActorLocation({ 1300,600 });
 
-
-	//Plant* TestPlant;
-	//TestPlant = SpawnActor<Plant>(MarioRenderOrder::Monster);
-	//TestPlant->StartLocation = { 600,600 };
-	//TestPlant->SetActorLocation(TestPlant->StartLocation);
 	
+	Plant* TestPlant;
+	TestPlant = SpawnActor<Plant>(MarioRenderOrder::Monster);
+	TestPlant->SetActorLocation({ 600,600 });
+	
+	TestPlant = SpawnActor<Plant>(MarioRenderOrder::Monster);
+	TestPlant->SetActorLocation({ 700,600 });
+
+	TestPlant = SpawnActor<Plant>(MarioRenderOrder::Monster);
+	TestPlant->SetActorLocation({ 800,600 });
 
 }
 

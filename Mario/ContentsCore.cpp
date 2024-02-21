@@ -44,6 +44,8 @@ void ContentsCore::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Plant.png", 2, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("MarioBlock.png", 6, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("MarioBrick.png", 5, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("Item.png", 5, 2);
+	
 
 	MainWindow.SetWindowScale({ 256 * 4/* * 1.5f*/, 240 * 4/* * 1.5f*/ });
 	MainWindow.SetWindowPosition({ 800/* * 1.5f*/, 0/* * 1.5f*/ });

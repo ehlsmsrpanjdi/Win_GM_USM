@@ -27,20 +27,24 @@ protected:
 	void BrickStart();
 	void NoneStart();
 	void BreakStart();
+	void InteractiveStart();
 
 
 	void Item(float _DeltaTime);
 	void Brick(float _DeltaTime);
 	void None(float _DeltaTime);
 	void Break(float _DeltaTime);
+	void Interactive(float _DeltaTime);
 
 
 	BlockState State = BlockState::Item;
 
-	float DeltaTime = 0.f;
-	float UpForce = -10.f;
-	float DownForce = 50.f;
+	FVector DefaultLocation = {};
 
+	float DeltaTime = -0.1f;
+	float UpForce = -2.f;
+	float DownForce = 18.f;
+	BlockState StartState = BlockState::None;
 
 private:
 
