@@ -13,3 +13,112 @@ MarioHelper::MarioHelper()
 MarioHelper::~MarioHelper()
 {
 }
+
+bool MarioHelper::BottomCheck(FVector _NextVector) {
+	FVector CurLocation = _NextVector;
+
+	FVector BottomLeft = MarioHelper::GetBottomLeftVector(CurLocation);
+	FVector BottomRight = MarioHelper::GetBottomRightVector(CurLocation);
+
+	Color8Bit CheckColor_BottomLeft = MarioHelper::ColMapImage->GetColor(BottomLeft.iX(), BottomLeft.iY(), Color8Bit::MagentaA);
+	Color8Bit CheckColor_BottomRight = MarioHelper::ColMapImage->GetColor(BottomRight.iX(), BottomRight.iY(), Color8Bit::MagentaA);
+
+	bool FirstCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_BottomLeft);
+	bool SecondCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_BottomRight);
+
+
+	if (FirstCondition || SecondCondition) {
+		{
+			return false;
+		}
+		return true;
+	}
+}
+
+bool MarioHelper::RightCheck(FVector _NextVector) {
+	FVector CurLocation = _NextVector;
+
+	FVector RightTop = MarioHelper::GetRightTopVector(CurLocation);
+	FVector RightBottom = MarioHelper::GetRightBottomVector(CurLocation);
+
+	Color8Bit CheckColor_RightTop = MarioHelper::ColMapImage->GetColor(RightTop.iX(), RightTop.iY(), Color8Bit::MagentaA);
+	Color8Bit CheckColor_RightBottom = MarioHelper::ColMapImage->GetColor(RightBottom.iX(), RightBottom.iY(), Color8Bit::MagentaA);
+
+	bool FirstCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_RightBottom);
+	bool SecondCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_RightTop);
+
+	if (FirstCondition || SecondCondition) {
+		return false;
+	}
+	return true;
+}
+
+bool MarioHelper::LeftCheck(FVector _NextVector) {
+	FVector CurLocation = _NextVector;
+
+	FVector LeftTop = MarioHelper::GetLeftTopVector(CurLocation);
+	FVector LeftBottom = MarioHelper::GetLeftBottomVector(CurLocation);
+
+	Color8Bit CheckColor_LeftTop = MarioHelper::ColMapImage->GetColor(LeftTop.iX(), LeftTop.iY(), Color8Bit::MagentaA);
+	Color8Bit CheckColor_LeftBottom = MarioHelper::ColMapImage->GetColor(LeftBottom.iX(), LeftBottom.iY(), Color8Bit::MagentaA);
+
+	bool FirstCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_LeftBottom);
+	bool SecondCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_LeftTop);
+
+
+	if (FirstCondition || SecondCondition) {
+		return true;
+	}
+	return false;
+}
+
+FVector MarioHelper::GetBottomLeftVector(FVector _NextVector) {
+
+	FVector CurLocation = _NextVector;
+	int EdgeLocation_Left = static_cast<int>(CurLocation.iX() - 28);
+	int EdgeLocation_Bottom = static_cast<int>(CurLocation.iY());
+
+	return FVector{ EdgeLocation_Left , EdgeLocation_Bottom };
+}
+
+FVector MarioHelper::GetBottomRightVector(FVector _NextVector) {
+
+	FVector CurLocation = _NextVector;
+	int EdgeLocation_Right = static_cast<int>(CurLocation.iX() + 28);
+	int EdgeLocation_Bottom = static_cast<int>(CurLocation.iY());
+
+	return FVector{ EdgeLocation_Right , EdgeLocation_Bottom };
+}
+
+FVector MarioHelper::GetLeftTopVector(FVector _NextVector) {
+	FVector CurLocation = _NextVector;
+	int EdgeLocation_Left = static_cast<int>(CurLocation.X - 32.f);
+	int EdgeLocation_Top = static_cast<int>(CurLocation.Y - 32.f);
+
+	return FVector{ EdgeLocation_Left , EdgeLocation_Top };
+}
+
+FVector MarioHelper::GetLeftBottomVector(FVector _NextVector) {
+	FVector CurLocation = _NextVector;
+	int EdgeLocation_Left = static_cast<int>(CurLocation.X - 32.f);
+	int EdgeLocation_Bottom = static_cast<int>(CurLocation.Y - 3.f);
+
+	return FVector{ EdgeLocation_Left , EdgeLocation_Bottom };
+}
+
+
+FVector MarioHelper::GetRightTopVector(FVector _NextVector) {
+	FVector CurLocation = _NextVector;
+	int EdgeLocation_Right = static_cast<int>(CurLocation.X + 32.f);
+	int EdgeLocation_Top = static_cast<int>(CurLocation.Y - 32.f);
+
+	return FVector{ EdgeLocation_Right , EdgeLocation_Top };
+}
+
+FVector MarioHelper::GetRightBottomVector(FVector _NextVector) {
+	FVector CurLocation = _NextVector;
+	int EdgeLocation_Right = static_cast<int>(CurLocation.X + 32.f);
+	int EdgeLocation_Bottom = static_cast<int>(CurLocation.Y - 3.f);
+
+	return FVector{ EdgeLocation_Right , EdgeLocation_Bottom };
+}

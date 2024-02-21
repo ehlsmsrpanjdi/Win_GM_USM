@@ -68,6 +68,19 @@ public:
 	static UWindowImage* ColMapImage;
 	static FVector Gravity;
 	static std::map<MarioState, std::string> StateList;
+
+	static bool BottomCheck(FVector _NextVector);
+	static bool LeftCheck(FVector _NextVector);
+	static bool RightCheck(FVector _NextVector);
+
+	static FVector GetBottomLeftVector(FVector _NextVector);
+	static FVector GetBottomRightVector(FVector _NextVector);
+	static FVector GetLeftTopVector(FVector _NextVector);
+	static FVector GetLeftBottomVector(FVector _NextVector);
+	static FVector GetRightTopVector(FVector _NextVector);
+	static FVector GetRightBottomVector(FVector _NextVector);
+
+
 private:
 	// constrcuter destructer
 	MarioHelper();
