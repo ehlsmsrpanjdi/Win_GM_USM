@@ -15,12 +15,31 @@ MarioUI::~MarioUI()
 void MarioUI::SetMarioScore()
 {
 	std::string Index = std::to_string(MarioHelper::MarioTotalScore);
-	std::string Test;
+	std::string str;
 	for (int i = 0; i < 6; ++i) {
-		Test = Index.substr(i + 1,1);
-		Test.append(".png");
-		Test;
-		ScoreUIArray[i]->SetImage(Test);
+		str = Index.substr(i + 1,1);
+		str.append(".png");
+		ScoreUIArray[i]->SetImage(str);
+	}
+
+}
+
+void MarioUI::SetMarioTime(float _DeltaTime)
+{
+	if (Time >= 1.f) {
+		Time = 0.f;
+		MarioHelper::MarioTime -= 1;
+	}
+	else {
+		Time += _DeltaTime;
+	}
+	
+	std::string Index = std::to_string(MarioHelper::MarioTime);
+	std::string str;
+	for (int i = 0; i < 3; ++i) {
+		str = Index.substr(i, 1);
+		str.append(".png");
+		TimeUIArray[i]->SetImage(str);
 	}
 
 }
@@ -41,13 +60,22 @@ void MarioUI::BeginPlay()
 		std::string Index = std::to_string(i);
 		ScoreUIArray[i] = CreateImageRenderer(static_cast<int>(MarioRenderOrder::UI));
 		ScoreUIArray[i]->SetImage(Index + ".png");
-		ScoreUIArray[i]->SetTransform({ {300,200 + i * 100}, {20,20} });
+		ScoreUIArray[i]->SetTransform({ {200,200 + i * 100}, {20,20} });
 		ScoreUIArray[i]->CameraEffectOff();
+	}
+
+	for (int i = 0; i < 3; ++i) {
+		std::string Index = std::to_string(i);
+		TimeUIArray[i] = CreateImageRenderer(static_cast<int>(MarioRenderOrder::UI));
+		TimeUIArray[i]->SetImage(Index + ".png");
+		TimeUIArray[i]->SetTransform({ {300,200 + i * 100}, {20,20} });
+		TimeUIArray[i]->CameraEffectOff();
 	}
 }
 
 void MarioUI::Tick(float _DeltaTime)
 {
 	SetMarioScore();
+	SetMarioTime(_DeltaTime);
 }
 

@@ -30,6 +30,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Coin.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MarioBlock.h">
       <SubType>
       </SubType>
@@ -109,6 +113,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Coin.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="MarioBlock.cpp">
       <SubType>
       </SubType>
