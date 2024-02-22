@@ -54,9 +54,9 @@ void UPlayLevel::BeginPlay()
 	//TestItem = SpawnActor<MushRoom>(MarioRenderOrder::Item);
 	//TestItem->SetActorLocation({ 800,200 });
 
-	//Goomba* TestGoomba;
-	//TestGoomba = SpawnActor<Goomba>(MarioRenderOrder::Monster);
-	//TestGoomba->SetActorLocation({ 600,200 });
+	Goomba* TestGoomba;
+	TestGoomba = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+	TestGoomba->SetActorLocation({ 600,200 });
 
 
 	//TestGoomba = SpawnActor<Goomba>(MarioRenderOrder::Monster);
@@ -66,9 +66,9 @@ void UPlayLevel::BeginPlay()
 	//TestGoomba = SpawnActor<Goomba>(MarioRenderOrder::Monster);
 	//TestGoomba->SetActorLocation({ 900,200 });
 
-	//GreenTroopa* TestTroopa;
-	//TestTroopa = SpawnActor<GreenTroopa>(MarioRenderOrder::Monster);
-	//TestTroopa->SetActorLocation({ 1000,200 });
+	GreenTroopa* TestTroopa;
+	TestTroopa = SpawnActor<GreenTroopa>(MarioRenderOrder::Monster);
+	TestTroopa->SetActorLocation({ 1000,200 });
 
 	//TestTroopa = SpawnActor<GreenTroopa>(MarioRenderOrder::Monster);
 	//TestTroopa->SetActorLocation({ 1200,200 });
