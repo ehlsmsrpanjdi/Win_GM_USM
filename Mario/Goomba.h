@@ -30,7 +30,7 @@ protected:
 
 
 	virtual void DeadStart();
-	virtual void Dead(float _DeltaTime) {};
+	virtual void Dead(float _DeltaTime);
 	virtual void Excute(float _DeltaTime);
 	virtual void ExcuteStart();
 
@@ -40,6 +40,8 @@ protected:
 
 
 	float MonsterDefaultSpeed = 200.f;
+	UImageRenderer* ScoreRenderer = nullptr;
+	FVector ScoreRendererLocation = FVector::Zero;
 
 private:
 

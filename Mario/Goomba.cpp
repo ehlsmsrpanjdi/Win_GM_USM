@@ -11,6 +11,7 @@ Goomba::Goomba()
 
 Goomba::~Goomba()
 {
+
 }
 
 void Goomba::BeginPlay()
@@ -78,6 +79,19 @@ void Goomba::DeadStart()
 {
 	SetAnimation("Dead");
 	Destroy(1.f);
+	ScoreRenderer = CreateImageRenderer(MarioRenderOrder::UI);
+	FVector OwnerLocation = this->GetActorLocation();
+	ScoreRenderer->SetImage("100.png");
+	ScoreRenderer->SetTransform({ {0,-20}, {60,20} });
+	ScoreRendererLocation = ScoreRenderer->GetTransform().GetPosition();
+	MarioHelper::MarioTotalScore += 100;
+}
+
+void Goomba::Dead(float _DeltaTime)
+{
+
+	ScoreRendererLocation += {0.f, -0.1f};
+	ScoreRenderer->SetTransform({ScoreRendererLocation, {60,20} });
 }
 
 void Goomba::Excute(float _DeltaTime)
@@ -118,6 +132,7 @@ void Goomba::StateUpdate(float _DeltaTime)
 		Idle(_DeltaTime);
 		break;
 	case MonsterState::Dead:
+		Dead(_DeltaTime);
 		break;
 	case MonsterState::Excute:
 		Excute(_DeltaTime);

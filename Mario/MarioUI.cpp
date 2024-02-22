@@ -42,12 +42,12 @@ void MarioUI::BeginPlay()
 		ScoreUIArray[i] = CreateImageRenderer(static_cast<int>(MarioRenderOrder::UI));
 		ScoreUIArray[i]->SetImage(Index + ".png");
 		ScoreUIArray[i]->SetTransform({ {300,200 + i * 100}, {20,20} });
+		ScoreUIArray[i]->CameraEffectOff();
 	}
 }
 
 void MarioUI::Tick(float _DeltaTime)
 {
-	MarioHelper::MarioTotalScore++;
 	SetMarioScore();
 }
 

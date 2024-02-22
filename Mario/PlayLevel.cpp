@@ -54,6 +54,21 @@ void UPlayLevel::BeginPlay()
 	MarioUI* TestUI;
 	TestUI = SpawnActor<MarioUI>(MarioRenderOrder::UI);
 	TestUI->SetActorLocation({ 200,200 });
+
+	Goomba* TestGoomba;
+	TestGoomba = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+	TestGoomba->SetActorLocation({ 500,500 });
+
+	TestGoomba = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+	TestGoomba->SetActorLocation({ 1200,500 });
+
+	TestGoomba = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+	TestGoomba->SetActorLocation({ 1000,500 });
+
+	TestGoomba = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+	TestGoomba->SetActorLocation({ 800,500 });
+
+
 }
 
 void UPlayLevel::Tick(float _DeltaTime)
