@@ -1,9 +1,13 @@
 #include "MarioHelper.h"
+#include <string>
 
 UWindowImage* MarioHelper::ColMapImage = nullptr;
 FVector MarioHelper::Gravity = { 0.f, 1500.0f };
-std::map<MarioState, std::string> StateList;
 
+int MarioHelper::MarioTime = 200;
+int MarioHelper::MarioCoinCount = 200;
+int MarioHelper::MarioTotalScore = 1000000;
+int MarioHelper::MarioLife = 200;
 
 MarioHelper::MarioHelper()
 {
@@ -121,4 +125,10 @@ FVector MarioHelper::GetRightBottomVector(FVector _NextVector) {
 	int EdgeLocation_Bottom = static_cast<int>(CurLocation.Y - 3.f);
 
 	return FVector{ EdgeLocation_Right , EdgeLocation_Bottom };
+}
+
+std::string_view MarioHelper::ReturnString(int _Value)
+{
+	std::string str = std::to_string(_Value);
+	return str;
 }

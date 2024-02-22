@@ -54,6 +54,9 @@
     <ClInclude Include="MushRoom.h">
       <Filter>Actor\Item</Filter>
     </ClInclude>
+    <ClInclude Include="MarioUI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -109,6 +112,9 @@
     <ClCompile Include="MushRoom.cpp">
       <Filter>Actor\Item</Filter>
     </ClCompile>
+    <ClCompile Include="MarioUI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Actor">
@@ -137,6 +143,9 @@
     </Filter>
     <Filter Include="Actor\Item">
       <UniqueIdentifier>{77234dd3-b766-4eb0-b88a-9fff9bbd7d24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{03ad46db-b318-40b6-888c-7cb8e58f9f4a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -12,6 +12,7 @@ enum MarioRenderOrder
 	Player,
 	Item,
 	Block,
+	UI,
 };
 
 enum class EActorDir
@@ -67,7 +68,11 @@ class MarioHelper
 public:
 	static UWindowImage* ColMapImage;
 	static FVector Gravity;
-	static std::map<MarioState, std::string> StateList;
+
+	static int MarioTime;
+	static int MarioCoinCount;
+	static int MarioTotalScore;
+	static int MarioLife;
 
 	static bool BottomCheck(FVector _NextVector);
 	static bool LeftCheck(FVector _NextVector);
@@ -79,6 +84,8 @@ public:
 	static FVector GetLeftBottomVector(FVector _NextVector);
 	static FVector GetRightTopVector(FVector _NextVector);
 	static FVector GetRightBottomVector(FVector _NextVector);
+
+	static std::string_view ReturnString(int _Value);
 
 
 private:
