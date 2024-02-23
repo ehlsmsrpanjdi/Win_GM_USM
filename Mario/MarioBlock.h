@@ -37,7 +37,7 @@ protected:
 	void Interactive(float _DeltaTime);
 
 
-	BlockState State = BlockState::Item;
+	BlockState State = BlockState::None;
 
 	FVector DefaultLocation = {};
 

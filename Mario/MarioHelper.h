@@ -45,22 +45,24 @@ enum class MonsterState {
 };
 
 enum class BlockState {
-	Item,
-	Brick,
 	None,
-	Break,
+	ItemBlock,
+	Brick,
+	ItemBrick,
 	Interactive,
+	Default,
 };
 
 enum class ItemState {
+	None,
 	Spawn,
 	MushRoom,
 	Flower,
 	Star,
+	Coin,
 };
 
-enum class MarioCollisionOrder
-{
+enum class MarioCollisionOrder{
 	Map,
 	Monster,
 	Player,

@@ -28,7 +28,7 @@ void MarioBlock::BeginPlay()
 	BodyCollision = CreateCollision(MarioCollisionOrder::Block);
 	BodyCollision->SetTransform({ { 0, -32 }, { 64, 64} });
 
-	State = BlockState::Item;
+	State = BlockState::Brick:
 }
 
 void MarioBlock::Tick(float _DeltaTime)
@@ -43,16 +43,10 @@ void MarioBlock::StateUpdate(float _DeltaTime)
 {
 	switch (State)
 	{
-	case BlockState::Item:
-		Item(_DeltaTime);
-		break;
 	case BlockState::Brick:
 		break;
 	case BlockState::None:
 		None(_DeltaTime);
-		break;
-	case BlockState::Break:
-		Break(_DeltaTime);
 		break;
 	case BlockState::Interactive:
 		Interactive(_DeltaTime);
@@ -70,17 +64,11 @@ void MarioBlock::SetBoxState(BlockState _MarioBlockState)
 
 	switch (State)
 	{
-	case BlockState::Item:
-		ItemStart();
-		break;
 	case BlockState::Brick:
 		BrickStart();
 		break;
 	case BlockState::None:
 		NoneStart();
-		break;
-	case BlockState::Break:
-		BreakStart();
 		break;
 	case BlockState::Interactive:
 		InteractiveStart();
@@ -97,21 +85,12 @@ void MarioBlock::BoxCollisionEvent(BlockState _MarioBlockState)
 	{
 		switch (State)
 		{
-		case BlockState::Item:
-		{
-			if (Mario::PlayerLocation.Y> this->GetActorLocation().Y) {
-				SetBoxState(BlockState::Interactive);
-			}
-		}
-		break;
 		case BlockState::Brick:
 			if (Mario::PlayerLocation.Y> this->GetActorLocation().Y) {
 				SetBoxState(BlockState::Interactive);
 			}
 			break;
 		case BlockState::None:
-			break;
-		case BlockState::Break:
 			break;
 		default:
 			break;

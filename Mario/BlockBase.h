@@ -24,28 +24,31 @@ protected:
 	void BoxCollisionEvent(BlockState _MarioBlockState);
 
 
-	void ItemStart();
-	void BrickStart();
 	void NoneStart();
-	void BreakStart();
+	void ItemBlockStart();
+	void BrickStart();
+	void ItemBrickStart();
 	void InteractiveStart();
+	void DefaultStart();
 
 
-	void Item(float _DeltaTime);
-	void Brick(float _DeltaTime);
 	void None(float _DeltaTime);
-	void Break(float _DeltaTime);
+	void ItemBlock(float _DeltaTime);
+	void Brick(float _DeltaTime);
+	void ItemBrick(float _DeltaTime);
 	void Interactive(float _DeltaTime);
-
-	BlockState State = BlockState::Item;
+	void Default(float _DeltaTime);
 
 	FVector DefaultLocation = {};
 
 	float DeltaTime = -0.1f;
 	float UpForce = -2.f;
 	float DownForce = 18.f;
+	BlockState BoxState = BlockState::None;
 	BlockState StartState = BlockState::None;
-	int ItemCount;
+
+	int ItemCount=0;
+	ItemState HaveItem = ItemState::None;
 
 private:
 
