@@ -1,4 +1,6 @@
 #include "BlockBase.h"
+#include "MushRoom.h"
+#include "Coin.h"
 
 BlockBase::BlockBase() 
 {
@@ -104,6 +106,8 @@ void BlockBase::InteractiveStart()
 	}
 	DeltaTime = 0.1f;
 	DefaultLocation = GetActorLocation();
+	UpForce = -2.f;
+
 }
 
 void BlockBase::DefaultStart()
@@ -140,16 +144,31 @@ void BlockBase::Interactive(float _DeltaTime)
 		DeltaTime -= _DeltaTime;
 		AddActorLocation({ 0.f, UpForce });
 	}
-
-	else if (BlockState::Brick == StartState) {
-		SetActorLocation(DefaultLocation);
-		DeltaTime = 0.1f;
-		UpForce = -2.f;
-		SetBoxState(BlockState::Brick);
-	}
 	else {
 		SetActorLocation(DefaultLocation);
-		SetBoxState(BlockState::None);
+		SetBoxState(StartState);
+	}
+	switch (HaveItem)
+	{
+	case ItemState::MushRoom:
+		ItemBase* Item;
+		Item = GetWorld()->SpawnActor<MushRoom>(MarioRenderOrder::Item);
+		Item->SetActorLocation(GetActorLocation());
+		break;
+	case ItemState::Flower:
+		ItemBase* Item;
+		Item = GetWorld()->SpawnActor<MushRoom>(MarioRenderOrder::Item);
+		Item->SetActorLocation(GetActorLocation());
+		break;
+	case ItemState::Star:
+		break;
+	case ItemState::Coin:
+		Coin* CoinItem;
+		CoinItem = GetWorld()->SpawnActor<Coin>(MarioRenderOrder::Item);
+		CoinItem->SetActorLocation(GetActorLocation());
+		break;
+	default:
+		break;
 	}
 }
 
