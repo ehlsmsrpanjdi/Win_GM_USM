@@ -32,11 +32,10 @@ bool MarioHelper::BottomCheck(FVector _NextVector) {
 
 
 	if (FirstCondition || SecondCondition) {
-		{
-			return false;
-		}
-		return true;
+		return false;
 	}
+
+	return true;
 }
 
 bool MarioHelper::RightCheck(FVector _NextVector) {
@@ -54,6 +53,7 @@ bool MarioHelper::RightCheck(FVector _NextVector) {
 	if (FirstCondition || SecondCondition) {
 		return false;
 	}
+
 	return true;
 }
 
@@ -73,6 +73,7 @@ bool MarioHelper::LeftCheck(FVector _NextVector) {
 	if (FirstCondition || SecondCondition) {
 		return true;
 	}
+
 	return false;
 }
 
@@ -129,6 +130,6 @@ FVector MarioHelper::GetRightBottomVector(FVector _NextVector) {
 
 std::string_view MarioHelper::ReturnString(int _Value)
 {
-	std::string str = std::to_string(_Value);
+	std::string_view str = std::to_string(_Value);
 	return str;
 }

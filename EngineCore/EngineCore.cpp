@@ -1,6 +1,7 @@
 #include "EngineCore.h"
 #include <Windows.h>
 #include "Level.h"
+#include <EnginePlatform\EngineSound.h>
 #include "EnginePlatform\EngineInput.h"
 
 bool UEngineCore::IsDebugValue = false;
@@ -62,6 +63,7 @@ void UEngineCore::CoreTick()
 		DeltaTime = 1.0f / 60.0f;
 	}
 
+	UEngineSound::Update();
 	UEngineInput::KeyCheckTick(DeltaTime);
 
 
@@ -82,6 +84,8 @@ void UEngineCore::CoreTick()
 		NextLevel->LevelStart(CurLevel);
 		CurLevel = NextLevel;
 		NextLevel = nullptr;
+		MainTimer.TimeCheckStart();
+		DeltaTime = MainTimer.TimeCheck();
 	}
 
 
@@ -145,6 +149,11 @@ void UEngineCore::EngineStart(HINSTANCE _hInstance)
 	CoreInit(_hInstance);
 	BeginPlay();
 	UEngineWindow::WindowMessageLoop(EngineTick, EngineEnd);
+}
+
+void Exit()
+{
+
 }
 
 void UEngineCore::CoreInit(HINSTANCE _HINSTANCE)

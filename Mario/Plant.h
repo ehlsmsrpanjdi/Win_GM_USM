@@ -1,7 +1,7 @@
 #pragma once
-#include "Goomba.h"
+#include "MonsterBase.h"
 // Ό³Έν :
-class Plant : public Goomba
+class Plant : public MonsterBase
 {
 public:
 	// constrcuter destructer

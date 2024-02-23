@@ -2,7 +2,13 @@
 #include <EngineBase\PathObject.h>
 #include <EngineBase\EngineMath.h>
 #include <EngineBase\Transform.h>
+#include <EngineBase\EngineDebug.h>
 #include <Windows.h>
+#include <string>
+#include <string_view>
+
+#include <objidl.h>
+#include <gdiplus.h>
 
 // 우리 엔진 WinAPi단계에서 랜더링이라는것은
 // 이미지가 다른 이미지를 자신내부에 그리는 겁니다.
@@ -28,6 +34,7 @@ public:
 	HBITMAP hBitMap;
 	HDC ImageDC = nullptr;
 	FTransform CuttingTrans;
+	UImageInfo* RotationMaskImage = nullptr;
 	EWIndowImageType ImageType = EWIndowImageType::IMG_NONE;
 };
 
@@ -73,7 +80,16 @@ public:
 
 	void AlphaCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, Color8Bit _Color = Color8Bit::Black);
 
+	// 알파랑 동시에 안될것이다.
+	void PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, float _RadAngle);
+
 	void TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color /*= Color8Bit::Black*/);
+
+	void TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _OutLineColor, Color8Bit _FillColor);
+
+	void TextCopyBold(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color /*= Color8Bit::Black*/);
+
+	void TextCopyFormat(const std::string& _Text, const std::string& _Font, const Gdiplus::StringFormat& stringFormat, float _Size, const FTransform& _Trans, Color8Bit _Color /*= Color8Bit::Black*/);
 
 	bool Create(UWindowImage* _Image, const FVector& _Scale);
 
@@ -89,9 +105,33 @@ public:
 		return ImageType;
 	}
 
+	// 이걸 해줘야 회전이 가능합니다.
+	void SetRotationMaskImage(int _Index, UWindowImage* _RotationMaskImage, int _MaskIndex)
+	{
+		UImageInfo& Ref = _RotationMaskImage->Infos[_MaskIndex];
+		Infos[_Index].RotationMaskImage = &Ref;
+	}
+
+	void SetRotationMaskImageFolder(UWindowImage* _RotationMaskImage)
+	{
+		if (Infos.size() != _RotationMaskImage->Infos.size())
+		{
+			MsgBoxAssert("이미지정보의 크기가 다른 이미지 끼리 매칭을 할수가 없습니다.");
+			return;
+		}
+
+		for (int i = 0; i < static_cast<int>(Infos.size()); i++)
+		{
+			SetRotationMaskImage(i, _RotationMaskImage, i);
+		}
+	}
+
+	void TextPrint(std::string_view _Text, FVector _Pos);
+
 protected:
 
 private:
+
 	EImageLoadType LoadType = EImageLoadType::IMG_Cutting;
 
 	// 윈도우에서 지원해주는 H붙은 애들은 다 struct HBITMAP__{int unused;}; typedef struct HBITMAP__ *HBITMAP

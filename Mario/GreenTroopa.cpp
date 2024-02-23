@@ -1,8 +1,8 @@
 #include "GreenTroopa.h"
-
 #include <EngineCore/EngineResourcesManager.h>
 #include "MarioHelper.h"
 #include "Mario.h"
+#include "MonsterBase.h"
 
 GreenTroopa::GreenTroopa()
 {
@@ -29,64 +29,7 @@ void GreenTroopa::BeginPlay()
 
 }
 
-void GreenTroopa::Tick(float _DeltaTime)
-{
-	StateUpdate(_DeltaTime);
-
-	CollisionEvent(State);
-}
-
-
-void GreenTroopa::Crouch(float _DeltaTime)
-{
-}
-
-void GreenTroopa::CrouchStart()
-{
-	BodyCollision->SetScale({ 32,36 });
-	SetAnimation("Crouch");
-}
-
-void GreenTroopa::CrouchMove(float _DeltaTime)
-{
-	IsEdge(_DeltaTime);
-	SpeedX.X = CrouchDefaultMoveSpeed * static_cast<int>(DirState);
-	GravityCheck(_DeltaTime);
-	ResultMove(_DeltaTime);
-}
-
-
-void GreenTroopa::SetState(MonsterState _State)
-{
-	if (State != _State) {
-		State = _State;
-	}
-
-	switch (State)
-	{
-	case MonsterState::None:
-		break;
-	case MonsterState::Idle:
-		break;
-	case MonsterState::Crouch:
-		CrouchStart();
-		break;
-	case MonsterState::CrouchMove:
-		CrouchMoveStart();
-		break;
-	case MonsterState::Dead:
-		DeadStart();
-		break;
-	case MonsterState::Excute:
-		ExcuteStart();
-		break;
-	default:
-		break;
-	}
-
-}
-
-void GreenTroopa::CollisionEvent(MonsterState _MonsterState)
+void GreenTroopa::CollisionEvent()
 {
 	std::vector<UCollision*> Result;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
@@ -111,7 +54,7 @@ void GreenTroopa::CollisionEvent(MonsterState _MonsterState)
 			FVector CurLocation = GetActorLocation();
 			if (CurPlayerLocation.Y < CurLocation.Y - 32) {
 				Player->SetState(MarioState::Interactive);
-				SetState(MonsterState::Crouch);
+  				SetMonsterState(MonsterState::Crouch);
 				return;
 			}
 			else {
@@ -121,14 +64,14 @@ void GreenTroopa::CollisionEvent(MonsterState _MonsterState)
 		}
 		break;
 		case MonsterState::Crouch:
-			SetState(MonsterState::CrouchMove);
+			SetMonsterState(MonsterState::CrouchMove);
 			break;
 		case MonsterState::CrouchMove:
 		{
 			FVector CurLocation = GetActorLocation();
 			if (CurPlayerLocation.Y < CurLocation.Y - 32) {
 				Player->SetState(MarioState::Interactive);
-				SetState(MonsterState::Crouch);
+				SetMonsterState(MonsterState::Crouch);
 				return;
 			}
 			else {
@@ -161,8 +104,8 @@ void GreenTroopa::CollisionEvent(MonsterState _MonsterState)
 				break;
 			case MonsterState::CrouchMove:
 			{
-				Goomba* Test = (Goomba*)(Collision->GetOwner());
- 				Test->SetState(MonsterState::Excute);
+				MonsterBase* Test = (MonsterBase*)(Collision->GetOwner());
+ 				Test->SetMonsterState(MonsterState::Excute);
 			}
 				break;
 			default:
@@ -173,46 +116,3 @@ void GreenTroopa::CollisionEvent(MonsterState _MonsterState)
 	}
 
 }
-
-void GreenTroopa::ExcuteStart()
-{
-	GravitySpeed.Y = 0.f;
-	SpeedX.X = 0.f;
-	SpeedY.Y = -500.f;
-	BodyCollision->Destroy();
-	int a = 0;
-	//animation dead
-}
-
-void GreenTroopa::CrouchMoveStart()
-{
-	InteractiveDirCheck();
-}
-
-
-void GreenTroopa::StateUpdate(float _DeltaTime)
-{
-	switch (State)
-	{
-	case MonsterState::None:
-		break;
-	case MonsterState::Idle:
-		Idle(_DeltaTime);
-		break;
-	case MonsterState::Crouch:
-		Crouch(_DeltaTime);
-		break;
-	case MonsterState::CrouchMove:
-		CrouchMove(_DeltaTime);
-		break;
-	case MonsterState::Dead:
-		Dead(_DeltaTime);
-		break;
-	case MonsterState::Excute:
-		Excute(_DeltaTime);
-	default:
-		break;
-	}
-
-}
-

@@ -22,15 +22,9 @@
     <ClInclude Include="MarioLevelBase.h">
       <Filter>Actor</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionActor.h">
-      <Filter>Actor</Filter>
-    </ClInclude>
     <ClInclude Include="MarioHelper.h" />
     <ClInclude Include="Stage1_Map.h">
       <Filter>Stage1</Filter>
-    </ClInclude>
-    <ClInclude Include="Goomba.h">
-      <Filter>Actor\Monster</Filter>
     </ClInclude>
     <ClInclude Include="TestLevel.h" />
     <ClInclude Include="GreenTroopa.h">
@@ -41,9 +35,6 @@
     </ClInclude>
     <ClInclude Include="Koopa.h">
       <Filter>Actor\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsActor.h">
-      <Filter>Actor</Filter>
     </ClInclude>
     <ClInclude Include="MarioBlock.h">
       <Filter>Actor\Block</Filter>
@@ -58,6 +49,21 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Coin.h">
+      <Filter>Actor\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterBase.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterGoomba.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsActor.h">
+      <Filter>Actor\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionActor.h">
+      <Filter>Actor\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBase.h">
       <Filter>Actor\Item</Filter>
     </ClInclude>
   </ItemGroup>
@@ -83,15 +89,9 @@
     <ClCompile Include="MarioLevelBase.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionActor.cpp">
-      <Filter>Actor</Filter>
-    </ClCompile>
     <ClCompile Include="MarioHelper.cpp" />
     <ClCompile Include="Stage1_Map.cpp">
       <Filter>Stage1</Filter>
-    </ClCompile>
-    <ClCompile Include="Goomba.cpp">
-      <Filter>Actor\Monster</Filter>
     </ClCompile>
     <ClCompile Include="TestLevel.cpp" />
     <ClCompile Include="GreenTroopa.cpp">
@@ -102,9 +102,6 @@
     </ClCompile>
     <ClCompile Include="Koopa.cpp">
       <Filter>Actor\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsActor.cpp">
-      <Filter>Actor</Filter>
     </ClCompile>
     <ClCompile Include="MarioBlock.cpp">
       <Filter>Actor\Block</Filter>
@@ -119,6 +116,21 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="Coin.cpp">
+      <Filter>Actor\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterBase.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterGoomba.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsActor.cpp">
+      <Filter>Actor\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionActor.cpp">
+      <Filter>Actor\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBase.cpp">
       <Filter>Actor\Item</Filter>
     </ClCompile>
   </ItemGroup>
@@ -152,6 +164,9 @@
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{03ad46db-b318-40b6-888c-7cb8e58f9f4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Base">
+      <UniqueIdentifier>{7ec14596-3f94-427b-9bec-4c91ad2a3877}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

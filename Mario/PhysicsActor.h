@@ -27,8 +27,7 @@ protected:
 	virtual void ResultMove(float _DeltaTime);
 
 	virtual void StateUpdate(float _DeltaTime) {};
-	virtual void SetState(MonsterState _State) {};
-	virtual void CollisionEvent(MonsterState _MonsterState) {};
+
 	virtual void BoxCollisionEvent(BlockState _BlockState) {};
 	virtual void ItemCollisionEvent() {};
 
@@ -39,8 +38,6 @@ protected:
 	UCollision* BodyCollision = nullptr;
 	EActorDir DirState = EActorDir::Right;
 
-
-	void InteractiveDirCheck();
 	virtual void BeginPlay() = 0;
 	virtual void Tick(float _DeltaTime) = 0;
 	bool NoDir = false;

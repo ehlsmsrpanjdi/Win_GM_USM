@@ -1,8 +1,8 @@
 #pragma once
-#include "Goomba.h"
+#include "ItemBase.h"
 
 // Ό³Έν :
-class MushRoom : public Goomba
+class MushRoom : public ItemBase
 {
 public:
 	// constrcuter destructer
@@ -18,13 +18,7 @@ public:
 protected:
 
 	void BeginPlay() override;
-	void Tick(float _DeltaTime) override;
-	void Spawn(float _DeltaTime);
-	void ItemCollisionEvent();
 
-	float ItemDefaultSpeed = 300.f;
-	float SpawnTime = -64.f;
-	float TotalMove = 0.f;
 
 private:
 

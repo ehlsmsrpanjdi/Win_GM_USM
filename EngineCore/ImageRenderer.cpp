@@ -209,6 +209,7 @@ FTransform UImageRenderer::GetRenderTransForm()
 		AActor* Actor = GetOwner();
 		ULevel* World = Actor->GetWorld();
 		FVector CameraPos = World->GetCameraPos();
+		CameraPos *= CameraRatio;
 		RendererTrans.AddPosition(-CameraPos);
 	}
 
@@ -219,13 +220,18 @@ void UImageRenderer::TextRender(float _DeltaTime)
 {
 	FTransform RendererTrans = GetRenderTransForm();
 
-	// 글자 수
-	float TextCount = static_cast<float>(Text.size());
-
-	//RendererTrans.AddPosition(float4::Up * Size * 0.5f);
-	// RendererTrans.AddPosition(float4::Left * (Size * 0.5f) * (TextCount * 0.5f));
-
-	GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor);
+	switch (TextEffect)
+	{
+	case 1:
+		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor, TextColor2);
+		break;
+	case 2:
+		GEngine->MainWindow.GetBackBufferImage()->TextCopyBold(Text, Font, Size, RendererTrans, TextColor);
+		break;
+	default:
+		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor);
+		break;
+	}
 }
 
 void UImageRenderer::ImageRender(float _DeltaTime)
@@ -253,7 +259,14 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 		// bmp일때는 일반적으로 Transcopy로 투명처리를 한다.
 		break;
 	case EWIndowImageType::IMG_PNG:
-		GEngine->MainWindow.GetBackBufferImage()->AlphaCopy(Image, RendererTrans, InfoIndex, TransColor);
+		if (0.0f == Angle)
+		{
+			GEngine->MainWindow.GetBackBufferImage()->AlphaCopy(Image, RendererTrans, InfoIndex, TransColor);
+		}
+		else
+		{
+			GEngine->MainWindow.GetBackBufferImage()->PlgCopy(Image, RendererTrans, InfoIndex, Angle * UEngineMath::DToR);
+		}
 		break;
 	default:
 		MsgBoxAssert("투명처리가 불가능한 이미지 입니다.");

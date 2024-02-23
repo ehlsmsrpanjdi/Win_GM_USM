@@ -27,13 +27,6 @@ void Plant::BeginPlay()
 	BodyCollision->SetTransform({ { 0, -32 }, { 64, 64} });
 }
 
-void Plant::Tick(float _DeltaTime)
-{
-	Update(_DeltaTime);
-
-	CollisionEvent(State);
-
-}
 
 void Plant::Update(float _DeltaTime)
 {

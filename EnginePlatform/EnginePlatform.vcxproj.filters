@@ -11,7 +11,10 @@
       <Filter>Input</Filter>
     </ClCompile>
     <ClCompile Include="EngineSound.cpp">
-      <Filter>Sound</Filter>
+      <Filter>Resources\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineResources.cpp">
+      <Filter>Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -25,7 +28,7 @@
       <Filter>Input</Filter>
     </ClInclude>
     <ClInclude Include="EngineSound.h">
-      <Filter>Sound</Filter>
+      <Filter>Resources\Sound</Filter>
     </ClInclude>
     <ClInclude Include="ThirdParty\FMOD\inc\fmod_common.h">
       <Filter>ThirdParty\Fmod\inc</Filter>
@@ -51,6 +54,9 @@
     <ClInclude Include="ThirdParty\FMOD\inc\fmod_codec.h">
       <Filter>ThirdParty\Fmod\inc</Filter>
     </ClInclude>
+    <ClInclude Include="EngineResources.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Input">
@@ -58,9 +64,6 @@
     </Filter>
     <Filter Include="Window">
       <UniqueIdentifier>{72b0ff96-e75a-487b-ac2c-8c4bac8f0164}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sound">
-      <UniqueIdentifier>{c9d8a702-8804-4aef-9882-adbdfa092df7}</UniqueIdentifier>
     </Filter>
     <Filter Include="ThirdParty">
       <UniqueIdentifier>{9df635a7-5cba-485d-a51b-392c79aacd02}</UniqueIdentifier>
@@ -77,9 +80,15 @@
     <Filter Include="ThirdParty\Fmod\Release">
       <UniqueIdentifier>{ae337f5e-5e85-4de1-9d09-524869fae5ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{ce4d4f60-bf18-40d8-a768-b6c54829d3bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Sound">
+      <UniqueIdentifier>{c9d8a702-8804-4aef-9882-adbdfa092df7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="ThirdParty\FMOD\Debug\fmod_vc.lib">
+    <CopyFileToFolders Include="ThirdParty\FMOD\Debug\fmodL.dll">
       <Filter>ThirdParty\Fmod\Debug</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="ThirdParty\FMOD\Debug\fmodL_vc.lib">
@@ -88,7 +97,7 @@
     <CopyFileToFolders Include="ThirdParty\FMOD\Release\fmod.dll">
       <Filter>ThirdParty\Fmod\Release</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FMOD\Release\fmodL.dll">
+    <CopyFileToFolders Include="ThirdParty\FMOD\Release\fmod_vc.lib">
       <Filter>ThirdParty\Fmod\Release</Filter>
     </CopyFileToFolders>
   </ItemGroup>

@@ -1,7 +1,7 @@
 #pragma once
-#include "Goomba.h"
+#include "MonsterBase.h"
 // Ό³Έν :
-class GreenTroopa : public Goomba
+class GreenTroopa : public MonsterBase
 {
 public:
 	// constrcuter destructer
@@ -17,18 +17,9 @@ public:
 
 protected:
 	void BeginPlay() override;
-	void Tick(float _DeltaTime) override;
-	void StateUpdate(float _DeltaTime) override;
-	void SetState(MonsterState _State);
+	void CollisionEvent() override;
 
-	void Crouch(float _DeltaTime);
-	void CrouchStart();
-	void CrouchMove(float _DeltaTime);
-	void CrouchMoveStart();
-	void CollisionEvent(MonsterState _MonsterState) override;
-	void ExcuteStart() override;
 
-	float CrouchDefaultMoveSpeed = 600.f;
 private:
 
 };

@@ -12,16 +12,6 @@ PhysicsActor::~PhysicsActor()
 {
 }
 
-void PhysicsActor::InteractiveDirCheck()
-{
-	if (Mario::PlayerLocation.X < GetActorLocation().X) {
-		DirState = EActorDir::Right;
-	}
-	else {
-		DirState = EActorDir::Left;
-	}
-
-}
 
 void PhysicsActor::Tick(float _DeltaTime)
 {

@@ -37,10 +37,9 @@ enum class MonsterState {
 	None,
 	Idle,
 	Crouch,
-	Dead,
 	CrouchMove,
+	Dead,
 	Excute,
-	Critical,
 };
 
 enum class BlockState {
@@ -49,6 +48,13 @@ enum class BlockState {
 	None,
 	Break,
 	Interactive,
+};
+
+enum class ItemState {
+	Spawn,
+	MushRoom,
+	Flower,
+	Star,
 };
 
 enum class MarioCollisionOrder
