@@ -11,6 +11,8 @@
 #include "MushRoom.h"
 #include "MarioUI.h"
 #include "MonsterGoomba.h"
+#include "Coin.h"
+#include "Flag.h"
 
 UPlayLevel::UPlayLevel()
 {
@@ -58,6 +60,15 @@ void UPlayLevel::BeginPlay()
 	MushRoom* mush;
 	mush = SpawnActor<MushRoom>(MarioRenderOrder::Item);
 	mush->SetActorLocation({ 700,600 });
+
+	Coin* co;
+	co = SpawnActor<Coin>(MarioRenderOrder::Item);
+	co->SetActorLocation({ 500,600 });
+
+	Flag* block;
+	block = SpawnActor<Flag>(MarioRenderOrder::Block);
+	block->SetActorLocation({ 500,600 });
+
 }
 
 void UPlayLevel::Tick(float _DeltaTime)

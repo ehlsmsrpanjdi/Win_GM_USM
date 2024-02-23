@@ -37,6 +37,8 @@ protected:
 	void DirChangeStart();
 	void InteractiveStart();
 	void DeadStart();
+	void EndStart();
+	void EndMoveStart();
 	void Idle(float _DeltaTime);
 	void Move(float _DeltaTime);
 	void Jump(float _DeltaTime);
@@ -44,7 +46,9 @@ protected:
 	void MoveFun(float _DeltaTime, FVector Acclerate);
 	void Interactive(float _DeltaTime);
 	void Dead(float _DeltaTime);
-	//void EdgeCheck();
+	void End(float _DeltaTime);
+	void EndMove(float _DeltaTime);
+
 	bool LeftEdgeCheck();
 	bool RightEdgeCheck();
 	void DirCheck();
@@ -71,6 +75,8 @@ protected:
 	bool Jumping = false;
 	
 	float DeadTime = .5f;
+
+	float EndTime = 0.5f;
 
 private:
 	MarioState State = MarioState::None;

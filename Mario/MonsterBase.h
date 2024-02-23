@@ -46,9 +46,6 @@ protected:
 
 	MonsterState State = MonsterState::None;
 
-	UImageRenderer* ScoreRenderer = nullptr;
-	FVector ScoreRendererLocation = FVector::Zero;
-
 	float MonsterDefaultSpeed = 200.f;
 	float CrouchDefaultMoveSpeed = 600.f;
 

@@ -34,6 +34,8 @@ void Mario::BeginPlay()
 	AnimationAuto(Renderer, "DirChange", 4, 4);
 	AnimationAuto(Renderer, "Jump", 5, 5);
 	AnimationAuto(Renderer, "Dead", 6, 6);
+	AnimationAuto(Renderer, "End", 7, 7);
+
 
 	BodyCollision = CreateCollision(MarioCollisionOrder::Player);
 	BodyCollision->SetColType(ECollisionType::Rect);
@@ -93,6 +95,12 @@ void Mario::StateUpdate(float _DeltaTime)
 	case MarioState::Dead:
 		Dead(_DeltaTime);
 		break;
+	case MarioState::End:
+		End(_DeltaTime);
+		break;
+	case MarioState::EndMove:
+		EndMove(_DeltaTime);
+		break;
 	default:
 		break;
 	}
@@ -151,6 +159,15 @@ void Mario::SetState(MarioState _State)
 		case MarioState::Dead:
 			DeadStart();
 			break;
+		case MarioState::End:
+			if (State == MarioState::EndMove) {
+				return;
+			}
+			EndStart();
+			break;
+		case MarioState::EndMove:
+			EndMoveStart();
+			break;
 		default:
 			break;
 		}
@@ -201,7 +218,9 @@ void Mario::Idle(float _DeltaTime)
 		SpeedX.X = 0;
 	}
 
-
+	if (UEngineInput::IsPress(VK_CONTROL)) {
+		SetState(MarioState::End);
+	}
 
 	if (UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsPress(VK_RIGHT)) {
 		return;
@@ -234,6 +253,20 @@ void Mario::DeadStart()
 	SpeedY.Y = -500.f;
 	SetAnimation("Dead");
 	BodyCollision->Destroy();
+}
+
+void Mario::EndStart()
+{
+	SetAnimation("End");
+}
+
+void Mario::EndMoveStart()
+{
+	DirState = EActorDir::Left;
+	SetAnimation("End");
+	float CurPosX = GetActorLocation().X + 64.f;
+	float CurPosY = GetActorLocation().Y;
+	SetActorLocation({ CurPosX , CurPosY });
 }
 
 void Mario::Move(float _DeltaTime)
@@ -283,6 +316,26 @@ void Mario::Dead(float _DeltaTime) {
 	}
 }
 
+void Mario::End(float _DeltaTime)
+{
+	float pos = 100.f * _DeltaTime;
+	AddActorLocation({ 0.f, pos });
+
+	if (UEngineInput::IsPress(VK_SHIFT)) {
+		SetState(MarioState::EndMove);
+	}
+}
+
+void Mario::EndMove(float _DeltaTime)
+{
+	if (EndTime >= 0) {
+		EndTime -= _DeltaTime;
+		return;
+	}
+	DirState = EActorDir::Right;
+	SetAnimation("Move");
+	AddActorLocation({ 100.f * _DeltaTime, 0.f});
+}
 void Mario::Jump(float _DeltaTime)
 {
 	if (true == UEngineInput::IsUp(VK_SPACE) && CurSpeed.Y < 0.f) {
@@ -417,7 +470,7 @@ bool Mario::LeftEdgeCheck()
 	int EdgeLocation_Bottom = static_cast<int>(CurLocation.Y - 3.f);
 
 	Color8Bit CheckColor_LeftTop = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Top, Color8Bit::MagentaA);
-	Color8Bit CheckColor_LeftBottom = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Bottom -2, Color8Bit::MagentaA);
+	Color8Bit CheckColor_LeftBottom = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Bottom - 2, Color8Bit::MagentaA);
 
 	bool FirstCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_LeftBottom);
 	bool SecondCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_LeftTop);
@@ -500,7 +553,7 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 				SpeedY.Y = 0;
 				IsCollision = true;
 			}
-   			else if ((SpeedY.Y + GravitySpeed.Y < 0) && BottomY < ThisPosition.Y - 32) {
+			else if ((SpeedY.Y + GravitySpeed.Y < 0) && BottomY < ThisPosition.Y - 32) {
 				SpeedY.Y = 0;
 			}
 		}

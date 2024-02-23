@@ -11,17 +11,21 @@ Coin::~Coin()
 void Coin::BeginPlay()
 {
 	SetName("Coin");
-	NoDir = true;
 	Renderer = CreateImageRenderer(MarioRenderOrder::Item);
-	Renderer->SetImage("Item.png");
+	Renderer->SetImage("Coin.png");
 	Renderer->SetTransform({ {0,0 }, { 128,128 } });
-
-
-	AnimationAuto(Renderer, "Idle", 0, 0, 0.1f, false);
+	NoDir = true;
+	AnimationAuto(Renderer, "Idle", 0, 3, 0.1f);
 
 	SetAnimation("Idle");
 
-	BodyCollision = CreateCollision(MarioCollisionOrder::Item);
-	BodyCollision->SetTransform({ { 0, -32 }, { 64, 64} });
+	Destroy(0.5f);
+
+}
+
+void Coin::Tick(float _DeltaTime)
+{
+	UpSpeed += DownSpeed * _DeltaTime;
+	AddActorLocation({0.f,UpSpeed * _DeltaTime});
 }
 

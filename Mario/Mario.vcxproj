@@ -30,7 +30,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BlockBase.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Coin.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Flag.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -121,7 +129,15 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BlockBase.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Coin.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Flag.cpp">
       <SubType>
       </SubType>
     </ClCompile>

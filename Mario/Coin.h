@@ -1,7 +1,7 @@
 #pragma once
-#include "MushRoom.h"
+#include "PhysicsActor.h"
 // Ό³Έν :
-class Coin : public MushRoom
+class Coin : public PhysicsActor
 {
 public:
 	// constrcuter destructer
@@ -16,6 +16,10 @@ public:
 
 protected:
 	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+
+	float UpSpeed = -1000.f;
+	float DownSpeed = 3000.f;
 private:
 
 };

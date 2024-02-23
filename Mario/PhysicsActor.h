@@ -29,12 +29,10 @@ protected:
 	virtual void StateUpdate(float _DeltaTime) {};
 
 	virtual void BoxCollisionEvent(BlockState _BlockState) {};
-	virtual void ItemCollisionEvent() {};
 
 
 	std::string CurAnimationName = "";
 	UImageRenderer* Renderer = nullptr;
-	UImageRenderer* ColRenderer = nullptr;
 	UCollision* BodyCollision = nullptr;
 	EActorDir DirState = EActorDir::Right;
 
@@ -48,6 +46,11 @@ protected:
 	FVector SpeedY = { 0,0,0,0 };
 	FVector GravitySpeed = { 0,0,0,0 };
 	const FVector StopSpeed = { 0,0,0,0 };
+
+
+	UImageRenderer* ScoreRenderer = nullptr;
+	FVector ScoreRendererLocation = FVector::Zero;
+
 
 private:
 

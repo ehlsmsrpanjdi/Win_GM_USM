@@ -66,6 +66,12 @@
     <ClInclude Include="ItemBase.h">
       <Filter>Actor\Item</Filter>
     </ClInclude>
+    <ClInclude Include="Flag.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockBase.h">
+      <Filter>Actor\Block</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -133,6 +139,12 @@
     <ClCompile Include="ItemBase.cpp">
       <Filter>Actor\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Flag.cpp">
+      <Filter>Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockBase.cpp">
+      <Filter>Actor\Block</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Actor">
@@ -167,6 +179,9 @@
     </Filter>
     <Filter Include="Actor\Base">
       <UniqueIdentifier>{7ec14596-3f94-427b-9bec-4c91ad2a3877}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Object">
+      <UniqueIdentifier>{032af010-e7cf-4fca-ab49-2c3507838581}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

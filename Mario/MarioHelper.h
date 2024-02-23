@@ -31,6 +31,8 @@ enum class MarioState
 	DirChange,
 	Interactive,
 	Dead,
+	End,
+	EndMove,
 };
 
 enum class MonsterState {
