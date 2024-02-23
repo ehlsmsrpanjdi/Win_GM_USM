@@ -57,17 +57,12 @@ void UPlayLevel::BeginPlay()
 	TestUI = SpawnActor<MarioUI>(MarioRenderOrder::UI);
 	TestUI->SetActorLocation({ 200,200 });
 
-	MushRoom* mush;
-	mush = SpawnActor<MushRoom>(MarioRenderOrder::Item);
-	mush->SetActorLocation({ 700,600 });
-
-	Coin* co;
-	co = SpawnActor<Coin>(MarioRenderOrder::Item);
-	co->SetActorLocation({ 500,600 });
-
-	Flag* block;
-	block = SpawnActor<Flag>(MarioRenderOrder::Block);
+	MarioBlock* block;
+	block = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
 	block->SetActorLocation({ 500,600 });
+
+	Flag* flag;
+
 
 }
 

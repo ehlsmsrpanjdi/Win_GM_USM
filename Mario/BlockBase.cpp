@@ -1,17 +1,19 @@
 #include "BlockBase.h"
 #include "MushRoom.h"
 #include "Coin.h"
+#include "Mario.h"
 
-BlockBase::BlockBase() 
+BlockBase::BlockBase()
 {
 }
 
-BlockBase::~BlockBase() 
+BlockBase::~BlockBase()
 {
 }
 
 void BlockBase::BeginPlay()
 {
+
 }
 
 void BlockBase::Tick(float _DeltaTime)
@@ -78,6 +80,16 @@ void BlockBase::SetBoxState(BlockState _MarioBlockState)
 
 void BlockBase::BoxCollisionEvent(BlockState _MarioBlockState)
 {
+	std::vector<UCollision*> Result;
+	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
+	{
+		// 이런식으로 상대를 사용할수 있다.
+		UCollision* Collision = Result[0];
+		AActor* Ptr = Collision->GetOwner();
+		Mario* Player = dynamic_cast<Mario*>(Ptr);
+
+		SetBoxState(BlockState::Interactive);
+	}
 }
 
 void BlockBase::NoneStart()
@@ -122,7 +134,7 @@ void BlockBase::None(float _DeltaTime)
 void BlockBase::ItemBlock(float _DeltaTime)
 {
 	if (ItemCount <= 0) {
-		SetBoxState(BlockState::None);
+		SetBoxState(BlockState::Default);
 	}
 }
 
@@ -133,6 +145,7 @@ void BlockBase::Brick(float _DeltaTime)
 void BlockBase::ItemBrick(float _DeltaTime)
 {
 	if (ItemCount <= 0) {
+		StartState = BlockState::None;
 		SetBoxState(BlockState::None);
 	}
 }
@@ -145,30 +158,37 @@ void BlockBase::Interactive(float _DeltaTime)
 		AddActorLocation({ 0.f, UpForce });
 	}
 	else {
+		switch (HaveItem)
+		{
+		case ItemState::MushRoom:
+		{
+			ItemBase* Item;
+			Item = GetWorld()->SpawnActor<MushRoom>(MarioRenderOrder::Item);
+			Item->SetActorLocation(GetActorLocation());
+		}
+		break;
+		case ItemState::Flower:
+		{
+			ItemBase* Item;
+			Item = GetWorld()->SpawnActor<MushRoom>(MarioRenderOrder::Item);
+			Item->SetActorLocation(GetActorLocation());
+			break;
+		}
+		case ItemState::Star:
+			break;
+		case ItemState::Coin:
+		{
+			Coin* CoinItem;
+			CoinItem = GetWorld()->SpawnActor<Coin>(MarioRenderOrder::Item);
+			CoinItem->SetActorLocation(GetActorLocation());
+		}
+		break;
+
+		default:
+			break;
+		}
 		SetActorLocation(DefaultLocation);
 		SetBoxState(StartState);
-	}
-	switch (HaveItem)
-	{
-	case ItemState::MushRoom:
-		ItemBase* Item;
-		Item = GetWorld()->SpawnActor<MushRoom>(MarioRenderOrder::Item);
-		Item->SetActorLocation(GetActorLocation());
-		break;
-	case ItemState::Flower:
-		ItemBase* Item;
-		Item = GetWorld()->SpawnActor<MushRoom>(MarioRenderOrder::Item);
-		Item->SetActorLocation(GetActorLocation());
-		break;
-	case ItemState::Star:
-		break;
-	case ItemState::Coin:
-		Coin* CoinItem;
-		CoinItem = GetWorld()->SpawnActor<Coin>(MarioRenderOrder::Item);
-		CoinItem->SetActorLocation(GetActorLocation());
-		break;
-	default:
-		break;
 	}
 }
 
