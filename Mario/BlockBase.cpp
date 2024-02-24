@@ -51,6 +51,7 @@ void BlockBase::StateUpdate(float _DeltaTime)
 
 void BlockBase::SetBoxState(BlockState _MarioBlockState)
 {
+	if (BoxState == BlockState::Default) return;
 	BoxState = _MarioBlockState;
 
 	switch (BoxState)
@@ -88,7 +89,22 @@ void BlockBase::BoxCollisionEvent(BlockState _MarioBlockState)
 		AActor* Ptr = Collision->GetOwner();
 		Mario* Player = dynamic_cast<Mario*>(Ptr);
 
-		SetBoxState(BlockState::Interactive);
+		switch (BoxState)
+		{
+		case BlockState::ItemBlock:
+
+			break;
+		case BlockState::Brick:
+
+			break;
+		case BlockState::ItemBrick:
+
+			break;
+		default:
+			break;
+		}
+
+
 	}
 }
 
@@ -113,9 +129,15 @@ void BlockBase::ItemBrickStart()
 
 void BlockBase::InteractiveStart()
 {
+
 	if (ItemCount >= 1) {
 		ItemCount -= 1;
 	}
+	else if (ItemCount > -1) {
+		SetBoxState(BlockState::Default);
+		return;
+	}
+	Interacting = true;
 	DeltaTime = 0.1f;
 	DefaultLocation = GetActorLocation();
 	UpForce = -2.f;
@@ -133,7 +155,7 @@ void BlockBase::None(float _DeltaTime)
 
 void BlockBase::ItemBlock(float _DeltaTime)
 {
-	if (ItemCount <= 0) {
+	if (ItemCount == 0) {
 		SetBoxState(BlockState::Default);
 	}
 }
@@ -144,9 +166,8 @@ void BlockBase::Brick(float _DeltaTime)
 
 void BlockBase::ItemBrick(float _DeltaTime)
 {
-	if (ItemCount <= 0) {
-		StartState = BlockState::None;
-		SetBoxState(BlockState::None);
+	if (ItemCount == 0) {
+		SetBoxState(BlockState::Default);
 	}
 }
 
@@ -169,10 +190,10 @@ void BlockBase::Interactive(float _DeltaTime)
 		break;
 		case ItemState::Flower:
 		{
-			ItemBase* Item;
-			Item = GetWorld()->SpawnActor<MushRoom>(MarioRenderOrder::Item);
-			Item->SetActorLocation(GetActorLocation());
-			break;
+			//ItemBase* Item;
+			//Item = GetWorld()->SpawnActor<MushRoom>(MarioRenderOrder::Item);
+			//Item->SetActorLocation(GetActorLocation());
+			//break;
 		}
 		case ItemState::Star:
 			break;
@@ -187,6 +208,7 @@ void BlockBase::Interactive(float _DeltaTime)
 		default:
 			break;
 		}
+		Interacting = false;
 		SetActorLocation(DefaultLocation);
 		SetBoxState(StartState);
 	}
@@ -194,4 +216,14 @@ void BlockBase::Interactive(float _DeltaTime)
 
 void BlockBase::Default(float _DeltaTime)
 {
+}
+
+void BlockBase::SetItemCount(int _Count)
+{
+	ItemCount = _Count;
+}
+
+void BlockBase::SetItemState(ItemState _Item)
+{
+	HaveItem = _Item;
 }

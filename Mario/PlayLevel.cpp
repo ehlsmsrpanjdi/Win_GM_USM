@@ -46,7 +46,7 @@ void UPlayLevel::BeginPlay()
 	}
 	Mario* TestMario;
 	TestMario = this->SpawnActor<Mario>(2);
-	TestMario->SetActorLocation({ 200,200 });
+	TestMario->SetActorLocation({ 200,800 });
 
 	BackGroundMap* Map;
 	Map = this->SpawnActor<BackGroundMap>(0);
@@ -60,10 +60,17 @@ void UPlayLevel::BeginPlay()
 	MarioBlock* block;
 	block = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
 	block->SetActorLocation({ 500,600 });
+	block->SetItemCount(3);
+	block->SetItemState(ItemState::MushRoom);
 
-	Flag* flag;
+	MarioBrick* brick;
+	brick = SpawnActor<MarioBrick>(MarioRenderOrder::Block);
+	brick->SetItemCount(-1);
+	brick->SetActorLocation({ 800,600 });
 
-
+	MonsterGoomba* tes;
+	tes = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
+	tes->SetActorLocation({ 800,600 });
 }
 
 void UPlayLevel::Tick(float _DeltaTime)

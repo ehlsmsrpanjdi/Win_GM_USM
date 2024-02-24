@@ -18,9 +18,13 @@ public:
 	Mario& operator=(const Mario& _Other) = delete;
 	Mario& operator=(Mario&& _Other) noexcept = delete;
 	void SetState(MarioState _State);
+	void Hit();
 
+	void SetMarioClassState(MarioClass _MarioClass);
 
 	static FVector PlayerLocation;
+
+	static MarioClass MyMarioClas;
 
 protected:
 	void BeginPlay() override;
@@ -29,6 +33,9 @@ protected:
 	void StateUpdate(float _DeltaTime) override;
 	void AddSpeed(float _DeltaTime, FVector _FVector);
 	void SubtractSpeed(float _DeltaTime, FVector _FVector);
+
+	UImageRenderer* MushRoomRenderer = nullptr;
+	UImageRenderer* FlowerRenderer = nullptr;
 
 protected:
 	void IdleStart();
@@ -49,9 +56,12 @@ protected:
 	void End(float _DeltaTime);
 	void EndMove(float _DeltaTime);
 
+
 	bool LeftEdgeCheck();
 	bool RightEdgeCheck();
 	void DirCheck();
+
+	void MarioChange(bool _Positive);
 
 	void MarioCollisionEvent(float _DeltaTime);
 
@@ -77,6 +87,9 @@ protected:
 	float DeadTime = .5f;
 
 	float EndTime = 0.5f;
+
+	float ChangeTime = 0.6f;
+	float GodTime = 3.f;
 
 private:
 	MarioState State = MarioState::None;

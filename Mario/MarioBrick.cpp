@@ -11,6 +11,7 @@ MarioBrick::~MarioBrick()
 
 void MarioBrick::BeginPlay()
 {
+	NoDir = true;
 	StartState = BlockState::Brick;
 	SetName("MarioBrick");
 	Renderer = CreateImageRenderer(MarioRenderOrder::Block);
@@ -23,6 +24,9 @@ void MarioBrick::BeginPlay()
 
 	BodyCollision = CreateCollision(MarioCollisionOrder::Block);
 	BodyCollision->SetTransform({ { 0, -32 }, { 64, 64} });
+
+	BoxState = BlockState::Brick;
+	StartState = BlockState::Brick;
 
 }
 

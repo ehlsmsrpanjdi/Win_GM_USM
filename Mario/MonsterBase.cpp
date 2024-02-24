@@ -127,7 +127,7 @@ void MonsterBase::CollisionEvent()
 			return;
 		}
 		else {
-			Player->SetState(MarioState::Dead);
+			Player->Hit();
 			return;
 		}
 	}

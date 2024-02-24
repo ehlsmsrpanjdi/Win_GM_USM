@@ -1,4 +1,7 @@
 #include "ItemBase.h"
+#include "MarioHelper.h"
+#include "BlockBase.h"
+#include "Mario.h"
 
 ItemBase::ItemBase() 
 {
@@ -132,6 +135,27 @@ void ItemBase::CollisionEvent()
 	std::vector<UCollision*> Result;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
 	{
-		Destroy();
+		Mario* MyMario = static_cast<Mario*>(Result[0]->GetOwner());
+
+		switch (State)
+		{
+		case ItemState::MushRoom:
+			MyMario->SetMarioClassState(MarioClass::Big);
+			Destroy();
+			break;
+		case ItemState::Flower:
+			break;
+		case ItemState::Star:
+			break;
+		default:
+			break;
+		}
+	}
+	
+	std::vector<UCollision*> BlockResult;
+	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, BlockResult))
+	{
+		SpeedY.Y = 0;
+		GravitySpeed.Y = 0;
 	}
 }

@@ -4,6 +4,7 @@
 UWindowImage* MarioHelper::ColMapImage = nullptr;
 FVector MarioHelper::Gravity = { 0.f, 1500.0f };
 
+
 int MarioHelper::MarioTime = 400;
 int MarioHelper::MarioCoinCount = 200;
 int MarioHelper::MarioTotalScore = 1000000;
@@ -32,10 +33,10 @@ bool MarioHelper::BottomCheck(FVector _NextVector) {
 
 
 	if (FirstCondition || SecondCondition) {
-		return false;
+		return true;
 	}
 
-	return true;
+	return false;
 }
 
 bool MarioHelper::RightCheck(FVector _NextVector) {
@@ -51,10 +52,10 @@ bool MarioHelper::RightCheck(FVector _NextVector) {
 	bool SecondCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_RightTop);
 
 	if (FirstCondition || SecondCondition) {
-		return false;
+		return true;
 	}
 
-	return true;
+	return false;
 }
 
 bool MarioHelper::LeftCheck(FVector _NextVector) {
@@ -80,7 +81,7 @@ bool MarioHelper::LeftCheck(FVector _NextVector) {
 FVector MarioHelper::GetBottomLeftVector(FVector _NextVector) {
 
 	FVector CurLocation = _NextVector;
-	int EdgeLocation_Left = static_cast<int>(CurLocation.iX() - 28);
+	int EdgeLocation_Left = static_cast<int>(CurLocation.iX() - 24);
 	int EdgeLocation_Bottom = static_cast<int>(CurLocation.iY());
 
 	return FVector{ EdgeLocation_Left , EdgeLocation_Bottom };
@@ -89,7 +90,7 @@ FVector MarioHelper::GetBottomLeftVector(FVector _NextVector) {
 FVector MarioHelper::GetBottomRightVector(FVector _NextVector) {
 
 	FVector CurLocation = _NextVector;
-	int EdgeLocation_Right = static_cast<int>(CurLocation.iX() + 28);
+	int EdgeLocation_Right = static_cast<int>(CurLocation.iX() + 24);
 	int EdgeLocation_Bottom = static_cast<int>(CurLocation.iY());
 
 	return FVector{ EdgeLocation_Right , EdgeLocation_Bottom };

@@ -15,12 +15,14 @@ public:
 	BlockBase(BlockBase&& _Other) noexcept = delete;
 	BlockBase& operator=(const BlockBase& _Other) = delete;
 	BlockBase& operator=(BlockBase&& _Other) noexcept = delete;
+	void SetItemCount(int _Count);
+	void SetItemState(ItemState _Item);
+	void SetBoxState(BlockState _MarioBlockState);
 
 protected:
 	virtual void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void StateUpdate(float _DeltaTime) override;
-	void SetBoxState(BlockState _MarioBlockState);
 	void BoxCollisionEvent(BlockState _MarioBlockState);
 
 
@@ -39,6 +41,7 @@ protected:
 	void Interactive(float _DeltaTime);
 	void Default(float _DeltaTime);
 
+
 	FVector DefaultLocation = {};
 
 	float DeltaTime = -0.1f;
@@ -49,6 +52,8 @@ protected:
 
 	int ItemCount=0;
 	ItemState HaveItem = ItemState::None;
+
+	bool Interacting = false;
 
 private:
 

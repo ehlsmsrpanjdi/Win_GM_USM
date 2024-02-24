@@ -5,8 +5,7 @@
 #include <map>
 
 
-enum MarioRenderOrder
-{
+enum MarioRenderOrder{
 	Map,
 	Monster,
 	Player,
@@ -15,15 +14,13 @@ enum MarioRenderOrder
 	UI,
 };
 
-enum class EActorDir
-{
+enum class EActorDir{
 	Left = -1,
 	None = 0,
 	Right = 1,
 };
 
-enum class MarioState
-{
+enum class MarioState{
 	None,
 	Idle,
 	Move,
@@ -33,6 +30,12 @@ enum class MarioState
 	Dead,
 	End,
 	EndMove,
+};
+
+enum class MarioClass {
+	Small,
+	Big,
+	Fire,
 };
 
 enum class MonsterState {
@@ -73,8 +76,7 @@ enum class MarioCollisionOrder{
 
 
 // Ό³Έν :
-class MarioHelper
-{
+class MarioHelper{
 public:
 	static UWindowImage* ColMapImage;
 	static FVector Gravity;
@@ -83,6 +85,7 @@ public:
 	static int MarioCoinCount;
 	static int MarioTotalScore;
 	static int MarioLife;
+
 
 	static bool BottomCheck(FVector _NextVector);
 	static bool LeftCheck(FVector _NextVector);

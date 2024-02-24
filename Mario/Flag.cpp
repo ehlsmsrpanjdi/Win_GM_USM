@@ -11,14 +11,14 @@ Flag::~Flag()
 
 void Flag::BeginPlay()
 {
-	SetName("Plag");
+	SetName("Flag");
 	Renderer = CreateImageRenderer(MarioRenderOrder::Item);
-	Renderer->SetImage("Item.png");
-	Renderer->SetTransform({ {0,0 }, { 128,640 } });
+	Renderer->SetImage("Flag.png");
+	Renderer->SetTransform({ {0,0 }, { 64,688 } });
 
 
 	BodyCollision = CreateCollision(MarioCollisionOrder::Item);
-	BodyCollision->SetTransform({ { 0, -320 }, { 64, 640} });
+	BodyCollision->SetTransform({ { 0, 0 }, { 16, 688} });
 }
 
 void Flag::Tick(float _DeltaTime)
@@ -35,10 +35,10 @@ void Flag::CollisionEvent()
 		UCollision* Collision = Result[0];
 		AActor* Ptr = Collision->GetOwner();
 		Mario* Player = dynamic_cast<Mario*>(Ptr);
-		FVector CurPlayerLocation = Player->GetActorLocation();
-		FVector CurLocation = GetActorLocation();
+		float CurPlayerLocation = Player->GetActorLocation().Y;
+		float CurLocation	 = GetActorLocation().Y + 344.f;
 
-		if (CurPlayerLocation.Y > CurLocation.Y) {
+		if (CurPlayerLocation > CurLocation) {
 			Player->SetState(MarioState::EndMove);
 		}
 		else {
