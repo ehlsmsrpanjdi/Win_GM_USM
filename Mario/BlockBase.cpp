@@ -2,6 +2,7 @@
 #include "MushRoom.h"
 #include "Coin.h"
 #include "Mario.h"
+#include "ItemFlower.h"
 
 BlockBase::BlockBase()
 {
@@ -129,7 +130,9 @@ void BlockBase::ItemBrickStart()
 
 void BlockBase::InteractiveStart()
 {
-
+	if (StartState == BlockState::Brick && (Mario::MyMarioClass == MarioClass::Big || Mario::MyMarioClass == MarioClass::Fire)) {
+		Destroy();
+	}
 	if (ItemCount >= 1) {
 		ItemCount -= 1;
 	}
@@ -183,18 +186,34 @@ void BlockBase::Interactive(float _DeltaTime)
 		{
 		case ItemState::MushRoom:
 		{
-			ItemBase* Item;
-			Item = GetWorld()->SpawnActor<MushRoom>(MarioRenderOrder::Item);
-			Item->SetActorLocation(GetActorLocation());
+			switch (Mario::MyMarioClass)
+			{
+			case MarioClass::Small:
+			{
+				ItemBase* Item;
+				Item = GetWorld()->SpawnActor<MushRoom>(MarioRenderOrder::Item);
+				Item->SetActorLocation(GetActorLocation());
+			}
+				break;
+			case MarioClass::Big:
+			{
+				ItemBase* Item;
+				Item = GetWorld()->SpawnActor<ItemFlower>(MarioRenderOrder::Item);
+				Item->SetActorLocation(GetActorLocation());
+				break;
+			}
+			case MarioClass::Fire:
+			{
+				ItemBase* Item;
+				Item = GetWorld()->SpawnActor<ItemFlower>(MarioRenderOrder::Item);
+				Item->SetActorLocation(GetActorLocation());
+				break;
+			}
+			default:
+				break;
+			}
 		}
 		break;
-		case ItemState::Flower:
-		{
-			//ItemBase* Item;
-			//Item = GetWorld()->SpawnActor<MushRoom>(MarioRenderOrder::Item);
-			//Item->SetActorLocation(GetActorLocation());
-			//break;
-		}
 		case ItemState::Star:
 			break;
 		case ItemState::Coin:
@@ -204,7 +223,6 @@ void BlockBase::Interactive(float _DeltaTime)
 			CoinItem->SetActorLocation(GetActorLocation());
 		}
 		break;
-
 		default:
 			break;
 		}

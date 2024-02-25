@@ -144,6 +144,8 @@ void ItemBase::CollisionEvent()
 			Destroy();
 			break;
 		case ItemState::Flower:
+			MyMario->SetMarioClassState(MarioClass::Fire);
+			Destroy();
 			break;
 		case ItemState::Star:
 			break;

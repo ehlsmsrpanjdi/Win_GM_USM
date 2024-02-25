@@ -24,7 +24,7 @@ public:
 
 	static FVector PlayerLocation;
 
-	static MarioClass MyMarioClas;
+	static MarioClass MyMarioClass;
 
 protected:
 	void BeginPlay() override;
@@ -46,6 +46,7 @@ protected:
 	void DeadStart();
 	void EndStart();
 	void EndMoveStart();
+	void ChangingStart();
 	void Idle(float _DeltaTime);
 	void Move(float _DeltaTime);
 	void Jump(float _DeltaTime);
@@ -55,6 +56,7 @@ protected:
 	void Dead(float _DeltaTime);
 	void End(float _DeltaTime);
 	void EndMove(float _DeltaTime);
+	void Changing(float _DeltaTime);
 
 
 	bool LeftEdgeCheck();
@@ -93,5 +95,6 @@ protected:
 
 private:
 	MarioState State = MarioState::None;
+	MarioState PrevState = MarioState::None;
 };
 

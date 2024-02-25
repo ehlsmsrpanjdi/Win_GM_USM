@@ -10,7 +10,7 @@
 #include "PhysicsActor.h"
 #include "BlockBase.h"
 
-MarioClass Mario::MyMarioClas = MarioClass::Small;
+MarioClass Mario::MyMarioClass = MarioClass::Small;
 FVector Mario::PlayerLocation = {};
 
 Mario::Mario()
@@ -40,6 +40,9 @@ void Mario::BeginPlay()
 	AnimationAuto(Renderer, "Bigger", 18, 19, 0.1f);
 	AnimationAuto(Renderer, "Big_Smaller", 18, 19, 0.1f);
 	AnimationAuto(Renderer, "Smaller", 18, 19, 0.1f);
+	AnimationAuto(Renderer, "Big_Fire", 32, 33, 0.1f);
+	AnimationAuto(Renderer, "Fire", 32, 33, 0.1f);
+	AnimationAuto(Renderer, "Fire_Smaller", 32, 33, 0.1f);
 
 	//MushRoomRenderer = CreateImageRenderer(MarioRenderOrder::Player);
 	//MushRoomRenderer->SetImage("Mario_Right.png");
@@ -50,6 +53,13 @@ void Mario::BeginPlay()
 	AnimationAuto(Renderer, "Big_Move", 10, 12);
 	AnimationAuto(Renderer, "Big_DirChange", 13, 13);
 	AnimationAuto(Renderer, "Big_Jump", 14, 14);
+
+	AnimationAuto(Renderer, "Fire_Idle", 20, 20);
+	AnimationAuto(Renderer, "Fire_Move", 21, 23);
+	AnimationAuto(Renderer, "Fire_DirChange", 24, 24);
+	AnimationAuto(Renderer, "Fire_Jump", 25, 25);
+
+
 
 
 
@@ -67,6 +77,12 @@ void Mario::Tick(float _DeltaTime)
 	PhysicsActor::Tick(_DeltaTime);
 
 	PlayerLocation = GetActorLocation();
+
+	if (MyMarioClass == MarioClass::Fire && UEngineInput::IsDown('Z')) {
+		AFire* Fire = GetWorld()->SpawnActor<AFire>(MarioRenderOrder::Fire);
+		Fire->SetActorLocation(GetActorLocation());
+		Fire->SetDirState(DirState);
+	}
 
 	if (ChangeTime >= 0.f) {
 		ChangeTime -= _DeltaTime;
@@ -122,6 +138,9 @@ void Mario::StateUpdate(float _DeltaTime)
 		break;
 	case MarioState::EndMove:
 		EndMove(_DeltaTime);
+		break;
+	case MarioState::Changing:
+		Changing(_DeltaTime);
 		break;
 	default:
 		break;
@@ -195,6 +214,9 @@ void Mario::SetState(MarioState _State)
 		case MarioState::EndMove:
 			EndMoveStart();
 			break;
+		case MarioState::Changing:
+			ChangingStart();
+			break;
 		default:
 			break;
 		}
@@ -204,14 +226,14 @@ void Mario::SetState(MarioState _State)
 
 void Mario::SetMarioClassState(MarioClass _MarioClass)
 {
-	if (MyMarioClas == _MarioClass) {
+	if (MyMarioClass == _MarioClass) {
 		return;
 	}
-	ChangeTime = 0.6f;
+	ChangeTime = 1.f;
 	switch (_MarioClass)
 	{
 	case MarioClass::Small:
-		GodTime = 1.f;
+		GodTime = 2.f;
 		SetAnimation("Smaller");
 		BodyCollision->SetTransform({ { 0,-32 }, { 64, 64 } });
 		break;
@@ -220,11 +242,14 @@ void Mario::SetMarioClassState(MarioClass _MarioClass)
 		BodyCollision->SetTransform({ { 0,-64 }, { 64, 128 } });
 		break;
 	case MarioClass::Fire:
+		SetAnimation("Fire");
+		BodyCollision->SetTransform({ { 0,-64 }, { 64, 128 } });
 		break;
 	default:
 		break;
 	}
-	MyMarioClas = _MarioClass;
+	MyMarioClass = _MarioClass;
+	SetState(MarioState::Changing);
 }
 
 void Mario::IdleStart()
@@ -239,13 +264,22 @@ void Mario::MoveStart()
 
 void Mario::JumpStart()
 {
-	Jumping = true;
-	SpeedY.Y = JumpPower;
-	GravitySpeed.Y = 0;
-	AddActorLocation({ 0.f,-4.f });
-	SetAnimation("Jump");
+	if (PrevState == MarioState::Jump) {
+		Jumping = true;
+		SpeedY.Y = 0;
+		GravitySpeed.Y = 0;
+		AddActorLocation({ 0.f,-4.f });
+		SetAnimation("Jump");
+		PrevState = MarioState::None;
+	}
+	else {
+		Jumping = true;
+		SpeedY.Y = JumpPower;
+		GravitySpeed.Y = 0;
+		AddActorLocation({ 0.f,-4.f });
+		SetAnimation("Jump");
+	}
 }
-
 void Mario::DirChangeStart()
 {
 	SetAnimation("DirChange");
@@ -361,7 +395,7 @@ void Mario::Dead(float _DeltaTime) {
 
 	if (DeadTime < 0.f) {
 		GravitySpeed += MarioHelper::Gravity * _DeltaTime;
- 		float Y = SpeedY.Y + GravitySpeed.Y;
+		float Y = SpeedY.Y + GravitySpeed.Y;
 		AddActorLocation(FVector{ 0.f,Y * _DeltaTime });
 		Destroy(3.f);
 	}
@@ -379,6 +413,12 @@ void Mario::End(float _DeltaTime)
 	if (UEngineInput::IsPress(VK_SHIFT)) {
 		SetState(MarioState::EndMove);
 	}
+}
+
+void Mario::ChangingStart()
+{
+	PrevState = State;
+	ChangeTime = 1.f;
 }
 
 void Mario::EndMove(float _DeltaTime)
@@ -470,7 +510,7 @@ void Mario::DirChange(float _DeltaTime)
 void Mario::SetAnimation(std::string _Name)
 {
 	std::string Name = GetAnimationName(_Name);
-	switch (MyMarioClas)
+	switch (MyMarioClass)
 	{
 	case MarioClass::Small:
 		break;
@@ -478,6 +518,7 @@ void Mario::SetAnimation(std::string _Name)
 		Name = "Big_" + Name;
 		break;
 	case MarioClass::Fire:
+		Name = "Fire_" + Name;
 		break;
 	default:
 		break;
@@ -624,7 +665,6 @@ void Mario::DirCheck()
 
 void Mario::MarioCollisionEvent(float _DeltaTime)
 {
-	FVector ThisPosition = this->GetActorLocation();
 	std::vector<UCollision*> Result;
 	IsCollision = false;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, Result))
@@ -677,7 +717,7 @@ void Mario::Hit()
 		return;
 	}
 
-	switch (MyMarioClas)
+	switch (MyMarioClass)
 	{
 	case MarioClass::Small:
 		SetState(MarioState::Dead);
@@ -686,16 +726,24 @@ void Mario::Hit()
 		SetMarioClassState(MarioClass::Small);
 		break;
 	case MarioClass::Fire:
+		SetMarioClassState(MarioClass::Small);
 		break;
 	default:
 		break;
 	}
 }
 
+void Mario::Changing(float _DeltaTime)
+{
+	if (ChangeTime <= 0) {
+		SetState(PrevState);
+	}
+}
+
 void Mario::MarioChange(bool _Positive)
 {
 	if (_Positive) {
-		switch (MyMarioClas)
+		switch (MyMarioClass)
 		{
 		case MarioClass::Small:
 			break;
@@ -708,7 +756,7 @@ void Mario::MarioChange(bool _Positive)
 		}
 	}
 	else {
-		switch (MyMarioClas)
+		switch (MyMarioClass)
 		{
 		case MarioClass::Small:
 			break;

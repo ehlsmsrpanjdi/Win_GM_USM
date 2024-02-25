@@ -11,6 +11,7 @@ enum MarioRenderOrder{
 	Player,
 	Item,
 	Block,
+	Fire,
 	UI,
 };
 
@@ -30,6 +31,7 @@ enum class MarioState{
 	Dead,
 	End,
 	EndMove,
+	Changing,
 };
 
 enum class MarioClass {
@@ -71,6 +73,7 @@ enum class MarioCollisionOrder{
 	Player,
 	Item,
 	Block,
+	Fire,
 };
 
 

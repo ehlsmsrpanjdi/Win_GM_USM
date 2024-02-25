@@ -58,7 +58,7 @@ void GreenTroopa::CollisionEvent()
 				return;
 			}
 			else {
-				Player->SetState(MarioState::Dead);
+				Player->Hit();
 				return;
 			}
 		}
@@ -75,7 +75,7 @@ void GreenTroopa::CollisionEvent()
 				return;
 			}
 			else {
-				Player->SetState(MarioState::Dead);
+				Player->Hit();
 				return;
 			}
 			break;

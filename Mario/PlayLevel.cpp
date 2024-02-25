@@ -13,6 +13,8 @@
 #include "MonsterGoomba.h"
 #include "Coin.h"
 #include "Flag.h"
+#include "ItemFlower.h"
+#include "Fire.h"
 
 UPlayLevel::UPlayLevel()
 {
@@ -68,9 +70,13 @@ void UPlayLevel::BeginPlay()
 	brick->SetItemCount(-1);
 	brick->SetActorLocation({ 800,600 });
 
-	MonsterGoomba* tes;
-	tes = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
-	tes->SetActorLocation({ 800,600 });
+	AFire* fire;
+	fire = SpawnActor<AFire>(MarioRenderOrder::Fire);
+	fire->SetActorLocation({ 500,800 });
+
+	MonsterGoomba* goo;
+	goo = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
+	goo->SetActorLocation({ 1200,500 });
 }
 
 void UPlayLevel::Tick(float _DeltaTime)

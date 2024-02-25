@@ -1,31 +1,30 @@
 #pragma once
-#include <EngineCore\Actor.h>
+#include "PhysicsActor.h"
+#include "MarioHelper.h"
 
 // Ό³Έν :
-class AFire : public AActor
+class AFire : public PhysicsActor
 {
 public:
-	// constrcuter destructer
 	AFire();
 	~AFire();
 
-	// delete Function
 	AFire(const AFire& _Other) = delete;
 	AFire(AFire&& _Other) noexcept = delete;
 	AFire& operator=(const AFire& _Other) = delete;
 	AFire& operator=(AFire&& _Other) noexcept = delete;
 
-	void SetDir(const FVector& _Dir)
-	{
-		Dir = _Dir;
-	}
+
+	void SetDirState(EActorDir _DirState);
 
 protected:
 	void Tick(float _DeltaTime) override;
 	void BeginPlay() override;
 
+	void CollisionEvent(float _DeltaTime);
+	void WallCheck(float _DeltaTime);
+
 private:
-	FVector Dir = FVector::Zero;
 	float Speed = 300.0f;
 };
 
