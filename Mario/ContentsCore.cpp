@@ -48,6 +48,7 @@ void ContentsCore::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Number_Origin.png", 10, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("Coin.png", 4, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("Fire.png", 4, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("BrokenBrick.png", 2, 2);
 	
 
 	MainWindow.SetWindowScale({ 256 * 4/* * 1.5f*/, 240 * 4/* * 1.5f*/ });

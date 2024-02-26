@@ -35,7 +35,7 @@ void Mario::BeginPlay()
 	AnimationAuto(Renderer, "DirChange", 4, 4);
 	AnimationAuto(Renderer, "Jump", 5, 5);
 	AnimationAuto(Renderer, "Dead", 6, 6);
-	AnimationAuto(Renderer, "End", 7, 7);
+	AnimationAuto(Renderer, "End", 7, 8);
 
 	AnimationAuto(Renderer, "Bigger", 18, 19, 0.1f);
 	AnimationAuto(Renderer, "Big_Smaller", 18, 19, 0.1f);
@@ -53,11 +53,13 @@ void Mario::BeginPlay()
 	AnimationAuto(Renderer, "Big_Move", 10, 12);
 	AnimationAuto(Renderer, "Big_DirChange", 13, 13);
 	AnimationAuto(Renderer, "Big_Jump", 14, 14);
+	AnimationAuto(Renderer, "Big_End", 16, 17);
 
 	AnimationAuto(Renderer, "Fire_Idle", 20, 20);
 	AnimationAuto(Renderer, "Fire_Move", 21, 23);
 	AnimationAuto(Renderer, "Fire_DirChange", 24, 24);
 	AnimationAuto(Renderer, "Fire_Jump", 25, 25);
+	AnimationAuto(Renderer, "Fire_End", 27, 28);
 
 
 
@@ -78,10 +80,11 @@ void Mario::Tick(float _DeltaTime)
 
 	PlayerLocation = GetActorLocation();
 
-	if (MyMarioClass == MarioClass::Fire && UEngineInput::IsDown('Z')) {
+	if (MyMarioClass == MarioClass::Fire && UEngineInput::IsDown('Z') && AFire::FireCount < 2) {
 		AFire* Fire = GetWorld()->SpawnActor<AFire>(MarioRenderOrder::Fire);
-		Fire->SetActorLocation(GetActorLocation());
+		Fire->SetActorLocation(FVector{ PlayerLocation.X, PlayerLocation.Y - 64 });
 		Fire->SetDirState(DirState);
+		++AFire::FireCount;
 	}
 
 	if (ChangeTime >= 0.f) {
@@ -296,16 +299,10 @@ void Mario::InteractiveStart()
 
 void Mario::Idle(float _DeltaTime)
 {
-
 	ResultMove(_DeltaTime);
-
 
 	if (0 == CurSpeedDir) {
 		SpeedX.X = 0;
-	}
-
-	if (UEngineInput::IsPress(VK_CONTROL)) {
-		SetState(MarioState::End);
 	}
 
 	if (UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsPress(VK_RIGHT)) {
@@ -344,6 +341,7 @@ void Mario::DeadStart()
 
 void Mario::EndStart()
 {
+	DirState = EActorDir::Right;
 	SetAnimation("End");
 }
 
@@ -410,7 +408,7 @@ void Mario::End(float _DeltaTime)
 	float pos = 100.f * _DeltaTime;
 	AddActorLocation({ 0.f, pos });
 
-	if (UEngineInput::IsPress(VK_SHIFT)) {
+	if (UEngineInput::IsDown('W')) {
 		SetState(MarioState::EndMove);
 	}
 }
@@ -430,13 +428,12 @@ void Mario::EndMove(float _DeltaTime)
 	}
 	DirState = EActorDir::Right;
 	SetAnimation("Move");
-	AddActorLocation({ 100.f * _DeltaTime, 0.f });
+	SpeedX.X = 100.f;
+	GravityCheck(_DeltaTime);
+	ResultMove(_DeltaTime);
 }
 void Mario::Jump(float _DeltaTime)
 {
-	if (IsCollision) {
-		//return;
-	}
 	if (true == UEngineInput::IsUp(VK_SPACE) && CurSpeed.Y < 0.f) {
 		SpeedY.Y = 0;
 		GravitySpeed.Y = 0;
@@ -681,12 +678,15 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 
 		FVector CurLocation = GetActorLocation();
 
+
 		if (CurLocation.X > LeftX && RightX > CurLocation.X) {
 			GravitySpeed.Y = 0;
 			SpeedY.Y = 0;
 			if (CurLocation.Y > BottomY) {
 				AddActorLocation(FVector{ 0.f,1.f });
-				Block->SetBoxState(BlockState::Interactive);
+				if (MarioState::EndMove != State) {
+					Block->SetBoxState(BlockState::Interactive);
+				}
 			}
 			else {
 				IsCollision = true;
@@ -695,7 +695,7 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 
 		if (CurSpeedDir == 1 && CurLocation.X < LeftX) {
 			if (CurLocation.Y - 64 > TopY || CurLocation.Y < BottomY) {
-				SpeedX.X = 0;
+					SpeedX.X = 0;
 				if (TopY + 4 < CurLocation.Y) {
 					AddActorLocation(FVector{ -1.f,0.f });
 				}

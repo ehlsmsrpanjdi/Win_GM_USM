@@ -20,7 +20,10 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	void CollisionEvent();
+	UCollision* BottomCollision;
 
+	bool IsFlag = false;
+	bool IsEnd = false;
 private:
 
 };

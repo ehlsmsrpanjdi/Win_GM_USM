@@ -75,6 +75,9 @@
     <ClInclude Include="ItemFlower.h">
       <Filter>Actor\Item</Filter>
     </ClInclude>
+    <ClInclude Include="BrokenBrick.h">
+      <Filter>Actor\Block</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -150,6 +153,9 @@
     </ClCompile>
     <ClCompile Include="ItemFlower.cpp">
       <Filter>Actor\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="BrokenBrick.cpp">
+      <Filter>Actor\Block</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
