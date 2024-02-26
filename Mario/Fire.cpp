@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include <EngineCore\EngineCore.h>
 #include "BlockBase.h"
-
+#include "MonsterBase.h"
 
 AFire::AFire() {
 
@@ -33,6 +33,7 @@ void AFire::BeginPlay()
 
 void AFire::SetDirState(EActorDir _DirState)
 {
+	DirState = _DirState;
 }
 
 void AFire::Tick(float _DeltaTime)
@@ -48,7 +49,6 @@ void AFire::Tick(float _DeltaTime)
 void AFire::CollisionEvent(float _DeltaTime) {
 	FVector ThisPosition = this->GetActorLocation();
 	std::vector<UCollision*> Result;
-	IsCollision = false;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, Result)) {
 
 		UCollision* Collision = Result[0];
@@ -57,7 +57,7 @@ void AFire::CollisionEvent(float _DeltaTime) {
 		
 		float LeftX = BlockVector.X - 32.f;
 		float RightX = BlockVector.X + 32.f;
-		float TopY = BlockVector.Y - 64.f;
+		float TopY = BlockVector.Y - 62.f;
 		float BottomY = BlockVector.Y;
 
 		if (ThisPosition.Y <= TopY) {
@@ -65,14 +65,14 @@ void AFire::CollisionEvent(float _DeltaTime) {
 			SpeedY.Y = -300.f;
 		}
 
-		if (DirState == EActorDir::Left) {
+		else if (DirState == EActorDir::Left) {
 			if (ThisPosition.X - 16 > RightX)
 			{
 				Destroy();
 			}
 		}
 
-		if (DirState == EActorDir::Right) {
+		else if (DirState == EActorDir::Right) {
 			if (ThisPosition.X + 16 > LeftX)
 			{
 				Destroy();
@@ -80,6 +80,14 @@ void AFire::CollisionEvent(float _DeltaTime) {
 		}
 
 	}
+
+	std::vector<UCollision*> MResult;
+	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Monster, MResult)) {
+		MonsterBase* Monster =  static_cast<MonsterBase*>(MResult[0]->GetOwner());
+		Monster->SetMonsterState(MonsterState::Excute);
+		Destroy();
+	}
+
 }
 
 void AFire::WallCheck(float _DeltaTime)

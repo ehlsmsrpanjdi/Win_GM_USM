@@ -18,6 +18,7 @@ public:
 	void SetItemCount(int _Count);
 	void SetItemState(ItemState _Item);
 	void SetBoxState(BlockState _MarioBlockState);
+	void SetBoxStartState(BlockState _MarioBlockState);
 
 protected:
 	virtual void BeginPlay() override;

@@ -80,6 +80,11 @@ void BlockBase::SetBoxState(BlockState _MarioBlockState)
 	}
 }
 
+void BlockBase::SetBoxStartState(BlockState _MarioBlockState)
+{
+	StartState = _MarioBlockState;
+}
+
 void BlockBase::BoxCollisionEvent(BlockState _MarioBlockState)
 {
 	std::vector<UCollision*> Result;
@@ -136,10 +141,7 @@ void BlockBase::InteractiveStart()
 	if (ItemCount >= 1) {
 		ItemCount -= 1;
 	}
-	else if (ItemCount > -1) {
-		SetBoxState(BlockState::Default);
-		return;
-	}
+
 	Interacting = true;
 	DeltaTime = 0.1f;
 	DefaultLocation = GetActorLocation();
@@ -228,6 +230,9 @@ void BlockBase::Interactive(float _DeltaTime)
 		}
 		Interacting = false;
 		SetActorLocation(DefaultLocation);
+		if (ItemCount <= 0 && ItemCount > -1) {
+			SetBoxState(BlockState::Default);
+		}
 		SetBoxState(StartState);
 	}
 }

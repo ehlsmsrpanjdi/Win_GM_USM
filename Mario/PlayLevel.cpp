@@ -74,6 +74,13 @@ void UPlayLevel::BeginPlay()
 	fire = SpawnActor<AFire>(MarioRenderOrder::Fire);
 	fire->SetActorLocation({ 500,800 });
 
+	brick = SpawnActor<MarioBrick>(MarioRenderOrder::Block);
+	brick->SetItemCount(3);
+	brick->SetActorLocation({ 300,600 });
+	brick->SetItemState(ItemState::Coin);
+	brick->SetBoxState(BlockState::ItemBrick);
+	brick->SetBoxStartState(BlockState::ItemBrick);
+
 	MonsterGoomba* goo;
 	goo = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
 	goo->SetActorLocation({ 1200,500 });

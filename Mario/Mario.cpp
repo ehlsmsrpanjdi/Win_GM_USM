@@ -434,7 +434,7 @@ void Mario::EndMove(float _DeltaTime)
 void Mario::Jump(float _DeltaTime)
 {
 	if (IsCollision) {
-		return;
+		//return;
 	}
 	if (true == UEngineInput::IsUp(VK_SPACE) && CurSpeed.Y < 0.f) {
 		SpeedY.Y = 0;

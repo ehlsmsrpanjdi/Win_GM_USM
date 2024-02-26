@@ -20,7 +20,7 @@ void MarioBrick::BeginPlay()
 	AnimationAuto(Renderer, "Brick", 0, 0, 0.1f, false);
 	SetAnimation("Brick");
 
-	AnimationAuto(Renderer, "None", 4, 4, 0.1f, false);
+	AnimationAuto(Renderer, "Default", 4, 4, 0.1f, false);
 
 	BodyCollision = CreateCollision(MarioCollisionOrder::Block);
 	BodyCollision->SetTransform({ { 0, -32 }, { 64, 64} });
