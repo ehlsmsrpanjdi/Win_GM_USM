@@ -17,6 +17,8 @@ public:
 
 	void SetDirState(EActorDir _DirState);
 
+	static int FireCount;
+
 protected:
 	void Tick(float _DeltaTime) override;
 	void BeginPlay() override;

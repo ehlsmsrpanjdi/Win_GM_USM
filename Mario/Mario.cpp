@@ -417,6 +417,7 @@ void Mario::End(float _DeltaTime)
 
 void Mario::ChangingStart()
 {
+	GetWorld()->SetOtherTimeScale(static_cast<int>(MarioRenderOrder::Player), 0.0f);
 	PrevState = State;
 	ChangeTime = 1.f;
 }
@@ -737,6 +738,7 @@ void Mario::Changing(float _DeltaTime)
 {
 	if (ChangeTime <= 0) {
 		SetState(PrevState);
+		GetWorld()->SetAllTimeScale(1.0f);
 	}
 }
 

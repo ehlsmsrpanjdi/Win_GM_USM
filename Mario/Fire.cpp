@@ -4,12 +4,15 @@
 #include "BlockBase.h"
 #include "MonsterBase.h"
 
+int AFire::FireCount = 0;
+
 AFire::AFire() {
 
 }
 
 AFire::~AFire()
 {
+	--FireCount;
 }
 
 
