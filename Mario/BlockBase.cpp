@@ -135,6 +135,9 @@ void BlockBase::ItemBrickStart()
 
 void BlockBase::InteractiveStart()
 {
+	if (Interacting == true) {
+		return;
+	}
 	if (StartState == BlockState::Brick && (Mario::MyMarioClass == MarioClass::Big || Mario::MyMarioClass == MarioClass::Fire)) {
 		Destroy();
 	}
@@ -160,9 +163,7 @@ void BlockBase::None(float _DeltaTime)
 
 void BlockBase::ItemBlock(float _DeltaTime)
 {
-	if (ItemCount == 0) {
-		SetBoxState(BlockState::Default);
-	}
+
 }
 
 void BlockBase::Brick(float _DeltaTime)
@@ -171,9 +172,7 @@ void BlockBase::Brick(float _DeltaTime)
 
 void BlockBase::ItemBrick(float _DeltaTime)
 {
-	if (ItemCount == 0) {
-		SetBoxState(BlockState::Default);
-	}
+
 }
 
 void BlockBase::Interactive(float _DeltaTime)
@@ -230,7 +229,7 @@ void BlockBase::Interactive(float _DeltaTime)
 		}
 		Interacting = false;
 		SetActorLocation(DefaultLocation);
-		if (ItemCount <= 0 && ItemCount > -1) {
+		if (ItemCount == 0 && ItemCount > -1) {
 			SetBoxState(BlockState::Default);
 		}
 		SetBoxState(StartState);
