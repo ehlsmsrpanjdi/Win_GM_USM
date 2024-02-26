@@ -13,6 +13,10 @@ BlockBase::~BlockBase()
 {
 	FVector CurLocation = GetActorLocation();
 
+	if (CurLocation.X < GetWorld()->GetCameraPos().X) {
+		return;
+	}
+
 	BrokenBrick* Broken;
 	Broken = GetWorld()->SpawnActor<BrokenBrick>(MarioRenderOrder::Block);
 	Broken->SetActorLocation(FVector{ CurLocation.X - 16, CurLocation.Y - 64 });
@@ -38,8 +42,23 @@ void BlockBase::BeginPlay()
 
 void BlockBase::Tick(float _DeltaTime)
 {
+	float CameraX = GetWorld()->GetCameraPos().X;
+	float WindowCenter = GEngine->MainWindow.GetWindowScale().hX();
+	float CurLocationX = GetActorLocation().X;
+	if (CameraX + WindowCenter + 300.f < CurLocationX)
+	{
+		return;
+	}
+	else if (!IsInit) {
+		IsInit = true;
+		BlockInit();
+	}
 	StateUpdate(_DeltaTime);
 	BoxCollisionEvent(StartState);
+
+	if (CurLocationX < CameraX - 32) {
+		Destroy();
+	}
 }
 
 void BlockBase::StateUpdate(float _DeltaTime)
@@ -116,6 +135,11 @@ void BlockBase::SetBrickDefault()
 	SetBoxStartState(BlockState::Brick);
 	SetBoxState(BlockState::Brick);
 	SetItemCount(-1);
+}
+
+BlockState BlockBase::GetState()
+{
+	return BoxState;
 }
 
 void BlockBase::BoxCollisionEvent(BlockState _MarioBlockState)
@@ -270,6 +294,10 @@ void BlockBase::Interactive(float _DeltaTime)
 }
 
 void BlockBase::Default(float _DeltaTime)
+{
+}
+
+void BlockBase::BlockInit()
 {
 }
 

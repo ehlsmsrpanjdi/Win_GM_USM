@@ -19,7 +19,7 @@ protected:
 	void BeginPlay() override;
 	void CollisionEvent() override;
 
-
+	void MonsterInit() override;
 private:
 
 };

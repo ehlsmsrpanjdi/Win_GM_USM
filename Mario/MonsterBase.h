@@ -50,6 +50,9 @@ protected:
 	float MonsterDefaultSpeed = 200.f;
 	float CrouchDefaultMoveSpeed = 600.f;
 
+	bool IsInit = false;
+	virtual void MonsterInit();
+
 private:
 
 };

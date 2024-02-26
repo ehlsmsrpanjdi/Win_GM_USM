@@ -174,5 +174,6 @@ void ItemBase::CollisionEvent()
 	{
 		SpeedY.Y = 0;
 		GravitySpeed.Y = 0;
+		AddActorLocation(FVector::Up);
 	}
 }

@@ -3,6 +3,7 @@
 #include "MarioHelper.h"
 #include "Mario.h"
 #include "PhysicsActor.h"
+#include "BlockBase.h"
 
 MonsterBase::MonsterBase() 
 {
@@ -19,12 +20,17 @@ void MonsterBase::BeginPlay()
 
 void MonsterBase::Tick(float _DeltaTime)
 {
+
 	float CameraX = GetWorld()->GetCameraPos().X;
 	float WindowCenter = GEngine->MainWindow.GetWindowScale().X;
 	float CurLocationX = GetActorLocation().X;
 	if(CameraX + WindowCenter < CurLocationX)
 	{
 		return;
+	}
+	else if (!IsInit) {
+		IsInit = true;
+		MonsterInit();
 	}
 	StateUpdate(_DeltaTime);
 
@@ -156,6 +162,18 @@ void MonsterBase::CollisionEvent()
 		}
 	}
 
+	std::vector<UCollision*> BlockResult;
+	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, BlockResult))
+	{
+		SpeedY.Y = 0;
+		GravitySpeed.Y = 0;
+		AddActorLocation(FVector::Up);
+		BlockBase* Block = (BlockBase*)BlockResult[0]->GetOwner();
+		if (Block->GetState() == BlockState::Interactive){
+			SetMonsterState(MonsterState::Excute);
+		}
+	}
+
 
 }
 
@@ -237,4 +255,8 @@ void MonsterBase::ExcuteStart()
 	SpeedX.X = 0.f;
 	SpeedY.Y = -500.f;
 	BodyCollision->Destroy();
+}
+
+void MonsterBase::MonsterInit()
+{
 }

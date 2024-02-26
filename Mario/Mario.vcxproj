@@ -74,10 +74,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Koopa.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="MarioBrick.h">
       <SubType>
       </SubType>
@@ -182,10 +178,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GreenTroopa.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Koopa.cpp">
       <SubType>
       </SubType>
     </ClCompile>

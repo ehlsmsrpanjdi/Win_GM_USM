@@ -33,9 +33,6 @@
     <ClInclude Include="Plant.h">
       <Filter>Actor\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="Koopa.h">
-      <Filter>Actor\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="MarioBlock.h">
       <Filter>Actor\Block</Filter>
     </ClInclude>
@@ -113,9 +110,6 @@
       <Filter>Actor\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Plant.cpp">
-      <Filter>Actor\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Koopa.cpp">
       <Filter>Actor\Monster</Filter>
     </ClCompile>
     <ClCompile Include="MarioBlock.cpp">

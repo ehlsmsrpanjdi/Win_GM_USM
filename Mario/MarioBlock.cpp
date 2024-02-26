@@ -24,6 +24,15 @@ void MarioBlock::BeginPlay()
 
 	AnimationAuto(Renderer, "Default", 4, 4, 0.1f, false);
 
+	//BodyCollision = CreateCollision(MarioCollisionOrder::Block);
+	//BodyCollision->SetTransform({ { 0, -32 }, { 64, 64} });
+
+	//BoxState = BlockState::ItemBlock;
+	//StartState = BlockState::ItemBlock;
+}
+
+void MarioBlock::BlockInit()
+{
 	BodyCollision = CreateCollision(MarioCollisionOrder::Block);
 	BodyCollision->SetTransform({ { 0, -32 }, { 64, 64} });
 

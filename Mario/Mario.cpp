@@ -9,6 +9,7 @@
 #include <string>
 #include "PhysicsActor.h"
 #include "BlockBase.h"
+#include <EngineCore/EngineDebug.h>
 
 MarioClass Mario::MyMarioClass = MarioClass::Small;
 FVector Mario::PlayerLocation = {};
@@ -24,6 +25,7 @@ Mario::~Mario()
 
 void Mario::BeginPlay()
 {
+
 	AActor::BeginPlay();
 	SetName("Mario");
 	Renderer = CreateImageRenderer(MarioRenderOrder::Player);
@@ -67,7 +69,7 @@ void Mario::BeginPlay()
 
 	BodyCollision = CreateCollision(MarioCollisionOrder::Player);
 	BodyCollision->SetColType(ECollisionType::Rect);
-	BodyCollision->SetTransform({ { 0,-32 }, { 64, 64 } });
+	BodyCollision->SetTransform({ { 0,-32 }, { 60, 64 } });
 
 	SetAnimation("Idle");
 	SetState(MarioState::Idle);
@@ -76,6 +78,16 @@ void Mario::BeginPlay()
 
 void Mario::Tick(float _DeltaTime)
 {
+	if (UEngineInput::IsDown('J')) {
+		AddActorLocation(FVector::Right * 400);
+		GetWorld()->SetCameraPos(FVector::Right * 400);
+		GodTime = 1000.f;
+	}
+
+	if (UEngineInput::IsDown('K')) {
+		AddActorLocation(FVector::Up * 200);
+	}
+
 	PhysicsActor::Tick(_DeltaTime);
 
 	PlayerLocation = GetActorLocation();
@@ -238,15 +250,15 @@ void Mario::SetMarioClassState(MarioClass _MarioClass)
 	case MarioClass::Small:
 		GodTime = 2.f;
 		SetAnimation("Smaller");
-		BodyCollision->SetTransform({ { 0,-32 }, { 64, 64 } });
+		BodyCollision->SetTransform({ { 0,-32 }, { 60, 64 } });
 		break;
 	case MarioClass::Big:
 		SetAnimation("Bigger");
-		BodyCollision->SetTransform({ { 0,-64 }, { 64, 128 } });
+		BodyCollision->SetTransform({ { 0,-64 }, { 60, 128 } });
 		break;
 	case MarioClass::Fire:
 		SetAnimation("Fire");
-		BodyCollision->SetTransform({ { 0,-64 }, { 64, 128 } });
+		BodyCollision->SetTransform({ { 0,-64 }, { 60, 128 } });
 		break;
 	default:
 		break;
@@ -430,7 +442,8 @@ void Mario::EndMove(float _DeltaTime)
 	SetAnimation("Move");
 	SpeedX.X = 100.f;
 	GravityCheck(_DeltaTime);
-	ResultMove(_DeltaTime);
+	AddActorLocation( SpeedX * _DeltaTime);
+	AddActorLocation(GravitySpeed * _DeltaTime);
 }
 void Mario::Jump(float _DeltaTime)
 {
@@ -668,36 +681,38 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, Result))
 	{
 		IsCollision = false;
-		UCollision* ResultCollision = Result[0];
-		BlockBase* Block = static_cast<BlockBase*>(ResultCollision->GetOwner());
-		FTransform MarioTransform = BodyCollision->GetActorBaseTransform();
-		FTransform ResultTransform = ResultCollision->GetActorBaseTransform();
+		for (UCollision* ResultCollision : Result) {
+			//UCollision* ResultCollision = Result[0];
+			BlockBase* Block = static_cast<BlockBase*>(ResultCollision->GetOwner());
+			FTransform MarioTransform = BodyCollision->GetActorBaseTransform();
+			FTransform ResultTransform = ResultCollision->GetActorBaseTransform();
 
 
-		if (MarioTransform.Top() + 5 > ResultTransform.Bottom()) {
-			if (MarioState::EndMove != State) {
-				Block->SetBoxState(BlockState::Interactive);
+			if (MarioTransform.Top() + 10 > ResultTransform.Bottom()) {
+				if (MarioState::EndMove != State) {
+					Block->SetBoxState(BlockState::Interactive);
+				}
+				SpeedY.Y = 0.f;
+				GravitySpeed.Y = GravitySpeed.Y / 2.f;
 			}
-			SpeedY.Y = 0.f;
-		}
 
-		else if (MarioTransform.Bottom() > ResultTransform.Top() + 5) {
+			else if (MarioTransform.Bottom() > ResultTransform.Top() + 10) {
 
-			if (CurSpeedDir == 1) {
-				SpeedX.X = 0;
-				AddActorLocation(FVector::Left);
+				if (CurSpeedDir == 1) {
+					SpeedX.X = 0;
+					AddActorLocation(FVector::Left);
+				}
+				else if (CurSpeedDir == -1) {
+					SpeedX.X = 0;
+					AddActorLocation(FVector::Right);
+				}
 			}
-			else if (CurSpeedDir == -1) {
-				SpeedX.X = 0;
-				AddActorLocation(FVector::Right);
+			else {
+				SpeedY.Y = 0;
+				GravitySpeed.Y = 0;
+				IsCollision = true;
 			}
 		}
-		else {
-			SpeedY.Y = 0;
-			GravitySpeed.Y = 0;
-			IsCollision = true;
-		}
-		
 	}
 }
 

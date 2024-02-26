@@ -22,6 +22,7 @@ public:
 
 	void SetItemBlockDefault(int _Count = 1, ItemState _Item = ItemState::Coin, BlockState _BlockState = BlockState::ItemBlock);
 	void SetBrickDefault();
+	BlockState GetState();
 
 protected:
 	virtual void BeginPlay() override;
@@ -45,7 +46,9 @@ protected:
 	void Interactive(float _DeltaTime);
 	void Default(float _DeltaTime);
 
-
+	bool IsInit = false;
+	virtual void BlockInit();
+	
 	FVector DefaultLocation = {};
 
 	float DeltaTime = -0.1f;

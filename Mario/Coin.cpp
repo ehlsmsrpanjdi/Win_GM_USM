@@ -1,4 +1,6 @@
 #include "Coin.h"
+#include "MarioHelper.h"
+
 
 Coin::Coin() 
 {
@@ -6,6 +8,7 @@ Coin::Coin()
 
 Coin::~Coin() 
 {
+	MarioHelper::MarioTotalScore += 100;
 }
 
 void Coin::BeginPlay()

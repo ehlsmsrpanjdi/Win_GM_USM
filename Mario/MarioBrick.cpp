@@ -22,12 +22,21 @@ void MarioBrick::BeginPlay()
 
 	AnimationAuto(Renderer, "Default", 4, 4, 0.1f, false);
 
+	//BodyCollision = CreateCollision(MarioCollisionOrder::Block);
+	//BodyCollision->SetTransform({ { 0, -32 }, { 64, 64} });
+
+	//BoxState = BlockState::Brick;
+	//StartState = BlockState::Brick;
+
+}
+
+void MarioBrick::BlockInit()
+{
 	BodyCollision = CreateCollision(MarioCollisionOrder::Block);
 	BodyCollision->SetTransform({ { 0, -32 }, { 64, 64} });
 
 	BoxState = BlockState::Brick;
 	StartState = BlockState::Brick;
-
 }
 
 

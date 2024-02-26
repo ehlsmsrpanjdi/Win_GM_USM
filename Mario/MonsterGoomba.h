@@ -16,7 +16,7 @@ public:
 	MonsterGoomba& operator=(MonsterGoomba&& _Other) noexcept = delete;
 
 	void BeginPlay() override;
-
+	void MonsterInit() override;
 protected:
 
 private:

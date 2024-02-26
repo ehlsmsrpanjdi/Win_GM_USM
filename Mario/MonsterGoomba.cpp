@@ -21,6 +21,11 @@ void MonsterGoomba::BeginPlay()
 
 	AnimationAuto(Renderer, "Dead", 2, 2);
 
+
+}
+
+void MonsterGoomba::MonsterInit()
+{
 	BodyCollision = CreateCollision(MarioCollisionOrder::Monster);
 	BodyCollision->SetTransform({ { 0,-24 }, { 64, 64} });
 

@@ -53,14 +53,14 @@ void MarioUI::BeginPlay()
 
 	FVector UIScale = PlayerUIRenderer->GetImage()->GetScale();
 
-	PlayerUIRenderer->SetTransform({ {300,-100}, {UIScale.iX() * 3, UIScale.iY() * 3} });
+	PlayerUIRenderer->SetTransform({ {300,-100}, {UIScale.iX() * 4, UIScale.iY() * 4} });
 	PlayerUIRenderer->CameraEffectOff();
 
 	for (int i = 0; i < 6; ++i) {
 		std::string Index = std::to_string(i);
 		ScoreUIArray[i] = CreateImageRenderer(static_cast<int>(MarioRenderOrder::UI));
 		ScoreUIArray[i]->SetImage(Index + ".png");
-		ScoreUIArray[i]->SetTransform({ {200,200 + i * 100}, {20,20} });
+		ScoreUIArray[i]->SetTransform({ {-120 + 35 * i,-50}, {20,20} });
 		ScoreUIArray[i]->CameraEffectOff();
 	}
 
@@ -68,7 +68,7 @@ void MarioUI::BeginPlay()
 		std::string Index = std::to_string(i);
 		TimeUIArray[i] = CreateImageRenderer(static_cast<int>(MarioRenderOrder::UI));
 		TimeUIArray[i]->SetImage(Index + ".png");
-		TimeUIArray[i]->SetTransform({ {300,200 + i * 100}, {20,20} });
+		TimeUIArray[i]->SetTransform({ {650 + i * 35, -50}, {20,20} });
 		TimeUIArray[i]->CameraEffectOff();
 	}
 }

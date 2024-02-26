@@ -23,10 +23,7 @@ void GreenTroopa::BeginPlay()
 	SetAnimation("Idle");
 	AnimationAuto(Renderer, "Crouch", 4, 4);
 
-	BodyCollision = CreateCollision(MarioRenderOrder::Monster);
-	BodyCollision->SetTransform({ {0,-24},{32,48} });
 
-	State = MonsterState::Idle;
 
 }
 
@@ -116,4 +113,12 @@ void GreenTroopa::CollisionEvent()
 		}
 	}
 
+}
+
+void GreenTroopa::MonsterInit()
+{
+	BodyCollision = CreateCollision(MarioRenderOrder::Monster);
+	BodyCollision->SetTransform({ {0,-24},{32,48} });
+
+	State = MonsterState::Idle;
 }
