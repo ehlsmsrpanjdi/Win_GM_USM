@@ -14,12 +14,27 @@ ItemBase::~ItemBase()
 
 void ItemBase::Tick(float _DeltaTime)
 {
+
+	float CameraX = GetWorld()->GetCameraPos().X;
+	float WindowCenter = GEngine->MainWindow.GetWindowScale().X;
+	float CurLocationX = GetActorLocation().X;
+
+	if (CameraX + WindowCenter < CurLocationX)
+	{
+		return;
+	}
+
 	if (!IsSpawn) {
 		Spawn(_DeltaTime);
 		return;
 	}
+
 	StateUpdate(_DeltaTime);
 	CollisionEvent();
+
+	if (CurLocationX < CameraX - 32) {
+		Destroy();
+	}
 }
 
 void ItemBase::MushRoomStart()

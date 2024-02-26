@@ -12,11 +12,27 @@ MonsterBase::~MonsterBase()
 {
 }
 
+void MonsterBase::BeginPlay()
+{
+	DirState = EActorDir::Left;
+}
+
 void MonsterBase::Tick(float _DeltaTime)
 {
+	float CameraX = GetWorld()->GetCameraPos().X;
+	float WindowCenter = GEngine->MainWindow.GetWindowScale().X;
+	float CurLocationX = GetActorLocation().X;
+	if(CameraX + WindowCenter < CurLocationX)
+	{
+		return;
+	}
 	StateUpdate(_DeltaTime);
 
 	CollisionEvent();
+
+	if (CurLocationX < CameraX - 32) {
+		Destroy();
+	}
 }
 
 void MonsterBase::IsEdge(float _DeltaTime)

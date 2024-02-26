@@ -667,48 +667,37 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 	IsCollision = false;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, Result))
 	{
-		UCollision* Collision = Result[0];
-		BlockBase* Block = static_cast<BlockBase*>(Collision->GetOwner());
-		FVector BlockVector = Block->GetActorLocation();
-
-		float LeftX = BlockVector.X - 32.f;
-		float RightX = BlockVector.X + 32.f;
-		float TopY = BlockVector.Y - 64.f;
-		float BottomY = BlockVector.Y;
-
-		FVector CurLocation = GetActorLocation();
+		IsCollision = false;
+		UCollision* ResultCollision = Result[0];
+		BlockBase* Block = static_cast<BlockBase*>(ResultCollision->GetOwner());
+		FTransform MarioTransform = BodyCollision->GetActorBaseTransform();
+		FTransform ResultTransform = ResultCollision->GetActorBaseTransform();
 
 
-		if (CurLocation.X > LeftX && RightX > CurLocation.X) {
-			GravitySpeed.Y = 0;
-			SpeedY.Y = 0;
-			if (CurLocation.Y > BottomY) {
-				AddActorLocation(FVector{ 0.f,1.f });
-				if (MarioState::EndMove != State) {
-					Block->SetBoxState(BlockState::Interactive);
-				}
+		if (MarioTransform.Top() + 5 > ResultTransform.Bottom()) {
+			if (MarioState::EndMove != State) {
+				Block->SetBoxState(BlockState::Interactive);
 			}
-			else {
-				IsCollision = true;
-			}
+			SpeedY.Y = 0.f;
 		}
 
-		if (CurSpeedDir == 1 && CurLocation.X < LeftX) {
-			if (CurLocation.Y - 64 > TopY || CurLocation.Y < BottomY) {
-					SpeedX.X = 0;
-				if (TopY + 4 < CurLocation.Y) {
-					AddActorLocation(FVector{ -1.f,0.f });
-				}
-			}
-		}
-		if (CurSpeedDir == -1 && CurLocation.X > RightX) {
-			if (CurLocation.Y - 64 > TopY || CurLocation.Y < BottomY) {
+		else if (MarioTransform.Bottom() > ResultTransform.Top() + 5) {
+
+			if (CurSpeedDir == 1) {
 				SpeedX.X = 0;
-				if (TopY + 4 < CurLocation.Y) {
-					AddActorLocation(FVector{ 1.f,0.f });
-				}
+				AddActorLocation(FVector::Left);
+			}
+			else if (CurSpeedDir == -1) {
+				SpeedX.X = 0;
+				AddActorLocation(FVector::Right);
 			}
 		}
+		else {
+			SpeedY.Y = 0;
+			GravitySpeed.Y = 0;
+			IsCollision = true;
+		}
+		
 	}
 }
 
@@ -789,7 +778,12 @@ void Mario::ResultMove(float _DeltaTime)
 	CurSpeed += SpeedY;
 	CurSpeed += GravitySpeed;
 
+	FVector CurLocation = GetActorLocation();
+	float CameraX = GetWorld()->GetCameraPos().X;
 
+	if (CurLocation.X - 32.f + CurSpeed.X * _DeltaTime < CameraX) {
+		CurSpeed.X = 0;
+	}
 	AddActorLocation(CurSpeed * _DeltaTime);
 
 	if (MarioHelper::BottomCheck(GetActorLocation() + FVector{ 0,-1 })) {

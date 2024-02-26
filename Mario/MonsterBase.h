@@ -18,8 +18,9 @@ public:
 
 	virtual void SetMonsterState(MonsterState _State);
 protected:
-	virtual void Tick(float _DeltaTime) override;
 
+	virtual void BeginPlay() override;
+	virtual void Tick(float _DeltaTime) override;
 	virtual void IsEdge(float _DeltaTime);
 	void ReverseDir();
 

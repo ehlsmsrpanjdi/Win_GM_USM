@@ -42,6 +42,19 @@ void AFire::SetDirState(EActorDir _DirState)
 
 void AFire::Tick(float _DeltaTime)
 {
+
+	float CameraX = GetWorld()->GetCameraPos().X;
+	float WindowCenter = GEngine->MainWindow.GetWindowScale().X;
+	float CurLocationX = GetActorLocation().X;
+	if (CameraX + WindowCenter < CurLocationX)
+	{
+		Destroy();
+		return;
+	}
+
+	if (CurLocationX < CameraX - 32) {
+		Destroy();
+	}
 		SpeedX.X = Speed * static_cast<int>(DirState);
 
 		WallCheck(_DeltaTime);

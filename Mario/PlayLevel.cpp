@@ -74,6 +74,10 @@ void UPlayLevel::BeginPlay()
 	itemblock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
 	itemblock->SetItemBlockDefault(1, ItemState::MushRoom);
 	itemblock->SetActorLocation({ 900,600 });
+
+	MonsterGoomba* goo;
+	goo = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
+	goo->SetActorLocation({ 900,600 });
 }
 
 void UPlayLevel::Tick(float _DeltaTime)

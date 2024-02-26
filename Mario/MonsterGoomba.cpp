@@ -10,6 +10,7 @@ MonsterGoomba::~MonsterGoomba()
 
 void MonsterGoomba::BeginPlay()
 {
+	MonsterBase::BeginPlay();
 	SetName("Goomba");
 	NoDir = true;
 	Renderer = CreateImageRenderer(MarioRenderOrder::Monster);

@@ -14,6 +14,7 @@ GreenTroopa::~GreenTroopa()
 
 void GreenTroopa::BeginPlay()
 {
+	MonsterBase::BeginPlay();
 	SetName("GreenTroopa");
 	Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 	Renderer->SetImage("GreenTroopa_Right.png");
