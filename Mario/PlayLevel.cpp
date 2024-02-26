@@ -15,6 +15,7 @@
 #include "Flag.h"
 #include "ItemFlower.h"
 #include "Fire.h"
+#include "FireEnd.h"
 
 UPlayLevel::UPlayLevel()
 {
@@ -66,8 +67,6 @@ void UPlayLevel::BeginPlay()
 	block->SetItemState(ItemState::MushRoom);
 
 
-	Flag* flag = SpawnActor<Flag>(MarioRenderOrder::Block);
-	flag->SetActorLocation({ 700,400 });
 }
 
 void UPlayLevel::Tick(float _DeltaTime)

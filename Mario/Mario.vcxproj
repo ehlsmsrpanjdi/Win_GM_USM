@@ -42,6 +42,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="FireEnd.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Flag.h">
       <SubType>
       </SubType>
@@ -146,6 +150,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Coin.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FireEnd.cpp">
       <SubType>
       </SubType>
     </ClCompile>

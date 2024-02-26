@@ -78,6 +78,9 @@
     <ClInclude Include="BrokenBrick.h">
       <Filter>Actor\Block</Filter>
     </ClInclude>
+    <ClInclude Include="FireEnd.h">
+      <Filter>Actor\Fire</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -156,6 +159,9 @@
     </ClCompile>
     <ClCompile Include="BrokenBrick.cpp">
       <Filter>Actor\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="FireEnd.cpp">
+      <Filter>Actor\Fire</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
