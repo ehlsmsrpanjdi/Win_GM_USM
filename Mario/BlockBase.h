@@ -20,6 +20,9 @@ public:
 	void SetBoxState(BlockState _MarioBlockState);
 	void SetBoxStartState(BlockState _MarioBlockState);
 
+	void SetItemBlockDefault(int _Count = 1, ItemState _Item = ItemState::Coin, BlockState _BlockState = BlockState::ItemBlock);
+	void SetBrickDefault();
+
 protected:
 	virtual void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

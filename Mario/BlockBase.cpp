@@ -104,6 +104,20 @@ void BlockBase::SetBoxStartState(BlockState _MarioBlockState)
 	StartState = _MarioBlockState;
 }
 
+void BlockBase::SetItemBlockDefault(int _Count, ItemState _Item, BlockState _BlockState)
+{
+	SetItemCount(_Count);
+	SetItemState(_Item);
+	SetBoxState(_BlockState);
+}
+
+void BlockBase::SetBrickDefault()
+{
+	SetBoxStartState(BlockState::Brick);
+	SetBoxState(BlockState::Brick);
+	SetItemCount(-1);
+}
+
 void BlockBase::BoxCollisionEvent(BlockState _MarioBlockState)
 {
 	std::vector<UCollision*> Result;
@@ -160,7 +174,7 @@ void BlockBase::InteractiveStart()
 	if (StartState == BlockState::Brick && (Mario::MyMarioClass == MarioClass::Big || Mario::MyMarioClass == MarioClass::Fire)) {
 		Destroy();
 	}
-	if (ItemCount >= 1) {
+	if (ItemCount >= 1 ) {
 		ItemCount -= 1;
 	}
 

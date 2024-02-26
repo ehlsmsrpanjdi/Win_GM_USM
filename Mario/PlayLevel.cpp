@@ -60,13 +60,20 @@ void UPlayLevel::BeginPlay()
 	TestUI = SpawnActor<MarioUI>(MarioRenderOrder::UI);
 	TestUI->SetActorLocation({ 200,200 });
 
-	MarioBlock* block;
-	block = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
+	MarioBrick* block;
+	block = SpawnActor<MarioBrick>(MarioRenderOrder::Block);
+	block->SetItemBlockDefault(1, ItemState::Coin, BlockState::ItemBrick);
 	block->SetActorLocation({ 500,600 });
-	block->SetItemCount(3);
-	block->SetItemState(ItemState::MushRoom);
 
+	MarioBrick* brick;
+	brick = SpawnActor<MarioBrick>(MarioRenderOrder::Block);
+	brick->SetBrickDefault();
+	brick->SetActorLocation({ 700,600 });
 
+	MarioBlock* itemblock;
+	itemblock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
+	itemblock->SetItemBlockDefault(1, ItemState::MushRoom);
+	itemblock->SetActorLocation({ 900,600 });
 }
 
 void UPlayLevel::Tick(float _DeltaTime)
