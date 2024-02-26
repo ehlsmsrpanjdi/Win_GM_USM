@@ -70,9 +70,9 @@ void UPlayLevel::BeginPlay()
 	brick->SetItemCount(-1);
 	brick->SetActorLocation({ 800,600 });
 
-	AFire* fire;
-	fire = SpawnActor<AFire>(MarioRenderOrder::Fire);
-	fire->SetActorLocation({ 500,800 });
+	//AFire* fire;
+	//fire = SpawnActor<AFire>(MarioRenderOrder::Fire);
+	//fire->SetActorLocation({ 500,800 });
 
 	brick = SpawnActor<MarioBrick>(MarioRenderOrder::Block);
 	brick->SetItemCount(3);
@@ -83,7 +83,7 @@ void UPlayLevel::BeginPlay()
 
 	MonsterGoomba* goo;
 	goo = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
-	goo->SetActorLocation({ 1200,500 });
+	goo->SetActorLocation({ 500,500 });
 }
 
 void UPlayLevel::Tick(float _DeltaTime)
