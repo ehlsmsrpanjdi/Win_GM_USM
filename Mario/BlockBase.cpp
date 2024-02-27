@@ -43,9 +43,9 @@ void BlockBase::BeginPlay()
 void BlockBase::Tick(float _DeltaTime)
 {
 	float CameraX = GetWorld()->GetCameraPos().X;
-	float WindowCenter = GEngine->MainWindow.GetWindowScale().hX();
+	float WindowCenter = GEngine->MainWindow.GetWindowScale().X;
 	float CurLocationX = GetActorLocation().X;
-	if (CameraX + WindowCenter + 300.f < CurLocationX)
+	if (CameraX + WindowCenter< CurLocationX)
 	{
 		return;
 	}
