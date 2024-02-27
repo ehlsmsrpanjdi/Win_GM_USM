@@ -17,7 +17,7 @@ public:
 
 protected:
 	void BeginPlay() override;
-	void CollisionEvent() override;
+	void CollisionEvent(float _DeltaTime) override;
 
 	void MonsterInit() override;
 private:

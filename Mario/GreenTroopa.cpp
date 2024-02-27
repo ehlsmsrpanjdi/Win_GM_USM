@@ -27,7 +27,7 @@ void GreenTroopa::BeginPlay()
 
 }
 
-void GreenTroopa::CollisionEvent()
+void GreenTroopa::CollisionEvent(float _DeltaTime)
 {
 	std::vector<UCollision*> Result;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))

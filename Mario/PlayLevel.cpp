@@ -189,10 +189,6 @@ void UPlayLevel::BeginPlay()
 	itemblock->SetItemBlockDefault(1, ItemState::Coin);
 	itemblock->SetActorLocation({ 7600,650 });
 
-	Itembrick = SpawnActor<MarioBrick>(MarioRenderOrder::Block);
-	Itembrick->SetItemBlockDefault(3, ItemState::Coin, BlockState::ItemBrick);
-	Itembrick->SetActorLocation({ 7600,650 });
-
 	brick = SpawnActor<MarioBrick>(MarioRenderOrder::Block);
 	brick->SetBrickDefault();
 	brick->SetActorLocation({ 7800,400 });

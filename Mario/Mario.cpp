@@ -69,7 +69,7 @@ void Mario::BeginPlay()
 
 	BodyCollision = CreateCollision(MarioCollisionOrder::Player);
 	BodyCollision->SetColType(ECollisionType::Rect);
-	BodyCollision->SetTransform({ { 0,-32 }, { 60, 64 } });
+	BodyCollision->SetTransform({ { 0,-32 }, { 56, 64 } });
 
 	SetAnimation("Idle");
 	SetState(MarioState::Idle);
@@ -250,15 +250,15 @@ void Mario::SetMarioClassState(MarioClass _MarioClass)
 	case MarioClass::Small:
 		GodTime = 2.f;
 		SetAnimation("Smaller");
-		BodyCollision->SetTransform({ { 0,-32 }, { 60, 64 } });
+		BodyCollision->SetTransform({ { 0,-32 }, { 56, 64 } });
 		break;
 	case MarioClass::Big:
 		SetAnimation("Bigger");
-		BodyCollision->SetTransform({ { 0,-64 }, { 60, 128 } });
+		BodyCollision->SetTransform({ { 0,-64 }, { 56, 128 } });
 		break;
 	case MarioClass::Fire:
 		SetAnimation("Fire");
-		BodyCollision->SetTransform({ { 0,-64 }, { 60, 128 } });
+		BodyCollision->SetTransform({ { 0,-64 }, { 56, 128 } });
 		break;
 	default:
 		break;
@@ -693,7 +693,6 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 					Block->SetBoxState(BlockState::Interactive);
 				}
 				SpeedY.Y = 0.f;
-				GravitySpeed.Y = GravitySpeed.Y / 2.f;
 			}
 
 			else if (MarioTransform.Bottom() > ResultTransform.Top() + 10) {

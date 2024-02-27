@@ -26,7 +26,7 @@ protected:
 
 	virtual void StateUpdate(float _DeltaTime) override;
 	
-	virtual void CollisionEvent();
+	virtual void CollisionEvent(float _DeltaTime);
 
 
 	void InteractiveDirCheck();

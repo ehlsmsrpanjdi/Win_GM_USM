@@ -5,11 +5,11 @@
 #include "PhysicsActor.h"
 #include "BlockBase.h"
 
-MonsterBase::MonsterBase() 
+MonsterBase::MonsterBase()
 {
 }
 
-MonsterBase::~MonsterBase() 
+MonsterBase::~MonsterBase()
 {
 }
 
@@ -24,7 +24,7 @@ void MonsterBase::Tick(float _DeltaTime)
 	float CameraX = GetWorld()->GetCameraPos().X;
 	float WindowCenter = GEngine->MainWindow.GetWindowScale().X;
 	float CurLocationX = GetActorLocation().X;
-	if(CameraX + WindowCenter < CurLocationX)
+	if (CameraX + WindowCenter < CurLocationX)
 	{
 		return;
 	}
@@ -34,7 +34,7 @@ void MonsterBase::Tick(float _DeltaTime)
 	}
 	StateUpdate(_DeltaTime);
 
-	CollisionEvent();
+	CollisionEvent(_DeltaTime);
 
 	if (CurLocationX < CameraX - 32) {
 		Destroy();
@@ -130,7 +130,7 @@ void MonsterBase::SetMonsterState(MonsterState _State)
 	}
 }
 
-void MonsterBase::CollisionEvent()
+void MonsterBase::CollisionEvent(float _DeltaTime)
 {
 	std::vector<UCollision*> Result;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
@@ -162,18 +162,19 @@ void MonsterBase::CollisionEvent()
 		}
 	}
 
-	std::vector<UCollision*> BlockResult;
-	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, BlockResult))
-	{
-		SpeedY.Y = 0;
-		GravitySpeed.Y = 0;
-		AddActorLocation(FVector::Up);
-		BlockBase* Block = (BlockBase*)BlockResult[0]->GetOwner();
-		if (Block->GetState() == BlockState::Interactive){
-			SetMonsterState(MonsterState::Excute);
-		}
-	}
-
+	//std::vector<UCollision*> BlockResult;
+	//if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, BlockResult))
+	//{
+	//	SpeedY.Y = 0;
+	//	GravitySpeed.Y = 0;
+	//	for (UCollision* Collision : BlockResult) {
+	//		AddActorLocation(FVector::Up * 0.1f);
+	//		BlockBase* Block = (BlockBase*)Collision->GetOwner();
+	//		if (Block->GetState() == BlockState::Interactive) {
+	//			SetMonsterState(MonsterState::Excute);
+	//		}
+	//	}
+	//}
 
 }
 
@@ -194,6 +195,21 @@ void MonsterBase::Idle(float _DeltaTime)
 	IsEdge(_DeltaTime);
 	SpeedX.X = MonsterDefaultSpeed * static_cast<int>(DirState);
 	GravityCheck(_DeltaTime);
+
+	std::vector<UCollision*> BlockResult;
+	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, BlockResult))
+	{
+		SpeedY.Y = 0;
+		GravitySpeed.Y = 0;
+		for (UCollision* Collision : BlockResult) {
+			AddActorLocation(FVector::Up * 0.1f);
+			BlockBase* Block = (BlockBase*)Collision->GetOwner();
+			if (Block->GetState() == BlockState::Interactive) {
+				SetMonsterState(MonsterState::Excute);
+			}
+		}
+	}
+
 	ResultMove(_DeltaTime);
 }
 
