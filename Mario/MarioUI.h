@@ -27,7 +27,8 @@ protected:
 
 	FTransform MainUITransform = { { 296,-136 }, { 1024, 108 } };
 	FTransform ScoreUITransform = { {-110 ,-95}, {20,20} };
-	FTransform CoinUITransform = { { 230 ,-95}, {20,20} };
+	FTransform CoinUITransform = { { 165 ,-95}, {128,128} };
+	FTransform CoinCountUITransform = { { 230 ,-95}, {20,20} };
 	FTransform WorldUITransform = { {430 ,-95}, {20,20} };
 	FTransform TimeUITransform { {640 , -95}, {20,20} };
 	int PlusSize = 35;
@@ -41,6 +42,7 @@ private:
 	UImageRenderer* CoinUIArray[2] = { nullptr, };
 	UImageRenderer* WorldUIArray[2] = { nullptr, };
 	UImageRenderer* TimeUIArray[3] = { nullptr, };
+	UImageRenderer* CoinImage = nullptr;
 
 };
 

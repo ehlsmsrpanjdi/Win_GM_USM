@@ -9,6 +9,7 @@ Coin::Coin()
 Coin::~Coin() 
 {
 	MarioHelper::MarioTotalScore += 100;
+	MarioHelper::MarioCoinCount += 1;
 }
 
 void Coin::BeginPlay()

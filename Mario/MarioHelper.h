@@ -105,6 +105,8 @@ public:
 	static std::string_view ReturnString(int _Value);
 
 	static void MarioTimeReset();
+	static void MarioCoinReset();
+	static void MarioWorldSet(int _World);
 
 private:
 	// constrcuter destructer

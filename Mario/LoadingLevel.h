@@ -19,9 +19,14 @@ public:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	UImageRenderer* LoadingImage = nullptr;
+
+	void LevelEnd(ULevel* Level) override;
 	
 
 protected:
+
+	UImageRenderer* WorldUIArray[2] = { nullptr, };
+	UImageRenderer* MarioLifeUI = nullptr;
 
 private:
 

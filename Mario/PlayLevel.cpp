@@ -243,5 +243,5 @@ void UPlayLevel::Tick(float _DeltaTime)
 
 void UPlayLevel::LevelStart(ULevel* Level)
 {
-	MarioHelper::MarioTimeReset();
+	//MarioHelper::MarioWorldSet(11);
 }

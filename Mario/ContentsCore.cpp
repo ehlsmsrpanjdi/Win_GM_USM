@@ -50,6 +50,7 @@ void ContentsCore::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Fire.png", 4, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("BrokenBrick.png", 2, 2);
 	UEngineResourcesManager::GetInst().CuttingImage("FireEnd.png", 3, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("Coin_Origin.png", 6, 1);
 
 	
 

@@ -9,7 +9,7 @@ int MarioHelper::MarioTime = 400;
 int MarioHelper::MarioCoinCount = 200;
 int MarioHelper::MarioWorldCount = 11;
 int MarioHelper::MarioTotalScore = 1000000;
-int MarioHelper::MarioLife = 200;
+int MarioHelper::MarioLife = 1;
 
 MarioHelper::MarioHelper()
 {
@@ -139,4 +139,14 @@ std::string_view MarioHelper::ReturnString(int _Value)
 void MarioHelper::MarioTimeReset()
 {
 	MarioHelper::MarioTime = 400;
+}
+
+void MarioHelper::MarioCoinReset()
+{
+	MarioHelper::MarioCoinCount = 100;
+}
+
+void MarioHelper::MarioWorldSet(int _World)
+{
+	MarioHelper::MarioWorldCount = _World;
 }

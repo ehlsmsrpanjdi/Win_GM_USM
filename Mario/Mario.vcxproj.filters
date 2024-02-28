@@ -83,6 +83,9 @@
     <ClInclude Include="TestLevel.h">
       <Filter>Level\UtilityLevel</Filter>
     </ClInclude>
+    <ClInclude Include="LoadingUI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -166,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="TestLevel.cpp">
       <Filter>Level\UtilityLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingUI.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 #include "MarioUI.h"
 #include "MarioHelper.h"
 #include "CollisionActor.h"
+#include "LoadingUI.h"
 
 LoadingLevel::LoadingLevel() 
 {
@@ -25,7 +26,10 @@ void LoadingLevel::BeginPlay()
 	Map = SpawnActor<BackGroundMap>(MarioRenderOrder::Map);
 	Map->SetCollisionActorImage(GetName(), true);
 	Map->Renderer->SetTransform({ { a, b }, {1024, 960} });
-	//Map->Renderer->SetPosition({ a, b });
+
+	LoadingUI* LoadingLevelUI;
+	LoadingLevelUI = SpawnActor<LoadingUI>(MarioRenderOrder::UI);
+	LoadingLevelUI->SetActorLocation({ 200,200 });
 }
 
 void LoadingLevel::Tick(float _DeltaTime)
@@ -33,6 +37,12 @@ void LoadingLevel::Tick(float _DeltaTime)
 	if (UEngineInput::IsDown('U')) {
 		GEngine->ChangeLevel("Stage1");
 	}
+}
+
+void LoadingLevel::LevelEnd(ULevel* Level)
+{
+	MarioHelper::MarioTimeReset();
+	MarioHelper::MarioCoinReset();
 }
 
 

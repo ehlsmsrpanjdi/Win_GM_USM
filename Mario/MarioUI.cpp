@@ -60,7 +60,7 @@ void MarioUI::SetMarioWorldUI()
 	std::string Index = std::to_string(MarioHelper::MarioWorldCount);
 	std::string str;
 	for (int i = 0; i < 2; ++i) {
-		str = Index.substr(i , 1);
+		str = Index.substr(i, 1);
 		str.append(".png");
 		WorldUIArray[i]->SetImage(str);
 	}
@@ -72,6 +72,15 @@ void MarioUI::BeginPlay()
 
 	PlayerUIRenderer = CreateImageRenderer(static_cast<int>(MarioRenderOrder::UI));
 	PlayerUIRenderer->SetImage("UIBar.png");
+
+	CoinImage = CreateImageRenderer(static_cast<int>(MarioRenderOrder::UI));
+	CoinImage->SetImage("Coin_Origin.PNG");
+	CoinImage->SetTransform(CoinUITransform);
+
+	CoinImage->CreateAnimation("Idle", "Coin_Origin.PNG", 0, 5, 0.2f, true);
+	CoinImage->ChangeAnimation("Idle");
+	CoinImage->CameraEffectOff();
+
 
 	FVector UIScale = PlayerUIRenderer->GetImage()->GetScale();
 
@@ -91,7 +100,7 @@ void MarioUI::BeginPlay()
 		std::string Index = std::to_string(i);
 		CoinUIArray[i] = CreateImageRenderer(static_cast<int>(MarioRenderOrder::UI));
 		CoinUIArray[i]->SetImage(Index + ".png");
-		CoinUIArray[i]->SetTransform(CoinUITransform);
+		CoinUIArray[i]->SetTransform(CoinCountUITransform);
 		CoinUITransform.AddPosition({ PlusSize,0 });
 		CoinUIArray[i]->CameraEffectOff();
 	}
