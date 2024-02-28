@@ -134,3 +134,8 @@ std::string_view MarioHelper::ReturnString(int _Value)
 	std::string_view str = std::to_string(_Value);
 	return str;
 }
+
+void MarioHelper::MarioTimeReset()
+{
+	MarioHelper::MarioTime = 400;
+}

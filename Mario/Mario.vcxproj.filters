@@ -5,7 +5,7 @@
       <Filter>Actor\Fire</Filter>
     </ClInclude>
     <ClInclude Include="PlayLevel.h">
-      <Filter>Stage1</Filter>
+      <Filter>Level\Stage1</Filter>
     </ClInclude>
     <ClInclude Include="ContentsCore.h">
       <Filter>Core</Filter>
@@ -24,9 +24,8 @@
     </ClInclude>
     <ClInclude Include="MarioHelper.h" />
     <ClInclude Include="Stage1_Map.h">
-      <Filter>Stage1</Filter>
+      <Filter>Level\Stage1</Filter>
     </ClInclude>
-    <ClInclude Include="TestLevel.h" />
     <ClInclude Include="GreenTroopa.h">
       <Filter>Actor\Monster</Filter>
     </ClInclude>
@@ -78,13 +77,19 @@
     <ClInclude Include="FireEnd.h">
       <Filter>Actor\Fire</Filter>
     </ClInclude>
+    <ClInclude Include="LoadingLevel.h">
+      <Filter>Level\UtilityLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="TestLevel.h">
+      <Filter>Level\UtilityLevel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
       <Filter>Actor\Fire</Filter>
     </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
-      <Filter>Stage1</Filter>
+      <Filter>Level\Stage1</Filter>
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp">
       <Filter>Core</Filter>
@@ -103,9 +108,8 @@
     </ClCompile>
     <ClCompile Include="MarioHelper.cpp" />
     <ClCompile Include="Stage1_Map.cpp">
-      <Filter>Stage1</Filter>
+      <Filter>Level\Stage1</Filter>
     </ClCompile>
-    <ClCompile Include="TestLevel.cpp" />
     <ClCompile Include="GreenTroopa.cpp">
       <Filter>Actor\Monster</Filter>
     </ClCompile>
@@ -157,6 +161,12 @@
     <ClCompile Include="FireEnd.cpp">
       <Filter>Actor\Fire</Filter>
     </ClCompile>
+    <ClCompile Include="LoadingLevel.cpp">
+      <Filter>Level\UtilityLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="TestLevel.cpp">
+      <Filter>Level\UtilityLevel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Actor">
@@ -173,9 +183,6 @@
     </Filter>
     <Filter Include="Actor\Title">
       <UniqueIdentifier>{bd9602ee-0b27-48ba-a313-220877c35d51}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Stage1">
-      <UniqueIdentifier>{e1247206-7384-4814-9dfa-56d2e7cb058a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\Monster">
       <UniqueIdentifier>{a8601e0d-79e0-4a18-aa9a-945182360483}</UniqueIdentifier>
@@ -194,6 +201,15 @@
     </Filter>
     <Filter Include="Actor\Object">
       <UniqueIdentifier>{032af010-e7cf-4fca-ab49-2c3507838581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level">
+      <UniqueIdentifier>{bc2b2a27-deed-4a3a-a130-e5e0298229cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Stage1">
+      <UniqueIdentifier>{e1247206-7384-4814-9dfa-56d2e7cb058a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\UtilityLevel">
+      <UniqueIdentifier>{1031374a-a666-4dfb-ac32-951a964a3351}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

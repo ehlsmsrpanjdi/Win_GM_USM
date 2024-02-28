@@ -3,6 +3,7 @@
 #include <EngineCore\EngineCore.h>
 #include <EngineCore\ImageRenderer.h>
 #include <map>
+#include "MarioUI.h"
 
 
 enum MarioRenderOrder{
@@ -89,7 +90,6 @@ public:
 	static int MarioTotalScore;
 	static int MarioLife;
 
-
 	static bool BottomCheck(FVector _NextVector);
 	static bool LeftCheck(FVector _NextVector);
 	static bool RightCheck(FVector _NextVector);
@@ -103,6 +103,7 @@ public:
 
 	static std::string_view ReturnString(int _Value);
 
+	static void MarioTimeReset();
 
 private:
 	// constrcuter destructer

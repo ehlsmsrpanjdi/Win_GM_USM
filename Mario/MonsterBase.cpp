@@ -202,7 +202,7 @@ void MonsterBase::Idle(float _DeltaTime)
 		SpeedY.Y = 0;
 		GravitySpeed.Y = 0;
 		for (UCollision* Collision : BlockResult) {
-			AddActorLocation(FVector::Up * 0.1f);
+			AddActorLocation(FVector::Up);
 			BlockBase* Block = (BlockBase*)Collision->GetOwner();
 			if (Block->GetState() == BlockState::Interactive) {
 				SetMonsterState(MonsterState::Excute);

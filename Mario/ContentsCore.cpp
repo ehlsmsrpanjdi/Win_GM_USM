@@ -5,7 +5,7 @@
 #include <EngineBase/EngineDirectory.h>
 #include <EngineCore/EngineResourcesManager.h>
 #include <EngineBase\EngineFile.h>
-#include "TestLevel.h"
+#include "LoadingLevel.h"
 
 ContentsCore::ContentsCore()
 	: UEngineCore()
@@ -58,7 +58,10 @@ void ContentsCore::BeginPlay()
 
 
 	CreateLevel<UPlayLevel>("Stage1");
-	ChangeLevel("Stage1");
+	CreateLevel<LoadingLevel>("Loading");
+	CreateLevel<UTitleLevel>("Title");
+	//ChangeLevel("Title");
+	ChangeLevel("Loading");
 }
 
 void ContentsCore::Tick(float _DeltaTime)

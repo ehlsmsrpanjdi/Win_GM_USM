@@ -56,9 +56,8 @@ void UPlayLevel::BeginPlay()
 	Map->SetCollisionActorImage(GetName());
 
 
-	MarioUI* TestUI;
-	TestUI = SpawnActor<MarioUI>(MarioRenderOrder::UI);
-	TestUI->SetActorLocation({ 200,200 });
+	MarioUI* UI = SpawnActor<MarioUI>(MarioRenderOrder::UI);
+	UI->SetActorLocation({ 200,200 });
 
 	MonsterGoomba* Goomba;
 	Goomba = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
@@ -240,4 +239,9 @@ void UPlayLevel::BeginPlay()
 
 void UPlayLevel::Tick(float _DeltaTime)
 {
+}
+
+void UPlayLevel::LevelStart(ULevel* Level)
+{
+	MarioHelper::MarioTimeReset();
 }

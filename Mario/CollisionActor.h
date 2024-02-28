@@ -18,13 +18,13 @@ public:
 
 	void SetRenderImage(std::string_view _MapImageName);
 	void SetColRenderImage(std::string_view _MapImageName);
-	void SetCollisionActorImage(std::string_view _MapImageName);
+	void SetCollisionActorImage(std::string_view _MapImageName, bool NotCollision = false);
 	void SwitchRender();
 
-protected:
-	std::string CurAnimationName = "";
 	UImageRenderer* Renderer = nullptr;
 	UImageRenderer* ColRenderer = nullptr;
+protected:
+	std::string CurAnimationName = "";
 
 
 	void BeginPlay() override;

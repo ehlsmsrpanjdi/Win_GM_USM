@@ -14,8 +14,10 @@ public:
 	MarioUI& operator=(const MarioUI& _Other) = delete;
 	MarioUI& operator=(MarioUI&& _Other) noexcept = delete;
 
-	void SetMarioScore();
-	void SetMarioTime(float _DeltaTime);
+	void SetMarioScoreUI();
+	void SetMarioTimeUI(float _DeltaTime);
+	void SetMarioCoinUI();
+	void SetMarioWorldUI();
 
 protected:
 
@@ -23,11 +25,21 @@ protected:
 	void Tick(float _DeltaTime) override;
 	float Time = 0;
 
+	FTransform MainUITransform = { { 296,-136 }, { 1024, 108 } };
+	FTransform ScoreUITransform = { {-110 ,-95}, {20,20} };
+	FTransform CoinUITransform = { { 230 ,-95}, {20,20} };
+	FTransform WorldUITransform = { {430 ,-95}, {20,20} };
+	FTransform TimeUITransform { {640 , -95}, {20,20} };
+	int PlusSize = 35;
+
+
 private:
 	UImageRenderer* PlayerUIRenderer = nullptr;
 
 	int MarioScoreIndex = 6;
 	UImageRenderer* ScoreUIArray[6] = { nullptr, };
+	UImageRenderer* CoinUIArray[2] = { nullptr, };
+	UImageRenderer* WorldUIArray[2] = { nullptr, };
 	UImageRenderer* TimeUIArray[3] = { nullptr, };
 
 };

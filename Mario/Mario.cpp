@@ -78,6 +78,8 @@ void Mario::BeginPlay()
 
 void Mario::Tick(float _DeltaTime)
 {
+	UEngineDebug::DebugTextPrint(std::to_string(1.0f / _DeltaTime), 24);
+
 	if (UEngineInput::IsDown('J')) {
 		AddActorLocation(FVector::Right * 400);
 		GetWorld()->SetCameraPos(FVector::Right * 400);
@@ -86,6 +88,10 @@ void Mario::Tick(float _DeltaTime)
 
 	if (UEngineInput::IsDown('K')) {
 		AddActorLocation(FVector::Up * 200);
+	}
+
+	if (UEngineInput::IsDown('U')) {
+		GEngine->ChangeLevel("Loading");
 	}
 
 	PhysicsActor::Tick(_DeltaTime);
@@ -800,8 +806,8 @@ void Mario::ResultMove(float _DeltaTime)
 	}
 	AddActorLocation(CurSpeed * _DeltaTime);
 
-	if (MarioHelper::BottomCheck(GetActorLocation() + FVector{ 0,-1 })) {
-		AddActorLocation(FVector{ 0.f,-1.f });
+	while(MarioHelper::BottomCheck(GetActorLocation() + FVector{ 0,-1 })) {
+		AddActorLocation(FVector::Up);
 	}
 	SetActorCameraPos();
 }

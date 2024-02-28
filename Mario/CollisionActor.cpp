@@ -26,11 +26,14 @@ void CollisionActor::SetColRenderImage(std::string_view _MapImageName)
 	ColRenderer->SetTransform({ ImageScale.Half2D(), ImageScale });
 }
 
-void CollisionActor::SetCollisionActorImage(std::string_view _MapImageName)
+void CollisionActor::SetCollisionActorImage(std::string_view _MapImageName, bool NotCollision)
 {
 	std::string Name = _MapImageName.data();
 
 	SetRenderImage(Name + ".PNG");
+	if(NotCollision){
+		return;
+	}
 	SetColRenderImage(Name + "_Col.PNG");
 }
 

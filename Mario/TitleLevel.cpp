@@ -4,6 +4,8 @@
 #include <EngineBase\EngineFile.h>
 #include <EngineCore\EngineResourcesManager.h>
 #include "TitleLogo.h"
+#include "MarioHelper.h"
+#include "MarioUI.h"
 
 UTitleLevel::UTitleLevel()
 {
@@ -35,3 +37,11 @@ void UTitleLevel::BeginPlay()
 	SpawnActor<TitleLogo>();
 
 }
+
+void UTitleLevel::Tick(float _DeltaTime)
+{
+	if (UEngineInput::IsDown('U')) {
+		GEngine->ChangeLevel("Stage1");
+	}
+}
+
