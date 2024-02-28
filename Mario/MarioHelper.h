@@ -113,6 +113,10 @@ public:
 	static void MarioCoinReset();
 	static void MarioWorldSet(int _World);
 
+	static void CreateLevel(std::string _LevelName);
+
+	static bool StageOneInit;
+
 private:
 	// constrcuter destructer
 	MarioHelper();

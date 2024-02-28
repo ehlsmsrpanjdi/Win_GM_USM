@@ -20,6 +20,7 @@ public:
 	void Tick(float _DeltaTime) override;
 	UImageRenderer* LoadingImage = nullptr;
 
+	void LevelStart(ULevel* Level) override;
 	void LevelEnd(ULevel* Level) override;
 	
 
@@ -27,7 +28,7 @@ protected:
 
 	UImageRenderer* WorldUIArray[2] = { nullptr, };
 	UImageRenderer* MarioLifeUI = nullptr;
-	float LevelChangeTime = 5.f;
+	float LevelChangeTime = 3.f;
 
 private:
 

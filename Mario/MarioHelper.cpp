@@ -1,5 +1,7 @@
 #include "MarioHelper.h"
 #include <string>
+#include "PlayLevel.h"
+
 
 UWindowImage* MarioHelper::ColMapImage = nullptr;
 FVector MarioHelper::Gravity = { 0.f, 1500.0f };
@@ -12,6 +14,8 @@ int MarioHelper::MarioTotalScore = 1000000;
 int MarioHelper::MarioLife = 3;
 std::string MarioHelper::PrevLevelName = "Stage1";
 
+bool MarioHelper::StageOneInit = false;
+
 MarioHelper::MarioHelper()
 {
 
@@ -19,6 +23,13 @@ MarioHelper::MarioHelper()
 
 MarioHelper::~MarioHelper()
 {
+}
+
+void MarioHelper::CreateLevel(std::string _LevelName)
+{
+	if (_LevelName == "State1"); {
+		GEngine->CreateLevel<UPlayLevel>("Stage1");
+	}
 }
 
 bool MarioHelper::BottomCheck(FVector _NextVector) {

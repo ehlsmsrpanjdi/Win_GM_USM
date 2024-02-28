@@ -30,22 +30,23 @@ void UPlayLevel::BeginPlay()
 {
 	ULevel::BeginPlay();
 
-	UEngineDirectory NewDir;
+	if(!MarioHelper::StageOneInit){
+		MarioHelper::StageOneInit = true;
+		UEngineDirectory NewDir;
 
-	NewDir.MoveParent();
-	NewDir.Move("ContentsResources");
-	NewDir.Move("Map");
-	NewDir.Move("Stage1");
+		NewDir.MoveParent();
+		NewDir.Move("ContentsResources");
+		NewDir.Move("Map");
+		NewDir.Move("Stage1");
 
+		std::list<UEngineFile> AllFileList = NewDir.AllFile({ ".png", ".bmp" }, true);
 
-
-	std::list<UEngineFile> AllFileList = NewDir.AllFile({ ".png", ".bmp" }, true);
-
-	for (UEngineFile& File : AllFileList)
-	{
-		std::string FullPath = File.GetFullPath();
-		// 싱글톤 잊지 말라고 일부러 GetInst를 사용하겠습니다.
-		UEngineResourcesManager::GetInst().LoadImg(FullPath);
+		for (UEngineFile& File : AllFileList)
+		{
+			std::string FullPath = File.GetFullPath();
+			// 싱글톤 잊지 말라고 일부러 GetInst를 사용하겠습니다.
+			UEngineResourcesManager::GetInst().LoadImg(FullPath);
+		}
 	}
 	Mario* TestMario;
 	TestMario = this->SpawnActor<Mario>(2);
