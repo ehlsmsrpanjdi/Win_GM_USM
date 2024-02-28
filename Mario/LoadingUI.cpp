@@ -41,6 +41,11 @@ void LoadingUI::BeginPlay()
 	LifeUI->SetImage("1.png");
 	LifeUI->SetTransform(LifeUITransform);
 	LifeUI->CameraEffectOff();
+
+	CheatUI = CreateImageRenderer(static_cast<int>(MarioRenderOrder::Cheat));
+	CheatUI->SetImage("Cheat.png");
+	CheatUI->SetTransform(CheatUITransform);
+	CheatUI->CameraEffectOff();
 }
 
 void LoadingUI::Tick(float _DeltaTime)

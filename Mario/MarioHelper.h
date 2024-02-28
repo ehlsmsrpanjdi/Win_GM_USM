@@ -14,6 +14,7 @@ enum MarioRenderOrder{
 	Block,
 	Fire,
 	UI,
+	Cheat,
 };
 
 enum class EActorDir{

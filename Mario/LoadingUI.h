@@ -24,8 +24,10 @@ protected:
 private:
 	FTransform LoadingWorldUITransform = { {365 ,138}, {20,20} };
 	FTransform LifeUITransform= { { 390,262}, {20,20} };
+	FTransform CheatUITransform = { {640 , -95}, {200,20} };
 
 	UImageRenderer* WorldUIArray[2] = { nullptr, };
 	UImageRenderer* LifeUI = nullptr;
+	UImageRenderer* CheatUI = nullptr;
 };
 
