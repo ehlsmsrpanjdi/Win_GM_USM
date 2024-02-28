@@ -9,7 +9,8 @@ int MarioHelper::MarioTime = 400;
 int MarioHelper::MarioCoinCount = 200;
 int MarioHelper::MarioWorldCount = 11;
 int MarioHelper::MarioTotalScore = 1000000;
-int MarioHelper::MarioLife = 1;
+int MarioHelper::MarioLife = 3;
+std::string MarioHelper::PrevLevelName = "Stage1";
 
 MarioHelper::MarioHelper()
 {
@@ -146,7 +147,16 @@ void MarioHelper::MarioCoinReset()
 	MarioHelper::MarioCoinCount = 100;
 }
 
+void MarioHelper::SetPrevLevel(std::string _LevelName)
+{
+}
+
 void MarioHelper::MarioWorldSet(int _World)
 {
 	MarioHelper::MarioWorldCount = _World;
+}
+
+std::string MarioHelper::GetPrevLevel()
+{
+	return MarioHelper::PrevLevelName;
 }

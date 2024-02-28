@@ -90,10 +90,6 @@ void Mario::Tick(float _DeltaTime)
 		AddActorLocation(FVector::Up * 200);
 	}
 
-	if (UEngineInput::IsDown('U')) {
-		GEngine->ChangeLevel("Loading");
-	}
-
 	PhysicsActor::Tick(_DeltaTime);
 
 	PlayerLocation = GetActorLocation();
@@ -413,7 +409,14 @@ void Mario::Dead(float _DeltaTime) {
 		GravitySpeed += MarioHelper::Gravity * _DeltaTime;
 		float Y = SpeedY.Y + GravitySpeed.Y;
 		AddActorLocation(FVector{ 0.f,Y * _DeltaTime });
-		Destroy(3.f);
+		if (ChangeLevelTime <= 0) {
+			ChangeLevelTime = 2.5f;
+			MarioHelper::MarioLife -= 1;
+			GEngine->ChangeLevel("Loading");
+		}
+		else {
+			ChangeLevelTime -= _DeltaTime;
+		}
 	}
 	else {
 		DeadTime -= _DeltaTime;
@@ -448,7 +451,7 @@ void Mario::EndMove(float _DeltaTime)
 	SetAnimation("Move");
 	SpeedX.X = 100.f;
 	GravityCheck(_DeltaTime);
-	AddActorLocation( SpeedX * _DeltaTime);
+	AddActorLocation(SpeedX * _DeltaTime);
 	AddActorLocation(GravitySpeed * _DeltaTime);
 }
 void Mario::Jump(float _DeltaTime)
@@ -806,7 +809,7 @@ void Mario::ResultMove(float _DeltaTime)
 	}
 	AddActorLocation(CurSpeed * _DeltaTime);
 
-	while(MarioHelper::BottomCheck(GetActorLocation() + FVector{ 0,-1 })) {
+	while (MarioHelper::BottomCheck(GetActorLocation() + FVector{ 0,-1 })) {
 		AddActorLocation(FVector::Up);
 	}
 	SetActorCameraPos();

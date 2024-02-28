@@ -101,7 +101,7 @@ void MarioUI::BeginPlay()
 		CoinUIArray[i] = CreateImageRenderer(static_cast<int>(MarioRenderOrder::UI));
 		CoinUIArray[i]->SetImage(Index + ".png");
 		CoinUIArray[i]->SetTransform(CoinCountUITransform);
-		CoinUITransform.AddPosition({ PlusSize,0 });
+		CoinCountUITransform.AddPosition({ PlusSize,0 });
 		CoinUIArray[i]->CameraEffectOff();
 	}
 

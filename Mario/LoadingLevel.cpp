@@ -14,7 +14,6 @@ LoadingLevel::~LoadingLevel()
 
 void LoadingLevel::BeginPlay()
 {
-
 	float a = GEngine->MainWindow.GetWindowScale().hX();
 	float  b = GEngine->MainWindow.GetWindowScale().hY();
 
@@ -37,12 +36,20 @@ void LoadingLevel::Tick(float _DeltaTime)
 	if (UEngineInput::IsDown('U')) {
 		GEngine->ChangeLevel("Stage1");
 	}
+
+	if (LevelChangeTime <= 0) {
+		std::string LevelName = MarioHelper::GetPrevLevel();
+		LevelChangeTime = 5.f;
+		GEngine->ChangeLevel(LevelName);
+	}
+	else {
+		LevelChangeTime -= _DeltaTime;
+	}
 }
 
 void LoadingLevel::LevelEnd(ULevel* Level)
 {
 	MarioHelper::MarioTimeReset();
-	MarioHelper::MarioCoinReset();
 }
 
 

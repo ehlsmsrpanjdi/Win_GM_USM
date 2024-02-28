@@ -62,7 +62,7 @@ void ContentsCore::BeginPlay()
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<UTitleLevel>("Title");
 	//ChangeLevel("Title");
-	ChangeLevel("Loading");
+	ChangeLevel("Title");
 }
 
 void ContentsCore::Tick(float _DeltaTime)

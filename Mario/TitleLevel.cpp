@@ -40,8 +40,8 @@ void UTitleLevel::BeginPlay()
 
 void UTitleLevel::Tick(float _DeltaTime)
 {
-	if (UEngineInput::IsDown('U')) {
-		GEngine->ChangeLevel("Stage1");
+	if (UEngineInput::IsDown(VK_TAB)) {
+		GEngine->ChangeLevel("Loading");
 	}
 }
 

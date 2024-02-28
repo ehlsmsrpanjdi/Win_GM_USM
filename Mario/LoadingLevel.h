@@ -27,6 +27,7 @@ protected:
 
 	UImageRenderer* WorldUIArray[2] = { nullptr, };
 	UImageRenderer* MarioLifeUI = nullptr;
+	float LevelChangeTime = 5.f;
 
 private:
 

@@ -105,6 +105,10 @@ public:
 
 	static std::string_view ReturnString(int _Value);
 
+	static void SetPrevLevel(std::string _LevelName);
+	static std::string GetPrevLevel();
+	static std::string PrevLevelName;
+
 	static void MarioTimeReset();
 	static void MarioCoinReset();
 	static void MarioWorldSet(int _World);

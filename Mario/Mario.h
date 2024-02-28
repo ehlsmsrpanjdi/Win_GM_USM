@@ -96,5 +96,7 @@ protected:
 private:
 	MarioState State = MarioState::None;
 	MarioState PrevState = MarioState::None;
+
+	float ChangeLevelTime = 2.5f;
 };
 
