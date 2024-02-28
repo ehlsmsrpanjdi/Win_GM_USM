@@ -86,6 +86,9 @@
     <ClInclude Include="LoadingUI.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -172,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="LoadingUI.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Actor\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

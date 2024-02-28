@@ -90,6 +90,10 @@ void Mario::Tick(float _DeltaTime)
 		AddActorLocation(FVector::Up * 200);
 	}
 
+	if (UEngineInput::IsDown('H')) {
+		MarioHelper::LevelEnd = true;
+	}
+
 	PhysicsActor::Tick(_DeltaTime);
 
 	PlayerLocation = GetActorLocation();

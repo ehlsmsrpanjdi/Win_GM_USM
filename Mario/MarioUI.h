@@ -33,6 +33,9 @@ protected:
 	FTransform TimeUITransform { {640 , -95}, {20,20} };
 	int PlusSize = 35;
 
+	void IsLevelEnd(float _DeltaTime);
+	float ChangeLevelTime = 5.0f;
+	float MinusTime = 0.004f;
 
 private:
 	UImageRenderer* PlayerUIRenderer = nullptr;

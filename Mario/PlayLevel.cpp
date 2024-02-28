@@ -16,6 +16,7 @@
 #include "ItemFlower.h"
 #include "Fire.h"
 #include "FireEnd.h"
+#include "Door.h"
 
 UPlayLevel::UPlayLevel()
 {
@@ -236,6 +237,9 @@ void UPlayLevel::BeginPlay()
 
 	Flag* flag = SpawnActor<Flag>(MarioRenderOrder::Item);
 	flag->SetActorLocation({ 12704.f, 490.f });
+
+	Door* door = SpawnActor<Door>(MarioRenderOrder::UI);
+	door->SetActorLocation({ 12904.f, 490.f });
 }
 
 void UPlayLevel::Tick(float _DeltaTime)

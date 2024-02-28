@@ -26,7 +26,19 @@ void MarioUI::SetMarioScoreUI()
 
 void MarioUI::SetMarioTimeUI(float _DeltaTime)
 {
-	if (Time >= 1.f) {
+	if (MarioHelper::LevelEnd) {
+		if (MarioHelper::MarioTime > 1000 && MinusTime < 0)
+		{
+			MarioHelper::MarioTime -= 1;
+			MarioHelper::MarioTotalScore += 100;
+			MinusTime = MinusTime + 0.004f;
+		}
+		else {
+			MinusTime -= _DeltaTime;
+		}
+	}
+
+	if (Time >= 1.f && MarioHelper::MarioTime > 1000 && !MarioHelper::LevelEnd) {
 		Time = 0.f;
 		MarioHelper::MarioTime -= 1;
 	}
@@ -37,7 +49,7 @@ void MarioUI::SetMarioTimeUI(float _DeltaTime)
 	std::string Index = std::to_string(MarioHelper::MarioTime);
 	std::string str;
 	for (int i = 0; i < 3; ++i) {
-		str = Index.substr(i, 1);
+		str = Index.substr(i + 1, 1);
 		str.append(".png");
 		TimeUIArray[i]->SetImage(str);
 	}
@@ -141,5 +153,21 @@ void MarioUI::Tick(float _DeltaTime)
 	SetMarioCoinUI();
 	SetMarioWorldUI();
 	SetMarioTimeUI(_DeltaTime);
+	IsLevelEnd(_DeltaTime);
+}
+
+void MarioUI::IsLevelEnd(float _DeltaTime)
+{
+	if (MarioHelper::LevelEnd == true) {
+		if (ChangeLevelTime >= 0) {
+			ChangeLevelTime -= _DeltaTime;
+		}
+		else {
+		MarioHelper::LevelEnd = false;
+		ChangeLevelTime = 5.0f;
+		GEngine->ChangeLevel("Loading");
+		}
+
+	}
 }
 

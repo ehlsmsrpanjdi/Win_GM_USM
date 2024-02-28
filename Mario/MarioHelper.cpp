@@ -7,12 +7,13 @@ UWindowImage* MarioHelper::ColMapImage = nullptr;
 FVector MarioHelper::Gravity = { 0.f, 1500.0f };
 
 
-int MarioHelper::MarioTime = 400;
+int MarioHelper::MarioTime = 1400;
 int MarioHelper::MarioCoinCount = 200;
 int MarioHelper::MarioWorldCount = 11;
 int MarioHelper::MarioTotalScore = 1000000;
 int MarioHelper::MarioLife = 3;
 std::string MarioHelper::PrevLevelName = "Stage1";
+bool MarioHelper::LevelEnd = false;
 
 bool MarioHelper::StageOneInit = false;
 
@@ -150,7 +151,7 @@ std::string_view MarioHelper::ReturnString(int _Value)
 
 void MarioHelper::MarioTimeReset()
 {
-	MarioHelper::MarioTime = 400;
+	MarioHelper::MarioTime = 1400;
 }
 
 void MarioHelper::MarioCoinReset()
@@ -160,6 +161,7 @@ void MarioHelper::MarioCoinReset()
 
 void MarioHelper::SetPrevLevel(std::string _LevelName)
 {
+	MarioHelper::PrevLevelName = _LevelName;
 }
 
 void MarioHelper::MarioWorldSet(int _World)

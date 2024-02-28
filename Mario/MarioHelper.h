@@ -76,6 +76,7 @@ enum class MarioCollisionOrder{
 	Item,
 	Block,
 	Fire,
+	Object,
 };
 
 
@@ -95,6 +96,7 @@ public:
 	static bool BottomCheck(FVector _NextVector);
 	static bool LeftCheck(FVector _NextVector);
 	static bool RightCheck(FVector _NextVector);
+	static bool LevelEnd;
 
 	static FVector GetBottomLeftVector(FVector _NextVector);
 	static FVector GetBottomRightVector(FVector _NextVector);

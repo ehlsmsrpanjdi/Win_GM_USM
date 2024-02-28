@@ -42,6 +42,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Door.h" />
     <ClInclude Include="FireEnd.h">
       <SubType>
       </SubType>
@@ -157,6 +158,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Door.cpp" />
     <ClCompile Include="FireEnd.cpp">
       <SubType>
       </SubType>
