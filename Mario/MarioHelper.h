@@ -87,6 +87,7 @@ public:
 
 	static int MarioTime;
 	static int MarioCoinCount;
+	static int MarioWorldCount;
 	static int MarioTotalScore;
 	static int MarioLife;
 

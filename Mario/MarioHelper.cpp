@@ -7,6 +7,7 @@ FVector MarioHelper::Gravity = { 0.f, 1500.0f };
 
 int MarioHelper::MarioTime = 400;
 int MarioHelper::MarioCoinCount = 200;
+int MarioHelper::MarioWorldCount = 11;
 int MarioHelper::MarioTotalScore = 1000000;
 int MarioHelper::MarioLife = 200;
 

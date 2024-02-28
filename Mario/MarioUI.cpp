@@ -46,10 +46,24 @@ void MarioUI::SetMarioTimeUI(float _DeltaTime)
 
 void MarioUI::SetMarioCoinUI()
 {
+	std::string Index = std::to_string(MarioHelper::MarioCoinCount);
+	std::string str;
+	for (int i = 0; i < 2; ++i) {
+		str = Index.substr(i + 1, 1);
+		str.append(".png");
+		CoinUIArray[i]->SetImage(str);
+	}
 }
 
 void MarioUI::SetMarioWorldUI()
 {
+	std::string Index = std::to_string(MarioHelper::MarioWorldCount);
+	std::string str;
+	for (int i = 0; i < 2; ++i) {
+		str = Index.substr(i , 1);
+		str.append(".png");
+		WorldUIArray[i]->SetImage(str);
+	}
 }
 
 void MarioUI::BeginPlay()
@@ -115,6 +129,8 @@ void MarioUI::Tick(float _DeltaTime)
 	//	PlayerUIRenderer->SetTransform({ {A},{1024,108} });
 	//}
 	SetMarioScoreUI();
+	SetMarioCoinUI();
+	SetMarioWorldUI();
 	SetMarioTimeUI(_DeltaTime);
 }
 
