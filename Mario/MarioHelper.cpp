@@ -14,6 +14,10 @@ int MarioHelper::MarioTotalScore = 1000000;
 int MarioHelper::MarioLife = 3;
 std::string MarioHelper::PrevLevelName = "Stage1";
 bool MarioHelper::LevelEnd = false;
+FVector MarioHelper::TeleportLocation = FVector{ 3193.f,1060.f };
+FVector MarioHelper::TeleportCameraLocation = FVector{ 3073.f,960.f };
+bool MarioHelper::IsGround =false;
+
 
 bool MarioHelper::StageOneInit = false;
 

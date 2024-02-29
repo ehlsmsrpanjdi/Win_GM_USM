@@ -15,7 +15,7 @@ void MonsterGoomba::BeginPlay()
 	NoDir = true;
 	Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 	Renderer->SetImage("Goomba.png");
-	Renderer->SetTransform({ {0,0 }, { 512,512 } });
+	Renderer->SetTransform({ {0,0 }, { 384,384} });
 	AnimationAuto(Renderer, "Idle", 0, 1, 0.2f);
 	SetAnimation("Idle");
 

@@ -26,6 +26,10 @@ public:
 
 	static MarioClass MyMarioClass;
 
+	MarioState GetState() {
+		return State;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -47,6 +51,8 @@ protected:
 	void EndStart();
 	void EndMoveStart();
 	void ChangingStart();
+	void TeleportingStart();
+
 	void Idle(float _DeltaTime);
 	void Move(float _DeltaTime);
 	void Jump(float _DeltaTime);
@@ -57,7 +63,7 @@ protected:
 	void End(float _DeltaTime);
 	void EndMove(float _DeltaTime);
 	void Changing(float _DeltaTime);
-
+	void Teleporting(float _DeltaTime);
 
 	bool LeftEdgeCheck();
 	bool RightEdgeCheck();
@@ -92,6 +98,7 @@ protected:
 
 	float ChangeTime = 0.6f;
 	float GodTime = 0.f;
+	float TeleportingTime = 3.f;
 
 private:
 	MarioState State = MarioState::None;

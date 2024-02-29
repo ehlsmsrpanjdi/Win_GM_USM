@@ -88,11 +88,25 @@ void Mario::Tick(float _DeltaTime)
 
 	if (UEngineInput::IsDown('K')) {
 		AddActorLocation(FVector::Up * 200);
+		SetState(MarioState::TelePorting);
 	}
 
 	if (UEngineInput::IsDown('H')) {
 		MarioHelper::LevelEnd = true;
 	}
+
+	//if (UEngineInput::IsDown('R')) {
+	//	FVector CurPos = GetActorLocation();
+	//	float WindowCenter = GEngine->MainWindow.GetWindowScale().hX();
+	//	FVector CurCameraPos = GetWorld()->GetCameraPos();
+	//	GetWorld()->SetCameraPos({ CurPos.X - WindowCenter,CurCameraPos.Y + 100 });
+	//}
+	//if (UEngineInput::IsDown('E')) {
+	//	FVector CurPos = GetActorLocation();
+	//	float WindowCenter = GEngine->MainWindow.GetWindowScale().hX();
+	//	FVector CurCameraPos = GetWorld()->GetCameraPos();
+	//	GetWorld()->SetCameraPos({ CurPos.X + 100 ,CurCameraPos.Y});
+	//}
 
 	PhysicsActor::Tick(_DeltaTime);
 
@@ -118,11 +132,14 @@ void Mario::Tick(float _DeltaTime)
 
 void Mario::SetActorCameraPos()
 {
-	FVector CurPos = GetActorLocation();
-	FVector CurCameraPos = GetWorld()->GetCameraPos();
-	float WindowCenter = GEngine->MainWindow.GetWindowScale().hX();
-	if (CurPos.X > WindowCenter + CurCameraPos.X) {
-		GetWorld()->SetCameraPos({ CurPos.X - WindowCenter,CurCameraPos.Y });
+	if (!MarioHelper::IsGround)
+	{
+		FVector CurPos = GetActorLocation();
+		FVector CurCameraPos = GetWorld()->GetCameraPos();
+		float WindowCenter = GEngine->MainWindow.GetWindowScale().hX();
+		if (CurPos.X > WindowCenter + CurCameraPos.X) {
+			GetWorld()->SetCameraPos({ CurPos.X - WindowCenter,CurCameraPos.Y });
+		}
 	}
 }
 
@@ -162,6 +179,9 @@ void Mario::StateUpdate(float _DeltaTime)
 		break;
 	case MarioState::Changing:
 		Changing(_DeltaTime);
+		break;
+	case MarioState::TelePorting:
+		Teleporting(_DeltaTime);
 		break;
 	default:
 		break;
@@ -237,6 +257,9 @@ void Mario::SetState(MarioState _State)
 			break;
 		case MarioState::Changing:
 			ChangingStart();
+			break;
+		case MarioState::TelePorting:
+			TeleportingStart();
 			break;
 		default:
 			break;
@@ -443,6 +466,10 @@ void Mario::ChangingStart()
 	GetWorld()->SetOtherTimeScale(static_cast<int>(MarioRenderOrder::Player), 0.0f);
 	PrevState = State;
 	ChangeTime = 1.f;
+}
+
+void Mario::TeleportingStart()
+{
 }
 
 void Mario::EndMove(float _DeltaTime)
@@ -755,6 +782,20 @@ void Mario::Changing(float _DeltaTime)
 	if (ChangeTime <= 0) {
 		SetState(PrevState);
 		GetWorld()->SetAllTimeScale(1.0f);
+	}
+}
+
+void Mario::Teleporting(float _DeltaTime)
+{
+	AddActorLocation(FVector::Down * 100.f * _DeltaTime);
+	if (TeleportingTime >= 0) {
+		TeleportingTime -= _DeltaTime;
+	}
+	else {
+		GetWorld()->SetCameraPos(MarioHelper::TeleportCameraLocation);
+		SetActorLocation(MarioHelper::TeleportLocation);
+		TeleportingTime = 3.0f;
+		SetState(MarioState::Idle);
 	}
 }
 

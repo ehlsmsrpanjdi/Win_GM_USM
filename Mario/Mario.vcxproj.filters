@@ -89,6 +89,9 @@
     <ClInclude Include="Door.h">
       <Filter>Actor\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Pipe.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -177,6 +180,9 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="Door.cpp">
+      <Filter>Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Pipe.cpp">
       <Filter>Actor\Object</Filter>
     </ClCompile>
   </ItemGroup>

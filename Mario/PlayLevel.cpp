@@ -8,15 +8,12 @@
 #include "Plant.h"
 #include "MarioBlock.h"
 #include "MarioBrick.h"
-#include "MushRoom.h"
 #include "MarioUI.h"
 #include "MonsterGoomba.h"
-#include "Coin.h"
 #include "Flag.h"
 #include "ItemFlower.h"
-#include "Fire.h"
-#include "FireEnd.h"
 #include "Door.h"
+#include "Pipe.h"
 
 UPlayLevel::UPlayLevel()
 {
@@ -64,6 +61,11 @@ void UPlayLevel::BeginPlay()
 	MonsterGoomba* Goomba;
 	Goomba = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
 	Goomba->SetActorLocation({ 1300, 830 });
+
+	Pipe* pipe;
+	pipe = SpawnActor<Pipe>(MarioRenderOrder::Cheat);
+	pipe->SetActorLocation({ 700,830 });
+	pipe->SetTotalLocation({ 3193.f,1060.f }, { 3073.f,960.f }, true);
 
 	Goomba = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
 	Goomba->SetActorLocation({ 2686, 830 });

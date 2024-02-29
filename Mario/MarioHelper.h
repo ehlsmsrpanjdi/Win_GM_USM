@@ -34,6 +34,7 @@ enum class MarioState{
 	End,
 	EndMove,
 	Changing,
+	TelePorting,
 };
 
 enum class MarioClass {
@@ -92,6 +93,9 @@ public:
 	static int MarioWorldCount;
 	static int MarioTotalScore;
 	static int MarioLife;
+	static FVector TeleportLocation;
+	static FVector TeleportCameraLocation;
+	static bool IsGround;
 
 	static bool BottomCheck(FVector _NextVector);
 	static bool LeftCheck(FVector _NextVector);
