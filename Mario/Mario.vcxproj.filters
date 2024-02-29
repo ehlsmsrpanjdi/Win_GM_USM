@@ -92,6 +92,12 @@
     <ClInclude Include="Pipe.h">
       <Filter>Actor\Object</Filter>
     </ClInclude>
+    <ClInclude Include="LeftPipe.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="UpPipe.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -183,6 +189,12 @@
       <Filter>Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="Pipe.cpp">
+      <Filter>Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="LeftPipe.cpp">
+      <Filter>Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="UpPipe.cpp">
       <Filter>Actor\Object</Filter>
     </ClCompile>
   </ItemGroup>

@@ -52,6 +52,7 @@ protected:
 	void EndMoveStart();
 	void ChangingStart();
 	void TeleportingStart();
+	void TeleportEndStart();
 
 	void Idle(float _DeltaTime);
 	void Move(float _DeltaTime);
@@ -64,6 +65,7 @@ protected:
 	void EndMove(float _DeltaTime);
 	void Changing(float _DeltaTime);
 	void Teleporting(float _DeltaTime);
+	void TeleportEnd(float _DeltaTime);
 
 	bool LeftEdgeCheck();
 	bool RightEdgeCheck();
@@ -98,7 +100,7 @@ protected:
 
 	float ChangeTime = 0.6f;
 	float GodTime = 0.f;
-	float TeleportingTime = 3.f;
+	float TeleportingTime = 2.f;
 
 private:
 	MarioState State = MarioState::None;

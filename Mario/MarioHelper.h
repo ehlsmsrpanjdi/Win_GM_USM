@@ -35,6 +35,7 @@ enum class MarioState{
 	EndMove,
 	Changing,
 	TelePorting,
+	TelePortEnd,
 };
 
 enum class MarioClass {

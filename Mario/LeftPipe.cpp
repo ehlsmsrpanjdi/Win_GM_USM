@@ -1,28 +1,28 @@
-#include "Pipe.h"
+#include "LeftPipe.h"
 #include "MarioHelper.h"
 #include "Mario.h"
 #include <EnginePlatform/EngineInput.h>
 
 
-Pipe::Pipe()
+LeftPipe::LeftPipe()
 {
 }
 
-Pipe::~Pipe()
+LeftPipe::~LeftPipe()
 {
 }
 
-void Pipe::BeginPlay()
+void LeftPipe::BeginPlay()
 {
 	BodyCollision = CreateCollision(MarioCollisionOrder::Object);
-	BodyCollision->SetTransform({ { 0,0 } ,{32,128} });
+	BodyCollision->SetTransform({ { 0,0 } ,{128,32} });
 
 	BodyRenderer = CreateImageRenderer(MarioRenderOrder::Cheat);
 	BodyRenderer->SetTransform({ {0,0}, {128, 128} });
-	BodyRenderer->SetImage("Pipe.png");
+	BodyRenderer->SetImage("LeftPipe.png");
 }
 
-void Pipe::Tick(float _DeltaTime)
+void LeftPipe::Tick(float _DeltaTime)
 {
 	std::vector<UCollision*> Result;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
@@ -31,8 +31,7 @@ void Pipe::Tick(float _DeltaTime)
 		UCollision* Collision = Result[0];
 		Player = (Mario*)Collision->GetOwner();
 
-		if (UEngineInput::IsDown(VK_DOWN) && Player->GetState() == MarioState::Idle && IsTeleporting != true) {
-			Player->SetState(MarioState::TelePorting);
+		if (UEngineInput::IsDown(VK_RIGHT) && Player->GetState() == MarioState::Move && IsTeleporting != true) {
 			MarioHelper::TeleportLocation = PlayerLocation;
 			MarioHelper::TeleportCameraLocation = CameraLocation;
 			MarioHelper::IsGround = IsGround;
@@ -42,17 +41,18 @@ void Pipe::Tick(float _DeltaTime)
 		if (IsTeleporting == true) {
 			if (TeleportTime >= 0) {
 				TeleportTime -= _DeltaTime;
-				Player->AddActorLocation(FVector::Down * 100 * _DeltaTime);
+				Player->AddActorLocation(FVector::Right * 100 * _DeltaTime);
 			}
 			else {
 				IsTeleporting = false;
 				TeleportTime = 2.0f;
+				Player->SetState(MarioState::TelePortEnd);
 			}
 		}
 	}
 }
 
-void Pipe::SetTotalLocation(FVector _PlayerLocation, FVector _CameraLocation, bool _IsGround)
+void LeftPipe::SetTotalLocation(FVector _PlayerLocation, FVector _CameraLocation, bool _IsGround)
 {
 	PlayerLocation = _PlayerLocation;
 	CameraLocation = _CameraLocation;

@@ -1,18 +1,18 @@
 #pragma once
 #include <EngineCore/Actor.h>
 // Ό³Έν :
-class Pipe : public AActor
+class LeftPipe : public AActor
 {
 public:
 	// constrcuter destructer
-	Pipe();
-	~Pipe();
+	LeftPipe();
+	~LeftPipe();
 
 	// delete Function
-	Pipe(const Pipe& _Other) = delete;
-	Pipe(Pipe&& _Other) noexcept = delete;
-	Pipe& operator=(const Pipe& _Other) = delete;
-	Pipe& operator=(Pipe&& _Other) noexcept = delete;
+	LeftPipe(const LeftPipe& _Other) = delete;
+	LeftPipe(LeftPipe&& _Other) noexcept = delete;
+	LeftPipe& operator=(const LeftPipe& _Other) = delete;
+	LeftPipe& operator=(LeftPipe&& _Other) noexcept = delete;
 
 	void SetTotalLocation(FVector _PlayerLocation, FVector _CameraLocation, bool _IsGround);
 

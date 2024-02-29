@@ -59,6 +59,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="LeftPipe.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="LoadingLevel.h">
       <SubType>
       </SubType>
@@ -148,6 +152,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="UpPipe.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BlockBase.cpp">
@@ -176,6 +184,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ItemFlower.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="LeftPipe.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -265,6 +277,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="UpPipe.cpp">
       <SubType>
       </SubType>
     </ClCompile>
