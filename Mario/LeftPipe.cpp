@@ -35,6 +35,7 @@ void LeftPipe::Tick(float _DeltaTime)
 			MarioHelper::TeleportLocation = PlayerLocation;
 			MarioHelper::TeleportCameraLocation = CameraLocation;
 			MarioHelper::IsGround = IsGround;
+			Player->SetState(MarioState::TelePortEnd);
 			IsTeleporting = true;
 		}
 
@@ -45,8 +46,9 @@ void LeftPipe::Tick(float _DeltaTime)
 			}
 			else {
 				IsTeleporting = false;
-				TeleportTime = 2.0f;
-				Player->SetState(MarioState::TelePortEnd);
+				TeleportTime = 1.0f;
+				MarioHelper::IsGround = false;
+				Player->SetActorLocation(MarioHelper::TeleportLocation);
 			}
 		}
 	}

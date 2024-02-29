@@ -100,7 +100,7 @@ protected:
 
 	float ChangeTime = 0.6f;
 	float GodTime = 0.f;
-	float TeleportingTime = 2.f;
+	float TeleportingTime = 1.f;
 
 private:
 	MarioState State = MarioState::None;

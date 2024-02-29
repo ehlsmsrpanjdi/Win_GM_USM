@@ -79,6 +79,7 @@ void Mario::BeginPlay()
 void Mario::Tick(float _DeltaTime)
 {
 	UEngineDebug::DebugTextPrint(std::to_string(Mario::PlayerLocation.X) + "     " + std::to_string(Mario::PlayerLocation.Y), 24);
+	UEngineDebug::DebugTextPrint(std::to_string(GetWorld()->GetCameraPos().X), 24);
 
 	if (UEngineInput::IsDown('J')) {
 		AddActorLocation(FVector::Right * 400);
@@ -476,14 +477,12 @@ void Mario::ChangingStart()
 
 void Mario::TeleportingStart()
 {
-	
+	TeleportingTime = 1.0f;
 }
 
 void Mario::TeleportEndStart()
 {
-	GetWorld()->SetCameraPos(MarioHelper::TeleportCameraLocation);
-	SetActorLocation(MarioHelper::TeleportLocation);
-	SetState(MarioState::Idle);
+	TeleportingTime = 1.0f;
 	SpeedX.X = 0;
 	SpeedY.Y = 0;
 }
@@ -809,20 +808,28 @@ void Mario::Teleporting(float _DeltaTime)
 	else {
 		GetWorld()->SetCameraPos(MarioHelper::TeleportCameraLocation);
 		SetActorLocation(MarioHelper::TeleportLocation);
-		TeleportingTime = 2.0f;
+		TeleportingTime = 1.0f;
 		SetState(MarioState::Idle);
 	}
 }
 
 void Mario::TeleportEnd(float _DeltaTime)
 {
-	if (!GravityCheck(_DeltaTime)) {
-		AddActorLocation(FVector::Up);
+	if (TeleportingTime >= 0) {
+		TeleportingTime -= _DeltaTime;
 	}
 	else {
-		SetState(MarioState::Idle);
+		if (!GravityCheck(_DeltaTime)) {
+			GetWorld()->SetCameraPos(MarioHelper::TeleportCameraLocation);
+			/*SetActorLocation(MarioHelper::TeleportLocation);*/
+			AddActorLocation(FVector::Up * _DeltaTime * 50);
+		}
+		else {
+			SetState(MarioState::Idle);
+		}
 	}
 }
+
 
 void Mario::MarioChange(bool _Positive)
 {

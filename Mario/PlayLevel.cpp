@@ -65,14 +65,14 @@ void UPlayLevel::BeginPlay()
 
 	Pipe* pipe;
 	pipe = SpawnActor<Pipe>(MarioRenderOrder::Cheat);
-	pipe->SetActorLocation({ 700,830 });
+	pipe->SetActorLocation({ 500,830 });
 	pipe->SetTotalLocation({ 3193.f,1060.f }, { 3073.f,960.f }, true);
 	
 
 	LeftPipe* pipe2;
 	pipe2 = SpawnActor<LeftPipe>(MarioRenderOrder::Cheat);
-	pipe2->SetActorLocation({ 3905, 1792 });
-	pipe2->SetTotalLocation({ 200.f,900.f }, { 3073.f,0.f }, false);
+	pipe2->SetActorLocation({ 3970, 1728 });
+	pipe2->SetTotalLocation({ 200.f,900.f }, { 200.f - 512.f,0.f }, true);
 
 	Goomba = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
 	Goomba->SetActorLocation({ 2686, 830 });

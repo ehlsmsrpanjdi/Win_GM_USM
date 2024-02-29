@@ -21,7 +21,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 	UCollision* BodyCollision = nullptr;
 	UImageRenderer* BodyRenderer = nullptr;
-	float TeleportTime = 2.0f;
+	float TeleportTime = 1.0f;
 	bool IsTeleporting = false;
 
 	FVector PlayerLocation = {};
