@@ -34,7 +34,7 @@ protected:
 	int PlusSize = 35;
 
 	void IsLevelEnd(float _DeltaTime);
-	float ChangeLevelTime = 5.0f;
+	float ChangeLevelTime = 7.0f;
 	float MinusTime = 0.004f;
 
 private:

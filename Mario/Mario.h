@@ -91,7 +91,7 @@ protected:
 	float EndTime = 0.5f;
 
 	float ChangeTime = 0.6f;
-	float GodTime = 3.f;
+	float GodTime = 0.f;
 
 private:
 	MarioState State = MarioState::None;

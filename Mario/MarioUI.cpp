@@ -139,16 +139,6 @@ void MarioUI::BeginPlay()
 
 void MarioUI::Tick(float _DeltaTime)
 {
-	//if (UEngineInput::IsDown(VK_DOWN)) {
-	//	FVector A = PlayerUIRenderer->GetTransform().GetPosition();
-	//	A.Y -= 1;
-	//	PlayerUIRenderer->SetTransform({ {A},{1024,108} });
-	//}
-	//if (UEngineInput::IsDown(VK_UP)) {
-	//	FVector A = PlayerUIRenderer->GetTransform().GetPosition();
-	//	A.Y += 1;
-	//	PlayerUIRenderer->SetTransform({ {A},{1024,108} });
-	//}
 	SetMarioScoreUI();
 	SetMarioCoinUI();
 	SetMarioWorldUI();
@@ -164,7 +154,7 @@ void MarioUI::IsLevelEnd(float _DeltaTime)
 		}
 		else {
 		MarioHelper::LevelEnd = false;
-		ChangeLevelTime = 5.0f;
+		ChangeLevelTime = 7.0f;
 		GEngine->ChangeLevel("Loading");
 		}
 
