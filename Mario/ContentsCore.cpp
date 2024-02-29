@@ -7,6 +7,7 @@
 #include <EngineBase\EngineFile.h>
 #include "LoadingLevel.h"
 
+
 ContentsCore::ContentsCore()
 	: UEngineCore()
 {

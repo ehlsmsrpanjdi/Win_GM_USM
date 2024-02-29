@@ -15,6 +15,7 @@
 #include "Door.h"
 #include "Pipe.h"
 #include "LeftPipe.h"
+#include "PipeCheat.h"
 
 UPlayLevel::UPlayLevel()
 {
@@ -65,14 +66,18 @@ void UPlayLevel::BeginPlay()
 
 	Pipe* pipe;
 	pipe = SpawnActor<Pipe>(MarioRenderOrder::Cheat);
-	pipe->SetActorLocation({ 500,830 });
+	pipe->SetActorLocation({ 3008,640 });
 	pipe->SetTotalLocation({ 3193.f,1060.f }, { 3073.f,960.f }, true);
 	
-
+	
 	LeftPipe* pipe2;
 	pipe2 = SpawnActor<LeftPipe>(MarioRenderOrder::Cheat);
 	pipe2->SetActorLocation({ 3970, 1728 });
-	pipe2->SetTotalLocation({ 200.f,900.f }, { 200.f - 512.f,0.f }, true);
+	pipe2->SetTotalLocation({ 11521.f,800.f }, { 11521.f - 512.f,0.f }, true);
+
+	PipeCheat* cheatpipe;
+	cheatpipe = SpawnActor<PipeCheat>(MarioRenderOrder::Cheat);
+	cheatpipe->SetActorLocation({ 11520, 769 });
 
 	Goomba = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
 	Goomba->SetActorLocation({ 2686, 830 });

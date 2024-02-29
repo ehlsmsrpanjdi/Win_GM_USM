@@ -15,7 +15,7 @@ Pipe::~Pipe()
 void Pipe::BeginPlay()
 {
 	BodyCollision = CreateCollision(MarioCollisionOrder::Object);
-	BodyCollision->SetTransform({ { 0,0 } ,{32,128} });
+	BodyCollision->SetTransform({ { 0,-5 } ,{32,128} });
 
 	BodyRenderer = CreateImageRenderer(MarioRenderOrder::Cheat);
 	BodyRenderer->SetTransform({ {0,0}, {128, 128} });
