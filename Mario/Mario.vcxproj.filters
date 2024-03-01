@@ -101,6 +101,15 @@
     <ClInclude Include="PipeCheat.h">
       <Filter>Actor\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Koopa.h">
+      <Filter>Actor\Monster\Koopa</Filter>
+    </ClInclude>
+    <ClInclude Include="Hammer.h">
+      <Filter>Actor\Monster\Koopa</Filter>
+    </ClInclude>
+    <ClInclude Include="KoopaFire.h">
+      <Filter>Actor\Monster\Koopa</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -203,6 +212,15 @@
     <ClCompile Include="PipeCheat.cpp">
       <Filter>Actor\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Koopa.cpp">
+      <Filter>Actor\Monster\Koopa</Filter>
+    </ClCompile>
+    <ClCompile Include="Hammer.cpp">
+      <Filter>Actor\Monster\Koopa</Filter>
+    </ClCompile>
+    <ClCompile Include="KoopaFire.cpp">
+      <Filter>Actor\Monster\Koopa</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Actor">
@@ -246,6 +264,9 @@
     </Filter>
     <Filter Include="Level\UtilityLevel">
       <UniqueIdentifier>{1031374a-a666-4dfb-ac32-951a964a3351}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Monster\Koopa">
+      <UniqueIdentifier>{09244d69-e0b2-47df-be50-2456bfd79bd3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

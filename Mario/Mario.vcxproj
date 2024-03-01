@@ -51,11 +51,23 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Hammer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ItemBase.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="ItemFlower.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Koopa.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KoopaFire.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -183,11 +195,23 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Hammer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ItemBase.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="ItemFlower.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Koopa.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KoopaFire.cpp">
       <SubType>
       </SubType>
     </ClCompile>
