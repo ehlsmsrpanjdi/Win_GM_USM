@@ -175,5 +175,13 @@ void ItemBase::CollisionEvent()
 		SpeedY.Y = 0;
 		GravitySpeed.Y = 0;
 		AddActorLocation(FVector::Up);
+		for (UCollision* Collision : BlockResult) {
+			BlockBase* Block = (BlockBase*)Collision->GetOwner();
+			if (Block->GetState() == BlockState::Interactive) {
+				SpeedY.Y = -300.f;
+				AddActorLocation(FVector::Up * 5);
+				return;
+			}
+		}
 	}
 }

@@ -16,6 +16,7 @@
 #include "Pipe.h"
 #include "LeftPipe.h"
 #include "PipeCheat.h"
+#include "Koopa.h"
 
 UPlayLevel::UPlayLevel()
 {
@@ -63,6 +64,10 @@ void UPlayLevel::BeginPlay()
 	MonsterGoomba* Goomba;
 	Goomba = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
 	Goomba->SetActorLocation({ 1300, 830 });
+
+	Koopa* Kopa;
+	Kopa = SpawnActor<Koopa>(MarioRenderOrder::Monster);
+	Kopa->SetActorLocation({ 1300,830 });
 
 	Pipe* pipe;
 	pipe = SpawnActor<Pipe>(MarioRenderOrder::Cheat);

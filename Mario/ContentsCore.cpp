@@ -52,6 +52,8 @@ void ContentsCore::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("BrokenBrick.png", 2, 2);
 	UEngineResourcesManager::GetInst().CuttingImage("FireEnd.png", 3, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("Coin_Origin.png", 6, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("Koopa_Left.png", 6, 2);
+	UEngineResourcesManager::GetInst().CuttingImage("Koopa_Right.png", 6, 2);
 
 	UWindowImage* Rot = UEngineResourcesManager::GetInst().FindImg("Pipe.png");
 	UWindowImage* Mask = UEngineResourcesManager::GetInst().FindImg("Pipe.png");

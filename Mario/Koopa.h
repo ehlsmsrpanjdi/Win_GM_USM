@@ -3,7 +3,7 @@
 
 
 // Ό³Έν :
-class Koopa : MonsterBase
+class Koopa : public MonsterBase
 {
 public:
 	// constrcuter destructer
@@ -17,6 +17,7 @@ public:
 	Koopa& operator=(Koopa&& _Other) noexcept = delete;
 
 protected:
+	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 
