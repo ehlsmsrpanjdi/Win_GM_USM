@@ -17,6 +17,7 @@
 #include "LeftPipe.h"
 #include "PipeCheat.h"
 #include "Koopa.h"
+#include "KoopaFire.h"
 
 UPlayLevel::UPlayLevel()
 {

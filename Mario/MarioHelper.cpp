@@ -1,6 +1,7 @@
 #include "MarioHelper.h"
 #include <string>
 #include "PlayLevel.h"
+#include "LastLevel.h"
 
 
 UWindowImage* MarioHelper::ColMapImage = nullptr;
@@ -18,8 +19,19 @@ FVector MarioHelper::TeleportLocation = FVector{ 3193.f,1060.f };
 FVector MarioHelper::TeleportCameraLocation = FVector{ 3073.f,960.f };
 bool MarioHelper::IsGround =false;
 
+void MarioHelper::SetNextLevel(std::string _LevelName) {
+	MarioHelper::NextLevelName = _LevelName;
+}
+
+std::string MarioHelper::GetNextLevel() {
+	return MarioHelper::NextLevelName;
+}
+
+std::string MarioHelper::NextLevelName = "Stage1";
+
 
 bool MarioHelper::StageOneInit = false;
+bool MarioHelper::LastStageInit = false;
 
 MarioHelper::MarioHelper()
 {
@@ -34,6 +46,9 @@ void MarioHelper::CreateLevel(std::string _LevelName)
 {
 	if (_LevelName == "State1"); {
 		GEngine->CreateLevel<UPlayLevel>("Stage1");
+	}
+	if (_LevelName == "LastStage") {
+		GEngine->CreateLevel<LastLevel>("LastStage");
 	}
 }
 

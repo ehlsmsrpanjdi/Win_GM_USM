@@ -116,6 +116,10 @@ public:
 	static std::string GetPrevLevel();
 	static std::string PrevLevelName;
 
+	static void SetNextLevel(std::string _LevelName);
+	static std::string GetNextLevel();
+	static std::string NextLevelName;
+
 	static void MarioTimeReset();
 	static void MarioCoinReset();
 	static void MarioWorldSet(int _World);
@@ -123,6 +127,7 @@ public:
 	static void CreateLevel(std::string _LevelName);
 
 	static bool StageOneInit;
+	static bool LastStageInit;
 
 private:
 	// constrcuter destructer

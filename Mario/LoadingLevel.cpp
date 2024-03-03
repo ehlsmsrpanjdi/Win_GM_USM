@@ -39,9 +39,18 @@ void LoadingLevel::Tick(float _DeltaTime)
 
 	if (LevelChangeTime <= 0) {
 		std::string LevelName = MarioHelper::GetPrevLevel();
+		std::string NextName = MarioHelper::GetNextLevel();
+		if (LevelName._Equal(NextName)) {
 		LevelChangeTime = 3.f;
-		MarioHelper::CreateLevel(MarioHelper::GetPrevLevel());
+		MarioHelper::CreateLevel(LevelName);
 		GEngine->ChangeLevel(LevelName);
+		}
+		else {
+			LevelChangeTime = 3.f;
+			MarioHelper::CreateLevel(NextName);
+			GEngine->ChangeLevel(NextName);
+		}
+
 	}
 	else {
 		LevelChangeTime -= _DeltaTime;

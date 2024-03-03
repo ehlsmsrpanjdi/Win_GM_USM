@@ -19,11 +19,12 @@ public:
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-
-
 	void Attack(float _DeltaTime);
+	void CollisionEvent(float _DeltaTime);
+
 	float FireTime = 2.0f;
 	float HammerTime = 4.0f;
+	float HammerCoolTime = 0.2f;
 
 	void Jump(float _DeltaTime);
 	float JumpTime = 3.0f;

@@ -135,13 +135,13 @@ void MarioUI::BeginPlay()
 		TimeUIArray[i]->CameraEffectOff();
 	}
 
+	SetMarioWorldUI();
 }
 
 void MarioUI::Tick(float _DeltaTime)
 {
 	SetMarioScoreUI();
 	SetMarioCoinUI();
-	SetMarioWorldUI();
 	SetMarioTimeUI(_DeltaTime);
 	IsLevelEnd(_DeltaTime);
 }
@@ -153,9 +153,10 @@ void MarioUI::IsLevelEnd(float _DeltaTime)
 			ChangeLevelTime -= _DeltaTime;
 		}
 		else {
-		MarioHelper::LevelEnd = false;
-		ChangeLevelTime = 7.0f;
-		GEngine->ChangeLevel("Loading");
+			MarioHelper::LevelEnd = false;
+			SetMarioWorldUI();
+			ChangeLevelTime = 7.0f;
+			GEngine->ChangeLevel("Loading");
 		}
 
 	}

@@ -69,6 +69,7 @@ protected:
 
 	bool LeftEdgeCheck();
 	bool RightEdgeCheck();
+	bool TopCheck();
 	void DirCheck();
 
 	void MarioChange(bool _Positive);

@@ -50,7 +50,7 @@ void LoadingUI::BeginPlay()
 
 void LoadingUI::Tick(float _DeltaTime)
 {
-	SetLoadingLifeUI();
 	SetLoadingWorldUI();
+	SetLoadingLifeUI();
 }
 

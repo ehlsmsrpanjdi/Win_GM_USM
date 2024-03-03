@@ -110,6 +110,9 @@
     <ClInclude Include="KoopaFire.h">
       <Filter>Actor\Monster\Koopa</Filter>
     </ClInclude>
+    <ClInclude Include="LastLevel.h">
+      <Filter>Level\Stage1</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -220,6 +223,9 @@
     </ClCompile>
     <ClCompile Include="KoopaFire.cpp">
       <Filter>Actor\Monster\Koopa</Filter>
+    </ClCompile>
+    <ClCompile Include="LastLevel.cpp">
+      <Filter>Level\Stage1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

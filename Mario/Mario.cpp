@@ -830,6 +830,27 @@ void Mario::TeleportEnd(float _DeltaTime)
 	}
 }
 
+bool Mario::TopCheck()
+{
+	FVector CurLocation = GetActorLocation();
+	float TopSize = -128.f;
+	if (MyMarioClass == MarioClass::Small) {
+		TopSize = -64.f;
+	}
+	int TopLocation = static_cast<int>(CurLocation.Y + TopSize);
+
+	Color8Bit TopCheckColor = MarioHelper::ColMapImage->GetColor(CurLocation.iX(), TopLocation, Color8Bit::MagentaA);
+
+	while(Color8Bit(255, 0, 255, 0) == TopCheckColor) {
+		SpeedY.Y = 0.f;
+		GravitySpeed.Y = 0.f;
+		AddActorLocation(FVector::Down);
+		TopLocation += 1.f;
+		TopCheckColor = MarioHelper::ColMapImage->GetColor(CurLocation.iX(), TopLocation, Color8Bit::MagentaA);
+	}
+	return false;
+}
+
 
 void Mario::MarioChange(bool _Positive)
 {
@@ -870,6 +891,8 @@ void Mario::ResultMove(float _DeltaTime)
 	else if (-1 == CurSpeedDir) {
 		LeftEdgeCheck();
 	}
+	TopCheck();
+	
 
 	MarioCollisionEvent(_DeltaTime);
 

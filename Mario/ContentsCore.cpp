@@ -6,6 +6,7 @@
 #include <EngineCore/EngineResourcesManager.h>
 #include <EngineBase\EngineFile.h>
 #include "LoadingLevel.h"
+#include "LastLevel.h"
 
 
 ContentsCore::ContentsCore()
@@ -52,12 +53,8 @@ void ContentsCore::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("BrokenBrick.png", 2, 2);
 	UEngineResourcesManager::GetInst().CuttingImage("FireEnd.png", 3, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("Coin_Origin.png", 6, 1);
-	UEngineResourcesManager::GetInst().CuttingImage("Koopa_Left.png", 6, 2);
-	UEngineResourcesManager::GetInst().CuttingImage("Koopa_Right.png", 6, 2);
-
-	UWindowImage* Rot = UEngineResourcesManager::GetInst().FindImg("Pipe.png");
-	UWindowImage* Mask = UEngineResourcesManager::GetInst().FindImg("Pipe.png");
-	Rot->SetRotationMaskImage(0, Mask, 0);
+	UEngineResourcesManager::GetInst().CuttingImage("Koopa.png", 6, 2);
+	UEngineResourcesManager::GetInst().CuttingImage("Hammer.png", 4, 1);
 
 	MainWindow.SetWindowScale({ 256 * 4/* * 1.5f*/, 240 * 4/* * 1.5f*/ });
 	MainWindow.SetWindowPosition({ 800/* * 1.5f*/, 0/* * 1.5f*/ });
@@ -66,7 +63,7 @@ void ContentsCore::BeginPlay()
 	CreateLevel<UPlayLevel>("Stage1");
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<UTitleLevel>("Title");
-	ChangeLevel("Stage1");
+	ChangeLevel("Title");
 }
 
 void ContentsCore::Tick(float _DeltaTime)

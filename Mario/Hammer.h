@@ -1,7 +1,10 @@
 #pragma once
+#include "PhysicsActor.h"
+#include "MarioHelper.h"
 
+class Koopa;
 // Ό³Έν :
-class Hammer
+class Hammer : public PhysicsActor
 {
 public:
 	// constrcuter destructer
@@ -15,7 +18,9 @@ public:
 	Hammer& operator=(Hammer&& _Other) noexcept = delete;
 
 protected:
-
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+	void CollisionEvent(float _DeltaTime);
 private:
 
 };
