@@ -18,9 +18,14 @@ public:
 protected:
 	UImageRenderer* EndingMessageBox = nullptr;
 	UImageRenderer* EndingMessageBoxCheat = nullptr;
+	UCollision* EndingMessageBoxCollision = nullptr;
 
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
+	void CollisionEvent(float _DeltaTime);
+
+	bool IsEnd = false;
+	float NextPageTime = 2.0f;
 private:
 
 };

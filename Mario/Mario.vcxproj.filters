@@ -119,9 +119,6 @@
     <ClInclude Include="Flat.h">
       <Filter>Actor\Object</Filter>
     </ClInclude>
-    <ClInclude Include="EndingDoor.h">
-      <Filter>Actor\Object</Filter>
-    </ClInclude>
     <ClInclude Include="EndingMessage.h">
       <Filter>Level\LastLevel</Filter>
     </ClInclude>
@@ -243,9 +240,6 @@
       <Filter>Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="Flat.cpp">
-      <Filter>Actor\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="EndingDoor.cpp">
       <Filter>Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="EndingMessage.cpp">

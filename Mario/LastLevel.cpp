@@ -12,7 +12,6 @@
 #include "FireWall.h"
 #include "Flat.h"
 #include "Koopa.h"
-#include "EndingDoor.h"
 #include "EndingMessage.h"
 
 
@@ -52,12 +51,7 @@ void LastLevel::BeginPlay()
 	
 	Mario* TestMario;
 	TestMario = this->SpawnActor<Mario>(2);
-	//TestMario->SetActorLocation({ 200,440 });
-	TestMario->SetActorLocation({ 720,440 });
-
-	EndingDoor* enddoor;
-	enddoor = SpawnActor<EndingDoor>(MarioRenderOrder::Cheat);
-	enddoor->SetActorLocation({ 400,400 });
+	TestMario->SetActorLocation({ 200,440 });
 
 	Flat* Flats = SpawnActor<Flat>(MarioRenderOrder::Cheat);
 	Flats->SetActorLocation({ 8224,672 });
@@ -104,7 +98,6 @@ void LastLevel::BeginPlay()
 	
 	Koopa* Boss = SpawnActor<Koopa>(MarioRenderOrder::Monster);
 	Boss->SetActorLocation({ 8800,615 });
-	//Boss->SetActorLocation({ 800,615 });
 
 }
 
