@@ -43,6 +43,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Door.h" />
+    <ClInclude Include="EndingDoor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EndingMessage.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="FireEnd.h">
       <SubType>
       </SubType>
@@ -52,6 +60,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Flag.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Flat.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -195,6 +207,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Door.cpp" />
+    <ClCompile Include="EndingDoor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EndingMessage.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="FireEnd.cpp">
       <SubType>
       </SubType>
@@ -204,6 +224,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Flag.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Flat.cpp">
       <SubType>
       </SubType>
     </ClCompile>

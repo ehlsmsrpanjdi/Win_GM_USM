@@ -7,6 +7,8 @@ class Koopa;
 class Hammer : public PhysicsActor
 {
 public:
+
+	friend Koopa;
 	// constrcuter destructer
 	Hammer();
 	~Hammer();
@@ -21,6 +23,7 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void CollisionEvent(float _DeltaTime);
+	void SetDir(EActorDir _KoopaDir);
 private:
 
 };

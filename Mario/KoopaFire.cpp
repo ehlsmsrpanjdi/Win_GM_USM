@@ -1,26 +1,22 @@
 #include "KoopaFire.h"
 #include "Mario.h"
 
-KoopaFire::KoopaFire() 
+KoopaFire::KoopaFire()
 {
 }
 
-KoopaFire::~KoopaFire() 
+KoopaFire::~KoopaFire()
 {
 }
 
 void KoopaFire::BeginPlay()
 {
 	SetName("Koopa");
-	NoDir = true;
 	Renderer = CreateImageRenderer(MarioRenderOrder::Fire);
-	Renderer->SetImage("Koopa.png");
 	Renderer->SetTransform({ { 0,0 }, { 512,512 } });
 	AnimationAuto(Renderer, "Idle", 6, 7, 0.2f);
-	SetAnimation("Idle");
-	BodyCollision = CreateCollision(MarioCollisionOrder::Monster);
+	BodyCollision = CreateCollision(MarioCollisionOrder::Object);
 	BodyCollision->SetTransform({ {0,-10}, {100,20} });
-	SpeedX.X = -300.f;
 	Destroy(10.f);
 }
 
@@ -39,4 +35,17 @@ void KoopaFire::CollisionEvent(float _DeltaTime)
 		Mario* Player = (Mario*)Collision->GetOwner();
 		Player->Hit();
 	}
+}
+
+void KoopaFire::SetDir(EActorDir _KoopaDir)
+{
+	if (EActorDir::Left == _KoopaDir) {
+		DirState = EActorDir::Left;
+		SpeedX.X = -300.f;
+	}
+	else {
+		DirState = EActorDir::Right;
+		SpeedX.X = 300.f;
+	}
+	SetAnimation("Idle");
 }

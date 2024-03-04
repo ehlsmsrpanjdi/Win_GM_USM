@@ -10,6 +10,11 @@
 #include "KoopaFire.h"
 #include "CollisionActor.h"
 #include "FireWall.h"
+#include "Flat.h"
+#include "Koopa.h"
+#include "EndingDoor.h"
+#include "EndingMessage.h"
+
 
 LastLevel::LastLevel() 
 {
@@ -47,14 +52,59 @@ void LastLevel::BeginPlay()
 	
 	Mario* TestMario;
 	TestMario = this->SpawnActor<Mario>(2);
-	TestMario->SetActorLocation({ 100,440 });
+	//TestMario->SetActorLocation({ 200,440 });
+	TestMario->SetActorLocation({ 720,440 });
+
+	EndingDoor* enddoor;
+	enddoor = SpawnActor<EndingDoor>(MarioRenderOrder::Cheat);
+	enddoor->SetActorLocation({ 400,400 });
+
+	Flat* Flats = SpawnActor<Flat>(MarioRenderOrder::Cheat);
+	Flats->SetActorLocation({ 8224,672 });
 
 	MarioUI* UI = SpawnActor<MarioUI>(MarioRenderOrder::UI);
-	UI->SetActorLocation({ 200,200 });
+	UI->SetActorLocation({ 200,200});
 
-	FireWall* wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
-	wall->SetActorLocation({ 400,500 });
+	EndingMessage* Message = SpawnActor<EndingMessage>(MarioRenderOrder::UI);
+	Message->SetActorLocation({ 9728,400 });
+
+	FireWall* wall;
+	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
+	wall->SetActorLocation({ 1504,422});
+
+	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
+	wall->SetActorLocation({ 1952,677});
+
+	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
+	wall->SetActorLocation({ 2400,422 });
+
+	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
+	wall->SetActorLocation({ 3170,422 });
+
+	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
+	wall->SetActorLocation({ 3872,422 });
+
+	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
+	wall->SetActorLocation({ 4320,422 });
+
+	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
+	wall->SetActorLocation({ 4895,615});
+
+	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
+	wall->SetActorLocation({ 5153,293});
+
+	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
+	wall->SetActorLocation({ 5407,615 });
+
+	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
+	wall->SetActorLocation({ 5663,293 });
+
+	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
+	wall->SetActorLocation({ 5920,615 });
 	
+	Koopa* Boss = SpawnActor<Koopa>(MarioRenderOrder::Monster);
+	Boss->SetActorLocation({ 8800,615 });
+	//Boss->SetActorLocation({ 800,615 });
 
 }
 

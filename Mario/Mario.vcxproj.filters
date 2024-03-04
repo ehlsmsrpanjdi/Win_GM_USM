@@ -14,10 +14,10 @@
       <Filter>Actor\Mario</Filter>
     </ClInclude>
     <ClInclude Include="TitleLogo.h">
-      <Filter>Actor\Title</Filter>
+      <Filter>Level\Title</Filter>
     </ClInclude>
     <ClInclude Include="TitleLevel.h">
-      <Filter>Actor\Title</Filter>
+      <Filter>Level\Title</Filter>
     </ClInclude>
     <ClInclude Include="MarioLevelBase.h">
       <Filter>Actor</Filter>
@@ -116,6 +116,15 @@
     <ClInclude Include="FireWall.h">
       <Filter>Actor\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Flat.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingDoor.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingMessage.h">
+      <Filter>Level\LastLevel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -131,10 +140,10 @@
       <Filter>Actor\Mario</Filter>
     </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
-      <Filter>Actor\Title</Filter>
+      <Filter>Level\Title</Filter>
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
-      <Filter>Actor\Title</Filter>
+      <Filter>Level\Title</Filter>
     </ClCompile>
     <ClCompile Include="MarioLevelBase.cpp">
       <Filter>Actor</Filter>
@@ -233,6 +242,15 @@
     <ClCompile Include="FireWall.cpp">
       <Filter>Actor\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Flat.cpp">
+      <Filter>Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingDoor.cpp">
+      <Filter>Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingMessage.cpp">
+      <Filter>Level\LastLevel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Actor">
@@ -246,9 +264,6 @@
     </Filter>
     <Filter Include="Actor\Mario">
       <UniqueIdentifier>{57735b2c-00f7-4327-a0fc-08547a023f9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Title">
-      <UniqueIdentifier>{bd9602ee-0b27-48ba-a313-220877c35d51}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\Monster">
       <UniqueIdentifier>{a8601e0d-79e0-4a18-aa9a-945182360483}</UniqueIdentifier>
@@ -282,6 +297,9 @@
     </Filter>
     <Filter Include="Level\LastLevel">
       <UniqueIdentifier>{757ee798-c026-4ae6-aa69-4f04ff8945c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Title">
+      <UniqueIdentifier>{bd9602ee-0b27-48ba-a313-220877c35d51}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

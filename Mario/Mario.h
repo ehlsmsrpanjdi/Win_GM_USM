@@ -66,6 +66,8 @@ protected:
 	void Changing(float _DeltaTime);
 	void Teleporting(float _DeltaTime);
 	void TeleportEnd(float _DeltaTime);
+	void EndingMove(float _DeltaTime);
+	void Ending();
 
 	bool LeftEdgeCheck();
 	bool RightEdgeCheck();

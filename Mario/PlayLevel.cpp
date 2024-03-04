@@ -16,8 +16,7 @@
 #include "Pipe.h"
 #include "LeftPipe.h"
 #include "PipeCheat.h"
-#include "Koopa.h"
-#include "KoopaFire.h"
+
 
 UPlayLevel::UPlayLevel()
 {
@@ -66,9 +65,6 @@ void UPlayLevel::BeginPlay()
 	Goomba = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
 	Goomba->SetActorLocation({ 1300, 830 });
 
-	Koopa* Kopa;
-	Kopa = SpawnActor<Koopa>(MarioRenderOrder::Monster);
-	Kopa->SetActorLocation({ 1300,830 });
 
 	Pipe* pipe;
 	pipe = SpawnActor<Pipe>(MarioRenderOrder::Cheat);
@@ -259,7 +255,7 @@ void UPlayLevel::BeginPlay()
 	flag->SetActorLocation({ 12704.f, 490.f });
 
 	Door* door = SpawnActor<Door>(MarioRenderOrder::UI);
-	door->SetActorLocation({ 12904.f, 490.f });
+	door->SetActorLocation({ 12954.f, 490.f });
 }
 
 void UPlayLevel::Tick(float _DeltaTime)

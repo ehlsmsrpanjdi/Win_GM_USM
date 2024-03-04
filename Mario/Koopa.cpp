@@ -3,33 +3,59 @@
 #include "Hammer.h"
 #include "Mario.h"
 
+bool Koopa::IsKoopaDead = false;
+
 Koopa::Koopa()
 {
 }
 
 Koopa::~Koopa()
 {
+	int a = 0;
 }
 
 void Koopa::BeginPlay()
 {
 	MonsterBase::BeginPlay();
-	NoDir = true;
 	SetName("Koopa");
 	Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
-	Renderer->SetImage("Koopa.png");
 	Renderer->SetTransform({ { 0,0 }, { 512,512 } });
 	AnimationAuto(Renderer, "Idle", 0, 3, 0.2f);
-	SetAnimation("Idle");
-	BodyCollision = CreateCollision(MarioCollisionOrder::Monster);
-	BodyCollision->SetTransform({ {0,-10}, {100,20} });
-	SpeedX.X = -50.f;
 
+	SetAnimation("Idle");
 }
 
 void Koopa::Tick(float _DeltaTime)
 {
+	PhysicsActor::Tick(_DeltaTime);
+
+	if (KoopaDead(_DeltaTime)) {
+		return;
+	}
+
+	float CameraX = GetWorld()->GetCameraPos().X;
+	float WindowCenter = GEngine->MainWindow.GetWindowScale().X;
+	float CurLocationX = GetActorLocation().X;
+	if (CameraX + WindowCenter < CurLocationX)
+	{
+		return;
+	}
+	else if (!IsInit) {
+		IsInit = true;
+		MonsterInit();
+	}
+
+	SetAnimation("Idle");
+	if (Mario::PlayerLocation.X > GetActorLocation().X) {
+		DirState = EActorDir::Right;
+		SpeedX.X = 50.f;
+	}
+	else {
+		DirState = EActorDir::Left;
+		SpeedX.X = -50.f;
+	}
 	GravityCheck(_DeltaTime);
+	CollisionEvent(_DeltaTime);
 	ResultMove(_DeltaTime);
 
 	Attack(_DeltaTime);
@@ -46,6 +72,7 @@ void Koopa::Attack(float _DeltaTime)
 		float X = GetActorLocation().X;
 		float Y = GetActorLocation().Y;
 		Fire->SetActorLocation({ X,Y - 50 });
+		Fire->SetDir(DirState);
 		FireTime = 2.0f;
 	}
 
@@ -62,6 +89,7 @@ void Koopa::Attack(float _DeltaTime)
 			float X = GetActorLocation().X;
 			float Y = GetActorLocation().Y;
 			Hama->SetActorLocation({ X,Y - 50 });
+			Hama->SetDir(DirState);
 			HammerCoolTime = 0.2f;
 		}
 	}
@@ -82,14 +110,41 @@ void Koopa::Jump(float _DeltaTime)
 	}
 }
 
+bool Koopa::KoopaDead(float _DeltaTime)
+{
+	if (Koopa::IsKoopaDead) {
+		SpeedX.X = 0;
+		GravitySpeed += MarioHelper::Gravity * _DeltaTime;
+		ResultMove(_DeltaTime);
+		if (GetActorLocation().Y >= 1500) {
+			Destroy();
+		}
+		return true;
+	}
+
+
+	return false;
+}
+
+void Koopa::MonsterInit()
+{
+	BodyCollision = CreateCollision(MarioCollisionOrder::Monster);
+	BodyCollision->SetTransform({ {0,-64}, {100,128} });
+}
+
 
 void Koopa::CollisionEvent(float _DeltaTime)
 {
-	FVector ThisPosition = this->GetActorLocation();
 	std::vector<UCollision*> Result;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result)) {
 		UCollision* Collision = Result[0];
 		Mario* Player = (Mario*)Collision->GetOwner();
 		Player->Hit();
 	}
+	std::vector<UCollision*> MResult;
+	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, MResult)) {
+		GravitySpeed.Y = 0;
+		SpeedY.Y = 0;
+	}
+
 }

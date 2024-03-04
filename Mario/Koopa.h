@@ -1,7 +1,7 @@
 #pragma once
 #include "MonsterBase.h"
 
-
+class Flat;
 // Ό³Έν :
 class Koopa : public MonsterBase
 {
@@ -10,6 +10,7 @@ public:
 	Koopa();
 	~Koopa();
 
+	friend Flat;
 	// delete Function
 	Koopa(const Koopa& _Other) = delete;
 	Koopa(Koopa&& _Other) noexcept = delete;
@@ -28,6 +29,11 @@ protected:
 
 	void Jump(float _DeltaTime);
 	float JumpTime = 3.0f;
+
+	bool KoopaDead(float _DeltaTime);
+	static bool IsKoopaDead;
+
+	void MonsterInit() override;
 private:
 
 };

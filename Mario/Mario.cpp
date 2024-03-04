@@ -78,8 +78,11 @@ void Mario::BeginPlay()
 
 void Mario::Tick(float _DeltaTime)
 {
+	const FVector  a = GEngine->MainWindow.GetMousePosition();
 	UEngineDebug::DebugTextPrint(std::to_string(Mario::PlayerLocation.X) + "     " + std::to_string(Mario::PlayerLocation.Y), 24);
+	UEngineDebug::DebugTextPrint(std::to_string(a.X) + "     " + std::to_string(a.Y), 24);
 	UEngineDebug::DebugTextPrint(std::to_string(GetWorld()->GetCameraPos().X), 24);
+
 
 	if (UEngineInput::IsDown('J')) {
 		AddActorLocation(FVector::Right * 400);
@@ -95,19 +98,6 @@ void Mario::Tick(float _DeltaTime)
 	if (UEngineInput::IsDown('H')) {
 		MarioHelper::LevelEnd = true;
 	}
-
-	//if (UEngineInput::IsDown('R')) {
-	//	FVector CurPos = GetActorLocation();
-	//	float WindowCenter = GEngine->MainWindow.GetWindowScale().hX();
-	//	FVector CurCameraPos = GetWorld()->GetCameraPos();
-	//	GetWorld()->SetCameraPos({ CurPos.X - WindowCenter,CurCameraPos.Y + 100 });
-	//}
-	//if (UEngineInput::IsDown('E')) {
-	//	FVector CurPos = GetActorLocation();
-	//	float WindowCenter = GEngine->MainWindow.GetWindowScale().hX();
-	//	FVector CurCameraPos = GetWorld()->GetCameraPos();
-	//	GetWorld()->SetCameraPos({ CurPos.X + 100 ,CurCameraPos.Y});
-	//}
 
 	PhysicsActor::Tick(_DeltaTime);
 
@@ -187,6 +177,11 @@ void Mario::StateUpdate(float _DeltaTime)
 	case MarioState::TelePortEnd:
 		TeleportEnd(_DeltaTime);
 		break;
+	case MarioState::EndingMove:
+		EndingMove(_DeltaTime);
+		break;
+	case MarioState::Ending:
+		Ending();
 	default:
 		break;
 	}
@@ -499,6 +494,9 @@ void Mario::EndMove(float _DeltaTime)
 	GravityCheck(_DeltaTime);
 	AddActorLocation(SpeedX * _DeltaTime);
 	AddActorLocation(GravitySpeed * _DeltaTime);
+	if (Mario::PlayerLocation.X <= 12985) {
+		SetActorCameraPos();
+	}
 }
 void Mario::Jump(float _DeltaTime)
 {
@@ -830,6 +828,22 @@ void Mario::TeleportEnd(float _DeltaTime)
 	}
 }
 
+void Mario::EndingMove(float _DeltaTime)
+{
+	DirState = EActorDir::Right;
+	SetAnimation("Move");
+	SpeedX.X = 100.f;
+	GravityCheck(_DeltaTime);
+	AddActorLocation(SpeedX * _DeltaTime);
+	AddActorLocation(GravitySpeed * _DeltaTime);
+	SetActorCameraPos();
+}
+
+void Mario::Ending()
+{
+	SetAnimation("Idle");
+}
+
 bool Mario::TopCheck()
 {
 	FVector CurLocation = GetActorLocation();
@@ -841,7 +855,7 @@ bool Mario::TopCheck()
 
 	Color8Bit TopCheckColor = MarioHelper::ColMapImage->GetColor(CurLocation.iX(), TopLocation, Color8Bit::MagentaA);
 
-	while(Color8Bit(255, 0, 255, 0) == TopCheckColor) {
+	while (Color8Bit(255, 0, 255, 0) == TopCheckColor) {
 		SpeedY.Y = 0.f;
 		GravitySpeed.Y = 0.f;
 		AddActorLocation(FVector::Down);
@@ -892,7 +906,7 @@ void Mario::ResultMove(float _DeltaTime)
 		LeftEdgeCheck();
 	}
 	TopCheck();
-	
+
 
 	MarioCollisionEvent(_DeltaTime);
 

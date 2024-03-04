@@ -20,15 +20,15 @@ void FireWall::BeginPlay()
 	for (int i = 0; i < 6; ++i) {
 		FireWallRenderer[i] = CreateImageRenderer(MarioRenderOrder::Monster);
 		FireWallRenderer[i]->SetImage("Fire.png");
-		FVector Pos = RightVector * 16.0f * i;
-		FireWallRenderer[i]->SetTransform({ Pos, {128 , 128} });
+		FVector Pos = RightVector * 32.0f * i;
+		FireWallRenderer[i]->SetTransform({ Pos, {256 , 256} });
 		AnimationAuto(FireWallRenderer[i], "Idle", 0, 3);
 		FireWallRenderer[i]->ChangeAnimation("Idle");
 	}
 
 	for (int i = 0; i < 6; ++i) {
 		FireWallCollision[i] = CreateCollision(MarioCollisionOrder::Monster);
-		FireWallCollision[i]->SetTransform({ {0 + i * 16,0}, {16 , 16} });
+		FireWallCollision[i]->SetTransform({ {0 + i * 16, 16}, {32 , 32} });
 	}
 	//BodyCollision = CreateCollision(MarioCollisionOrder::Fire);
 	//BodyCollision->SetColType(ECollisionType::Rect);
@@ -40,7 +40,7 @@ void FireWall::Tick(float _DeltaTime)
 	PhysicsActor::Tick(_DeltaTime);
 	Spin(_DeltaTime);
 
-	CollisionEvent(_DeltaTime);
+	//CollisionEvent(_DeltaTime);
 }
 
 void FireWall::CollisionEvent(float _DeltaTime)
@@ -72,16 +72,16 @@ void FireWall::Spin(float _DeltaTime)
 
 	for (int i = 0; i < 6; ++i)
 	{
-		FVector Pos = RightVector * 18.0f * i;
+		FVector Pos = RightVector * 24.f * i;
 		Pos.RotationZToDeg(Angle);
-		FireWallRenderer[i]->SetTransform({ Pos, {128 , 128} });
+		FireWallRenderer[i]->SetTransform({ Pos, {192 , 192} });
 	}
 
 	for (int i = 0; i < 6; ++i)
 	{
-		FVector Pos = RightVector * 18.0f * i;
+		FVector Pos = RightVector * 24.f * i;
 		Pos.RotationZToDeg(Angle);
-		FireWallCollision[i]->SetTransform({ Pos, {16 ,16} });
+		FireWallCollision[i]->SetTransform({ {Pos.X, Pos.Y - 12}, {24 ,24} });
 	}
 	
 }
