@@ -99,6 +99,7 @@ public:
 	static FVector TeleportLocation;
 	static FVector TeleportCameraLocation;
 	static bool IsGround;
+	static bool IsEndingLevel;
 
 	static bool BottomCheck(FVector _NextVector);
 	static bool LeftCheck(FVector _NextVector);

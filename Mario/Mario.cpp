@@ -46,11 +46,6 @@ void Mario::BeginPlay()
 	AnimationAuto(Renderer, "Fire", 32, 33, 0.1f);
 	AnimationAuto(Renderer, "Fire_Smaller", 32, 33, 0.1f);
 
-	//MushRoomRenderer = CreateImageRenderer(MarioRenderOrder::Player);
-	//MushRoomRenderer->SetImage("Mario_Right.png");
-	//MushRoomRenderer->SetTransform({ {0,0}, {256, 256} });
-
-
 	AnimationAuto(Renderer, "Big_Idle", 9, 9);
 	AnimationAuto(Renderer, "Big_Move", 10, 12);
 	AnimationAuto(Renderer, "Big_DirChange", 13, 13);
@@ -118,6 +113,11 @@ void Mario::Tick(float _DeltaTime)
 
 void Mario::SetActorCameraPos()
 {
+
+	if (MarioHelper::IsGround) {
+
+	}
+
 	if (!MarioHelper::IsGround)
 	{
 		FVector CurPos = GetActorLocation();

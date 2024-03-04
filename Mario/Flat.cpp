@@ -56,6 +56,12 @@ void Flat::CollisionEvent(float _DeltaTime)
 			GetWorld()->SetOtherTimeScale(static_cast<int>(MarioRenderOrder::Cheat), 0.0f);
 			Player->SetState(MarioState::EndingMove);
 		}
+
+		std::vector<UCollision*> MResult;
+		if (true == FloatCollision->CollisionCheck(MarioCollisionOrder::Player, Result)) {
+			MarioHelper::IsEndingLevel = true;
+		}
+
 }
 
 void Flat::FlatDestroy(float _DeltaTime)
