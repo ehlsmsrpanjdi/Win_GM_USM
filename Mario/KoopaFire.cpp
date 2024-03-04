@@ -1,5 +1,6 @@
 #include "KoopaFire.h"
 #include "Mario.h"
+#include "MarioHelper.h"
 
 KoopaFire::KoopaFire()
 {
@@ -33,6 +34,9 @@ void KoopaFire::CollisionEvent(float _DeltaTime)
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result)) {
 		UCollision* Collision = Result[0];
 		Mario* Player = (Mario*)Collision->GetOwner();
+		if (Player->GetState() == MarioState::EndingMove) {
+			return;
+		}
 		Player->Hit();
 	}
 }

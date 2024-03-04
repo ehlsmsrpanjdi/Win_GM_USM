@@ -13,7 +13,7 @@
 #include "Flat.h"
 #include "Koopa.h"
 #include "EndingMessage.h"
-
+#include "MarioBlock.h"
 
 LastLevel::LastLevel() 
 {
@@ -61,6 +61,10 @@ void LastLevel::BeginPlay()
 
 	EndingMessage* Message = SpawnActor<EndingMessage>(MarioRenderOrder::UI);
 	Message->SetActorLocation({ 9728,400 });
+
+	MarioBlock* ItemBlock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
+	ItemBlock->SetActorLocation({ 1951, 464 });
+	ItemBlock->SetItemBlockDefault(1, ItemState::MushRoom);
 
 	FireWall* wall;
 	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);

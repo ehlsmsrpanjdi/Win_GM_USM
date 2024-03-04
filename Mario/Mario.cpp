@@ -114,8 +114,8 @@ void Mario::Tick(float _DeltaTime)
 void Mario::SetActorCameraPos()
 {
 
-	if (MarioHelper::IsGround) {
-
+	if (MarioHelper::IsEndingLevel) {
+		return;
 	}
 
 	if (!MarioHelper::IsGround)
@@ -176,7 +176,7 @@ void Mario::StateUpdate(float _DeltaTime)
 		EndingMove(_DeltaTime);
 		break;
 	case MarioState::Ending:
-		Ending();
+		Ending(_DeltaTime);
 		break;
 	default:
 		break;
@@ -739,7 +739,7 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 
 			if (MarioTransform.Top() + 10 > ResultTransform.Bottom()) {
 				if (MarioState::EndMove != State) {
-					Block->SetBoxState(BlockState::Interactive);
+		    			Block->SetBoxState(BlockState::Interactive);
 				}
 				SpeedY.Y = 0.f;
 			}
@@ -835,11 +835,17 @@ void Mario::EndingMove(float _DeltaTime)
 	SetActorCameraPos();
 }
 
-void Mario::Ending()
+void Mario::Ending(float _DeltaTime)
 {
 	SetAnimation("Idle");
+	if (EndingTime >= 0) {
+		EndingTime -= _DeltaTime;
+	}
+	else {
+		GEngine->ChangeLevel("Title");
+		EndingTime = 16.f;
+	}
 }
-
 bool Mario::TopCheck()
 {
 	FVector CurLocation = GetActorLocation();
