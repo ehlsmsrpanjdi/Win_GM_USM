@@ -122,6 +122,9 @@
     <ClInclude Include="EndingMessage.h">
       <Filter>Level\LastLevel</Filter>
     </ClInclude>
+    <ClInclude Include="GroundCoin.h">
+      <Filter>Actor\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -244,6 +247,9 @@
     </ClCompile>
     <ClCompile Include="EndingMessage.cpp">
       <Filter>Level\LastLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundCoin.cpp">
+      <Filter>Actor\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

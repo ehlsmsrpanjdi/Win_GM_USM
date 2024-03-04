@@ -57,6 +57,7 @@ void ContentsCore::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Koopa_Right.png", 6, 2);
 	UEngineResourcesManager::GetInst().CuttingImage("Hammer_Left.png", 4, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("Hammer_Right.png", 4, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("GroundCoin.png", 3, 1);
 
 	MainWindow.SetWindowScale({ 256 * 4/* * 1.5f*/, 240 * 4/* * 1.5f*/ });
 	MainWindow.SetWindowPosition({ 800/* * 1.5f*/, 0/* * 1.5f*/ });

@@ -92,11 +92,6 @@ void Mario::Tick(float _DeltaTime)
 
 	if (UEngineInput::IsDown('K')) {
 		AddActorLocation(FVector::Up * 200);
-		SetState(MarioState::TelePorting);
-	}
-
-	if (UEngineInput::IsDown('H')) {
-		MarioHelper::LevelEnd = true;
 	}
 
 	PhysicsActor::Tick(_DeltaTime);
@@ -182,6 +177,7 @@ void Mario::StateUpdate(float _DeltaTime)
 		break;
 	case MarioState::Ending:
 		Ending();
+		break;
 	default:
 		break;
 	}
@@ -818,8 +814,8 @@ void Mario::TeleportEnd(float _DeltaTime)
 	}
 	else {
 		if (!GravityCheck(_DeltaTime)) {
+			SetAnimation("Idle");
 			GetWorld()->SetCameraPos(MarioHelper::TeleportCameraLocation);
-			/*SetActorLocation(MarioHelper::TeleportLocation);*/
 			AddActorLocation(FVector::Up * _DeltaTime * 50);
 		}
 		else {

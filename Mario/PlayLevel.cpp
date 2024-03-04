@@ -16,6 +16,7 @@
 #include "Pipe.h"
 #include "LeftPipe.h"
 #include "PipeCheat.h"
+#include "GroundCoin.h"
 
 
 UPlayLevel::UPlayLevel()
@@ -64,6 +65,23 @@ void UPlayLevel::BeginPlay()
 	MonsterGoomba* Goomba;
 	Goomba = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
 	Goomba->SetActorLocation({ 1300, 830 });
+
+	GroundCoin* Coin;
+
+	for (int i = 0; i < 7; ++i) {
+		Coin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
+		Coin->SetActorLocation({ 3360 + i * 63,1600 });
+	}
+
+	for (int i = 0; i < 7; ++i) {
+		Coin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
+		Coin->SetActorLocation({ 3360 + i * 63,1500 });
+	}
+
+	for (int i = 0; i < 5; ++i) {
+		Coin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
+		Coin->SetActorLocation({ 3423 + i * 63,1400 });
+	}
 
 
 	Pipe* pipe;
