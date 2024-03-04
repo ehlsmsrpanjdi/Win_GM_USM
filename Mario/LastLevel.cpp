@@ -9,7 +9,7 @@
 #include "Koopa.h"
 #include "KoopaFire.h"
 #include "CollisionActor.h"
-
+#include "FireWall.h"
 
 LastLevel::LastLevel() 
 {
@@ -51,6 +51,10 @@ void LastLevel::BeginPlay()
 
 	MarioUI* UI = SpawnActor<MarioUI>(MarioRenderOrder::UI);
 	UI->SetActorLocation({ 200,200 });
+
+	FireWall* wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
+	wall->SetActorLocation({ 400,500 });
+	
 
 }
 

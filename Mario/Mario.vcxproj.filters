@@ -111,7 +111,10 @@
       <Filter>Actor\Monster\Koopa</Filter>
     </ClInclude>
     <ClInclude Include="LastLevel.h">
-      <Filter>Level\Stage1</Filter>
+      <Filter>Level\LastLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="FireWall.h">
+      <Filter>Actor\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -225,7 +228,10 @@
       <Filter>Actor\Monster\Koopa</Filter>
     </ClCompile>
     <ClCompile Include="LastLevel.cpp">
-      <Filter>Level\Stage1</Filter>
+      <Filter>Level\LastLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="FireWall.cpp">
+      <Filter>Actor\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -273,6 +279,9 @@
     </Filter>
     <Filter Include="Actor\Monster\Koopa">
       <UniqueIdentifier>{09244d69-e0b2-47df-be50-2456bfd79bd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\LastLevel">
+      <UniqueIdentifier>{757ee798-c026-4ae6-aa69-4f04ff8945c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
