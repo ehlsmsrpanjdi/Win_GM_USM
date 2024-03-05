@@ -100,6 +100,7 @@ public:
 	static FVector TeleportCameraLocation;
 	static bool IsGround;
 	static bool IsEndingLevel;
+	static MarioClass MyMarioClass;
 
 	static bool BottomCheck(FVector _NextVector);
 	static bool LeftCheck(FVector _NextVector);

@@ -196,7 +196,7 @@ void BlockBase::InteractiveStart()
 	if (Interacting == true) {
 		return;
 	}
-	if (StartState == BlockState::Brick && (Mario::MyMarioClass == MarioClass::Big || Mario::MyMarioClass == MarioClass::Fire)) {
+	if (StartState == BlockState::Brick && (MarioHelper::MyMarioClass == MarioClass::Big || MarioHelper::MyMarioClass == MarioClass::Fire)) {
 		std::vector<UCollision*> Result;
 		if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Monster, Result))
 		{
@@ -253,7 +253,7 @@ void BlockBase::Interactive(float _DeltaTime)
 		{
 		case ItemState::MushRoom:
 		{
-			switch (Mario::MyMarioClass)
+			switch (MarioHelper::MyMarioClass)
 			{
 			case MarioClass::Small:
 			{

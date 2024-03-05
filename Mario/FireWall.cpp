@@ -18,7 +18,7 @@ void FireWall::BeginPlay()
 	FVector RightVector = FVector::Right;
 
 	for (int i = 0; i < 6; ++i) {
-		FireWallRenderer[i] = CreateImageRenderer(MarioRenderOrder::Monster);
+		FireWallRenderer[i] = CreateImageRenderer(MarioRenderOrder::Fire);
 		FireWallRenderer[i]->SetImage("Fire.png");
 		FVector Pos = RightVector * 32.0f * i;
 		FireWallRenderer[i]->SetTransform({ Pos, {256 , 256} });

@@ -24,8 +24,6 @@ public:
 
 	static FVector PlayerLocation;
 
-	static MarioClass MyMarioClass;
-
 	MarioState GetState() {
 		return State;
 	}
@@ -73,6 +71,8 @@ protected:
 	bool RightEdgeCheck();
 	bool TopCheck();
 	void DirCheck();
+
+	void MarioFall();
 
 	void MarioChange(bool _Positive);
 

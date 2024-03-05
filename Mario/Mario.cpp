@@ -11,7 +11,7 @@
 #include "BlockBase.h"
 #include <EngineCore/EngineDebug.h>
 
-MarioClass Mario::MyMarioClass = MarioClass::Small;
+
 FVector Mario::PlayerLocation = {};
 
 Mario::Mario()
@@ -65,12 +65,14 @@ void Mario::BeginPlay()
 	BodyCollision = CreateCollision(MarioCollisionOrder::Player);
 	BodyCollision->SetColType(ECollisionType::Rect);
 
-	switch (Mario::MyMarioClass)
+	switch (MarioHelper::MyMarioClass)
 	{
 	case MarioClass::Small:
 		BodyCollision->SetTransform({ { 0,-32 }, { 56, 64 } });
 		break;
 	case MarioClass::Big:
+		BodyCollision->SetTransform({ { 0,-64 }, { 56, 128} });
+		break;
 	case MarioClass::Fire:
 		BodyCollision->SetTransform({ { 0,-64 }, { 56, 128} });
 		break;
@@ -92,6 +94,8 @@ void Mario::Tick(float _DeltaTime)
 	UEngineDebug::DebugTextPrint(std::to_string(GetWorld()->GetCameraPos().X), 24);
 
 
+	MarioFall();
+
 	if (UEngineInput::IsDown('J')) {
 		AddActorLocation(FVector::Right * 400);
 		GetWorld()->SetCameraPos(FVector::Right * 400);
@@ -106,7 +110,7 @@ void Mario::Tick(float _DeltaTime)
 
 	PlayerLocation = GetActorLocation();
 
-	if (MyMarioClass == MarioClass::Fire && UEngineInput::IsDown('Z') && AFire::FireCount < 2) {
+	if (MarioHelper::MyMarioClass == MarioClass::Fire && UEngineInput::IsDown('Z') && AFire::FireCount < 2) {
 		AFire* Fire = GetWorld()->SpawnActor<AFire>(MarioRenderOrder::Fire);
 		Fire->SetActorLocation(FVector{ PlayerLocation.X, PlayerLocation.Y - 64 });
 		Fire->SetDirState(DirState);
@@ -281,7 +285,7 @@ void Mario::SetState(MarioState _State)
 
 void Mario::SetMarioClassState(MarioClass _MarioClass)
 {
-	if (MyMarioClass == _MarioClass) {
+	if (MarioHelper::MyMarioClass == _MarioClass) {
 		return;
 	}
 	ChangeTime = 1.f;
@@ -303,7 +307,7 @@ void Mario::SetMarioClassState(MarioClass _MarioClass)
 	default:
 		break;
 	}
-	MyMarioClass = _MarioClass;
+	MarioHelper::MyMarioClass = _MarioClass;
 	SetState(MarioState::Changing);
 }
 
@@ -583,7 +587,7 @@ void Mario::DirChange(float _DeltaTime)
 void Mario::SetAnimation(std::string _Name)
 {
 	std::string Name = GetAnimationName(_Name);
-	switch (MyMarioClass)
+	switch (MarioHelper::MyMarioClass)
 	{
 	case MarioClass::Small:
 		break;
@@ -736,6 +740,16 @@ void Mario::DirCheck()
 	}
 }
 
+void Mario::MarioFall()
+{
+	FVector CurLocation = GetActorLocation();
+	Color8Bit FallCheck = MarioHelper::ColMapImage->GetColor(CurLocation.X, CurLocation.Y, Color8Bit::YellowA);
+	if (Color8Bit(255, 255, 0, 0) == FallCheck) {
+		MarioHelper::MyMarioClass = MarioClass::Small;
+		SetState(MarioState::Dead);
+	}
+}
+
 void Mario::MarioCollisionEvent(float _DeltaTime)
 {
 	std::vector<UCollision*> Result;
@@ -785,7 +799,7 @@ void Mario::Hit()
 		return;
 	}
 
-	switch (MyMarioClass)
+	switch (MarioHelper::MyMarioClass)
 	{
 	case MarioClass::Small:
 		SetState(MarioState::Dead);
@@ -865,7 +879,7 @@ bool Mario::TopCheck()
 {
 	FVector CurLocation = GetActorLocation();
 	float TopSize = -128.f;
-	if (MyMarioClass == MarioClass::Small) {
+	if (MarioHelper::MyMarioClass == MarioClass::Small) {
 		TopSize = -64.f;
 	}
 	int TopLocation = static_cast<int>(CurLocation.Y + TopSize);
@@ -880,37 +894,6 @@ bool Mario::TopCheck()
 		TopCheckColor = MarioHelper::ColMapImage->GetColor(CurLocation.iX(), TopLocation, Color8Bit::MagentaA);
 	}
 	return false;
-}
-
-
-void Mario::MarioChange(bool _Positive)
-{
-	if (_Positive) {
-		switch (MyMarioClass)
-		{
-		case MarioClass::Small:
-			break;
-		case MarioClass::Big:
-			break;
-		case MarioClass::Fire:
-			break;
-		default:
-			break;
-		}
-	}
-	else {
-		switch (MyMarioClass)
-		{
-		case MarioClass::Small:
-			break;
-		case MarioClass::Big:
-			break;
-		case MarioClass::Fire:
-			break;
-		default:
-			break;
-		}
-	}
 }
 
 

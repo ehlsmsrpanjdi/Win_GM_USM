@@ -6,7 +6,7 @@
 
 UWindowImage* MarioHelper::ColMapImage = nullptr;
 FVector MarioHelper::Gravity = { 0.f, 1500.0f };
-
+MarioClass MarioHelper::MyMarioClass = MarioClass::Small;
 
 int MarioHelper::MarioTime = 1400;
 int MarioHelper::MarioCoinCount = 200;
