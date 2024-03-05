@@ -64,7 +64,20 @@ void Mario::BeginPlay()
 
 	BodyCollision = CreateCollision(MarioCollisionOrder::Player);
 	BodyCollision->SetColType(ECollisionType::Rect);
+
+	switch (Mario::MyMarioClass)
+	{
+	case MarioClass::Small:
 	BodyCollision->SetTransform({ { 0,-32 }, { 56, 64 } });
+		break;
+	case MarioClass::Big:
+	case MarioClass::Fire:
+		BodyCollision->SetTransform({ { 0,-64 }, { 56, 128} });
+		break;
+	default:
+		break;
+	}
+
 
 	SetAnimation("Idle");
 	SetState(MarioState::Idle);
@@ -861,7 +874,7 @@ bool Mario::TopCheck()
 		SpeedY.Y = 0.f;
 		GravitySpeed.Y = 0.f;
 		AddActorLocation(FVector::Down);
-		TopLocation += 1.f;
+		TopLocation += 1;
 		TopCheckColor = MarioHelper::ColMapImage->GetColor(CurLocation.iX(), TopLocation, Color8Bit::MagentaA);
 	}
 	return false;

@@ -33,10 +33,6 @@ void LoadingLevel::BeginPlay()
 
 void LoadingLevel::Tick(float _DeltaTime)
 {
-	if (UEngineInput::IsDown('U')) {
-		GEngine->ChangeLevel("Stage1");
-	}
-
 	if (LevelChangeTime <= 0) {
 		std::string LevelName = MarioHelper::GetPrevLevel();
 		std::string NextName = MarioHelper::GetNextLevel();

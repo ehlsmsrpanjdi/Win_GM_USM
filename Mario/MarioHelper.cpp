@@ -45,7 +45,7 @@ MarioHelper::~MarioHelper()
 
 void MarioHelper::CreateLevel(std::string _LevelName)
 {
-	if (_LevelName == "State1"); {
+	if (_LevelName == "Stage1") {
 		GEngine->CreateLevel<UPlayLevel>("Stage1");
 	}
 	if (_LevelName == "LastStage") {
@@ -163,11 +163,11 @@ FVector MarioHelper::GetRightBottomVector(FVector _NextVector) {
 	return FVector{ EdgeLocation_Right , EdgeLocation_Bottom };
 }
 
-std::string_view MarioHelper::ReturnString(int _Value)
-{
-	std::string_view str = std::to_string(_Value);
-	return str;
-}
+//std::string_view MarioHelper::ReturnString(int _Value)
+//{
+//	std::string_view str = std::to_string(_Value);
+//	return str;
+//}
 
 void MarioHelper::MarioTimeReset()
 {

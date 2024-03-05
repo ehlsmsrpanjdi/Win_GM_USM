@@ -3,11 +3,11 @@
 #include "BlockBase.h"
 #include "Mario.h"
 
-ItemBase::ItemBase() 
+ItemBase::ItemBase()
 {
 }
 
-ItemBase::~ItemBase() 
+ItemBase::~ItemBase()
 {
 }
 
@@ -52,13 +52,13 @@ void ItemBase::StarStart()
 void ItemBase::Spawn(float _DeltaTime)
 {
 	if (TotalMove >= -64.f) {
-		float AddPos = SpawnSpeed* _DeltaTime;
-		AddActorLocation({ 0.f, AddPos});
+		float AddPos = SpawnSpeed * _DeltaTime;
+		AddActorLocation({ 0.f, AddPos });
 		TotalMove += AddPos;
 	}
 	else {
-	SetItemState(State);
-	IsSpawn = true;
+		SetItemState(State);
+		IsSpawn = true;
 	}
 }
 
@@ -80,19 +80,16 @@ void ItemBase::Star(float _DeltaTime)
 
 void ItemBase::IsEdge(float _DeltaTime)
 {
-	EActorDir Dir = DirState;
+	FVector CurLocation = GetActorLocation();
 
-	Color8Bit Color_Right = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() + 5, GetActorLocation().iY() - 20, Color8Bit::MagentaA);
-	Color8Bit Color_Left = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() - 5, GetActorLocation().iY() - 20, Color8Bit::MagentaA);
-
-	if (Color_Right == Color8Bit(255, 0, 255, 0))
-	{
+	bool IsLeft = MarioHelper::LeftCheck({ CurLocation.X, CurLocation.Y - 6 });
+	bool IsRight = MarioHelper::RightCheck({ CurLocation.X, CurLocation.Y - 6 });
+	if (IsLeft) {
 		ReverseDir();
 		return;
 	}
 
-	if (Color_Left == Color8Bit(255, 0, 255, 0))
-	{
+	if (IsRight) {
 		ReverseDir();
 		return;
 	}
@@ -168,13 +165,13 @@ void ItemBase::CollisionEvent()
 			break;
 		}
 	}
-	
+
 	std::vector<UCollision*> BlockResult;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, BlockResult))
 	{
 		SpeedY.Y = 0;
 		GravitySpeed.Y = 0;
-		AddActorLocation(FVector::Up);
+		SetActorLocation({ GetActorLocation().X,BlockResult[0]->GetActorBaseTransform().Top() });
 		for (UCollision* Collision : BlockResult) {
 			BlockBase* Block = (BlockBase*)Collision->GetOwner();
 			if (Block->GetState() == BlockState::Interactive) {

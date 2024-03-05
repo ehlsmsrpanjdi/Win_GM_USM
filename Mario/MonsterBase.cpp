@@ -43,19 +43,16 @@ void MonsterBase::Tick(float _DeltaTime)
 
 void MonsterBase::IsEdge(float _DeltaTime)
 {
-	EActorDir Dir = DirState;
+	FVector CurLocation = GetActorLocation();
 
-	Color8Bit Color_Right = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() + 5, GetActorLocation().iY() - 20, Color8Bit::MagentaA);
-	Color8Bit Color_Left = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() - 5, GetActorLocation().iY() - 20, Color8Bit::MagentaA);
-
-	if (Color_Right == Color8Bit(255, 0, 255, 0))
-	{
+	bool IsLeft = MarioHelper::LeftCheck({ CurLocation.X +4, CurLocation.Y - 10 });
+	bool IsRight = MarioHelper::RightCheck({ CurLocation.X -4, CurLocation.Y - 10 });
+	if (IsLeft) {
 		ReverseDir();
 		return;
 	}
 
-	if (Color_Left == Color8Bit(255, 0, 255, 0))
-	{
+	if (IsRight) {
 		ReverseDir();
 		return;
 	}
@@ -161,21 +158,6 @@ void MonsterBase::CollisionEvent(float _DeltaTime)
 			this->ReverseDir();
 		}
 	}
-
-	//std::vector<UCollision*> BlockResult;
-	//if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, BlockResult))
-	//{
-	//	SpeedY.Y = 0;
-	//	GravitySpeed.Y = 0;
-	//	for (UCollision* Collision : BlockResult) {
-	//		AddActorLocation(FVector::Up * 0.1f);
-	//		BlockBase* Block = (BlockBase*)Collision->GetOwner();
-	//		if (Block->GetState() == BlockState::Interactive) {
-	//			SetMonsterState(MonsterState::Excute);
-	//		}
-	//	}
-	//}
-
 }
 
 void MonsterBase::InteractiveDirCheck()
@@ -202,7 +184,7 @@ void MonsterBase::Idle(float _DeltaTime)
 		SpeedY.Y = 0;
 		GravitySpeed.Y = 0;
 		for (UCollision* Collision : BlockResult) {
-			AddActorLocation(FVector::Up);
+			SetActorLocation({ GetActorLocation().X,Collision->GetActorBaseTransform().Top()});
 			BlockBase* Block = (BlockBase*)Collision->GetOwner();
 			if (Block->GetState() == BlockState::Interactive) {
 				SetMonsterState(MonsterState::Excute);
