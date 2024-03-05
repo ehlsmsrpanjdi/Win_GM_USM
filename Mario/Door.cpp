@@ -27,7 +27,6 @@ void Door::Tick(float _DeltaTime)
 		Collision->GetOwner()->Destroy();
 		MarioHelper::LevelEnd = true;
 		MarioHelper::SetNextLevel("LastStage");
-		MarioHelper::MarioWorldCount = 12;
 	}
 }
 

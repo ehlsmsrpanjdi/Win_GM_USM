@@ -184,9 +184,15 @@ void MarioHelper::SetPrevLevel(std::string _LevelName)
 	MarioHelper::PrevLevelName = _LevelName;
 }
 
-void MarioHelper::MarioWorldSet(int _World)
+void MarioHelper::MarioWorldSet()
 {
-	MarioHelper::MarioWorldCount = _World;
+	if (MarioHelper::NextLevelName._Equal("LastStage")) {
+		MarioHelper::MarioWorldCount = 12;
+	}
+	else {
+		MarioHelper::MarioWorldCount = 11;
+	}
+	return;
 }
 
 std::string MarioHelper::GetPrevLevel()

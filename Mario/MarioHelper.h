@@ -114,8 +114,6 @@ public:
 	static FVector GetRightTopVector(FVector _NextVector);
 	static FVector GetRightBottomVector(FVector _NextVector);
 
-	static std::string_view ReturnString(int _Value);
-
 	static void SetPrevLevel(std::string _LevelName);
 	static std::string GetPrevLevel();
 	static std::string PrevLevelName;
@@ -126,7 +124,7 @@ public:
 
 	static void MarioTimeReset();
 	static void MarioCoinReset();
-	static void MarioWorldSet(int _World);
+	static void MarioWorldSet();
 
 	static void CreateLevel(std::string _LevelName);
 

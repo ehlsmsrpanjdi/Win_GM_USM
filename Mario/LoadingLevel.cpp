@@ -33,6 +33,7 @@ void LoadingLevel::BeginPlay()
 
 void LoadingLevel::Tick(float _DeltaTime)
 {
+	
 	if (LevelChangeTime <= 0) {
 		std::string LevelName = MarioHelper::GetPrevLevel();
 		std::string NextName = MarioHelper::GetNextLevel();
@@ -55,6 +56,7 @@ void LoadingLevel::Tick(float _DeltaTime)
 
 void LoadingLevel::LevelStart(ULevel* Level)
 {
+	MarioHelper::MarioWorldSet();
 	GEngine->DestroyLevel(MarioHelper::GetPrevLevel());
 }
 

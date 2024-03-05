@@ -142,6 +142,7 @@ void MarioUI::Tick(float _DeltaTime)
 {
 	SetMarioScoreUI();
 	SetMarioCoinUI();
+	SetMarioWorldUI();
 	SetMarioTimeUI(_DeltaTime);
 	IsLevelEnd(_DeltaTime);
 }
