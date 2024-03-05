@@ -743,7 +743,7 @@ void Mario::DirCheck()
 void Mario::MarioFall()
 {
 	FVector CurLocation = GetActorLocation();
-	Color8Bit FallCheck = MarioHelper::ColMapImage->GetColor(CurLocation.X, CurLocation.Y, Color8Bit::YellowA);
+	Color8Bit FallCheck = MarioHelper::ColMapImage->GetColor(CurLocation.iX(), CurLocation.iY(), Color8Bit::YellowA);
 	if (Color8Bit(255, 255, 0, 0) == FallCheck) {
 		MarioHelper::MyMarioClass = MarioClass::Small;
 		SetState(MarioState::Dead);

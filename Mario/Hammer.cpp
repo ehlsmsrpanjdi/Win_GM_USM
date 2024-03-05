@@ -25,6 +25,9 @@ void Hammer::BeginPlay()
 
 void Hammer::Tick(float _DeltaTime)
 {
+	if (MarioHelper::GameEnd) {
+		Destroy();
+	}
 	GravitySpeed.Y += _DeltaTime * 200.f;
 	ResultMove(_DeltaTime);
 	CollisionEvent(_DeltaTime);

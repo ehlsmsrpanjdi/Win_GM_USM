@@ -31,7 +31,6 @@ protected:
 	float JumpTime = 3.0f;
 
 	bool KoopaDead(float _DeltaTime);
-	static bool IsKoopaDead;
 
 	void MonsterInit() override;
 private:

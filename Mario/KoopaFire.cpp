@@ -23,6 +23,9 @@ void KoopaFire::BeginPlay()
 
 void KoopaFire::Tick(float _DeltaTime)
 {
+	if (MarioHelper::GameEnd) {
+		Destroy();
+	}
 	ResultMove(_DeltaTime);
 	CollisionEvent(_DeltaTime);
 }

@@ -3,8 +3,6 @@
 #include "Hammer.h"
 #include "Mario.h"
 
-bool Koopa::IsKoopaDead = false;
-
 Koopa::Koopa()
 {
 }
@@ -112,7 +110,7 @@ void Koopa::Jump(float _DeltaTime)
 
 bool Koopa::KoopaDead(float _DeltaTime)
 {
-	if (Koopa::IsKoopaDead) {
+	if (MarioHelper::GameEnd) {
 		SpeedX.X = 0;
 		GravitySpeed += MarioHelper::Gravity * _DeltaTime;
 		ResultMove(_DeltaTime);

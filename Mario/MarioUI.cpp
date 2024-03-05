@@ -26,6 +26,9 @@ void MarioUI::SetMarioScoreUI()
 
 void MarioUI::SetMarioTimeUI(float _DeltaTime)
 {
+	if (MarioHelper::GameEnd) {
+		return;
+	}
 	if (MarioHelper::LevelEnd) {
 		if (MarioHelper::MarioTime > 1000 && MinusTime < 0)
 		{

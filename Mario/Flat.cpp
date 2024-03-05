@@ -9,7 +9,6 @@ Flat::Flat()
 
 Flat::~Flat() 
 {
-	Koopa::IsKoopaDead = true;
 }
 
 void Flat::BeginPlay()
@@ -58,6 +57,7 @@ void Flat::CollisionEvent(float _DeltaTime)
 			FloatCollision->Destroy();
 			GetWorld()->SetOtherTimeScale(static_cast<int>(MarioRenderOrder::Cheat), 0.0f);
 			Player->SetState(MarioState::EndingMove);
+			MarioHelper::GameEnd = true;
 		}
 
 		std::vector<UCollision*> MResult;

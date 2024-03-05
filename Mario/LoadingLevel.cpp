@@ -56,6 +56,7 @@ void LoadingLevel::Tick(float _DeltaTime)
 
 void LoadingLevel::LevelStart(ULevel* Level)
 {
+	MarioHelper::GameEnd = false;
 	MarioHelper::MarioWorldSet();
 	GEngine->DestroyLevel(MarioHelper::GetPrevLevel());
 }
