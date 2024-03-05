@@ -68,7 +68,7 @@ void Mario::BeginPlay()
 	switch (Mario::MyMarioClass)
 	{
 	case MarioClass::Small:
-	BodyCollision->SetTransform({ { 0,-32 }, { 56, 64 } });
+		BodyCollision->SetTransform({ { 0,-32 }, { 56, 64 } });
 		break;
 	case MarioClass::Big:
 	case MarioClass::Fire:
@@ -744,17 +744,18 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 	{
 		IsCollision = false;
 		for (UCollision* ResultCollision : Result) {
-			//UCollision* ResultCollision = Result[0];
 			BlockBase* Block = static_cast<BlockBase*>(ResultCollision->GetOwner());
 			FTransform MarioTransform = BodyCollision->GetActorBaseTransform();
 			FTransform ResultTransform = ResultCollision->GetActorBaseTransform();
 
+			bool Beside = (MarioTransform.GetPosition().X > ResultTransform.Left() && MarioTransform.GetPosition().X < ResultTransform.Right());
 
 			if (MarioTransform.Top() + 10 > ResultTransform.Bottom()) {
-				if (MarioState::EndMove != State) {
-		    			Block->SetBoxState(BlockState::Interactive);
+				if (MarioState::EndMove != State && Beside) {
+					Block->SetBoxState(BlockState::Interactive);
 				}
 				SpeedY.Y = 0.f;
+				SetActorLocation({ MarioTransform.GetPosition().X,ResultTransform.Bottom() + MarioTransform.GetScale().Y });
 			}
 
 			else if (MarioTransform.Bottom() > ResultTransform.Top() + 10) {
@@ -771,6 +772,7 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 			else {
 				SpeedY.Y = 0;
 				GravitySpeed.Y = 0;
+				SetActorLocation({ MarioTransform.GetPosition().X,ResultTransform.Top() });
 				IsCollision = true;
 			}
 		}

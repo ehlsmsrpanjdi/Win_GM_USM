@@ -4,6 +4,7 @@
 #include "Mario.h"
 #include "ItemFlower.h"
 #include "BrokenBrick.h"
+#include "MonsterBase.h"
 
 BlockBase::BlockBase()
 {
@@ -196,6 +197,14 @@ void BlockBase::InteractiveStart()
 		return;
 	}
 	if (StartState == BlockState::Brick && (Mario::MyMarioClass == MarioClass::Big || Mario::MyMarioClass == MarioClass::Fire)) {
+		std::vector<UCollision*> Result;
+		if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Monster, Result))
+		{
+			for (UCollision* Collision : Result) {
+				MonsterBase* Monster = (MonsterBase*)Collision->GetOwner();
+				Monster->SetMonsterState(MonsterState::Excute);
+			}
+		}
 		Destroy();
 	}
 	if (ItemCount >= 1 ) {
