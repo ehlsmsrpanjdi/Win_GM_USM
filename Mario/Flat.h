@@ -19,7 +19,6 @@ protected:
 	UImageRenderer* AxeRenderer = nullptr;
 	UCollision* FloatCollision = nullptr;
 	UCollision* AxeCollision = nullptr;
-	UCollision* BanCameraCollision= nullptr;
 
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

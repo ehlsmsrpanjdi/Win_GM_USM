@@ -14,7 +14,7 @@ public:
 	LeftPipe& operator=(const LeftPipe& _Other) = delete;
 	LeftPipe& operator=(LeftPipe&& _Other) noexcept = delete;
 
-	void SetTotalLocation(FVector _PlayerLocation, FVector _CameraLocation, bool _IsGround);
+	void SetTotalLocation(FVector _PlayerLocation, FVector _CameraLocation);
 
 protected:
 	void BeginPlay() override;
@@ -22,11 +22,9 @@ protected:
 	UCollision* BodyCollision = nullptr;
 	UImageRenderer* BodyRenderer = nullptr;
 	float TeleportTime = 1.0f;
-	bool IsTeleporting = false;
 
 	FVector PlayerLocation = {};
 	FVector CameraLocation = {};
-	bool IsGround = false;
 private:
 
 };

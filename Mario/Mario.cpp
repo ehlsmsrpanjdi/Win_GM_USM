@@ -140,12 +140,7 @@ void Mario::Tick(float _DeltaTime)
 
 void Mario::SetActorCameraPos()
 {
-
-	if (MarioHelper::IsEndingLevel) {
-		return;
-	}
-
-	if (!MarioHelper::IsGround)
+	if (!MarioHelper::CameraOff)
 	{
 		FVector CurPos = GetActorLocation();
 		FVector CurCameraPos = GetWorld()->GetCameraPos();
@@ -200,10 +195,10 @@ void Mario::StateUpdate(float _DeltaTime)
 		Changing(_DeltaTime);
 		break;
 	case MarioState::TelePorting:
-		Teleporting(_DeltaTime);
+
 		break;
 	case MarioState::TelePortEnd:
-		TeleportEnd(_DeltaTime);
+
 		break;
 	case MarioState::EndingMove:
 		EndingMove(_DeltaTime);
@@ -300,10 +295,10 @@ void Mario::SetState(MarioState _State)
 			ChangingStart();
 			break;
 		case MarioState::TelePorting:
-			TeleportingStart();
+
 			break;
 		case MarioState::TelePortEnd:
-			TeleportEndStart();
+
 			break;
 		default:
 			break;
@@ -542,18 +537,6 @@ void Mario::ChangingStart()
 	ChangeTime = 1.f;
 }
 
-void Mario::TeleportingStart()
-{
-	TeleportingTime = 1.0f;
-}
-
-void Mario::TeleportEndStart()
-{
-	TeleportingTime = 1.0f;
-	SpeedX.X = 0;
-	SpeedY.Y = 0;
-}
-
 void Mario::EndMove(float _DeltaTime)
 {
 	if (EndTime >= 0) {
@@ -566,9 +549,7 @@ void Mario::EndMove(float _DeltaTime)
 	GravityCheck(_DeltaTime);
 	AddActorLocation(SpeedX * _DeltaTime);
 	AddActorLocation(GravitySpeed * _DeltaTime);
-	if (Mario::PlayerLocation.X <= 12985) {
-		SetActorCameraPos();
-	}
+	SetActorCameraPos();
 }
 void Mario::Jump(float _DeltaTime)
 {
@@ -933,36 +914,6 @@ void Mario::Changing(float _DeltaTime)
 	if (ChangeTime <= 0) {
 		SetState(PrevState);
 		GetWorld()->SetAllTimeScale(1.0f);
-	}
-}
-
-void Mario::Teleporting(float _DeltaTime)
-{
-	if (TeleportingTime >= 0) {
-		TeleportingTime -= _DeltaTime;
-	}
-	else {
-		GetWorld()->SetCameraPos(MarioHelper::TeleportCameraLocation);
-		SetActorLocation(MarioHelper::TeleportLocation);
-		TeleportingTime = 1.0f;
-		SetState(MarioState::Idle);
-	}
-}
-
-void Mario::TeleportEnd(float _DeltaTime)
-{
-	if (TeleportingTime >= 0) {
-		TeleportingTime -= _DeltaTime;
-	}
-	else {
-		if (!GravityCheck(_DeltaTime)) {
-			SetAnimation("Idle");
-			GetWorld()->SetCameraPos(MarioHelper::TeleportCameraLocation);
-			AddActorLocation(FVector::Up * _DeltaTime * 50);
-		}
-		else {
-			SetState(MarioState::Idle);
-		}
 	}
 }
 

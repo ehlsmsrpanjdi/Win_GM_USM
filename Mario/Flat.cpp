@@ -33,9 +33,6 @@ void Flat::BeginPlay()
 	AxeRenderer = CreateImageRenderer(MarioRenderOrder::Map);
 	AxeRenderer->SetImage("Axe.png");
 	AxeRenderer->SetTransform({ { 800.f,-66.f }, {128.f,196.f } });
-
-	BanCameraCollision = CreateCollision(MarioCollisionOrder::Object);
-	BanCameraCollision->SetTransform({ { 432.f,-160.f }, {64.f,640.f } });
 }
 
 
@@ -59,14 +56,6 @@ void Flat::CollisionEvent(float _DeltaTime)
 			Player->SetState(MarioState::EndingMove);
 			MarioHelper::GameEnd = true;
 		}
-
-		std::vector<UCollision*> MResult;
-		if (true == BanCameraCollision->CollisionCheck(MarioCollisionOrder::Player, Result)) {
-			MarioHelper::IsEndingLevel = true;
-			MarioHelper::SetNextLevel("Stage1");
-			MarioHelper::SetPrevLevel("Stage1");
-		}
-
 }
 
 void Flat::FlatDestroy(float _DeltaTime)

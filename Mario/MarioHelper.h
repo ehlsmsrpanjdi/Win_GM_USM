@@ -97,9 +97,7 @@ public:
 	static int MarioWorldCount;
 	static int MarioTotalScore;
 	static int MarioLife;
-	static FVector TeleportLocation;
-	static FVector TeleportCameraLocation;
-	static bool IsGround;
+	static bool CameraOff;
 	static bool IsEndingLevel;
 	static bool GameEnd;
 	static MarioClass MyMarioClass;

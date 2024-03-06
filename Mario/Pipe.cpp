@@ -31,31 +31,27 @@ void Pipe::Tick(float _DeltaTime)
 		UCollision* Collision = Result[0];
 		Player = (Mario*)Collision->GetOwner();
 
-		if (UEngineInput::IsDown(VK_DOWN) && Player->GetState() == MarioState::Idle && IsTeleporting != true) {
-			Player->SetState(MarioState::TelePorting);
-			MarioHelper::TeleportLocation = PlayerLocation;
-			MarioHelper::TeleportCameraLocation = CameraLocation;
-			MarioHelper::IsGround = IsGround;
-			IsTeleporting = true;
+		if (UEngineInput::IsDown(VK_DOWN)) {
+			MarioHelper::CameraOff = true;
 		}
 
-		if (IsTeleporting == true) {
+		else {
 			if (TeleportTime >= 0) {
 				TeleportTime -= _DeltaTime;
-				Player->AddActorLocation(FVector::Down * 100 * _DeltaTime);
+				Player->AddActorLocation(FVector::Down * 127 * _DeltaTime);
 			}
 			else {
-				IsTeleporting = false;
-				TeleportTime = 2.0f;
+				TeleportTime = 1.0f;
+				Player->SetActorLocation(PlayerLocation);
+				GetWorld()->SetCameraPos(CameraLocation);
 			}
 		}
 	}
 }
 
-void Pipe::SetTotalLocation(FVector _PlayerLocation, FVector _CameraLocation, bool _IsGround)
+void Pipe::SetTotalLocation(FVector _PlayerLocation, FVector _CameraLocation)
 {
 	PlayerLocation = _PlayerLocation;
 	CameraLocation = _CameraLocation;
-	IsGround = _IsGround;
 }
 

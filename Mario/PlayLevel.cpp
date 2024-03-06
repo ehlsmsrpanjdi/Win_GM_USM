@@ -17,6 +17,7 @@
 #include "LeftPipe.h"
 #include "PipeCheat.h"
 #include "GroundCoin.h"
+#include "CameraOffCollisionActor.h"
 
 
 UPlayLevel::UPlayLevel()
@@ -87,13 +88,13 @@ void UPlayLevel::BeginPlay()
 	Pipe* pipe;
 	pipe = SpawnActor<Pipe>(MarioRenderOrder::Cheat);
 	pipe->SetActorLocation({ 3008,640 });
-	pipe->SetTotalLocation({ 3193.f,1060.f }, { 3073.f,960.f }, true);
+	pipe->SetTotalLocation({ 3193.f,1060.f }, { 3073.f,960.f });
 	
 	
 	LeftPipe* pipe2;
 	pipe2 = SpawnActor<LeftPipe>(MarioRenderOrder::Cheat);
 	pipe2->SetActorLocation({ 3970, 1728 });
-	pipe2->SetTotalLocation({ 11521.f,800.f }, { 11521.f - 512.f,0.f }, true);
+	pipe2->SetTotalLocation({ 11521.f,800.f }, { 11521.f - 512.f,0.f });
 
 	PipeCheat* cheatpipe;
 	cheatpipe = SpawnActor<PipeCheat>(MarioRenderOrder::Cheat);
@@ -271,6 +272,9 @@ void UPlayLevel::BeginPlay()
 
 	Flag* flag = SpawnActor<Flag>(MarioRenderOrder::Item);
 	flag->SetActorLocation({ 12704.f, 490.f });
+
+	CameraOffCollisionActor* BanCamera = SpawnActor<CameraOffCollisionActor>(MarioRenderOrder::UI);
+	BanCamera->SetActorLocation({ 12874.f,800.f });
 
 	Door* door = SpawnActor<Door>(MarioRenderOrder::UI);
 	door->SetActorLocation({ 12954.f, 490.f });

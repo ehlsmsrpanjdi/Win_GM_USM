@@ -51,8 +51,6 @@ protected:
 	void EndStart();
 	void EndMoveStart();
 	void ChangingStart();
-	void TeleportingStart();
-	void TeleportEndStart();
 
 	void Idle(float _DeltaTime);
 	void Move(float _DeltaTime);
@@ -66,8 +64,6 @@ protected:
 	void End(float _DeltaTime);
 	void EndMove(float _DeltaTime);
 	void Changing(float _DeltaTime);
-	void Teleporting(float _DeltaTime);
-	void TeleportEnd(float _DeltaTime);
 	void EndingMove(float _DeltaTime);
 	void Ending(float _DeltaTime);
 

@@ -128,6 +128,9 @@
     <ClInclude Include="MonsterScore.h">
       <Filter>Actor\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="CameraOffCollisionActor.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -256,6 +259,9 @@
     </ClCompile>
     <ClCompile Include="MonsterScore.cpp">
       <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraOffCollisionActor.cpp">
+      <Filter>Actor\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
