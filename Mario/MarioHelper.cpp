@@ -2,17 +2,20 @@
 #include <string>
 #include "PlayLevel.h"
 #include "LastLevel.h"
+#include "Mario.h"
 
 
 UWindowImage* MarioHelper::ColMapImage = nullptr;
 FVector MarioHelper::Gravity = { 0.f, 1500.0f };
-MarioClass MarioHelper::MyMarioClass = MarioClass::Small;
+MarioClass MarioHelper::MyMarioClass = MarioClass::Fire;
+float MarioHelper::MonsterScoreResetTime = 5.f;
 
 int MarioHelper::MarioTime = 1400;
 int MarioHelper::MarioCoinCount = 200;
 int MarioHelper::MarioWorldCount = 11;
 int MarioHelper::MarioTotalScore = 1000000;
 int MarioHelper::MarioLife = 3;
+int MarioHelper::MonsterScore = 0;
 std::string MarioHelper::PrevLevelName = "Stage1";
 bool MarioHelper::LevelEnd = false;
 FVector MarioHelper::TeleportLocation = FVector{ 3193.f,1060.f };
@@ -111,6 +114,12 @@ bool MarioHelper::LeftCheck(FVector _NextVector) {
 	}
 
 	return false;
+}
+
+void MarioHelper::AddMonsterScore(int _Score)
+{
+	MarioHelper::MonsterScore += _Score;
+	MarioHelper::MonsterScoreResetTime = 2.0f;
 }
 
 FVector MarioHelper::GetBottomLeftVector(FVector _NextVector) {

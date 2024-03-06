@@ -18,6 +18,7 @@ public:
 	void SetMarioTimeUI(float _DeltaTime);
 	void SetMarioCoinUI();
 	void SetMarioWorldUI();
+	void SetMonsterScroeUI(float _DeltaTime);
 
 protected:
 

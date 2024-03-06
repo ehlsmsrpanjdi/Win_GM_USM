@@ -48,8 +48,7 @@ protected:
 	const FVector StopSpeed = { 0,0,0,0 };
 
 
-	UImageRenderer* ScoreRenderer = nullptr;
-	FVector ScoreRendererLocation = FVector::Zero;
+
 
 
 private:

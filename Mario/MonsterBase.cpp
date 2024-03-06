@@ -4,6 +4,7 @@
 #include "Mario.h"
 #include "PhysicsActor.h"
 #include "BlockBase.h"
+#include "MonsterScore.h"
 
 MonsterBase::MonsterBase()
 {
@@ -24,7 +25,7 @@ void MonsterBase::Tick(float _DeltaTime)
 	float CameraX = GetWorld()->GetCameraPos().X;
 	float WindowCenter = GEngine->MainWindow.GetWindowScale().X;
 	float CurLocationX = GetActorLocation().X;
-	if (CameraX + WindowCenter < CurLocationX && (MonsterState::CrouchMove != State))
+	if (CameraX + WindowCenter < CurLocationX - 100.f && (MonsterState::CrouchMove != State))
 	{
 		return;
 	}
@@ -45,8 +46,8 @@ void MonsterBase::IsEdge(float _DeltaTime)
 {
 	FVector CurLocation = GetActorLocation();
 
-	bool IsLeft = MarioHelper::LeftCheck({ CurLocation.X +4, CurLocation.Y - 10 });
-	bool IsRight = MarioHelper::RightCheck({ CurLocation.X -4, CurLocation.Y - 10 });
+	bool IsLeft = MarioHelper::LeftCheck({ CurLocation.X + 4, CurLocation.Y - 10 });
+	bool IsRight = MarioHelper::RightCheck({ CurLocation.X - 4, CurLocation.Y - 10 });
 	if (IsLeft) {
 		ReverseDir();
 		return;
@@ -184,7 +185,7 @@ void MonsterBase::Idle(float _DeltaTime)
 		SpeedY.Y = 0;
 		GravitySpeed.Y = 0;
 		for (UCollision* Collision : BlockResult) {
-			SetActorLocation({ GetActorLocation().X,Collision->GetActorBaseTransform().Top()});
+			SetActorLocation({ GetActorLocation().X,Collision->GetActorBaseTransform().Top() });
 			BlockBase* Block = (BlockBase*)Collision->GetOwner();
 			if (Block->GetState() == BlockState::Interactive) {
 				SetMonsterState(MonsterState::Excute);
@@ -209,12 +210,22 @@ void MonsterBase::CrouchMove(float _DeltaTime)
 
 void MonsterBase::Dead(float _DeltaTime)
 {
-	ScoreRendererLocation += {0.f, -0.1f};
-	ScoreRenderer->SetTransform({ ScoreRendererLocation, {60,20} });
+	if (!ScoreSpawn) {
+		ScoreSpawn = true;
+		MarioHelper::AddMonsterScore(100);
+		MonsterScore* Score = GetWorld()->SpawnActor<MonsterScore>(MarioRenderOrder::UI);
+		Score->SetActorLocation(GetActorLocation());
+	}
 }
 
 void MonsterBase::Excute(float _DeltaTime)
 {
+	if (!ScoreSpawn) {
+		ScoreSpawn = true;
+		MarioHelper::AddMonsterScore(100);
+		MonsterScore* Score = GetWorld()->SpawnActor<MonsterScore>(MarioRenderOrder::UI);
+		Score->SetActorLocation(GetActorLocation());
+	}
 	GravitySpeed += MarioHelper::Gravity * _DeltaTime;
 	ResultMove(_DeltaTime);
 	Destroy(3.f);
@@ -239,12 +250,7 @@ void MonsterBase::DeadStart()
 {
 	SetAnimation("Dead");
 	Destroy(1.f);
-	ScoreRenderer = CreateImageRenderer(MarioRenderOrder::UI);
-	FVector OwnerLocation = this->GetActorLocation();
-	ScoreRenderer->SetImage("100.png");
-	ScoreRenderer->SetTransform({ {0,-20}, {60,20} });
-	ScoreRendererLocation = ScoreRenderer->GetTransform().GetPosition();
-	MarioHelper::MarioTotalScore += 100;
+
 }
 
 void MonsterBase::ExcuteStart()

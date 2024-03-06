@@ -143,35 +143,6 @@ BlockState BlockBase::GetState()
 	return BoxState;
 }
 
-void BlockBase::BoxCollisionEvent(BlockState _MarioBlockState)
-{
-	std::vector<UCollision*> Result;
-	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
-	{
-		// 이런식으로 상대를 사용할수 있다.
-		UCollision* Collision = Result[0];
-		AActor* Ptr = Collision->GetOwner();
-		Mario* Player = dynamic_cast<Mario*>(Ptr);
-
-		switch (BoxState)
-		{
-		case BlockState::ItemBlock:
-
-			break;
-		case BlockState::Brick:
-
-			break;
-		case BlockState::ItemBrick:
-
-			break;
-		default:
-			break;
-		}
-
-
-	}
-}
-
 void BlockBase::NoneStart()
 {
 }

@@ -81,6 +81,17 @@ void MarioUI::SetMarioWorldUI()
 	}
 }
 
+void MarioUI::SetMonsterScroeUI(float _DeltaTime)
+{
+	if (MarioHelper::MonsterScoreResetTime > 0) {
+		MarioHelper::MonsterScoreResetTime -= _DeltaTime;
+	}
+	else {
+		MarioHelper::MonsterScoreResetTime = 2.0f;
+		MarioHelper::MonsterScore = 0;
+	}
+}
+
 void MarioUI::BeginPlay()
 {
 	AActor::BeginPlay();
@@ -148,6 +159,7 @@ void MarioUI::Tick(float _DeltaTime)
 	SetMarioWorldUI();
 	SetMarioTimeUI(_DeltaTime);
 	IsLevelEnd(_DeltaTime);
+	SetMonsterScroeUI(_DeltaTime);
 }
 
 void MarioUI::IsLevelEnd(float _DeltaTime)

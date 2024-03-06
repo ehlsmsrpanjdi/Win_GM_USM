@@ -2,6 +2,7 @@
 #include "MarioHelper.h"
 #include "BlockBase.h"
 #include "Mario.h"
+#include "MonsterScore.h"
 
 ItemBase::ItemBase()
 {
@@ -9,6 +10,14 @@ ItemBase::ItemBase()
 
 ItemBase::~ItemBase()
 {
+	if (!ScoreSpawn) {
+		ScoreSpawn = true;
+		MarioHelper::MonsterScore = 0;
+		MarioHelper::AddMonsterScore(1000);
+		MonsterScore* Score = GetWorld()->SpawnActor<MonsterScore>(MarioRenderOrder::UI);
+		Score->SetActorLocation(GetActorLocation());
+		MarioHelper::MonsterScore = 0;
+	}
 }
 
 

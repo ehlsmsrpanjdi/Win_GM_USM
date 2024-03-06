@@ -125,6 +125,9 @@
     <ClInclude Include="GroundCoin.h">
       <Filter>Actor\Item</Filter>
     </ClInclude>
+    <ClInclude Include="MonsterScore.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -250,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="GroundCoin.cpp">
       <Filter>Actor\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterScore.cpp">
+      <Filter>Actor\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

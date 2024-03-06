@@ -1,5 +1,6 @@
 #include "Coin.h"
 #include "MarioHelper.h"
+#include "MonsterScore.h"
 
 
 Coin::Coin() 
@@ -8,7 +9,12 @@ Coin::Coin()
 
 Coin::~Coin() 
 {
-	MarioHelper::MarioTotalScore += 100;
+	if (!ScoreSpawn) {
+		ScoreSpawn = true;
+		MarioHelper::AddMonsterScore(100);
+		MonsterScore* Score = GetWorld()->SpawnActor<MonsterScore>(MarioRenderOrder::UI);
+		Score->SetActorLocation(GetActorLocation());
+	}
 	MarioHelper::MarioCoinCount += 1;
 }
 

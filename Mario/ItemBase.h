@@ -42,6 +42,7 @@ protected:
 	float ItemDefaultSpeed = 300.f;
 	float SpawnSpeed = -64.f;
 	float TotalMove = 0.f;
+	bool ScoreSpawn = false;
 
 	bool IsSpawn = false;
 

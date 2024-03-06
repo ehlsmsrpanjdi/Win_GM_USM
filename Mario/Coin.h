@@ -20,6 +20,7 @@ protected:
 
 	float UpSpeed = -1000.f;
 	float DownSpeed = 3000.f;
+	bool ScoreSpawn = false;
 private:
 
 };

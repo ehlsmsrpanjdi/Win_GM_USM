@@ -30,6 +30,8 @@ enum class MarioState{
 	Jump,
 	DirChange,
 	Interactive,
+	Crouch,
+	CrouchJump,
 	Dead,
 	End,
 	EndMove,
@@ -84,7 +86,6 @@ enum class MarioCollisionOrder{
 };
 
 
-
 // Ό³Έν :
 class MarioHelper{
 public:
@@ -102,6 +103,10 @@ public:
 	static bool IsEndingLevel;
 	static bool GameEnd;
 	static MarioClass MyMarioClass;
+	static int MonsterScore;
+	static float MonsterScoreResetTime;
+	static void AddMonsterScore(int _Score);
+
 
 	static bool BottomCheck(FVector _NextVector);
 	static bool LeftCheck(FVector _NextVector);

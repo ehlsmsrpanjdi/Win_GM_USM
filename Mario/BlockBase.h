@@ -28,8 +28,6 @@ protected:
 	virtual void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void StateUpdate(float _DeltaTime) override;
-	void BoxCollisionEvent(BlockState _MarioBlockState);
-
 
 	void NoneStart();
 	void ItemBlockStart();

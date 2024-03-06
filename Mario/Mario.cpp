@@ -49,6 +49,7 @@ void Mario::BeginPlay()
 	AnimationAuto(Renderer, "Big_Idle", 9, 9);
 	AnimationAuto(Renderer, "Big_Move", 10, 12);
 	AnimationAuto(Renderer, "Big_DirChange", 13, 13);
+	AnimationAuto(Renderer, "Big_Crouch", 15, 15, 0.1f, false);
 	AnimationAuto(Renderer, "Big_Jump", 14, 14);
 	AnimationAuto(Renderer, "Big_End", 16, 17);
 
@@ -57,7 +58,7 @@ void Mario::BeginPlay()
 	AnimationAuto(Renderer, "Fire_DirChange", 24, 24);
 	AnimationAuto(Renderer, "Fire_Jump", 25, 25);
 	AnimationAuto(Renderer, "Fire_End", 27, 28);
-
+	AnimationAuto(Renderer, "Fire_Crouch", 26, 26, 0.1f, false);
 
 
 
@@ -107,9 +108,18 @@ void Mario::Tick(float _DeltaTime)
 	}
 
 	PhysicsActor::Tick(_DeltaTime);
-
 	PlayerLocation = GetActorLocation();
 
+	if (UEngineInput::IsPress('Z')) {
+		JumpPower = -1000.f;
+		AccelerateX = { 600.f,0.f,0.f,0.f };
+		MaxSpeedX = 600.f;
+	}
+	else {
+		JumpPower = -900.f;
+		AccelerateX = { 400.f,0.f,0.f,0.f };
+		MaxSpeedX = 400.f;
+	}
 	if (MarioHelper::MyMarioClass == MarioClass::Fire && UEngineInput::IsDown('Z') && AFire::FireCount < 2) {
 		AFire* Fire = GetWorld()->SpawnActor<AFire>(MarioRenderOrder::Fire);
 		Fire->SetActorLocation(FVector{ PlayerLocation.X, PlayerLocation.Y - 64 });
@@ -171,6 +181,12 @@ void Mario::StateUpdate(float _DeltaTime)
 	case MarioState::Interactive:
 		Interactive(_DeltaTime);
 		break;
+	case MarioState::Crouch:
+		Crouch(_DeltaTime);
+		break;
+	case MarioState::CrouchJump:
+		CrouchJump(_DeltaTime);
+		break;
 	case MarioState::Dead:
 		Dead(_DeltaTime);
 		break;
@@ -208,6 +224,13 @@ void Mario::AddSpeed(float _DeltaTime, FVector _FVector) {
 	float NextFloatX = abs(CurSpeed.X + (_FVector.X * _DeltaTime));
 	if (MaxSpeedX >= NextFloatX) {
 		SpeedX.X += _FVector.X * _DeltaTime;
+	}
+	else {
+		if (CurSpeed.X < 0 && _FVector.X < 0) {
+			SpeedX.X -= _FVector.X * _DeltaTime;
+		}
+		else if (CurSpeed.X > 0 && _FVector.X > 0)
+			SpeedX.X -= _FVector.X * _DeltaTime;
 	}
 
 	float NextFloatY = abs(CurSpeed.Y + (_FVector.Y * _DeltaTime));
@@ -254,6 +277,12 @@ void Mario::SetState(MarioState _State)
 			break;
 		case MarioState::Interactive:
 			InteractiveStart();
+			break;
+		case MarioState::Crouch:
+			CrouchStart();
+			break;
+		case MarioState::CrouchJump:
+			CrouchJumpStart();
 			break;
 		case MarioState::Dead:
 			DeadStart();
@@ -353,12 +382,32 @@ void Mario::InteractiveStart()
 	SetAnimation("Jump");
 }
 
+void Mario::CrouchStart()
+{
+	BodyCollision->SetTransform({ { 0,-32 }, { 56, 64 } });
+	SetAnimation("Crouch");
+}
+
+void Mario::CrouchJumpStart()
+{
+	BodyCollision->SetTransform({ { 0,-32 }, { 56, 64 } });
+	SpeedY.Y = 0;
+	GravitySpeed.Y = 0;
+	SpeedY.Y = JumpPower;
+	AddActorLocation(FVector::Up * 5);
+}
+
 void Mario::Idle(float _DeltaTime)
 {
 	ResultMove(_DeltaTime);
 
 	if (0 == CurSpeedDir) {
 		SpeedX.X = 0;
+	}
+
+	if (UEngineInput::IsPress(VK_DOWN) && !(MarioClass::Small == MarioHelper::MyMarioClass)) {
+		SetState(MarioState::Crouch);
+		return;
 	}
 
 	if (UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsPress(VK_RIGHT)) {
@@ -414,6 +463,11 @@ void Mario::Move(float _DeltaTime)
 {
 	if (UEngineInput::IsDown(VK_SPACE) && false == Jumping) {
 		SetState(MarioState::Jump);
+		return;
+	}
+
+	if (UEngineInput::IsPress(VK_DOWN) && !(MarioClass::Small == MarioHelper::MyMarioClass)) {
+		SetState(MarioState::Crouch);
 		return;
 	}
 
@@ -651,6 +705,60 @@ void Mario::Interactive(float _DeltaTime)
 
 }
 
+void Mario::Crouch(float _DeltaTime)
+{
+	GravityCheck(_DeltaTime);
+
+	SetAnimation("Crouch");
+
+	SpeedX.X -= SpeedX.X * _DeltaTime * 4;
+	if (abs(SpeedX.X) < 10) {
+		SpeedX.X = 0;
+	}
+	ResultMove(_DeltaTime);
+	if (UEngineInput::IsDown(VK_SPACE)) {
+		SetState(MarioState::CrouchJump);
+		return;
+	}
+
+	if (UEngineInput::IsFree(VK_DOWN)) {
+		if (abs(CurSpeed.X) < 3) {
+			SetState(MarioState::Idle);
+			BodyCollision->SetTransform({ { 0,-64 }, { 56, 128} });
+		}
+		else {
+			SetState(MarioState::Move);
+			BodyCollision->SetTransform({ { 0,-64 }, { 56, 128} });
+		}
+	}
+}
+
+void Mario::CrouchJump(float _DeltaTime)
+{
+	ResultMove(_DeltaTime);
+	GravityCheck(_DeltaTime);
+
+	SetAnimation("Crouch");
+
+	if (true == UEngineInput::IsUp(VK_SPACE) && CurSpeed.Y < 0.f) {
+		SpeedY.Y = 0;
+		GravitySpeed.Y = 0;
+	}
+
+	if (UEngineInput::IsFree(VK_DOWN)) {
+		SetState(MarioState::Idle);
+		BodyCollision->SetTransform({ { 0,-64 }, { 56, 128} });
+	}
+
+	if (UEngineInput::IsFree(VK_SPACE)) {
+		if (StopSpeed.Y == SpeedY.Y && StopSpeed.Y == GravitySpeed.Y) {
+			SetState(MarioState::Crouch);
+			Jumping = false;
+			return;
+		}
+	}
+}
+
 bool Mario::LeftEdgeCheck()
 {
 
@@ -764,7 +872,7 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 
 			bool Beside = (MarioTransform.GetPosition().X > ResultTransform.Left() && MarioTransform.GetPosition().X < ResultTransform.Right());
 
-			if (MarioTransform.Top() + 10 > ResultTransform.Bottom()) {
+			if (MarioTransform.Top() + 30 > ResultTransform.Bottom()) {
 				if (MarioState::EndMove != State && Beside) {
 					Block->SetBoxState(BlockState::Interactive);
 				}

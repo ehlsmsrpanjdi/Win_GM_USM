@@ -51,6 +51,7 @@ protected:
 	float CrouchDefaultMoveSpeed = 600.f;
 
 	bool IsInit = false;
+	bool ScoreSpawn = false;
 	virtual void MonsterInit();
 
 private:
