@@ -362,7 +362,12 @@ void Mario::JumpStart()
 	}
 	else {
 		Jumping = true;
-		SpeedY.Y = JumpPower;
+		if (GravitySpeed.Y < 5) {
+			SpeedY.Y = JumpPower;
+		}
+		else {
+			return;
+		}
 		GravitySpeed.Y = 0;
 		AddActorLocation({ 0.f,-4.f });
 		SetAnimation("Jump");
