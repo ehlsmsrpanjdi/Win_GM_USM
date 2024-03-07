@@ -7,13 +7,13 @@
 #include "MarioBrick.h"
 #include "MarioUI.h"
 #include "Koopa.h"
-#include "KoopaFire.h"
 #include "CollisionActor.h"
 #include "FireWall.h"
 #include "Flat.h"
 #include "Koopa.h"
 #include "EndingMessage.h"
 #include "MarioBlock.h"
+#include "CameraOffCollisionActor.h"
 
 LastLevel::LastLevel() 
 {
@@ -102,6 +102,9 @@ void LastLevel::BeginPlay()
 	
 	Koopa* Boss = SpawnActor<Koopa>(MarioRenderOrder::Monster);
 	Boss->SetActorLocation({ 8800,615 });
+
+	CameraOffCollisionActor* BanCamera = SpawnActor<CameraOffCollisionActor>(MarioRenderOrder::UI);
+	BanCamera->SetActorLocation({ 8700.f,800.f });
 
 }
 

@@ -18,7 +18,6 @@ int MarioHelper::MarioLife = 3;
 int MarioHelper::MonsterScore = 0;
 std::string MarioHelper::PrevLevelName = "Stage1";
 bool MarioHelper::LevelEnd = false;
-bool MarioHelper::IsEndingLevel = false;
 bool MarioHelper::GameEnd = false;
 
 bool MarioHelper::CameraOff = false;

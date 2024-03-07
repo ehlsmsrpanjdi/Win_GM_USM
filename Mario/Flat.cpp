@@ -74,7 +74,7 @@ void Flat::FlatDestroy(float _DeltaTime)
 		}
 		else {
 			GetWorld()->SetAllTimeScale(1.0f);
-			MarioHelper::IsEndingLevel = false;
+			MarioHelper::CameraOff = false;
 			Destroy();
 		}
 	}

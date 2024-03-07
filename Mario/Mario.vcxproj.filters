@@ -23,9 +23,6 @@
       <Filter>Actor</Filter>
     </ClInclude>
     <ClInclude Include="MarioHelper.h" />
-    <ClInclude Include="Stage1_Map.h">
-      <Filter>Level\Stage1</Filter>
-    </ClInclude>
     <ClInclude Include="GreenTroopa.h">
       <Filter>Actor\Monster</Filter>
     </ClInclude>
@@ -131,6 +128,9 @@
     <ClInclude Include="CameraOffCollisionActor.h">
       <Filter>Actor\Object</Filter>
     </ClInclude>
+    <ClInclude Include="PlayLevel2.h">
+      <Filter>Level\Stage2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -155,9 +155,6 @@
       <Filter>Actor</Filter>
     </ClCompile>
     <ClCompile Include="MarioHelper.cpp" />
-    <ClCompile Include="Stage1_Map.cpp">
-      <Filter>Level\Stage1</Filter>
-    </ClCompile>
     <ClCompile Include="GreenTroopa.cpp">
       <Filter>Actor\Monster</Filter>
     </ClCompile>
@@ -263,6 +260,9 @@
     <ClCompile Include="CameraOffCollisionActor.cpp">
       <Filter>Actor\Object</Filter>
     </ClCompile>
+    <ClCompile Include="PlayLevel2.cpp">
+      <Filter>Level\Stage2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Actor">
@@ -312,6 +312,9 @@
     </Filter>
     <Filter Include="Level\Title">
       <UniqueIdentifier>{bd9602ee-0b27-48ba-a313-220877c35d51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Stage2">
+      <UniqueIdentifier>{2c081ee1-a0d3-4e65-8449-34b9916dc30f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

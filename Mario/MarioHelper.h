@@ -98,7 +98,6 @@ public:
 	static int MarioTotalScore;
 	static int MarioLife;
 	static bool CameraOff;
-	static bool IsEndingLevel;
 	static bool GameEnd;
 	static MarioClass MyMarioClass;
 	static int MonsterScore;

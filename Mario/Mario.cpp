@@ -195,10 +195,10 @@ void Mario::StateUpdate(float _DeltaTime)
 		Changing(_DeltaTime);
 		break;
 	case MarioState::TelePorting:
-
+		TelePorting(_DeltaTime);
 		break;
 	case MarioState::TelePortEnd:
-
+		TelePortEnding(_DeltaTime);
 		break;
 	case MarioState::EndingMove:
 		EndingMove(_DeltaTime);
@@ -295,10 +295,10 @@ void Mario::SetState(MarioState _State)
 			ChangingStart();
 			break;
 		case MarioState::TelePorting:
-
+			TelePortingStart();
 			break;
 		case MarioState::TelePortEnd:
-
+			TelePortEndingStart();
 			break;
 		default:
 			break;
@@ -535,6 +535,29 @@ void Mario::ChangingStart()
 	GetWorld()->SetOtherTimeScale(static_cast<int>(MarioRenderOrder::Player), 0.0f);
 	PrevState = State;
 	ChangeTime = 1.f;
+}
+
+void Mario::TelePortingStart()
+{
+	SpeedX.X = 0;
+	SpeedY.Y = 0;
+	switch (MarioHelper::MyMarioClass)
+	{
+	case MarioClass::Small:
+		BodyCollision->SetTransform({ { 0,-32 }, { 56, 64 } });
+		break;
+	case MarioClass::Big:
+	case MarioClass::Fire:
+		BodyCollision->SetTransform({ { 0,-64 }, { 56, 128} });
+		break;
+	default:
+		break;
+	}
+}
+
+void Mario::TelePortEndingStart()
+{
+	SetAnimation("Idle");
 }
 
 void Mario::EndMove(float _DeltaTime)
@@ -937,6 +960,23 @@ void Mario::Ending(float _DeltaTime)
 	else {
 		GEngine->ChangeLevel("Title");
 		EndingTime = 16.f;
+	}
+}
+void Mario::TelePorting(float _DeltaTime)
+{
+}
+void Mario::TelePortEnding(float _DeltaTime)
+{
+	FVector CurLocation = GetActorLocation();
+
+	Color8Bit Color_Left = MarioHelper::ColMapImage->GetColor(CurLocation.iX(), CurLocation.iY(), Color8Bit::MagentaA);
+
+	if (MarioHelper::BottomCheck({ CurLocation.X,CurLocation.Y - 1 })) {
+		AddActorLocation(FVector::Up * _DeltaTime * 50);
+		CurLocation.Y -= 1;
+	}
+	else {
+		SetState(MarioState::Idle);
 	}
 }
 bool Mario::TopCheck()

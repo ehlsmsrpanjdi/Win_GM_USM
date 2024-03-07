@@ -24,6 +24,7 @@ public:
 
 	static FVector PlayerLocation;
 
+	void SetAnimation(std::string _Name) override;
 	MarioState GetState() {
 		return State;
 	}
@@ -51,6 +52,8 @@ protected:
 	void EndStart();
 	void EndMoveStart();
 	void ChangingStart();
+	void TelePortingStart();
+	void TelePortEndingStart();
 
 	void Idle(float _DeltaTime);
 	void Move(float _DeltaTime);
@@ -66,6 +69,8 @@ protected:
 	void Changing(float _DeltaTime);
 	void EndingMove(float _DeltaTime);
 	void Ending(float _DeltaTime);
+	void TelePorting(float _DeltaTime);
+	void TelePortEnding(float _DeltaTime);
 
 	bool LeftEdgeCheck();
 	bool RightEdgeCheck();
@@ -74,13 +79,10 @@ protected:
 
 	void MarioFall();
 
-	void MarioChange(bool _Positive);
-
 	void MarioCollisionEvent(float _DeltaTime);
 
 	void ResultMove(float _DeltaTime) override;
 
-	void SetAnimation(std::string _Name) override;
 
 	FVector AccelerateX = { 400.f,0.f,0.f,0.f };
 	const FVector StopAccelerateX = AccelerateX * 2;
