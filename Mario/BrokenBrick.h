@@ -4,7 +4,7 @@
 // Ό³Έν :
 class BlockBase;
 class ULevel;
-class BrokenBrick : PhysicsActor
+class BrokenBrick : public PhysicsActor
 {
 public:
 	// constrcuter destructer

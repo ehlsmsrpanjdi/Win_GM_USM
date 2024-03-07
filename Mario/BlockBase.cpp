@@ -3,7 +3,6 @@
 #include "Coin.h"
 #include "Mario.h"
 #include "ItemFlower.h"
-#include "BrokenBrick.h"
 #include "MonsterBase.h"
 
 BlockBase::BlockBase()
@@ -12,28 +11,7 @@ BlockBase::BlockBase()
 
 BlockBase::~BlockBase()
 {
-	FVector CurLocation = GetActorLocation();
 
-	if (CurLocation.X < GetWorld()->GetCameraPos().X) {
-		return;
-	}
-
-	BrokenBrick* Broken;
-	Broken = GetWorld()->SpawnActor<BrokenBrick>(MarioRenderOrder::Block);
-	Broken->SetActorLocation(FVector{ CurLocation.X - 16, CurLocation.Y - 64 });
-	Broken->SetDirState(EActorDir::Left);
-
-	Broken = GetWorld()->SpawnActor<BrokenBrick>(MarioRenderOrder::Block);
-	Broken->SetActorLocation(FVector{ CurLocation.X - 16, CurLocation.Y });
-	Broken->SetDirState(EActorDir::Left);
-
-	Broken = GetWorld()->SpawnActor<BrokenBrick>(MarioRenderOrder::Block);
-	Broken->SetActorLocation(FVector{ CurLocation.X + 16, CurLocation.Y - 64 });
-	Broken->SetDirState(EActorDir::Right);
-
-	Broken = GetWorld()->SpawnActor<BrokenBrick>(MarioRenderOrder::Block);
-	Broken->SetActorLocation(FVector{ CurLocation.X + 16, CurLocation.Y });
-	Broken->SetDirState(EActorDir::Right);
 }
 
 void BlockBase::BeginPlay()

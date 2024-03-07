@@ -52,11 +52,11 @@ void UPlayLevel::BeginPlay()
 		}
 	}
 	Mario* TestMario;
-	TestMario = this->SpawnActor<Mario>(2);
+	TestMario = this->SpawnActor<Mario>(MarioRenderOrder::Map);
 	TestMario->SetActorLocation({ 200,800 });
 
 	BackGroundMap* Map;
-	Map = this->SpawnActor<BackGroundMap>(0);
+	Map = this->SpawnActor<BackGroundMap>(MarioRenderOrder::Player);
 	Map->SetCollisionActorImage(GetName());
 
 

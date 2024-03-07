@@ -7,6 +7,7 @@
 #include <EngineBase\EngineFile.h>
 #include "LoadingLevel.h"
 #include "LastLevel.h"
+#include "PlayLevel2.h"
 
 
 ContentsCore::ContentsCore()
@@ -58,16 +59,20 @@ void ContentsCore::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Hammer_Left.png", 4, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("Hammer_Right.png", 4, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("GroundCoin.png", 3, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("GroundBlock.png", 6, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("GroundBrick.png", 5, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("GroundBrokenBrick.png", 2, 2);
 
 	MainWindow.SetWindowScale({ 256 * 4/* * 1.5f*/, 240 * 4/* * 1.5f*/ });
 	MainWindow.SetWindowPosition({ 800/* * 1.5f*/, 0/* * 1.5f*/ });
 
 
-	CreateLevel<UPlayLevel>("Stage1");
-	CreateLevel<LoadingLevel>("Loading");
-	CreateLevel<UTitleLevel>("Title");
-	CreateLevel<LastLevel>("LastStage");
-	ChangeLevel("LastStage");
+	//CreateLevel<UPlayLevel>("Stage1");
+	//CreateLevel<LoadingLevel>("Loading");
+	//CreateLevel<UTitleLevel>("Title");
+	//CreateLevel<LastLevel>("LastStage");
+	CreateLevel<PlayLevel2>("Stage2");
+	ChangeLevel("Stage2");
 }
 
 void ContentsCore::Tick(float _DeltaTime)

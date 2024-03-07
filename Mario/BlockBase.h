@@ -60,6 +60,8 @@ protected:
 
 	bool Interacting = false;
 
+	bool IsGround = false;
+
 private:
 
 };

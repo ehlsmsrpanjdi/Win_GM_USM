@@ -131,6 +131,18 @@
     <ClInclude Include="PlayLevel2.h">
       <Filter>Level\Stage2</Filter>
     </ClInclude>
+    <ClInclude Include="Stage2Pipe.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GroundBrick.h">
+      <Filter>Actor\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="GroundBlock.h">
+      <Filter>Actor\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="GroundBrokenBrick.h">
+      <Filter>Actor\Block</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -262,6 +274,18 @@
     </ClCompile>
     <ClCompile Include="PlayLevel2.cpp">
       <Filter>Level\Stage2</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2Pipe.cpp">
+      <Filter>Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundBrick.cpp">
+      <Filter>Actor\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundBlock.cpp">
+      <Filter>Actor\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundBrokenBrick.cpp">
+      <Filter>Actor\Block</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
