@@ -18,7 +18,7 @@ void MarioBlock::BeginPlay()
 	SetName("MarioBlock");
 	Renderer = CreateImageRenderer(MarioRenderOrder::Block);
 	Renderer->SetImage("MarioBlock.png");
-	Renderer->SetTransform({ {0,0 }, { 1024,1024 } });
+	Renderer->SetTransform({ {0,0 }, { 256,256 } });
 	AnimationAuto(Renderer, "ItemBlock", 0, 3, 0.2f);
 	SetAnimation("ItemBlock");
 

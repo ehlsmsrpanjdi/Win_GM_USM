@@ -871,45 +871,45 @@ void Mario::MarioFall()
 
 void Mario::MarioCollisionEvent(float _DeltaTime)
 {
-	//std::vector<UCollision*> Result;
-	//IsCollision = false;
-	////if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, Result))
-	////{
-	////	IsCollision = false;
-	////	for (UCollision* ResultCollision : Result) {
-	////		BlockBase* Block = static_cast<BlockBase*>(ResultCollision->GetOwner());
-	////		FTransform MarioTransform = BodyCollision->GetActorBaseTransform();
-	////		FTransform ResultTransform = ResultCollision->GetActorBaseTransform();
+	std::vector<UCollision*> Result;
+	IsCollision = false;
+	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, Result))
+	{
+		IsCollision = false;
+		for (UCollision* ResultCollision : Result) {
+			BlockBase* Block = static_cast<BlockBase*>(ResultCollision->GetOwner());
+			FTransform MarioTransform = BodyCollision->GetActorBaseTransform();
+			FTransform ResultTransform = ResultCollision->GetActorBaseTransform();
 
-	////		bool Beside = (MarioTransform.GetPosition().X > ResultTransform.Left() && MarioTransform.GetPosition().X < ResultTransform.Right());
+			bool Beside = (MarioTransform.GetPosition().X > ResultTransform.Left() && MarioTransform.GetPosition().X < ResultTransform.Right());
 
-	////		if (MarioTransform.Top() + 30 > ResultTransform.Bottom()) {
-	////			if (MarioState::EndMove != State && Beside) {
-	////				Block->SetBoxState(BlockState::Interactive);
-	////			}
-	////			SpeedY.Y = 0.f;
-	////			SetActorLocation({ MarioTransform.GetPosition().X,ResultTransform.Bottom() + MarioTransform.GetScale().Y });
-	////		}
+			if (MarioTransform.Top() + 30 > ResultTransform.Bottom()) {
+				if (MarioState::EndMove != State && Beside) {
+					Block->SetBoxState(BlockState::Interactive);
+				}
+				SpeedY.Y = 0.f;
+				SetActorLocation({ MarioTransform.GetPosition().X,ResultTransform.Bottom() + MarioTransform.GetScale().Y });
+			}
 
-	////		else if (MarioTransform.Bottom() > ResultTransform.Top() + 10) {
+			else if (MarioTransform.Bottom() > ResultTransform.Top() + 10) {
 
-	////			if (CurSpeedDir == 1) {
-	////				SpeedX.X = 0;
-	////				AddActorLocation(FVector::Left);
-	////			}
-	////			else if (CurSpeedDir == -1) {
-	////				SpeedX.X = 0;
-	////				AddActorLocation(FVector::Right);
-	////			}
-	////		}
-	////		else {
-	////			SpeedY.Y = 0;
-	////			GravitySpeed.Y = 0;
-	////			SetActorLocation({ MarioTransform.GetPosition().X,ResultTransform.Top() });
-	////			IsCollision = true;
-	////		}
-	////	}
-	////}
+				if (CurSpeedDir == 1) {
+					SpeedX.X = 0;
+					AddActorLocation(FVector::Left);
+				}
+				else if (CurSpeedDir == -1) {
+					SpeedX.X = 0;
+					AddActorLocation(FVector::Right);
+				}
+			}
+			else {
+				SpeedY.Y = 0;
+				GravitySpeed.Y = 0;
+				SetActorLocation({ MarioTransform.GetPosition().X,ResultTransform.Top() });
+				IsCollision = true;
+			}
+		}
+	}
 }
 
 void Mario::Hit()
