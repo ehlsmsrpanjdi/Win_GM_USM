@@ -91,7 +91,7 @@ protected:
 
 	bool DirChanging = false;
 
-	const float MinSpeed = 5.f;
+	const float MinSpeed = 10.f;
 	float MaxSpeedX = 400.f;
 	const float  MaxSpeedY = 1000.f;
 	int CurSpeedDir = 0;

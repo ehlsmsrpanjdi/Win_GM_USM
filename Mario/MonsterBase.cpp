@@ -21,11 +21,8 @@ void MonsterBase::BeginPlay()
 
 void MonsterBase::Tick(float _DeltaTime)
 {
-
-	float CameraX = GetWorld()->GetCameraPos().X;
-	float WindowCenter = GEngine->MainWindow.GetWindowScale().X;
 	float CurLocationX = GetActorLocation().X;
-	if (CameraX + WindowCenter < CurLocationX - 100.f && (MonsterState::CrouchMove != State))
+	if (MarioHelper::CameraX + MarioHelper::WindowCenter < CurLocationX - 100.f && (MonsterState::CrouchMove != State))
 	{
 		return;
 	}
@@ -37,7 +34,7 @@ void MonsterBase::Tick(float _DeltaTime)
 
 	CollisionEvent(_DeltaTime);
 
-	if (CurLocationX < CameraX - 32) {
+	if (CurLocationX < MarioHelper::CameraX - 32) {
 		Destroy();
 	}
 }

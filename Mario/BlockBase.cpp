@@ -21,10 +21,8 @@ void BlockBase::BeginPlay()
 
 void BlockBase::Tick(float _DeltaTime)
 {
-	float CameraX = GetWorld()->GetCameraPos().X;
-	float WindowCenter = GEngine->MainWindow.GetWindowScale().X;
 	float CurLocationX = GetActorLocation().X;
-	if (CameraX + WindowCenter< CurLocationX)
+	if (MarioHelper::CameraX + MarioHelper::WindowCenter< CurLocationX)
 	{
 		return;
 	}
@@ -33,9 +31,9 @@ void BlockBase::Tick(float _DeltaTime)
 		BlockInit();
 	}
 	StateUpdate(_DeltaTime);
-	BoxCollisionEvent(StartState);
+	//BoxCollisionEvent(StartState);
 
-	if (CurLocationX < CameraX - 32) {
+	if (CurLocationX < MarioHelper::CameraX - 32) {
 		Destroy();
 	}
 }

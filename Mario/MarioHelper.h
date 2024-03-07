@@ -129,6 +129,9 @@ public:
 	static void MarioCoinReset();
 	static void MarioWorldSet();
 
+	static float CameraX;
+	static float WindowCenter;
+
 	static void CreateLevel(std::string _LevelName);
 
 	static bool StageOneInit;

@@ -9,6 +9,7 @@
 #include "GroundBrick.h"
 #include "GroundBlock.h"
 #include "GroundGoomba.h"
+#include "MarioUI.h"
 
 PlayLevel2::PlayLevel2() 
 {
@@ -44,6 +45,10 @@ void PlayLevel2::BeginPlay()
 	BackGroundMap* Map;
 	Map = SpawnActor<BackGroundMap>(MarioRenderOrder::Map);
 	Map->SetCollisionActorImage(GetName());
+	
+	MarioUI* UI;
+	UI = SpawnActor<MarioUI>(MarioRenderOrder::UI);
+	UI->SetActorLocation({ 200,200 });
 
 	Mario* TestMario;
 	TestMario = SpawnActor<Mario>(MarioRenderOrder::Player);
@@ -59,21 +64,114 @@ void PlayLevel2::BeginPlay()
 	StartPipe->SetActorLocation({ 707,768 });
 	StartPipe->SetTotalLocation({ 200,1060 }, { 0,960 });
 
-	GroundBrick* GBrick;
-	GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
-	GBrick->SetBrickDefault();
-	GBrick->SetActorLocation({ 400,1600 });
-
 	GroundBlock* GIBlock;
+	for (int i = 0; i < 5; ++i) {
 	GIBlock = SpawnActor<GroundBlock>(MarioRenderOrder::Block);
-	GIBlock->SetActorLocation({ 600,1600 });
-	GIBlock->SetItemState(ItemState::Coin);
+	GIBlock->SetActorLocation({ 674 + i * 64,1600 });
+	GIBlock->SetItemBlockDefault();
+	}
 
-	GroundGoomba* GGoomba;
-	GGoomba = SpawnActor<GroundGoomba>(MarioRenderOrder::Monster);
-	GGoomba->SetActorLocation({ 400,1400 });
+	GroundBrick* GBrick;
+
+	GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+	GBrick->SetActorLocation({ 1890, 1536 });
+	GBrick->SetBrickDefault();
+
+	{
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 2526, 1472 });
+		GBrick->SetBrickDefault();
+
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 2654, 1472 });
+		GBrick->SetBrickDefault();
+
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 2718, 1472 });
+		GBrick->SetBrickDefault();
+
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 2782, 1472 });
+		GBrick->SetBrickDefault();
+
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 2846, 1472 });
+		GBrick->SetBrickDefault();
+
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 2974, 1472 });
+		GBrick->SetBrickDefault();
+	}
+
+	{
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 2526, 1536 });
+		GBrick->SetBrickDefault();
+
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 2654, 1536 });
+		GBrick->SetBrickDefault();
+
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 2846, 1536 });
+		GBrick->SetBrickDefault();
+
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 2974, 1536 });
+		GBrick->SetBrickDefault();
+	}
+
+	{
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 2526, 1600 });
+		GBrick->SetBrickDefault();
+
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 2590, 1600 });
+		GBrick->SetBrickDefault();
+
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 2654, 1600 });
+		GBrick->SetBrickDefault();
+
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 2846, 1600 });
+		GBrick->SetBrickDefault();
+
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 2910, 1600 });
+		GBrick->SetBrickDefault();
+
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 2974, 1600 });
+		GBrick->SetBrickDefault();
+	}
+
+	for (int i = 0; i < 2; ++i) {
+		for (int j = 0; j < 5; ++j) {
+			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+			GBrick->SetActorLocation({ 3485 + i * 64, 1408 + j * 64 });
+			GBrick->SetBrickDefault();
+		}
+	}
+	for (int i = 0; i < 2; ++i) {
+		for (int j = 0; j < 2; ++j) {
+			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+			GBrick->SetActorLocation({ 3613 + i * 64, 1344 + j * 64 });
+			GBrick->SetBrickDefault();
+		}
+	}
+	for (int i = 0; i < 2; ++i) {
+		for (int j = 0; j < 3; ++j) {
+			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+			GBrick->SetActorLocation({ 3613 + i * 64, 1600 + j * 64 });
+			GBrick->SetBrickDefault();
+		}
+	}
 
 }
+
+
 
 void PlayLevel2::Tick(float _DeltaTime)
 {

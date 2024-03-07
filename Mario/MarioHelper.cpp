@@ -36,6 +36,9 @@ std::string MarioHelper::NextLevelName = "Stage1";
 bool MarioHelper::StageOneInit = false;
 bool MarioHelper::LastStageInit = false;
 
+float MarioHelper::CameraX = 0;
+float MarioHelper::WindowCenter = 0;
+
 MarioHelper::MarioHelper()
 {
 

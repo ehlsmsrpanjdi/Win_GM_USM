@@ -17,7 +17,7 @@ void GroundBrick::BeginPlay()
 	SetName("GroundBrick");
 	Renderer = CreateImageRenderer(MarioRenderOrder::Block);
 	Renderer->SetImage("GroundBrick.png");
-	Renderer->SetTransform({ {0,0 }, { 1024,1024 } });
+	Renderer->SetTransform({ {0,0 }, { 256,256 } });
 	AnimationAuto(Renderer, "Brick", 0, 0, 0.1f, false);
 	SetAnimation("Brick");
 
