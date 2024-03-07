@@ -8,6 +8,7 @@
 #include "Stage2Pipe.h"
 #include "GroundBrick.h"
 #include "GroundBlock.h"
+#include "GroundGoomba.h"
 
 PlayLevel2::PlayLevel2() 
 {
@@ -60,12 +61,17 @@ void PlayLevel2::BeginPlay()
 
 	GroundBrick* GBrick;
 	GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+	GBrick->SetBrickDefault();
 	GBrick->SetActorLocation({ 400,1600 });
 
 	GroundBlock* GIBlock;
 	GIBlock = SpawnActor<GroundBlock>(MarioRenderOrder::Block);
 	GIBlock->SetActorLocation({ 600,1600 });
 	GIBlock->SetItemState(ItemState::Coin);
+
+	GroundGoomba* GGoomba;
+	GGoomba = SpawnActor<GroundGoomba>(MarioRenderOrder::Monster);
+	GGoomba->SetActorLocation({ 400,1400 });
 
 }
 

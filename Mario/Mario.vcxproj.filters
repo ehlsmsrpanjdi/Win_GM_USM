@@ -143,6 +143,9 @@
     <ClInclude Include="GroundBrokenBrick.h">
       <Filter>Actor\Block</Filter>
     </ClInclude>
+    <ClInclude Include="GroundGoomba.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -286,6 +289,9 @@
     </ClCompile>
     <ClCompile Include="GroundBrokenBrick.cpp">
       <Filter>Actor\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundGoomba.cpp">
+      <Filter>Actor\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

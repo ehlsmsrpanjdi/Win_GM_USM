@@ -42,6 +42,7 @@ void ContentsCore::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Mario_Right.png", 5, 7);
 	UEngineResourcesManager::GetInst().CuttingImage("Mario_Left.png", 5, 7);
 	UEngineResourcesManager::GetInst().CuttingImage("Goomba.png", 3,1);
+	UEngineResourcesManager::GetInst().CuttingImage("BlackGoomba.png", 3, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("GreenTroopa_Left.png", 6, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("GreenTroopa_Right.png", 6, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("Plant.png", 2, 1);
