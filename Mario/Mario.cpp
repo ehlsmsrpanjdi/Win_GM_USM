@@ -100,14 +100,14 @@ void Mario::Tick(float _DeltaTime)
 	MarioFall();
 
 	if (UEngineInput::IsDown('J')) {
-		AddActorLocation(FVector::Right * 400);
-		GetWorld()->SetCameraPos(FVector::Right * 400);
+		Debug = true;
 		GodTime = 1000.f;
 	}
 
 	if (UEngineInput::IsDown('K')) {
-		AddActorLocation(FVector::Up * 200);
+		Debug = false;
 	}
+
 
 	PhysicsActor::Tick(_DeltaTime);
 	PlayerLocation = GetActorLocation();
@@ -130,6 +130,26 @@ void Mario::Tick(float _DeltaTime)
 	}
 	if (GodTime >= 0.f) {
 		GodTime -= _DeltaTime;
+	}
+
+	if (Debug) {
+		if(UEngineInput::IsPress(VK_RIGHT)) {
+			AddActorLocation(FVector::Right * 1000 * _DeltaTime);
+			GetWorld()->AddCameraPos(FVector::Right * 1000 * _DeltaTime);
+		}
+		if(UEngineInput::IsPress(VK_LEFT)) {
+			AddActorLocation(FVector::Left* 1000 * _DeltaTime);
+			GetWorld()->AddCameraPos(FVector::Left * 1000 * _DeltaTime);
+		}
+		if(UEngineInput::IsPress(VK_UP)) {
+			AddActorLocation(FVector::Up * 1000 * _DeltaTime);
+			GetWorld()->AddCameraPos(FVector::Up * 1000 * _DeltaTime);
+		}
+		if(UEngineInput::IsPress(VK_DOWN)) {
+			AddActorLocation(FVector::Down * 1000 * _DeltaTime);
+			GetWorld()->AddCameraPos(FVector::Down * 1000 * _DeltaTime);
+		}
+		return;
 	}
 
 	StateUpdate(_DeltaTime);

@@ -12,11 +12,11 @@
 #include "MarioUI.h"
 #include "GroundCoin.h"
 
-PlayLevel2::PlayLevel2() 
+PlayLevel2::PlayLevel2()
 {
 }
 
-PlayLevel2::~PlayLevel2() 
+PlayLevel2::~PlayLevel2()
 {
 }
 
@@ -46,7 +46,7 @@ void PlayLevel2::BeginPlay()
 	BackGroundMap* Map;
 	Map = SpawnActor<BackGroundMap>(MarioRenderOrder::Map);
 	Map->SetCollisionActorImage(GetName());
-	
+
 	MarioUI* UI;
 	UI = SpawnActor<MarioUI>(MarioRenderOrder::UI);
 	UI->SetActorLocation({ 200,200 });
@@ -67,9 +67,9 @@ void PlayLevel2::BeginPlay()
 
 	GroundBlock* GIBlock;
 	for (int i = 0; i < 5; ++i) {
-	GIBlock = SpawnActor<GroundBlock>(MarioRenderOrder::Block);
-	GIBlock->SetActorLocation({ 674 + i * 64,1600 });
-	GIBlock->SetItemBlockDefault();
+		GIBlock = SpawnActor<GroundBlock>(MarioRenderOrder::Block);
+		GIBlock->SetActorLocation({ 674 + i * 64,1600 });
+		GIBlock->SetItemBlockDefault();
 	}
 
 	GroundBrick* GBrick;
@@ -179,9 +179,70 @@ void PlayLevel2::BeginPlay()
 
 	for (int i = 0; i < 6; ++i) {
 		for (int j = 0; j < 2; ++j) {
-
+			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+			GBrick->SetActorLocation({ 3869 + i * 64, 1216 + j * 64 });
+			GBrick->SetBrickDefault();
 		}
-		
+	}
+	GroundCoin* GCoin;
+	for (int i = 0; i < 4; ++i) {
+		GCoin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
+		GCoin->SetActorLocation({ 3869 + i * 64,1536 });
+	}
+
+	for (int i = 0; i < 6; ++i) {
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 3869 + i * 64, 1600 });
+		GBrick->SetBrickDefault();
+	}
+
+	for (int i = 0; i < 4; ++i) {
+		for (int j = 0; j < 2; ++j) {
+			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+			GBrick->SetActorLocation({ 4125 + j * 64, 1344 + i * 64});
+			GBrick->SetBrickDefault();
+		}
+	}
+
+	for (int i = 0; i < 4; ++i) {
+		for (int j = 0; j < 2; ++j) {
+			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+			GBrick->SetActorLocation({ 4381 + j * 64, 1408 + i * 64 });
+			GBrick->SetBrickDefault();
+		}
+	}
+
+	for (int i = 0; i < 4; ++i) {
+		for (int j = 0; j < 2; ++j) {
+			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+			GBrick->SetActorLocation({ 4573 + i * 64, 1280 + j * 64 });
+			GBrick->SetBrickDefault();
+		}
+	}
+
+	for (int i = 0; i < 4; ++i) {
+			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+			GBrick->SetActorLocation({ 4573 + i * 64, 1728});
+			GBrick->SetBrickDefault();
+	}
+
+	for (int i = 0; i < 4; ++i) {
+		for (int j = 0; j < 2; ++j) {
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 5540 + i * 64, 1472 + j * 64});
+		GBrick->SetBrickDefault();
+		}
+	}
+
+	for (int i = 0; i < 4; ++i) {
+			GCoin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
+			GCoin->SetActorLocation({ 5540 + i * 64,1344 });
+	}
+
+	for (int i = 0; i < 6; ++i) {
+			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+			GBrick->SetActorLocation({ 9305 + i * 64, 1536});
+			GBrick->SetBrickDefault();
 	}
 
 

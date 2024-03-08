@@ -88,7 +88,7 @@ protected:
 	const FVector StopAccelerateX = AccelerateX * 2;
 	const FVector DirChangeAccelerateX = StopAccelerateX * 2;
 
-
+	bool Debug = false;
 	bool DirChanging = false;
 
 	const float MinSpeed = 10.f;
