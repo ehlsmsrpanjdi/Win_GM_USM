@@ -133,19 +133,19 @@ void Mario::Tick(float _DeltaTime)
 	}
 
 	if (Debug) {
-		if(UEngineInput::IsPress(VK_RIGHT)) {
+		if (UEngineInput::IsPress(VK_RIGHT)) {
 			AddActorLocation(FVector::Right * 1000 * _DeltaTime);
 			GetWorld()->AddCameraPos(FVector::Right * 1000 * _DeltaTime);
 		}
-		if(UEngineInput::IsPress(VK_LEFT)) {
-			AddActorLocation(FVector::Left* 1000 * _DeltaTime);
+		if (UEngineInput::IsPress(VK_LEFT)) {
+			AddActorLocation(FVector::Left * 1000 * _DeltaTime);
 			GetWorld()->AddCameraPos(FVector::Left * 1000 * _DeltaTime);
 		}
-		if(UEngineInput::IsPress(VK_UP)) {
+		if (UEngineInput::IsPress(VK_UP)) {
 			AddActorLocation(FVector::Up * 1000 * _DeltaTime);
 			GetWorld()->AddCameraPos(FVector::Up * 1000 * _DeltaTime);
 		}
-		if(UEngineInput::IsPress(VK_DOWN)) {
+		if (UEngineInput::IsPress(VK_DOWN)) {
 			AddActorLocation(FVector::Down * 1000 * _DeltaTime);
 			GetWorld()->AddCameraPos(FVector::Down * 1000 * _DeltaTime);
 		}
@@ -596,13 +596,13 @@ void Mario::Jump(float _DeltaTime)
 {
 	if (true == UEngineInput::IsUp(VK_SPACE) && CurSpeed.Y < 0.f) {
 		SpeedY.Y = 0;
-		GravitySpeed.Y = 0;
+		GravitySpeed.Y = 10;
 	}
 
 	MoveFun(_DeltaTime, AccelerateX);
 	GravityCheck(_DeltaTime);
 
-	if (StopSpeed.Y == SpeedY.Y && StopSpeed.Y == GravitySpeed.Y) {
+	if (StopSpeed.Y == SpeedY.Y &&  10 > abs(GravitySpeed.Y)) {
 		if (abs(SpeedX.X) > 5) {
 			SetState(MarioState::Move);
 			Jumping = false;

@@ -29,12 +29,6 @@
     <ClInclude Include="Plant.h">
       <Filter>Actor\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="MarioBlock.h">
-      <Filter>Actor\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="MarioBrick.h">
-      <Filter>Actor\Block</Filter>
-    </ClInclude>
     <ClInclude Include="MushRoom.h">
       <Filter>Actor\Item</Filter>
     </ClInclude>
@@ -67,9 +61,6 @@
     </ClInclude>
     <ClInclude Include="ItemFlower.h">
       <Filter>Actor\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="BrokenBrick.h">
-      <Filter>Actor\Block</Filter>
     </ClInclude>
     <ClInclude Include="FireEnd.h">
       <Filter>Actor\Fire</Filter>
@@ -134,17 +125,29 @@
     <ClInclude Include="Stage2Pipe.h">
       <Filter>Actor\Object</Filter>
     </ClInclude>
-    <ClInclude Include="GroundBrick.h">
-      <Filter>Actor\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="GroundBlock.h">
-      <Filter>Actor\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="GroundBrokenBrick.h">
-      <Filter>Actor\Block</Filter>
-    </ClInclude>
     <ClInclude Include="GroundGoomba.h">
       <Filter>Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="GroundBlock.h">
+      <Filter>Actor\Block\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="MarioBlock.h">
+      <Filter>Actor\Block\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="GroundBrick.h">
+      <Filter>Actor\Block\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="MarioBrick.h">
+      <Filter>Actor\Block\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="BrokenBrick.h">
+      <Filter>Actor\Block\Broken</Filter>
+    </ClInclude>
+    <ClInclude Include="GroundBrokenBrick.h">
+      <Filter>Actor\Block\Broken</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingBlock.h">
+      <Filter>Actor\Block\Moving</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -175,12 +178,6 @@
     </ClCompile>
     <ClCompile Include="Plant.cpp">
       <Filter>Actor\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="MarioBlock.cpp">
-      <Filter>Actor\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="MarioBrick.cpp">
-      <Filter>Actor\Block</Filter>
     </ClCompile>
     <ClCompile Include="MushRoom.cpp">
       <Filter>Actor\Item</Filter>
@@ -214,9 +211,6 @@
     </ClCompile>
     <ClCompile Include="ItemFlower.cpp">
       <Filter>Actor\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="BrokenBrick.cpp">
-      <Filter>Actor\Block</Filter>
     </ClCompile>
     <ClCompile Include="FireEnd.cpp">
       <Filter>Actor\Fire</Filter>
@@ -281,17 +275,29 @@
     <ClCompile Include="Stage2Pipe.cpp">
       <Filter>Actor\Object</Filter>
     </ClCompile>
-    <ClCompile Include="GroundBrick.cpp">
-      <Filter>Actor\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="GroundBlock.cpp">
-      <Filter>Actor\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="GroundBrokenBrick.cpp">
-      <Filter>Actor\Block</Filter>
-    </ClCompile>
     <ClCompile Include="GroundGoomba.cpp">
       <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundBlock.cpp">
+      <Filter>Actor\Block\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="MarioBlock.cpp">
+      <Filter>Actor\Block\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundBrick.cpp">
+      <Filter>Actor\Block\Brick</Filter>
+    </ClCompile>
+    <ClCompile Include="MarioBrick.cpp">
+      <Filter>Actor\Block\Brick</Filter>
+    </ClCompile>
+    <ClCompile Include="BrokenBrick.cpp">
+      <Filter>Actor\Block\Broken</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundBrokenBrick.cpp">
+      <Filter>Actor\Block\Broken</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingBlock.cpp">
+      <Filter>Actor\Block\Moving</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -345,6 +351,18 @@
     </Filter>
     <Filter Include="Level\Stage2">
       <UniqueIdentifier>{2c081ee1-a0d3-4e65-8449-34b9916dc30f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Block\Block">
+      <UniqueIdentifier>{87953ef0-8c46-4952-9f99-193d396065cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Block\Brick">
+      <UniqueIdentifier>{e173514d-b312-45c9-8fb3-7f30b21e1e21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Block\Broken">
+      <UniqueIdentifier>{e26a4925-2a7d-4446-924c-b38ddaa9b1b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Block\Moving">
+      <UniqueIdentifier>{e7469684-09be-4385-b1bc-45a9f6ff558b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

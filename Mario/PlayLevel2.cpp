@@ -11,6 +11,7 @@
 #include "GroundGoomba.h"
 #include "MarioUI.h"
 #include "GroundCoin.h"
+#include "MovingBlock.h"
 
 PlayLevel2::PlayLevel2()
 {
@@ -55,6 +56,11 @@ void PlayLevel2::BeginPlay()
 	TestMario = SpawnActor<Mario>(MarioRenderOrder::Player);
 	TestMario->SetActorLocation({ 200,1531 });
 	SetCameraPos({ 0,960 });
+
+	MovingBlock* MBlock;
+	MBlock = SpawnActor<MovingBlock>(MarioRenderOrder::Block);
+	MBlock->SetActorLocation({ 200,1531 });
+	MBlock->MovingBlockInit({ 200,1531 }, { 400,1531 }, true);
 
 	CameraOffCollisionActor* CameraBan;
 	CameraBan = SpawnActor<CameraOffCollisionActor>();

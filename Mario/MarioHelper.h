@@ -83,6 +83,7 @@ enum class MarioCollisionOrder{
 	Block,
 	Fire,
 	Object,
+	MovingBox,
 };
 
 

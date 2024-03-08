@@ -4,6 +4,7 @@
 #include "PhysicsActor.h"
 #include <EngineCore\Collision.h>
 
+class MovingBlock;
 // Ό³Έν :
 class Mario : public PhysicsActor
 {
@@ -11,6 +12,8 @@ public:
 	// constrcuter destructer
 	Mario();
 	~Mario();
+
+	friend MovingBlock;
 
 	// delete Function
 	Mario(const Mario& _Other) = delete;
