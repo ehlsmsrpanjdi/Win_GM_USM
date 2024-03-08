@@ -68,10 +68,9 @@ void ContentsCore::BeginPlay()
 	MainWindow.SetWindowPosition({ 800/* * 1.5f*/, 0/* * 1.5f*/ });
 
 
-	//CreateLevel<UPlayLevel>("Stage1");
-	//CreateLevel<LoadingLevel>("Loading");
-	//CreateLevel<UTitleLevel>("Title");
-	//CreateLevel<LastLevel>("LastStage");
+	CreateLevel<UPlayLevel>("Stage1");
+	CreateLevel<LoadingLevel>("Loading");
+	CreateLevel<UTitleLevel>("Title");
 	CreateLevel<PlayLevel2>("Stage2");
 	ChangeLevel("Stage2");
 }

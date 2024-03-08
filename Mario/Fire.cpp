@@ -26,7 +26,7 @@ void AFire::BeginPlay()
 	SetName("Fire");
 	Renderer = CreateImageRenderer(MarioRenderOrder::Fire);
 	Renderer->SetImage("Fire.png");
-	Renderer->SetTransform({ {0,0}, {128, 128} });
+	Renderer->SetTransform({ {0,0}, {164, 164} });
 
 	AnimationAuto(Renderer, "Idle", 0, 3);
 	Renderer->ChangeAnimation("Idle");

@@ -27,6 +27,6 @@ protected:
 	void WallCheck(float _DeltaTime);
 
 private:
-	float Speed = 300.0f;
+	float Speed = 600.0f;
 };
 

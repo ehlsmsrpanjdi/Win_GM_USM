@@ -60,7 +60,7 @@ void MarioBrick::BeginPlay()
 	SetName("MarioBrick");
 	Renderer = CreateImageRenderer(MarioRenderOrder::Block);
 	Renderer->SetImage("MarioBrick.png");
-	Renderer->SetTransform({ {0,0 }, { 1024,1024 } });
+	Renderer->SetTransform({ {0,0 }, { 256,256 } });
 	AnimationAuto(Renderer, "Brick", 0, 0, 0.1f, false);
 	SetAnimation("Brick");
 

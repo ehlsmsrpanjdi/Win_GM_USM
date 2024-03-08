@@ -91,7 +91,7 @@ void Mario::Tick(float _DeltaTime)
 {
 	const FVector  a = GEngine->MainWindow.GetMousePosition();
 	UEngineDebug::DebugTextPrint(std::to_string(Mario::PlayerLocation.X) + "     " + std::to_string(Mario::PlayerLocation.Y), 24);
-	UEngineDebug::DebugTextPrint(std::to_string(1 / _DeltaTime),24);
+	UEngineDebug::DebugTextPrint(std::to_string(1 / _DeltaTime), 24);
 	UEngineDebug::DebugTextPrint(std::to_string(GetWorld()->GetCameraPos().X), 24);
 
 	MarioHelper::CameraX = GetWorld()->GetCameraPos().X;
@@ -127,10 +127,6 @@ void Mario::Tick(float _DeltaTime)
 		Fire->SetActorLocation(FVector{ PlayerLocation.X, PlayerLocation.Y - 64 });
 		Fire->SetDirState(DirState);
 		++AFire::FireCount;
-	}
-
-	if (ChangeTime >= 0.f) {
-		ChangeTime -= _DeltaTime;
 	}
 	if (GodTime >= 0.f) {
 		GodTime -= _DeltaTime;
@@ -884,7 +880,7 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 			bool Beside = (MarioTransform.GetPosition().X > ResultTransform.Left() && MarioTransform.GetPosition().X < ResultTransform.Right());
 
 			if (MarioTransform.Top() + 30 > ResultTransform.Bottom()) {
-				if (MarioState::EndMove != State && Beside) {
+				if (MarioState::EndMove != State && Beside && (SpeedY.Y + GravitySpeed.Y) < -10) {
 					Block->SetBoxState(BlockState::Interactive);
 				}
 				SpeedY.Y = 0.f;
@@ -936,7 +932,10 @@ void Mario::Hit()
 
 void Mario::Changing(float _DeltaTime)
 {
-	if (ChangeTime <= 0) {
+	if (ChangeTime >= 0.f) {
+		ChangeTime -= _DeltaTime;
+	}
+	else if (ChangeTime < 0) {
 		SetState(PrevState);
 		GetWorld()->SetAllTimeScale(1.0f);
 	}

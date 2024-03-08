@@ -24,8 +24,8 @@ void PlayLevel2::BeginPlay()
 {
 	ULevel::BeginPlay();
 
-	if (!MarioHelper::StageOneInit) {
-		MarioHelper::StageOneInit = true;
+	if (!MarioHelper::StageTwoInit) {
+		MarioHelper::StageTwoInit = true;
 		UEngineDirectory NewDir;
 
 		NewDir.MoveParent();
@@ -158,24 +158,32 @@ void PlayLevel2::BeginPlay()
 	for (int i = 0; i < 2; ++i) {
 		for (int j = 0; j < 5; ++j) {
 			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
-			GBrick->SetActorLocation({ 3485 + i * 64, 1388 + j * 64 });
+			GBrick->SetActorLocation({ 3485 + i * 64, 1408 + j * 64 });
 			GBrick->SetBrickDefault();
 		}
 	}
 	for (int i = 0; i < 2; ++i) {
 		for (int j = 0; j < 2; ++j) {
 			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
-			GBrick->SetActorLocation({ 3613 + i * 64, 1324 + j * 64 });
+			GBrick->SetActorLocation({ 3613 + i * 64, 1280 + j * 64 });
 			GBrick->SetBrickDefault();
 		}
 	}
 	for (int i = 0; i < 2; ++i) {
 		for (int j = 0; j < 3; ++j) {
 			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
-			GBrick->SetActorLocation({ 3613 + i * 64, 1580 + j * 64 });
+			GBrick->SetActorLocation({ 3613 + i * 64, 1600 + j * 64 });
 			GBrick->SetBrickDefault();
 		}
 	}
+
+	for (int i = 0; i < 6; ++i) {
+		for (int j = 0; j < 2; ++j) {
+
+		}
+		
+	}
+
 
 }
 

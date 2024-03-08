@@ -135,6 +135,7 @@ public:
 	static void CreateLevel(std::string _LevelName);
 
 	static bool StageOneInit;
+	static bool StageTwoInit;
 	static bool LastStageInit;
 
 private:

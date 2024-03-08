@@ -4,6 +4,7 @@
 #include "Mario.h"
 #include "ItemFlower.h"
 #include "MonsterBase.h"
+#include "GroundCoin.h"
 
 BlockBase::BlockBase()
 {
@@ -22,7 +23,7 @@ void BlockBase::BeginPlay()
 void BlockBase::Tick(float _DeltaTime)
 {
 	float CurLocationX = GetActorLocation().X;
-	if (MarioHelper::CameraX + MarioHelper::WindowCenter< CurLocationX)
+	if (MarioHelper::CameraX + MarioHelper::WindowCenter < CurLocationX)
 	{
 		return;
 	}
@@ -152,11 +153,24 @@ void BlockBase::InteractiveStart()
 				Monster->SetMonsterState(MonsterState::Excute);
 			}
 		}
+		std::vector<UCollision*> MResult;
+		if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Item, MResult)) {
+			for (UCollision* CoinCollision : MResult) {
+				GroundCoin* Coin = dynamic_cast<GroundCoin*>(CoinCollision->GetOwner());
+				if (Coin == nullptr) {
+					continue;
+				}
+				else {
+					Coin->Destroy();
+				}
+			}
+		}
 		Destroy();
 	}
-	if (ItemCount >= 1 ) {
+	if (ItemCount >= 1) {
 		ItemCount -= 1;
 	}
+
 
 	Interacting = true;
 	DeltaTime = 0.1f;
