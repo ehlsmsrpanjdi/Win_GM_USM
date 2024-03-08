@@ -22,7 +22,7 @@ void MovingBlock::BeginPlay()
 
 void MovingBlock::Tick(float _DeltaTime)
 {
-	//Moving(_DeltaTime);
+	Moving(_DeltaTime);
 	CollisionEvent(_DeltaTime);
 }
 
@@ -46,10 +46,7 @@ void MovingBlock::Moving(float _DeltaTime)
 			SetActorLocation(StartPos);
 		}
 	}
-}
 
-void MovingBlock::CollisionEvent(float _DeltaTime)
-{
 	std::vector<UCollision*> Result;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
 	{
@@ -59,10 +56,29 @@ void MovingBlock::CollisionEvent(float _DeltaTime)
 		FVector MarioPos = MarioTransform.GetPosition();
 		FVector BoxPos = ResultTransform.GetPosition();
 		if (MarioPos.X > ResultTransform.Left() && MarioPos.X < ResultTransform.Right()) {
-				Player->SetActorLocation({ Player->GetActorLocation().X, ResultTransform.Top() +2});
+			if (MarioPos.Y < ResultTransform.Bottom()) {
+				Player->SetActorLocation({ Player->GetActorLocation().X, ResultTransform.Top() + 2 });
 				Player->SpeedY.Y = 0;
 				Player->GravitySpeed.Y = 0;
-				Player->IsCollision = true;
+				Player->AddActorLocation(DirPosNormal * _DeltaTime * Speed);
+			}
+			else {
+				Player->GravitySpeed.Y = 10;
+				Player->SpeedY.Y = 0;
+			}
+		}
+		else if (MarioPos.X + 24 > ResultTransform.Right()) {
+			Player->AddActorLocation(FVector::Right);
+			Player->SpeedX.X = 0;
+		}
+		else if (MarioPos.X - 24 < ResultTransform.Left()) {
+			Player->AddActorLocation(FVector::Left);
+			Player->SpeedX.X = 0;
 		}
 	}
+}
+
+void MovingBlock::CollisionEvent(float _DeltaTime)
+{
+
 }

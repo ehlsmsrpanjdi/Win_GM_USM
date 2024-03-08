@@ -3,7 +3,7 @@
 #include "PlayLevel.h"
 #include "LastLevel.h"
 #include "Mario.h"
-
+#include "PlayLevel2.h"
 
 UWindowImage* MarioHelper::ColMapImage = nullptr;
 FVector MarioHelper::Gravity = { 0.f, 1500.0f };
@@ -53,6 +53,9 @@ void MarioHelper::CreateLevel(std::string _LevelName)
 {
 	if (_LevelName == "Stage1") {
 		GEngine->CreateLevel<UPlayLevel>("Stage1");
+	}
+	if (_LevelName == "Stage2") {
+		GEngine->CreateLevel<PlayLevel2>("Stage2");
 	}
 	if (_LevelName == "LastStage") {
 		GEngine->CreateLevel<LastLevel>("LastStage");
@@ -199,9 +202,12 @@ void MarioHelper::SetPrevLevel(std::string _LevelName)
 void MarioHelper::MarioWorldSet()
 {
 	if (MarioHelper::NextLevelName._Equal("LastStage")) {
+		MarioHelper::MarioWorldCount = 13;
+	}
+	else if (MarioHelper::NextLevelName._Equal("Stage2")) {
 		MarioHelper::MarioWorldCount = 12;
 	}
-	else {
+	else if (MarioHelper::NextLevelName._Equal("Stage1")) {
 		MarioHelper::MarioWorldCount = 11;
 	}
 	return;

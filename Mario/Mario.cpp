@@ -375,7 +375,7 @@ void Mario::JumpStart()
 	}
 	else {
 		Jumping = true;
-		if (GravitySpeed.Y < 5) {
+		if (GravitySpeed.Y < 10) {
 			SpeedY.Y = JumpPower;
 		}
 		else {
@@ -888,10 +888,8 @@ void Mario::MarioFall()
 void Mario::MarioCollisionEvent(float _DeltaTime)
 {
 	std::vector<UCollision*> Result;
-	IsCollision = false;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, Result))
 	{
-		IsCollision = false;
 		for (UCollision* ResultCollision : Result) {
 			BlockBase* Block = static_cast<BlockBase*>(ResultCollision->GetOwner());
 			FTransform MarioTransform = BodyCollision->GetActorBaseTransform();
@@ -922,7 +920,6 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 				SpeedY.Y = 0;
 				GravitySpeed.Y = 0;
 				SetActorLocation({ MarioTransform.GetPosition().X,ResultTransform.Top() });
-				IsCollision = true;
 			}
 		}
 	}

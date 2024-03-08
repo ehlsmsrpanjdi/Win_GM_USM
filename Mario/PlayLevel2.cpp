@@ -12,6 +12,10 @@
 #include "MarioUI.h"
 #include "GroundCoin.h"
 #include "MovingBlock.h"
+#include "PipeCheat.h"
+#include "Pipe.h"
+#include "Flag.h"
+#include "Door.h"
 
 PlayLevel2::PlayLevel2()
 {
@@ -54,13 +58,32 @@ void PlayLevel2::BeginPlay()
 
 	Mario* TestMario;
 	TestMario = SpawnActor<Mario>(MarioRenderOrder::Player);
-	TestMario->SetActorLocation({ 200,1531 });
-	SetCameraPos({ 0,960 });
+	TestMario->SetActorLocation({ 200,831 });
 
 	MovingBlock* MBlock;
 	MBlock = SpawnActor<MovingBlock>(MarioRenderOrder::Block);
-	MBlock->SetActorLocation({ 200,1531 });
-	MBlock->MovingBlockInit({ 200,1531 }, { 400,1531 }, true);
+	MBlock->SetActorLocation({ 9042,836 });
+	MBlock->MovingBlockInit({ 9042,836 }, { 9042,2048 }, true);
+
+	MBlock = SpawnActor<MovingBlock>(MarioRenderOrder::Block);
+	MBlock->SetActorLocation({ 9042,1236 });
+	MBlock->MovingBlockInit({ 9042,836 }, { 9042,2048 }, true);
+
+	MBlock = SpawnActor<MovingBlock>(MarioRenderOrder::Block);
+	MBlock->SetActorLocation({ 9042,1636 });
+	MBlock->MovingBlockInit({ 9042,836 }, { 9042,2048 }, true);
+
+	MBlock = SpawnActor<MovingBlock>(MarioRenderOrder::Block);
+	MBlock->SetActorLocation({ 10000,2048 });
+	MBlock->MovingBlockInit({ 10000,2048 }, { 10000,1024 }, true);
+
+	MBlock = SpawnActor<MovingBlock>(MarioRenderOrder::Block);
+	MBlock->SetActorLocation({ 10000,1706 });
+	MBlock->MovingBlockInit({ 10000,2048 }, { 10000,1024 }, true);
+
+	MBlock = SpawnActor<MovingBlock>(MarioRenderOrder::Block);
+	MBlock->SetActorLocation({ 10000,1365 });
+	MBlock->MovingBlockInit({ 10000,2048 }, { 10000,1024 }, true);
 
 	CameraOffCollisionActor* CameraBan;
 	CameraBan = SpawnActor<CameraOffCollisionActor>();
@@ -71,6 +94,27 @@ void PlayLevel2::BeginPlay()
 	StartPipe->SetActorLocation({ 707,768 });
 	StartPipe->SetTotalLocation({ 200,1060 }, { 0,960 });
 
+	LeftPipe* EndPipe;
+	EndPipe = SpawnActor<LeftPipe>(MarioRenderOrder::Cheat);
+	EndPipe->SetActorLocation({ 10688,1536 });
+	EndPipe->SetTotalLocation({ 10305,831 }, { 10050,0 });
+
+	EndPipe = SpawnActor<LeftPipe>(MarioRenderOrder::Cheat);
+	EndPipe->SetActorLocation({ 7040,2688 });
+	EndPipe->SetTotalLocation({ 7422,1792 }, { 7120,960 });
+
+	Pipe* GroundPipe;
+	GroundPipe = SpawnActor<Pipe>(MarioRenderOrder::Cheat);
+	GroundPipe->SetActorLocation({ 6656,1664 });
+	GroundPipe->SetTotalLocation({ 6276,2280 }, { 6145,1920 });
+
+	PipeCheat* CheatPipe;
+	CheatPipe = SpawnActor<PipeCheat>(MarioRenderOrder::Cheat);
+	CheatPipe->SetActorLocation({ 10304,768 });
+
+	CheatPipe = SpawnActor<PipeCheat>(MarioRenderOrder::Cheat);
+	CheatPipe->SetActorLocation({ 7424,1728 });
+
 	GroundBlock* GIBlock;
 	for (int i = 0; i < 5; ++i) {
 		GIBlock = SpawnActor<GroundBlock>(MarioRenderOrder::Block);
@@ -79,6 +123,24 @@ void PlayLevel2::BeginPlay()
 	}
 
 	GroundBrick* GBrick;
+	GroundCoin* GCoin;
+
+
+	for (int i = 0; i < 10; ++i) {
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 6370 + i * 64, 2528 });
+		GBrick->SetBrickDefault();
+	}
+
+	for (int i = 0; i < 8; ++i) {
+		GCoin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
+		GCoin->SetActorLocation({ 6442 + i * 64, 2464 });
+	}
+
+	for (int i = 0; i < 10; ++i) {
+		GCoin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
+		GCoin->SetActorLocation({ 6378 + i * 64, 2720 });
+	}
 
 	GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
 	GBrick->SetActorLocation({ 1890, 1536 });
@@ -137,7 +199,6 @@ void PlayLevel2::BeginPlay()
 		GBrick->SetActorLocation({ 2590, 1560 });
 		GBrick->SetBrickDefault();
 
-		GroundCoin* GCoin;
 		GCoin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
 		GCoin->SetActorLocation({ 2590,1496 });
 
@@ -190,7 +251,7 @@ void PlayLevel2::BeginPlay()
 			GBrick->SetBrickDefault();
 		}
 	}
-	GroundCoin* GCoin;
+
 	for (int i = 0; i < 4; ++i) {
 		GCoin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
 		GCoin->SetActorLocation({ 3869 + i * 64,1536 });
@@ -205,7 +266,7 @@ void PlayLevel2::BeginPlay()
 	for (int i = 0; i < 4; ++i) {
 		for (int j = 0; j < 2; ++j) {
 			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
-			GBrick->SetActorLocation({ 4125 + j * 64, 1344 + i * 64});
+			GBrick->SetActorLocation({ 4125 + j * 64, 1344 + i * 64 });
 			GBrick->SetBrickDefault();
 		}
 	}
@@ -227,30 +288,41 @@ void PlayLevel2::BeginPlay()
 	}
 
 	for (int i = 0; i < 4; ++i) {
-			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
-			GBrick->SetActorLocation({ 4573 + i * 64, 1728});
-			GBrick->SetBrickDefault();
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 4573 + i * 64, 1728 });
+		GBrick->SetBrickDefault();
 	}
 
 	for (int i = 0; i < 4; ++i) {
 		for (int j = 0; j < 2; ++j) {
-		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
-		GBrick->SetActorLocation({ 5540 + i * 64, 1472 + j * 64});
-		GBrick->SetBrickDefault();
+			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+			GBrick->SetActorLocation({ 5540 + i * 64, 1472 + j * 64 });
+			GBrick->SetBrickDefault();
 		}
 	}
 
 	for (int i = 0; i < 4; ++i) {
-			GCoin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
-			GCoin->SetActorLocation({ 5540 + i * 64,1344 });
+		GCoin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
+		GCoin->SetActorLocation({ 5540 + i * 64,1344 });
 	}
 
 	for (int i = 0; i < 6; ++i) {
-			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
-			GBrick->SetActorLocation({ 9305 + i * 64, 1536});
-			GBrick->SetBrickDefault();
+		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
+		GBrick->SetActorLocation({ 9305 + i * 64, 1536 });
+		GBrick->SetBrickDefault();
 	}
 
+	Flag* EndFlag;
+	EndFlag = SpawnActor<Flag>(MarioRenderOrder::Block);
+	EndFlag->SetActorLocation({ 11488,487 });
+
+	Door* EndDoor;
+	EndDoor = SpawnActor<Door>(MarioRenderOrder::Item);
+	EndDoor->SetActorLocation({ 11738,490 });
+	EndDoor->DoorNextLevel("LastStage");
+
+	CameraBan = SpawnActor<CameraOffCollisionActor>(MarioRenderOrder::Item);
+	CameraBan->SetActorLocation({ 11658,831 });
 
 }
 
@@ -262,4 +334,5 @@ void PlayLevel2::Tick(float _DeltaTime)
 
 void PlayLevel2::LevelStart(ULevel* Level)
 {
+	MarioHelper::SetPrevLevel("Stage2");
 }

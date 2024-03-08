@@ -8,8 +8,6 @@ GroundCoin::GroundCoin()
 
 GroundCoin::~GroundCoin() 
 {
-	MarioHelper::MarioCoinCount++;
-	MarioHelper::MarioTotalScore += 100;
 }
 
 void GroundCoin::BeginPlay()
@@ -35,6 +33,8 @@ void GroundCoin::Tick(float _DeltaTime)
 {
 	std::vector<UCollision*> Result;
 	if (BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result)) {
+		MarioHelper::MarioCoinCount++;
+		MarioHelper::MarioTotalScore += 100;
 		Destroy();
 	}
 }

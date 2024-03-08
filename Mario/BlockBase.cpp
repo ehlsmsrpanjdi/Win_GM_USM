@@ -161,6 +161,8 @@ void BlockBase::InteractiveStart()
 					continue;
 				}
 				else {
+					MarioHelper::MarioCoinCount++;
+					MarioHelper::MarioTotalScore += 100;
 					Coin->Destroy();
 				}
 			}

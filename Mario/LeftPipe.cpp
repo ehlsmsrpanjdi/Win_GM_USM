@@ -15,7 +15,7 @@ LeftPipe::~LeftPipe()
 void LeftPipe::BeginPlay()
 {
 	BodyCollision = CreateCollision(MarioCollisionOrder::Object);
-	BodyCollision->SetTransform({ { 0,0 } ,{128,32} });
+	BodyCollision->SetTransform({ { -16,0 } ,{128,32} });
 
 	BodyRenderer = CreateImageRenderer(MarioRenderOrder::Cheat);
 	BodyRenderer->SetTransform({ {0,0}, {128, 128} });

@@ -17,7 +17,7 @@ void MarioUI::SetMarioScoreUI()
 	std::string Index = std::to_string(MarioHelper::MarioTotalScore);
 	std::string str;
 	for (int i = 0; i < 6; ++i) {
-		str = Index.substr(i + 1, 1); 
+		str = Index.substr(i +1 ,1);
 		str.append(".png");
 		ScoreUIArray[i]->SetImage(str);
 	}

@@ -87,7 +87,7 @@ bool PhysicsActor::GravityCheck(float _DeltaTime)
 		CurLocation.Y -= 1;
 	}
 
-	if (Color_Right == Color8Bit(255, 0, 255, 0) || Color_Left == Color8Bit(255, 0, 255, 0) || IsCollision == true)
+	if (Color_Right == Color8Bit(255, 0, 255, 0) || Color_Left == Color8Bit(255, 0, 255, 0))
 	{
 		GravitySpeed = StopSpeed;
 		SpeedY = StopSpeed;

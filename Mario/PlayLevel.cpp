@@ -278,6 +278,7 @@ void UPlayLevel::BeginPlay()
 
 	Door* door = SpawnActor<Door>(MarioRenderOrder::UI);
 	door->SetActorLocation({ 12954.f, 490.f });
+	door->DoorNextLevel("Stage2");
 }
 
 void UPlayLevel::Tick(float _DeltaTime)

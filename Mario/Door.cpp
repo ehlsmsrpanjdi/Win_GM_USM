@@ -26,7 +26,12 @@ void Door::Tick(float _DeltaTime)
 		UCollision* Collision = Result[0];
 		Collision->GetOwner()->Destroy();
 		MarioHelper::LevelEnd = true;
-		MarioHelper::SetNextLevel("LastStage");
+		MarioHelper::SetNextLevel(NextLevel);
 	}
+}
+
+void Door::DoorNextLevel(std::string _NextLevel)
+{
+	NextLevel = _NextLevel;
 }
 
