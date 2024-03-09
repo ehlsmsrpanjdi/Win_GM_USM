@@ -29,8 +29,7 @@ void GreenTroopa::BeginPlay()
 	SetAnimation("Idle");
 	AnimationAuto(Renderer, "Crouch", 4, 4);
 	AnimationAuto(Renderer, "Fly", 2, 3, 0.2f);
-	SetMonsterState(MonsterState::Idle);
-}
+}	
 
 void GreenTroopa::CollisionEvent(float _DeltaTime)
 {
@@ -50,8 +49,6 @@ void GreenTroopa::CollisionEvent(float _DeltaTime)
 
 		switch (State)
 		{
-		case MonsterState::None:
-			break;
 		case MonsterState::Idle:
 		{
 			FVector CurLocation = GetActorLocation();

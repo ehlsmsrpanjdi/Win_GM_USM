@@ -5,6 +5,7 @@
 #include "PhysicsActor.h"
 #include "BlockBase.h"
 #include "MonsterScore.h"
+#include "GreenTroopa.h"
 
 MonsterBase::MonsterBase()
 {
@@ -43,6 +44,22 @@ void MonsterBase::IsEdge(float _DeltaTime)
 {
 	FVector CurLocation = GetActorLocation();
 
+	GreenTroopa* GTroopa = dynamic_cast<GreenTroopa*>(this);
+	if (GTroopa != nullptr) {
+		bool LeftBottom = MarioHelper::LeftCheck({ CurLocation.X + 8, CurLocation.Y + 4 });
+		bool RightBottom = MarioHelper::RightCheck({ CurLocation.X - 8, CurLocation.Y + 4 });
+		if (!LeftBottom) {
+			ReverseDir();
+			return;
+		}
+
+		if (!RightBottom) {
+			ReverseDir();
+			return;
+		}
+	}
+
+
 	bool IsLeft = MarioHelper::LeftCheck({ CurLocation.X + 4, CurLocation.Y - 10 });
 	bool IsRight = MarioHelper::RightCheck({ CurLocation.X - 4, CurLocation.Y - 10 });
 	if (IsLeft) {
@@ -73,8 +90,6 @@ void MonsterBase::StateUpdate(float _DeltaTime)
 {
 	switch (State)
 	{
-	case MonsterState::None:
-		break;
 	case MonsterState::Idle:
 		Idle(_DeltaTime);
 		break;
@@ -105,8 +120,6 @@ void MonsterBase::SetMonsterState(MonsterState _State)
 
 	switch (State)
 	{
-	case MonsterState::None:
-		break;
 	case MonsterState::Idle:
 		IdleStart();
 		break;

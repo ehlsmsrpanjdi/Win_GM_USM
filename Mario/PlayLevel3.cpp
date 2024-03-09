@@ -12,12 +12,13 @@
 #include "Flag.h"
 #include "Door.h"
 #include "CameraOffCollisionActor.h"
+#include "MonsterGoomba.h"
 
-PlayLevel3::PlayLevel3() 
+PlayLevel3::PlayLevel3()
 {
 }
 
-PlayLevel3::~PlayLevel3() 
+PlayLevel3::~PlayLevel3()
 {
 }
 
@@ -76,18 +77,18 @@ void PlayLevel3::BeginPlay()
 
 
 	GCoin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
-	GCoin->SetActorLocation({ 3232,447});
+	GCoin->SetActorLocation({ 3232,447 });
 
 	GCoin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
-	GCoin->SetActorLocation({ 3296, 447});
+	GCoin->SetActorLocation({ 3296, 447 });
 
 	for (int i = 0; i < 4; ++i) {
 		GCoin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
-		GCoin->SetActorLocation({ 3870 + i * 64, 319});
+		GCoin->SetActorLocation({ 3870 + i * 64, 319 });
 	}
 
 	GCoin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
-	GCoin->SetActorLocation({ 5473, 389});
+	GCoin->SetActorLocation({ 5473, 389 });
 
 	GCoin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
 	GCoin->SetActorLocation({ 5537, 389 });
@@ -138,8 +139,34 @@ void PlayLevel3::BeginPlay()
 
 	RedTroopa* Red;
 	Red = SpawnActor<RedTroopa>(MarioRenderOrder::Monster);
-	Red->SetActorLocation({ 1900,316});
-	
+	Red->SetActorLocation({ 1900,316 });
+
+	Red = SpawnActor<RedTroopa>(MarioRenderOrder::Monster);
+	Red->SetActorLocation({ 4771,264 });
+	Red->FlyInit({ 4771,364 }, { 4771,723 });
+	Red->SetMonsterState(MonsterState::Fly);
+
+	Red = SpawnActor<RedTroopa>(MarioRenderOrder::Monster);
+	Red->SetActorLocation({ 7057,447});
+
+	Red = SpawnActor<RedTroopa>(MarioRenderOrder::Monster);
+	Red->SetActorLocation({ 7320,250});
+	Red->FlyInit({ 7320,250}, { 7320,600 });
+	Red->SetMonsterState(MonsterState::Fly);
+
+	MonsterGoomba* Goomba;
+	Goomba = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
+	Goomba->SetActorLocation({ 2777,250 });
+
+	Goomba = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
+	Goomba->SetActorLocation({ 2914,250 });
+
+	Goomba = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
+	Goomba->SetActorLocation({ 5173,383 });
+
+	MarioBlock* Block;
+	Block = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
+	Block->SetItemBlockDefault(1, ItemState::MushRoom);
 
 	Flag* EndFlag;
 	EndFlag = SpawnActor<Flag>(MarioRenderOrder::Item);

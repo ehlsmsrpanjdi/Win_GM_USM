@@ -47,7 +47,7 @@ protected:
 	void FlyStart();
 
 
-	MonsterState State = MonsterState::None;
+	MonsterState State = MonsterState::Idle;
 
 	float MonsterDefaultSpeed = 200.f;
 	float CrouchDefaultMoveSpeed = 600.f;

@@ -49,7 +49,6 @@ enum class MarioClass {
 };
 
 enum class MonsterState {
-	None,
 	Idle,
 	Crouch,
 	CrouchMove,
