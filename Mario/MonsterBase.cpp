@@ -90,6 +90,8 @@ void MonsterBase::StateUpdate(float _DeltaTime)
 	case MonsterState::Excute:
 		Excute(_DeltaTime);
 		break;
+	case MonsterState::Fly:
+		Fly(_DeltaTime);
 	default:
 		break;
 	}
@@ -120,6 +122,8 @@ void MonsterBase::SetMonsterState(MonsterState _State)
 	case MonsterState::Excute:
 		ExcuteStart();
 		break;
+	case MonsterState::Fly:
+		FlyStart();
 	default:
 		break;
 	}
@@ -228,8 +232,13 @@ void MonsterBase::Excute(float _DeltaTime)
 	Destroy(3.f);
 }
 
+void MonsterBase::Fly(float _DeltaTime)
+{
+}
+
 void MonsterBase::IdleStart()
 {
+	SetAnimation("Idle");   
 }
 
 void MonsterBase::CrouchStart()
@@ -256,6 +265,11 @@ void MonsterBase::ExcuteStart()
 	SpeedX.X = 0.f;
 	SpeedY.Y = -500.f;
 	BodyCollision->Destroy();
+}
+
+void MonsterBase::FlyStart()
+{
+	SetAnimation("Fly");
 }
 
 void MonsterBase::MonsterInit()

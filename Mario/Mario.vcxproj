@@ -196,6 +196,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="PlayLevel3.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="RedTroopa.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Stage2Pipe.h">
       <SubType>
       </SubType>
@@ -389,6 +397,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="PlayLevel2.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="PlayLevel3.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="RedTroopa.cpp">
       <SubType>
       </SubType>
     </ClCompile>

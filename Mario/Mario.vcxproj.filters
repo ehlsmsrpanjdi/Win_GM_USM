@@ -149,6 +149,12 @@
     <ClInclude Include="MovingBlock.h">
       <Filter>Actor\Block\Moving</Filter>
     </ClInclude>
+    <ClInclude Include="PlayLevel3.h">
+      <Filter>Level\Stage3</Filter>
+    </ClInclude>
+    <ClInclude Include="RedTroopa.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -299,6 +305,12 @@
     <ClCompile Include="MovingBlock.cpp">
       <Filter>Actor\Block\Moving</Filter>
     </ClCompile>
+    <ClCompile Include="PlayLevel3.cpp">
+      <Filter>Level\Stage3</Filter>
+    </ClCompile>
+    <ClCompile Include="RedTroopa.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Actor">
@@ -363,6 +375,9 @@
     </Filter>
     <Filter Include="Actor\Block\Moving">
       <UniqueIdentifier>{e7469684-09be-4385-b1bc-45a9f6ff558b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Stage3">
+      <UniqueIdentifier>{ef32aa2c-2e4d-48d1-ba75-d9079be7ae1e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

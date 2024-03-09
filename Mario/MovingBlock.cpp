@@ -37,13 +37,24 @@ void MovingBlock::Moving(float _DeltaTime)
 {
 	FVector DirPos = (EndPos - StartPos);
 	FVector DirPosNormal = DirPos.Normalize2DReturn();
-	AddActorLocation(DirPosNormal * _DeltaTime * Speed);
+	FVector CurAcc = DirPosNormal* _DeltaTime* Speed;
+	if (abs(CurSpeed.X + CurAcc.X) <= MaxSpeed && abs(CurSpeed.Y + CurAcc.Y) <= MaxSpeed) {
+	CurSpeed += CurAcc;
+	}
+	AddActorLocation(CurSpeed * _DeltaTime);
 	FVector CurLocation = GetActorLocation();
 	float SubX = EndPos.X - CurLocation.X;
 	float SubY = EndPos.Y - CurLocation.Y;
 	if (TelePort == true) {
 		if (abs(SubX) + abs(SubY) < 10) {
 			SetActorLocation(StartPos);
+		}
+	}
+	else {
+		if (abs(SubX) + abs(SubY) < 10) {
+			FVector TempLocation = StartPos;
+			StartPos = EndPos;
+			EndPos = TempLocation;
 		}
 	}
 

@@ -8,6 +8,7 @@
 #include "LoadingLevel.h"
 #include "LastLevel.h"
 #include "PlayLevel2.h"
+#include "PlayLevel3.h"
 
 
 ContentsCore::ContentsCore()
@@ -45,6 +46,8 @@ void ContentsCore::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("BlackGoomba.png", 3, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("GreenTroopa_Left.png", 6, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("GreenTroopa_Right.png", 6, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("RedTroopa_Left.png", 6, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("RedTroopa_Right.png", 6, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("Plant.png", 2, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("MarioBlock.png", 6, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("MarioBrick.png", 5, 1);
@@ -71,7 +74,8 @@ void ContentsCore::BeginPlay()
 	CreateLevel<UPlayLevel>("Stage1");
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<UTitleLevel>("Title");
-	ChangeLevel("Title");
+	CreateLevel<PlayLevel3>("Stage3");
+	ChangeLevel("Stage3");
 }
 
 void ContentsCore::Tick(float _DeltaTime)

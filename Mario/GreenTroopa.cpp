@@ -12,6 +12,12 @@ GreenTroopa::~GreenTroopa()
 {
 }
 
+void GreenTroopa::FlyInit(FVector _StartPos, FVector _EndPos)
+{
+	StartPos = _StartPos;
+	EndPos = _EndPos;
+}
+
 void GreenTroopa::BeginPlay()
 {
 	MonsterBase::BeginPlay();
@@ -22,9 +28,8 @@ void GreenTroopa::BeginPlay()
 	AnimationAuto(Renderer, "Idle", 0, 1, 0.2f);
 	SetAnimation("Idle");
 	AnimationAuto(Renderer, "Crouch", 4, 4);
-
-
-
+	AnimationAuto(Renderer, "Fly", 2, 3, 0.2f);
+	SetMonsterState(MonsterState::Idle);
 }
 
 void GreenTroopa::CollisionEvent(float _DeltaTime)
@@ -52,7 +57,7 @@ void GreenTroopa::CollisionEvent(float _DeltaTime)
 			FVector CurLocation = GetActorLocation();
 			if (CurPlayerLocation.Y < CurLocation.Y - 32) {
 				Player->SetState(MarioState::Interactive);
-  				SetMonsterState(MonsterState::Crouch);
+				SetMonsterState(MonsterState::Crouch);
 				return;
 			}
 			else {
@@ -78,8 +83,20 @@ void GreenTroopa::CollisionEvent(float _DeltaTime)
 			}
 			break;
 		}
-		case MonsterState::Dead:
-			break;
+		case MonsterState::Fly:
+		{
+			FVector CurLocation = GetActorLocation();
+			if (CurPlayerLocation.Y < CurLocation.Y - 32) {
+				Player->SetState(MarioState::Interactive);
+				SetMonsterState(MonsterState::Idle);
+				return;
+			}
+			else {
+				Player->Hit();
+				return;
+			}
+		}
+		break;
 		default:
 			break;
 		}
@@ -91,21 +108,15 @@ void GreenTroopa::CollisionEvent(float _DeltaTime)
 		for (UCollision* Collision : MonsterResult) {
 			switch (State)
 			{
-			case MonsterState::None:
-				break;
 			case MonsterState::Idle:
 				this->ReverseDir();
-				break;
-			case MonsterState::Crouch:
-				break;
-			case MonsterState::Dead:
 				break;
 			case MonsterState::CrouchMove:
 			{
 				MonsterBase* Test = (MonsterBase*)(Collision->GetOwner());
- 				Test->SetMonsterState(MonsterState::Excute);
+				Test->SetMonsterState(MonsterState::Excute);
 			}
-				break;
+			break;
 			default:
 				break;
 			}
@@ -115,10 +126,27 @@ void GreenTroopa::CollisionEvent(float _DeltaTime)
 
 }
 
+void GreenTroopa::Fly(float _DeltaTime)
+{
+	FVector DirPos = (EndPos - StartPos);
+	FVector DirPosNormal = DirPos.Normalize2DReturn();
+	FVector CurAcc = DirPosNormal * _DeltaTime * Speed;
+	if (abs(CurSpeed.X + CurAcc.X) <= MaxSpeed && abs(CurSpeed.Y + CurAcc.Y) <= MaxSpeed) {
+		CurSpeed += CurAcc;
+	}
+	AddActorLocation(CurSpeed * _DeltaTime);
+	FVector CurLocation = GetActorLocation();
+	float SubX = EndPos.X - CurLocation.X;
+	float SubY = EndPos.Y - CurLocation.Y;
+	if (abs(SubX) + abs(SubY) < 10) {
+		FVector TempLocation = StartPos;
+		StartPos = EndPos;
+		EndPos = TempLocation;
+	}
+}
+
 void GreenTroopa::MonsterInit()
 {
 	BodyCollision = CreateCollision(MarioRenderOrder::Monster);
 	BodyCollision->SetTransform({ {0,-24},{32,48} });
-
-	State = MonsterState::Idle;
 }

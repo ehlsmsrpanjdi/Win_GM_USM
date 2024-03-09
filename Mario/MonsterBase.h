@@ -37,12 +37,14 @@ protected:
 	void CrouchMove(float _DeltaTime);
 	void Dead(float _DeltaTime);
 	virtual void Excute(float _DeltaTime);
+	virtual void Fly(float _DeltaTime);
 
 	void IdleStart();
 	void CrouchStart();
 	void CrouchMoveStart();
 	void DeadStart();
 	void ExcuteStart();
+	void FlyStart();
 
 
 	MonsterState State = MonsterState::None;

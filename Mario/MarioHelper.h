@@ -55,6 +55,7 @@ enum class MonsterState {
 	CrouchMove,
 	Dead,
 	Excute,
+	Fly,
 };
 
 enum class BlockState {
@@ -137,6 +138,7 @@ public:
 
 	static bool StageOneInit;
 	static bool StageTwoInit;
+	static bool StageThreeInit;
 	static bool LastStageInit;
 
 private:

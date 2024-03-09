@@ -25,6 +25,8 @@ protected:
 	FVector StartPos = {};
 	FVector EndPos = {};
 	float Speed = 200.f;
+	FVector CurSpeed = {};
+	float MaxSpeed = 200.f;
 	bool TelePort = false;
 private:
 
