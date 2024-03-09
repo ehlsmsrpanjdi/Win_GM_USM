@@ -154,6 +154,9 @@ void PlayLevel3::BeginPlay()
 	Red->FlyInit({ 7320,250}, { 7320,600 });
 	Red->SetMonsterState(MonsterState::Fly);
 
+	Red = SpawnActor<RedTroopa>(MarioRenderOrder::Monster);
+	Red->SetActorLocation({ 8737,831});
+
 	MonsterGoomba* Goomba;
 	Goomba = SpawnActor<MonsterGoomba>(MarioRenderOrder::Monster);
 	Goomba->SetActorLocation({ 2777,250 });

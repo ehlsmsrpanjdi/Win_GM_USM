@@ -79,8 +79,8 @@ bool PhysicsActor::GravityCheck(float _DeltaTime)
 	FVector CurLocation = GetActorLocation();
 	GravitySpeed += MarioHelper::Gravity * _DeltaTime;
 
-	Color8Bit Color_Right = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() + 28, GetActorLocation().iY(), Color8Bit::MagentaA);
-	Color8Bit Color_Left = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() - 28, GetActorLocation().iY(), Color8Bit::MagentaA);
+	Color8Bit Color_Right = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() + 28, GetActorLocation().iY(), Color8Bit(0, 0, 0, 0));
+	Color8Bit Color_Left = MarioHelper::ColMapImage->GetColor(GetActorLocation().iX() - 28, GetActorLocation().iY(), Color8Bit(0, 0, 0, 0));
 
 	while (MarioHelper::BottomCheck({ CurLocation.X,CurLocation.Y - 1 })) {
 		AddActorLocation(FVector::Up);

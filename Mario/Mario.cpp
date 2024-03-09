@@ -802,8 +802,8 @@ bool Mario::LeftEdgeCheck()
 	int EdgeLocation_Top = static_cast<int>(CurLocation.Y - 32.f);
 	int EdgeLocation_Bottom = static_cast<int>(CurLocation.Y - 3.f);
 
-	Color8Bit CheckColor_LeftTop = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Top, Color8Bit::MagentaA);
-	Color8Bit CheckColor_LeftBottom = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Bottom - 2, Color8Bit::MagentaA);
+	Color8Bit CheckColor_LeftTop = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Top, Color8Bit(0,0,0,0));
+	Color8Bit CheckColor_LeftBottom = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Bottom - 2, Color8Bit(0, 0, 0, 0));
 
 	bool FirstCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_LeftBottom);
 	bool SecondCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_LeftTop);
@@ -833,8 +833,8 @@ bool Mario::RightEdgeCheck()
 	int EdgeLocation_Top = static_cast<int>(CurLocation.Y - 32.f);
 	int EdgeLocation_Bottom = static_cast<int>(CurLocation.Y - 3.f);
 
-	Color8Bit CheckColor_RightTop = MarioHelper::ColMapImage->GetColor(EdgeLocation_Right, EdgeLocation_Top, Color8Bit::MagentaA);
-	Color8Bit CheckColor_RightBottom = MarioHelper::ColMapImage->GetColor(EdgeLocation_Right, EdgeLocation_Bottom - 2, Color8Bit::MagentaA);
+	Color8Bit CheckColor_RightTop = MarioHelper::ColMapImage->GetColor(EdgeLocation_Right, EdgeLocation_Top, Color8Bit(0, 0, 0, 0));
+	Color8Bit CheckColor_RightBottom = MarioHelper::ColMapImage->GetColor(EdgeLocation_Right, EdgeLocation_Bottom - 2, Color8Bit(0, 0, 0, 0));
 
 	bool FirstCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_RightBottom);
 	bool SecondCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_RightTop);
@@ -878,7 +878,7 @@ void Mario::DirCheck()
 void Mario::MarioFall()
 {
 	FVector CurLocation = GetActorLocation();
-	Color8Bit FallCheck = MarioHelper::ColMapImage->GetColor(CurLocation.iX(), CurLocation.iY(), Color8Bit::YellowA);
+	Color8Bit FallCheck = MarioHelper::ColMapImage->GetColor(CurLocation.iX(), CurLocation.iY(), Color8Bit(0, 0, 0, 0));
 	if (Color8Bit(255, 255, 0, 0) == FallCheck) {
 		MarioHelper::MyMarioClass = MarioClass::Small;
 		SetState(MarioState::Dead);
@@ -987,7 +987,7 @@ void Mario::TelePortEnding(float _DeltaTime)
 {
 	FVector CurLocation = GetActorLocation();
 
-	Color8Bit Color_Left = MarioHelper::ColMapImage->GetColor(CurLocation.iX(), CurLocation.iY(), Color8Bit::MagentaA);
+	Color8Bit Color_Left = MarioHelper::ColMapImage->GetColor(CurLocation.iX(), CurLocation.iY(), Color8Bit(0, 0, 0, 0));
 
 	if (MarioHelper::BottomCheck({ CurLocation.X,CurLocation.Y - 1 })) {
 		AddActorLocation(FVector::Up * _DeltaTime * 50);
@@ -1006,14 +1006,14 @@ bool Mario::TopCheck()
 	}
 	int TopLocation = static_cast<int>(CurLocation.Y + TopSize);
 
-	Color8Bit TopCheckColor = MarioHelper::ColMapImage->GetColor(CurLocation.iX(), TopLocation, Color8Bit::MagentaA);
+	Color8Bit TopCheckColor = MarioHelper::ColMapImage->GetColor(CurLocation.iX(), TopLocation, Color8Bit(0, 0, 0, 0));
 
 	while (Color8Bit(255, 0, 255, 0) == TopCheckColor) {
 		SpeedY.Y = 0.f;
 		GravitySpeed.Y = 0.f;
 		AddActorLocation(FVector::Down);
 		TopLocation += 1;
-		TopCheckColor = MarioHelper::ColMapImage->GetColor(CurLocation.iX(), TopLocation, Color8Bit::MagentaA);
+		TopCheckColor = MarioHelper::ColMapImage->GetColor(CurLocation.iX(), TopLocation, Color8Bit(0, 0, 0, 0));
 	}
 	return false;
 }

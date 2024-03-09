@@ -73,8 +73,8 @@ bool MarioHelper::BottomCheck(FVector _NextVector) {
 	FVector BottomLeft = MarioHelper::GetBottomLeftVector(CurLocation);
 	FVector BottomRight = MarioHelper::GetBottomRightVector(CurLocation);
 
-	Color8Bit CheckColor_BottomLeft = MarioHelper::ColMapImage->GetColor(BottomLeft.iX(), BottomLeft.iY(), Color8Bit::MagentaA);
-	Color8Bit CheckColor_BottomRight = MarioHelper::ColMapImage->GetColor(BottomRight.iX(), BottomRight.iY(), Color8Bit::MagentaA);
+	Color8Bit CheckColor_BottomLeft = MarioHelper::ColMapImage->GetColor(BottomLeft.iX(), BottomLeft.iY(), Color8Bit(0, 0, 0, 0));
+	Color8Bit CheckColor_BottomRight = MarioHelper::ColMapImage->GetColor(BottomRight.iX(), BottomRight.iY(), Color8Bit(0, 0, 0, 0));
 
 	bool FirstCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_BottomLeft);
 	bool SecondCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_BottomRight);
@@ -93,8 +93,8 @@ bool MarioHelper::RightCheck(FVector _NextVector) {
 	FVector RightTop = MarioHelper::GetRightTopVector(CurLocation);
 	FVector RightBottom = MarioHelper::GetRightBottomVector(CurLocation);
 
-	Color8Bit CheckColor_RightTop = MarioHelper::ColMapImage->GetColor(RightTop.iX(), RightTop.iY(), Color8Bit::MagentaA);
-	Color8Bit CheckColor_RightBottom = MarioHelper::ColMapImage->GetColor(RightBottom.iX(), RightBottom.iY(), Color8Bit::MagentaA);
+	Color8Bit CheckColor_RightTop = MarioHelper::ColMapImage->GetColor(RightTop.iX(), RightTop.iY(), Color8Bit(0, 0, 0, 0));
+	Color8Bit CheckColor_RightBottom = MarioHelper::ColMapImage->GetColor(RightBottom.iX(), RightBottom.iY(), Color8Bit(0, 0, 0, 0));
 
 	bool FirstCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_RightBottom);
 	bool SecondCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_RightTop);
@@ -112,8 +112,8 @@ bool MarioHelper::LeftCheck(FVector _NextVector) {
 	FVector LeftTop = MarioHelper::GetLeftTopVector(CurLocation);
 	FVector LeftBottom = MarioHelper::GetLeftBottomVector(CurLocation);
 
-	Color8Bit CheckColor_LeftTop = MarioHelper::ColMapImage->GetColor(LeftTop.iX(), LeftTop.iY(), Color8Bit::MagentaA);
-	Color8Bit CheckColor_LeftBottom = MarioHelper::ColMapImage->GetColor(LeftBottom.iX(), LeftBottom.iY(), Color8Bit::MagentaA);
+	Color8Bit CheckColor_LeftTop = MarioHelper::ColMapImage->GetColor(LeftTop.iX(), LeftTop.iY(), Color8Bit(0, 0, 0, 0));
+	Color8Bit CheckColor_LeftBottom = MarioHelper::ColMapImage->GetColor(LeftBottom.iX(), LeftBottom.iY(), Color8Bit(0, 0, 0, 0));
 
 	bool FirstCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_LeftBottom);
 	bool SecondCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_LeftTop);
