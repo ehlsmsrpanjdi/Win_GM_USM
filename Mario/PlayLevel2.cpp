@@ -16,6 +16,8 @@
 #include "Pipe.h"
 #include "Flag.h"
 #include "Door.h"
+#include "GreenTroopa.h"
+
 
 PlayLevel2::PlayLevel2()
 {
@@ -116,15 +118,66 @@ void PlayLevel2::BeginPlay()
 	CheatPipe->SetActorLocation({ 7424,1728 });
 
 	GroundBlock* GIBlock;
+
+	GIBlock = SpawnActor<GroundBlock>(MarioRenderOrder::Block);
+	GIBlock->SetActorLocation({ 674,1600 });
+	GIBlock->SetItemBlockDefault(1,ItemState::MushRoom);
+
 	for (int i = 0; i < 5; ++i) {
 		GIBlock = SpawnActor<GroundBlock>(MarioRenderOrder::Block);
-		GIBlock->SetActorLocation({ 674 + i * 64,1600 });
+		GIBlock->SetActorLocation({ 738 + i * 64,1600 });
 		GIBlock->SetItemBlockDefault();
 	}
 
+	GroundGoomba* Goom;
+	Goom = SpawnActor<GroundGoomba>(MarioRenderOrder::Monster);
+	Goom->SetActorLocation({ 1000,1791 });
+
+	Goom = SpawnActor<GroundGoomba>(MarioRenderOrder::Monster);
+	Goom->SetActorLocation({ 924,1791 });
+
+	Goom = SpawnActor<GroundGoomba>(MarioRenderOrder::Monster);
+	Goom->SetActorLocation({ 1940,1791 });
+
+	Goom = SpawnActor<GroundGoomba>(MarioRenderOrder::Monster);
+	Goom->SetActorLocation({ 5088,1530 });
+
+	Goom = SpawnActor<GroundGoomba>(MarioRenderOrder::Monster);
+	Goom->SetActorLocation({ 5002,1530 });
+
+	Goom = SpawnActor<GroundGoomba>(MarioRenderOrder::Monster);
+	Goom->SetActorLocation({ 6524,1786 });
+
+	Goom = SpawnActor<GroundGoomba>(MarioRenderOrder::Monster);
+	Goom->SetActorLocation({ 6448,1786 });
+
+	Goom = SpawnActor<GroundGoomba>(MarioRenderOrder::Monster);
+	Goom->SetActorLocation({ 6384,1786 });
+
+	Goom = SpawnActor<GroundGoomba>(MarioRenderOrder::Monster);
+	Goom->SetActorLocation({ 8712,1529 });
+
+	Goom = SpawnActor<GroundGoomba>(MarioRenderOrder::Monster);
+	Goom->SetActorLocation({ 8800,1529 });
+
+	GreenTroopa* GT;
+	GT = SpawnActor<GreenTroopa>(MarioRenderOrder::Monster);
+	GT->SetActorLocation({ 3193, 1791 });
+
+	GT = SpawnActor<GreenTroopa>(MarioRenderOrder::Monster);
+	GT->SetActorLocation({ 3100, 1791 });
+
+	GT = SpawnActor<GreenTroopa>(MarioRenderOrder::Monster);
+	GT->SetActorLocation({ 3770, 1791 });
+
+	Goom = SpawnActor<GroundGoomba>(MarioRenderOrder::Monster);
+	Goom->SetActorLocation({ 3950,1791 });
+
+	Goom = SpawnActor<GroundGoomba>(MarioRenderOrder::Monster);
+	Goom->SetActorLocation({ 4100,1791 });
+
 	GroundBrick* GBrick;
 	GroundCoin* GCoin;
-
 
 	for (int i = 0; i < 10; ++i) {
 		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
@@ -144,7 +197,7 @@ void PlayLevel2::BeginPlay()
 
 	GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
 	GBrick->SetActorLocation({ 1890, 1536 });
-	GBrick->SetBrickDefault();
+	GBrick->SetItemBrickDefault(1, ItemState::MushRoom, BlockState::ItemBrick);
 
 	{
 		GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
@@ -252,6 +305,7 @@ void PlayLevel2::BeginPlay()
 		}
 	}
 
+
 	for (int i = 0; i < 4; ++i) {
 		GCoin = SpawnActor<GroundCoin>(MarioRenderOrder::Item);
 		GCoin->SetActorLocation({ 3869 + i * 64,1536 });
@@ -319,7 +373,7 @@ void PlayLevel2::BeginPlay()
 	Door* EndDoor;
 	EndDoor = SpawnActor<Door>(MarioRenderOrder::Item);
 	EndDoor->SetActorLocation({ 11738,490 });
-	EndDoor->DoorNextLevel("LastStage");
+	EndDoor->DoorNextLevel("Stage3");
 
 	CameraBan = SpawnActor<CameraOffCollisionActor>(MarioRenderOrder::Item);
 	CameraBan->SetActorLocation({ 11658,831 });

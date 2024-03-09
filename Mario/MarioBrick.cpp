@@ -71,9 +71,6 @@ void MarioBrick::BlockInit()
 {
 	BodyCollision = CreateCollision(MarioCollisionOrder::Block);
 	BodyCollision->SetTransform({ { 0, -32 }, { 64, 64} });
-
-	BoxState = BlockState::Brick;
-	StartState = BlockState::Brick;
 }
 
 

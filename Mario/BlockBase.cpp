@@ -108,12 +108,22 @@ void BlockBase::SetItemBlockDefault(int _Count, ItemState _Item, BlockState _Blo
 	SetBoxState(_BlockState);
 }
 
+void BlockBase::SetItemBrickDefault(int _Count, ItemState _Item, BlockState _BlockState)
+{
+	SetItemCount(_Count);
+	SetItemState(_Item);
+	SetBoxStartState(_BlockState);
+	SetBoxState(_BlockState);
+}
+
 void BlockBase::SetBrickDefault()
 {
 	SetBoxStartState(BlockState::Brick);
 	SetBoxState(BlockState::Brick);
 	SetItemCount(-1);
 }
+
+
 
 BlockState BlockBase::GetState()
 {

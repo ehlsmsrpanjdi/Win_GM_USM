@@ -21,6 +21,7 @@ public:
 	void SetBoxStartState(BlockState _MarioBlockState);
 
 	void SetItemBlockDefault(int _Count = 1, ItemState _Item = ItemState::Coin, BlockState _BlockState = BlockState::ItemBlock);
+	void SetItemBrickDefault(int _Count = 1, ItemState _Item = ItemState::Coin, BlockState _BlockState = BlockState::ItemBrick);
 	void SetBrickDefault();
 	BlockState GetState();
 

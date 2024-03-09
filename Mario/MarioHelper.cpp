@@ -8,7 +8,7 @@
 
 UWindowImage* MarioHelper::ColMapImage = nullptr;
 FVector MarioHelper::Gravity = { 0.f, 1500.0f };
-MarioClass MarioHelper::MyMarioClass = MarioClass::Fire;
+MarioClass MarioHelper::MyMarioClass = MarioClass::Small;
 float MarioHelper::MonsterScoreResetTime = 5.f;
 
 int MarioHelper::MarioTime = 1400;
@@ -207,6 +207,9 @@ void MarioHelper::SetPrevLevel(std::string _LevelName)
 void MarioHelper::MarioWorldSet()
 {
 	if (MarioHelper::NextLevelName._Equal("LastStage")) {
+		MarioHelper::MarioWorldCount = 14;
+	}
+	else if (MarioHelper::NextLevelName._Equal("Stage3")) {
 		MarioHelper::MarioWorldCount = 13;
 	}
 	else if (MarioHelper::NextLevelName._Equal("Stage2")) {

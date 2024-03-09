@@ -172,6 +172,7 @@ void MarioUI::IsLevelEnd(float _DeltaTime)
 			MarioHelper::LevelEnd = false;
 			SetMarioWorldUI();
 			ChangeLevelTime = 7.0f;
+			MarioHelper::CameraX = 0;
 			GEngine->ChangeLevel("Loading");
 		}
 

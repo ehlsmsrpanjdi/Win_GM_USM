@@ -38,6 +38,10 @@ void MonsterBase::Tick(float _DeltaTime)
 	if (CurLocationX < MarioHelper::CameraX - 32) {
 		Destroy();
 	}
+
+	if (State == MonsterState::CrouchMove && CurLocationX > MarioHelper::CameraX + MarioHelper::WindowCenter + 200) {
+		Destroy();
+	}
 }
 
 void MonsterBase::IsEdge(float _DeltaTime)
