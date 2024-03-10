@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore\Level.h>
+#include <EnginePlatform\EngineSound.h>
 
 // Ό³Έν :
 class UPlayLevel : public ULevel
@@ -20,6 +21,7 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void LevelStart(ULevel* Level) override;
+	UEngineSoundPlayer BGMPlayer;
 private:
 
 };

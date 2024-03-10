@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EnginePlatform/EngineSound.h>
 // Ό³Έν :
 class LeftPipe : public AActor
 {
@@ -22,6 +23,9 @@ protected:
 	UCollision* BodyCollision = nullptr;
 	UImageRenderer* BodyRenderer = nullptr;
 	float TeleportTime = 1.0f;
+
+	UEngineSoundPlayer BGMPlayer;
+	bool SoundOnce = false;
 
 	FVector PlayerLocation = {};
 	FVector CameraLocation = {};

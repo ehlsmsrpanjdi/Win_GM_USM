@@ -17,6 +17,7 @@ ItemBase::~ItemBase()
 		MonsterScore* Score = GetWorld()->SpawnActor<MonsterScore>(MarioRenderOrder::UI);
 		Score->SetActorLocation(GetActorLocation());
 		MarioHelper::MonsterScore = 0;
+		BGMPlayer = UEngineSound::SoundPlay("GainMushRoom.wav");
 	}
 }
 

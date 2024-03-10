@@ -40,6 +40,12 @@ void ContentsCore::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadImg(File.GetFullPath());
 	}
 
+	NewList = NewDir.AllFile({ ".wav", ".mp3" }, true);
+	for (UEngineFile& File : NewList)
+	{
+		UEngineSound::Load(File.GetFullPath());
+	}
+
 	UEngineResourcesManager::GetInst().CuttingImage("Mario_Right.png", 5, 7);
 	UEngineResourcesManager::GetInst().CuttingImage("Mario_Left.png", 5, 7);
 	UEngineResourcesManager::GetInst().CuttingImage("Goomba.png", 3,1);
@@ -71,10 +77,9 @@ void ContentsCore::BeginPlay()
 	MainWindow.SetWindowPosition({ 800/* * 1.5f*/, 0/* * 1.5f*/ });
 
 
-	CreateLevel<UPlayLevel>("Stage1");
+	CreateLevel<PlayLevel2>("Stage2");
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<UTitleLevel>("Title");
-	CreateLevel<PlayLevel2>("Stage2");
 	ChangeLevel("Stage2");
 }
 

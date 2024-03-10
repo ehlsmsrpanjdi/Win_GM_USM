@@ -5,6 +5,7 @@
 #include "ItemFlower.h"
 #include "MonsterBase.h"
 #include "GroundCoin.h"
+#include <EnginePlatform/EngineSound.h>
 
 BlockBase::BlockBase()
 {
@@ -154,6 +155,24 @@ void BlockBase::InteractiveStart()
 	if (Interacting == true) {
 		return;
 	}
+
+	std::vector<UCollision*> MResult;
+	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Item, MResult)) {
+		for (UCollision* CoinCollision : MResult) {
+			GroundCoin* Coin = dynamic_cast<GroundCoin*>(CoinCollision->GetOwner());
+			if (Coin == nullptr) {
+				continue;
+			}
+			else {
+				MarioHelper::MarioCoinCount++;
+				MarioHelper::MarioTotalScore += 200;
+				UEngineSoundPlayer BGMPlayer = UEngineSound::SoundPlay("GainCoin.wav");
+				Coin->Destroy();
+			}
+		}
+	}
+
+	UEngineSoundPlayer BGMPlayer = UEngineSound::SoundPlay("Interactive.wav");
 	if (StartState == BlockState::Brick && (MarioHelper::MyMarioClass == MarioClass::Big || MarioHelper::MyMarioClass == MarioClass::Fire)) {
 		std::vector<UCollision*> Result;
 		if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Monster, Result))
@@ -163,20 +182,7 @@ void BlockBase::InteractiveStart()
 				Monster->SetMonsterState(MonsterState::Excute);
 			}
 		}
-		std::vector<UCollision*> MResult;
-		if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Item, MResult)) {
-			for (UCollision* CoinCollision : MResult) {
-				GroundCoin* Coin = dynamic_cast<GroundCoin*>(CoinCollision->GetOwner());
-				if (Coin == nullptr) {
-					continue;
-				}
-				else {
-					MarioHelper::MarioCoinCount++;
-					MarioHelper::MarioTotalScore += 100;
-					Coin->Destroy();
-				}
-			}
-		}
+		UEngineSoundPlayer BGMPlayer = UEngineSound::SoundPlay("BrickBreak.wav");
 		Destroy();
 	}
 	if (ItemCount >= 1) {
@@ -226,6 +232,7 @@ void BlockBase::Interactive(float _DeltaTime)
 		{
 		case ItemState::MushRoom:
 		{
+			UEngineSoundPlayer BGMPlayer = UEngineSound::SoundPlay("MushRoomAppear.wav");
 			switch (MarioHelper::MyMarioClass)
 			{
 			case MarioClass::Small:

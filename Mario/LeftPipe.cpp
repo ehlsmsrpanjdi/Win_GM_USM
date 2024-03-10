@@ -32,6 +32,7 @@ void LeftPipe::Tick(float _DeltaTime)
 		Player = (Mario*)Collision->GetOwner();
 
 		if (UEngineInput::IsDown(VK_RIGHT) && Player->GetState() != MarioState::TelePorting) {
+			BGMPlayer = UEngineSound::SoundPlay("PipeTravel.wav");
 			MarioHelper::CameraOff = true;
 			Player->SetState(MarioState::TelePorting);
 			Player->SetAnimation("Move");

@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EnginePlatform/EngineSound.h>
 // Ό³Έν :
 class Pipe : public AActor
 {
@@ -25,6 +26,10 @@ protected:
 
 	FVector PlayerLocation = {};
 	FVector CameraLocation = {};
+
+	UEngineSoundPlayer BGMPlayer;
+
+	bool SoundOnce = false;
 
 private:
 

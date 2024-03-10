@@ -32,6 +32,7 @@ void MarioUI::SetMarioTimeUI(float _DeltaTime)
 	if (MarioHelper::LevelEnd) {
 		if (MarioHelper::MarioTime > 1000 && MinusTime < 0)
 		{
+			BGMPlayer = UEngineSound::SoundPlay("GainCoin.wav");
 			MarioHelper::MarioTime -= 1;
 			MarioHelper::MarioTotalScore += 100;
 			MinusTime = MinusTime + 0.004f;

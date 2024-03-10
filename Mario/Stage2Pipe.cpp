@@ -33,10 +33,15 @@ void Stage2Pipe::Tick(float _DeltaTime)
 		UCollision* Collision = MResult[0];
 		Player = (Mario*)Collision->GetOwner();
 		if (TeleportTime >= 0) {
+			if (!SoundOnce) {
+			BGMPlayer = UEngineSound::SoundPlay("PipeTravel.wav");
+			SoundOnce = true;
+			}
 			TeleportTime -= _DeltaTime;
 			Player->AddActorLocation(FVector::Right * 63 * _DeltaTime);
 		}
 		else {
+			BGMPlayer = UEngineSound::SoundPlay("PipeTravel.wav");
 			TeleportTime = 1.0f;
 			Player->SetActorLocation(PlayerLocation);
 			GetWorld()->SetCameraPos(CameraLocation);

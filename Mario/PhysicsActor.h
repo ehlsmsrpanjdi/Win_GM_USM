@@ -2,6 +2,7 @@
 #include <EngineCore/Actor.h>
 #include <EngineCore\EngineResourcesManager.h>
 #include "MarioHelper.h"
+#include <EnginePlatform/EngineSound.h>
 
 
 // Ό³Έν :
@@ -39,6 +40,8 @@ protected:
 	virtual void BeginPlay() = 0;
 	virtual void Tick(float _DeltaTime) = 0;
 	bool NoDir = false;
+
+	UEngineSoundPlayer BGMPlayer;
 
 	FVector CurSpeed = { 0,0,0,0 };
 	FVector SpeedX = { 0,0,0,0 };

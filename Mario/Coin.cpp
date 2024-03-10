@@ -1,17 +1,18 @@
 #include "Coin.h"
 #include "MarioHelper.h"
 #include "MonsterScore.h"
-
+#include <EnginePlatform/EngineSound.h>
 
 Coin::Coin() 
 {
+	UEngineSoundPlayer BGMPlayer = UEngineSound::SoundPlay("GainCoin.wav");
 }
 
 Coin::~Coin() 
 {
 	if (!ScoreSpawn) {
 		ScoreSpawn = true;
-		MarioHelper::AddMonsterScore(100);
+		MarioHelper::AddMonsterScore(200);
 		MonsterScore* Score = GetWorld()->SpawnActor<MonsterScore>(MarioRenderOrder::UI);
 		Score->SetActorLocation(GetActorLocation());
 	}

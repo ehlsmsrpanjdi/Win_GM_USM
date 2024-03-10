@@ -34,7 +34,8 @@ void GroundCoin::Tick(float _DeltaTime)
 	std::vector<UCollision*> Result;
 	if (BodyCollision->CollisionCheck(MarioCollisionOrder::Player, Result)) {
 		MarioHelper::MarioCoinCount++;
-		MarioHelper::MarioTotalScore += 100;
+		MarioHelper::MarioTotalScore += 200;
+		BGMPlayer = UEngineSound::SoundPlay("GainCoin.wav");
 		Destroy();
 	}
 }

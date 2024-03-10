@@ -85,6 +85,7 @@ void GreenTroopa::CollisionEvent(float _DeltaTime)
 			FVector CurLocation = GetActorLocation();
 			if (CurPlayerLocation.Y < CurLocation.Y - 32) {
 				Player->SetState(MarioState::Interactive);
+				BGMPlayer = UEngineSound::SoundPlay("Stomp.wav");
 				SetMonsterState(MonsterState::Idle);
 				return;
 			}

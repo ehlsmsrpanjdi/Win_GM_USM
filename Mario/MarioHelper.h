@@ -104,7 +104,8 @@ public:
 	static int MonsterScore;
 	static float MonsterScoreResetTime;
 	static void AddMonsterScore(int _Score);
-
+	static bool SoundOff;
+	static bool Stage2GroundOut;
 
 	static bool BottomCheck(FVector _NextVector);
 	static bool LeftCheck(FVector _NextVector);

@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EnginePlatform/EngineSound.h>
 // Ό³Έν :
 class MarioUI : public AActor
 {
@@ -25,6 +26,8 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	float Time = 0;
+
+	UEngineSoundPlayer BGMPlayer;
 
 	FTransform MainUITransform = { { 296,-136 }, { 1024, 108 } };
 	FTransform ScoreUITransform = { {-110 ,-95}, {20,20} };

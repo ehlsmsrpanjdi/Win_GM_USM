@@ -260,24 +260,27 @@ void MonsterBase::IdleStart()
 
 void MonsterBase::CrouchStart()
 {
+	BGMPlayer = UEngineSound::SoundPlay("Stomp.wav");
 	BodyCollision->SetScale({ 32,36 });
 	SetAnimation("Crouch");
 }
 
 void MonsterBase::CrouchMoveStart()
 {
+	BGMPlayer = UEngineSound::SoundPlay("Stomp.wav");
 	InteractiveDirCheck();
 }
 
 void MonsterBase::DeadStart()
 {
+	BGMPlayer = UEngineSound::SoundPlay("Stomp.wav");
 	SetAnimation("Dead");
 	Destroy(1.f);
-
 }
 
 void MonsterBase::ExcuteStart()
 {
+	BGMPlayer = UEngineSound::SoundPlay("Stomp.wav");
 	GravitySpeed.Y = 0.f;
 	SpeedX.X = 0.f;
 	SpeedY.Y = -500.f;

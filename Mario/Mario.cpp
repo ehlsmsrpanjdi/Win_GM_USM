@@ -10,7 +10,7 @@
 #include "PhysicsActor.h"
 #include "BlockBase.h"
 #include <EngineCore/EngineDebug.h>
-
+#include <EnginePlatform/EngineSound.h>
 
 FVector Mario::PlayerLocation = {};
 
@@ -125,6 +125,7 @@ void Mario::Tick(float _DeltaTime)
 	if (MarioHelper::MyMarioClass == MarioClass::Fire && UEngineInput::IsDown('Z') && AFire::FireCount < 2) {
 		AFire* Fire = GetWorld()->SpawnActor<AFire>(MarioRenderOrder::Fire);
 		Fire->SetActorLocation(FVector{ PlayerLocation.X, PlayerLocation.Y - 64 });
+		BGMPlayer = UEngineSound::SoundPlay("FireBall.wav");
 		Fire->SetDirState(DirState);
 		++AFire::FireCount;
 	}
@@ -336,6 +337,7 @@ void Mario::SetMarioClassState(MarioClass _MarioClass)
 	case MarioClass::Small:
 		GodTime = 2.f;
 		SetAnimation("Smaller");
+		BGMPlayer = UEngineSound::SoundPlay("PipeTravel.wav");
 		BodyCollision->SetTransform({ { 0,-32 }, { 56, 64 } });
 		break;
 	case MarioClass::Big:
@@ -365,6 +367,14 @@ void Mario::MoveStart()
 
 void Mario::JumpStart()
 {
+	if (MarioHelper::MyMarioClass == MarioClass::Small) {
+		BGMPlayer = UEngineSound::SoundPlay("SmallJump.wav");
+
+	}
+	else {
+		BGMPlayer = UEngineSound::SoundPlay("SuperJump.wav");
+
+	}
 	if (PrevState == MarioState::Jump) {
 		Jumping = true;
 		SpeedY.Y = 0;
@@ -557,6 +567,7 @@ void Mario::ChangingStart()
 
 void Mario::TelePortingStart()
 {
+
 	SpeedX.X = 0;
 	SpeedY.Y = 0;
 	switch (MarioHelper::MyMarioClass)
@@ -575,6 +586,7 @@ void Mario::TelePortingStart()
 
 void Mario::TelePortEndingStart()
 {
+	BGMPlayer = UEngineSound::SoundPlay("PipeTravel.wav");
 	SetAnimation("Idle");
 }
 

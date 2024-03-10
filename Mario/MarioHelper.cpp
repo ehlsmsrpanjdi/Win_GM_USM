@@ -8,8 +8,9 @@
 
 UWindowImage* MarioHelper::ColMapImage = nullptr;
 FVector MarioHelper::Gravity = { 0.f, 1500.0f };
-MarioClass MarioHelper::MyMarioClass = MarioClass::Small;
+MarioClass MarioHelper::MyMarioClass = MarioClass::Fire;
 float MarioHelper::MonsterScoreResetTime = 5.f;
+bool MarioHelper::SoundOff = false;
 
 int MarioHelper::MarioTime = 1400;
 int MarioHelper::MarioCoinCount = 200;
@@ -36,6 +37,7 @@ std::string MarioHelper::NextLevelName = "Stage1";
 
 bool MarioHelper::StageOneInit = false;
 bool MarioHelper::StageTwoInit = false;
+bool MarioHelper::Stage2GroundOut = false;
 bool MarioHelper::StageThreeInit = false;
 bool MarioHelper::LastStageInit = false;
 

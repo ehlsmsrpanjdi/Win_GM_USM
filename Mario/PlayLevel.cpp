@@ -279,10 +279,18 @@ void UPlayLevel::BeginPlay()
 	Door* door = SpawnActor<Door>(MarioRenderOrder::UI);
 	door->SetActorLocation({ 12954.f, 490.f });
 	door->DoorNextLevel("Stage2");
+
+	BGMPlayer = UEngineSound::SoundPlay("Level1.mp3");
+
+
+
 }
 
 void UPlayLevel::Tick(float _DeltaTime)
 {
+	if (MarioHelper::SoundOff) {
+		BGMPlayer.Off();
+	}
 }
 
 void UPlayLevel::LevelStart(ULevel* Level)

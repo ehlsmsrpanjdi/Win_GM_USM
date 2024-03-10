@@ -42,6 +42,8 @@ void Flag::CollisionEvent()
 			Mario* Player = dynamic_cast<Mario*>(Ptr);
 			Player->SetState(MarioState::End);
 			IsFlag = true;
+			BGMPlayer = UEngineSound::SoundPlay("FlagTouch.wav");
+			MarioHelper::SoundOff = true;
 		}
 	}
 	if (IsEnd) {
@@ -56,6 +58,7 @@ void Flag::CollisionEvent()
 			Mario* Player = dynamic_cast<Mario*>(Ptr);
 			Player->SetState(MarioState::EndMove);
 			IsEnd = true;
+			BGMPlayer = UEngineSound::SoundPlay("StageClear.wav");
 		}
 	}
 }

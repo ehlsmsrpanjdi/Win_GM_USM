@@ -32,6 +32,7 @@ void Pipe::Tick(float _DeltaTime)
 		Player = (Mario*)Collision->GetOwner();
 
 		if (UEngineInput::IsDown(VK_DOWN) && Player->GetState() != MarioState::TelePorting) {
+			BGMPlayer = UEngineSound::SoundPlay("PipeTravel.wav");
 			MarioHelper::CameraOff = true;
 			Player->SetState(MarioState::TelePorting);
 			Player->SetAnimation("Idle");
@@ -43,6 +44,7 @@ void Pipe::Tick(float _DeltaTime)
 				Player->AddActorLocation(FVector::Down * 127 * _DeltaTime);
 			}
 			else {
+				BGMPlayer = UEngineSound::SoundPlay("PipeTravel.wav");
 				TeleportTime = 1.0f;
 				Player->SetActorLocation(PlayerLocation);
 				GetWorld()->SetCameraPos(CameraLocation);

@@ -3,6 +3,7 @@
 #include "MarioHelper.h"
 #include "PhysicsActor.h"
 #include <EngineCore\Collision.h>
+#include <EnginePlatform/EngineSound.h>
 
 class MovingBlock;
 // Ό³Έν :

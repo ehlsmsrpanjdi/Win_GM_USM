@@ -10,6 +10,7 @@ FireEnd::~FireEnd()
 
 void FireEnd::BeginPlay()
 {
+	BGMPlayer = UEngineSound::SoundPlay("Interactive.wav");
 	NoDir = true;
 	AActor::BeginPlay();
 	SetName("FireEnd");

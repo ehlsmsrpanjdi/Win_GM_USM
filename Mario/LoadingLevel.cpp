@@ -59,6 +59,7 @@ void LoadingLevel::LevelStart(ULevel* Level)
 	MarioHelper::GameEnd = false;
 	MarioHelper::MarioWorldSet();
 	MarioHelper::CameraOff = false;
+	MarioHelper::SoundOff = false;
 	GEngine->DestroyLevel(MarioHelper::GetPrevLevel());
 }
 
