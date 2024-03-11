@@ -148,10 +148,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Fire.h" />
-    <ClInclude Include="MarioLevelBase.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="MarioUI.h">
       <SubType>
       </SubType>
@@ -237,10 +233,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="TrapFire.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="UpPipe.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -364,10 +356,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Fire.cpp" />
-    <ClCompile Include="MarioLevelBase.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="MarioUI.cpp">
       <SubType>
       </SubType>
@@ -453,10 +441,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TrapFire.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="UpPipe.cpp">
       <SubType>
       </SubType>
     </ClCompile>

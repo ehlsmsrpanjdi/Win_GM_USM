@@ -19,9 +19,6 @@
     <ClInclude Include="TitleLevel.h">
       <Filter>Level\Title</Filter>
     </ClInclude>
-    <ClInclude Include="MarioLevelBase.h">
-      <Filter>Actor</Filter>
-    </ClInclude>
     <ClInclude Include="MarioHelper.h" />
     <ClInclude Include="GreenTroopa.h">
       <Filter>Actor\Monster</Filter>
@@ -81,9 +78,6 @@
       <Filter>Actor\Object</Filter>
     </ClInclude>
     <ClInclude Include="LeftPipe.h">
-      <Filter>Actor\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="UpPipe.h">
       <Filter>Actor\Object</Filter>
     </ClInclude>
     <ClInclude Include="PipeCheat.h">
@@ -184,9 +178,6 @@
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level\Title</Filter>
     </ClCompile>
-    <ClCompile Include="MarioLevelBase.cpp">
-      <Filter>Actor</Filter>
-    </ClCompile>
     <ClCompile Include="MarioHelper.cpp" />
     <ClCompile Include="GreenTroopa.cpp">
       <Filter>Actor\Monster</Filter>
@@ -246,9 +237,6 @@
       <Filter>Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="LeftPipe.cpp">
-      <Filter>Actor\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="UpPipe.cpp">
       <Filter>Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="PipeCheat.cpp">

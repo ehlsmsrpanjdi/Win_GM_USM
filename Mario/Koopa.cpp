@@ -31,9 +31,7 @@ void Koopa::Tick(float _DeltaTime)
 	if (KoopaDead(_DeltaTime)) {
 		return;
 	}
-	if (KoopaExcute == true) {
-		return;
-	}
+
 
 	float CameraX = GetWorld()->GetCameraPos().X;
 	float WindowCenter = GEngine->MainWindow.GetWindowScale().X;
@@ -59,6 +57,10 @@ void Koopa::Tick(float _DeltaTime)
 	GravityCheck(_DeltaTime);
 	CollisionEvent(_DeltaTime);
 	ResultMove(_DeltaTime);
+
+	if (KoopaExcute == true) {
+		return;
+	}
 
 	Attack(_DeltaTime);
 	Jump(_DeltaTime);

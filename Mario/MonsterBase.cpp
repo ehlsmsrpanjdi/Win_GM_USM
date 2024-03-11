@@ -165,7 +165,9 @@ void MonsterBase::CollisionEvent(float _DeltaTime)
 			return;
 		}
 		else {
+			if(Player->GetState() != MarioState::TelePortEnd && Player->GetState() != MarioState::TelePorting){
 			Player->Hit();
+			}
 			return;
 		}
 	}

@@ -74,10 +74,10 @@ void Mario::BeginPlay()
 		BodyCollision->SetTransform({ { 0,-32 }, { 56, 64 } });
 		break;
 	case MarioClass::Big:
-		BodyCollision->SetTransform({ { 0,-64 }, { 56, 128} });
+		BodyCollision->SetTransform({ { 0,-64 }, { 56, 126} });
 		break;
 	case MarioClass::Fire:
-		BodyCollision->SetTransform({ { 0,-64 }, { 56, 128} });
+		BodyCollision->SetTransform({ { 0,-64 }, { 56, 126} });
 		break;
 	default:
 		break;
@@ -110,6 +110,10 @@ void Mario::Tick(float _DeltaTime)
 		Debug = false;
 	}
 
+	if (UEngineInput::IsDown('O')) {
+		GEngine->ChangeLevel("Loading");
+	}
+
 
 	PhysicsActor::Tick(_DeltaTime);
 	PlayerLocation = GetActorLocation();
@@ -117,7 +121,7 @@ void Mario::Tick(float _DeltaTime)
 	if (UEngineInput::IsPress('Z')) {
 		JumpPower = -1000.f;
 		AccelerateX = { 600.f,0.f,0.f,0.f };
-		MaxSpeedX = 600.f;
+		MaxSpeedX = 500.f;
 	}
 	else {
 		JumpPower = -900.f;
@@ -353,11 +357,11 @@ void Mario::SetMarioClassState(MarioClass _MarioClass)
 		break;
 	case MarioClass::Big:
 		SetAnimation("Bigger");
-		BodyCollision->SetTransform({ { 0,-64 }, { 56, 128 } });
+		BodyCollision->SetTransform({ { 0,-64 }, { 56, 126 } });
 		break;
 	case MarioClass::Fire:
 		SetAnimation("Fire");
-		BodyCollision->SetTransform({ { 0,-64 }, { 56, 128 } });
+		BodyCollision->SetTransform({ { 0,-64 }, { 56, 126 } });
 		break;
 	default:
 		break;
@@ -417,6 +421,7 @@ void Mario::InteractiveStart()
 {
 	Jumping = true;
 	GravitySpeed.Y = 0;
+	AddActorLocation(FVector::Up * 20);
 	SpeedY.Y = -500;
 	SetAnimation("Jump");
 }
@@ -441,6 +446,18 @@ void Mario::Idle(float _DeltaTime)
 	ResultMove(_DeltaTime);
 
 	FireAttack(_DeltaTime);
+	std::vector<UCollision*> Result;
+	if(BodyCollision->CollisionCheck(MarioCollisionOrder::Block, Result)) {
+		FTransform BlockTrans = Result[0]->GetActorBaseTransform();
+		if (BlockTrans.Bottom() < BodyCollision->GetActorBaseTransform().Bottom()) {
+			if (Mario::PlayerLocation.X < BlockTrans.GetPosition().X) {
+				AddActorLocation(FVector::Left * _DeltaTime * 100);
+			}
+			else {
+				AddActorLocation(FVector::Right * _DeltaTime * 100);
+			}
+		}
+	}
 
 	if (0 == CurSpeedDir) {
 		SpeedX.X = 0;
@@ -582,7 +599,6 @@ void Mario::ChangingStart()
 
 void Mario::TelePortingStart()
 {
-	GodTime = 10.f;
 	SpeedX.X = 0;
 	SpeedY.Y = 0;
 	switch (MarioHelper::MyMarioClass)
@@ -592,7 +608,7 @@ void Mario::TelePortingStart()
 		break;
 	case MarioClass::Big:
 	case MarioClass::Fire:
-		BodyCollision->SetTransform({ { 0,-64 }, { 56, 128} });
+		BodyCollision->SetTransform({ { 0,-64 }, { 56, 126} });
 		break;
 	default:
 		break;
@@ -781,11 +797,11 @@ void Mario::Crouch(float _DeltaTime)
 	if (UEngineInput::IsFree(VK_DOWN)) {
 		if (abs(CurSpeed.X) < 3) {
 			SetState(MarioState::Idle);
-			BodyCollision->SetTransform({ { 0,-64 }, { 56, 128} });
+			BodyCollision->SetTransform({ { 0,-64 }, { 56, 126} });
 		}
 		else {
 			SetState(MarioState::Move);
-			BodyCollision->SetTransform({ { 0,-64 }, { 56, 128} });
+			BodyCollision->SetTransform({ { 0,-64 }, { 56, 126} });
 		}
 	}
 }
@@ -804,7 +820,7 @@ void Mario::CrouchJump(float _DeltaTime)
 
 	if (UEngineInput::IsFree(VK_DOWN)) {
 		SetState(MarioState::Idle);
-		BodyCollision->SetTransform({ { 0,-64 }, { 56, 128} });
+		BodyCollision->SetTransform({ { 0,-64 }, { 56, 126} });
 	}
 
 	if (UEngineInput::IsFree(VK_SPACE)) {

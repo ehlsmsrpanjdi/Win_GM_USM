@@ -40,50 +40,55 @@ void GreenTroopa::CollisionEvent(float _DeltaTime)
 		UCollision* Collision = Result[0];
 		AActor* Ptr = Collision->GetOwner();
 		Mario* Player = dynamic_cast<Mario*>(Ptr);
-		FVector CurPlayerLocation = Player->GetActorLocation();
-
+		
 		if (nullptr == Player)
 		{
 			MsgBoxAssert("터져야겠지....");
 		}
+
+		FTransform BodyTransform = BodyCollision->GetActorBaseTransform();
+		FTransform MarioTransform = Collision->GetActorBaseTransform();
 
 		switch (State)
 		{
 		case MonsterState::Idle:
 		{
 			FVector CurLocation = GetActorLocation();
-			if (CurPlayerLocation.Y < CurLocation.Y - 32) {
+			if (BodyTransform.Top() + 8 > MarioTransform.Bottom()) {
 				Player->SetState(MarioState::Interactive);
 				SetMonsterState(MonsterState::Crouch);
 				return;
 			}
 			else {
 				Player->Hit();
-				return;
 			}
 		}
 		break;
 		case MonsterState::Crouch:
+			if (BodyTransform.Top() + 4 > MarioTransform.Bottom()) {
+				Player->SetState(MarioState::Interactive);
+				SetMonsterState(MonsterState::CrouchMove);
+				return;
+			}
+			else {
 			SetMonsterState(MonsterState::CrouchMove);
+			}
 			break;
 		case MonsterState::CrouchMove:
 		{
-			FVector CurLocation = GetActorLocation();
-			if (CurPlayerLocation.Y < CurLocation.Y - 32) {
+			if (BodyTransform.Top() + 4 > MarioTransform.Bottom()) {
 				Player->SetState(MarioState::Interactive);
 				SetMonsterState(MonsterState::Crouch);
 				return;
 			}
 			else {
 				Player->Hit();
-				return;
 			}
 			break;
 		}
 		case MonsterState::Fly:
 		{
-			FVector CurLocation = GetActorLocation();
-			if (CurPlayerLocation.Y < CurLocation.Y - 32) {
+			if (BodyTransform.Top() + 4 > MarioTransform.Bottom()) {
 				Player->SetState(MarioState::Interactive);
 				BGMPlayer = UEngineSound::SoundPlay("Stomp.wav");
 				SetMonsterState(MonsterState::Idle);

@@ -79,11 +79,9 @@ void ContentsCore::BeginPlay()
 
 	CreateLevel<UPlayLevel>("Stage1");
 	CreateLevel<PlayLevel2>("Stage2");
-	CreateLevel<PlayLevel3>("Stage3");
-	CreateLevel<LastLevel>("LastStage");
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<UTitleLevel>("Title");
-	ChangeLevel("LastStage");
+	ChangeLevel("Stage2");
 }
 
 void ContentsCore::Tick(float _DeltaTime)
