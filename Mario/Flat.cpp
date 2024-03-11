@@ -55,6 +55,7 @@ void Flat::CollisionEvent(float _DeltaTime)
 			GetWorld()->SetOtherTimeScale(static_cast<int>(MarioRenderOrder::Cheat), 0.0f);
 			Player->SetState(MarioState::EndingMove);
 			MarioHelper::GameEnd = true;
+			BGMPlayer = UEngineSound::SoundPlay("KoopaFall.mp3");
 		}
 }
 
@@ -76,6 +77,7 @@ void Flat::FlatDestroy(float _DeltaTime)
 			GetWorld()->SetAllTimeScale(1.0f);
 			MarioHelper::CameraOff = false;
 			Destroy();
+			BGMPlayer = UEngineSound::SoundPlay("Ending.wav");
 		}
 	}
 }

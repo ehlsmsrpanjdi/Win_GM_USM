@@ -21,7 +21,9 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void LevelStart(ULevel* Level) override;
+	void LevelEnd(ULevel* Level) override;
 	UEngineSoundPlayer BGMPlayer;
+	UEngineSoundPlayer GroundBGMPlayer;
 private:
 
 };

@@ -17,9 +17,9 @@
 #include "Flag.h"
 #include "Door.h"
 #include "GreenTroopa.h"
-#include "SoundCheatActor.h"
 #include "Plant.h"
 #include "PipePlant.h"
+#include "SoundCheat.h"
 
 
 PlayLevel2::PlayLevel2()
@@ -52,8 +52,6 @@ void PlayLevel2::BeginPlay()
 			UEngineResourcesManager::GetInst().LoadImg(FullPath);
 		}
 	}
-
-	BGMPlayer = UEngineSound::SoundPlay("Level2Start.mp3");
 
 	BackGroundMap* Map;
 	Map = SpawnActor<BackGroundMap>(MarioRenderOrder::Map);
@@ -120,10 +118,6 @@ void PlayLevel2::BeginPlay()
 	EndPipe = SpawnActor<LeftPipe>(MarioRenderOrder::Cheat);
 	EndPipe->SetActorLocation({ 10688,1536 });
 	EndPipe->SetTotalLocation({ 10305,831 }, { 10050,0 });
-
-	SoundCheatActor* SoundCheat;
-	SoundCheat = SpawnActor<SoundCheatActor>(MarioRenderOrder::Cheat);
-	SoundCheat->SetActorLocation({ 10308,704 });
 
 	EndPipe = SpawnActor<LeftPipe>(MarioRenderOrder::Cheat);
 	EndPipe->SetActorLocation({ 7040,2688 });
@@ -401,35 +395,53 @@ void PlayLevel2::BeginPlay()
 
 	CameraBan = SpawnActor<CameraOffCollisionActor>(MarioRenderOrder::Item);
 	CameraBan->SetActorLocation({ 11658,831 });
-	Level2SoundStart = false;
+	StartBGMPlayer = UEngineSound::SoundPlay("Level2Start.mp3");
+	GroundBGMPlayer = UEngineSound::SoundPlay("Level2.mp3");
+	GroundBGMPlayer.Off();
+	BGMPlayer = UEngineSound::SoundPlay("Level1.mp3");
+	BGMPlayer.On();
+
+	SoundCheat* CheatSound = SpawnActor<SoundCheat>(MarioRenderOrder::Cheat);
+	CheatSound->SetActorLocation({ 10308,704 });
+	CheatSound->SetBool(false);
 }
 
 
 
 void PlayLevel2::Tick(float _DeltaTime)
 {
-	if (Level2SoundTime >= 0 && Level2SoundStart == false) {
-		Level2SoundTime -= _DeltaTime;
-	}
-	else if (Level2SoundStart == false) {
-		BGMPlayer = UEngineSound::SoundPlay("Level2.mp3");
-		Level2SoundStart = true;
-		Level2SoundTime = 6.0f;
-	}
-
-
-	if (MarioHelper::Stage2GroundOut && !Level2SoundEnd) {
-		BGMPlayer.Off();
-		BGMPlayer = UEngineSound::SoundPlay("Level1.mp3");
-		Level2SoundEnd = true;
-	}
-
 	if (MarioHelper::SoundOff) {
+		GroundBGMPlayer.Off();
 		BGMPlayer.Off();
+		return;
 	}
+
+	if (Level2SoundTime >= 0) {
+	Level2SoundTime -= _DeltaTime;
+	}
+	else if(!SoundStart){
+		GroundBGMPlayer.On();
+		SoundStart = true;
+	}
+
+	if (MarioHelper::Stage2Sound) {
+
+	}
+	else {
+		GroundBGMPlayer.Off();
+		BGMPlayer.On();
+	}
+
 }
 
 void PlayLevel2::LevelStart(ULevel* Level)
 {
 	MarioHelper::SetPrevLevel("Stage2");
+	BGMPlayer.Off();
+}
+
+void PlayLevel2::LevelEnd(ULevel* Level)
+{
+	GroundBGMPlayer.Off();
+	BGMPlayer.Off();
 }

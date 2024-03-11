@@ -17,6 +17,7 @@
 #include "PipeCheat.h"
 #include "GroundCoin.h"
 #include "CameraOffCollisionActor.h"
+#include "SoundCheat.h"
 
 
 UPlayLevel::UPlayLevel()
@@ -279,12 +280,23 @@ void UPlayLevel::BeginPlay()
 	CameraOffCollisionActor* BanCamera = SpawnActor<CameraOffCollisionActor>(MarioRenderOrder::UI);
 	BanCamera->SetActorLocation({ 12874.f,800.f });
 
+
+	SoundCheat* CheatSound = SpawnActor<SoundCheat>(MarioRenderOrder::Cheat);
+	CheatSound->SetActorLocation({ 3193.f, 1060.f });
+	CheatSound->SetBool(false);
+	
+
+	CheatSound = SpawnActor<SoundCheat>(MarioRenderOrder::Cheat);
+	CheatSound->SetActorLocation({ 11515.f,777.f });
+	CheatSound->SetBool(true);
+
 	Door* door = SpawnActor<Door>(MarioRenderOrder::UI);
 	door->SetActorLocation({ 12954.f, 490.f });
 	door->DoorNextLevel("Stage2");
 
 	BGMPlayer = UEngineSound::SoundPlay("Level1.mp3");
-
+	GroundBGMPlayer = UEngineSound::SoundPlay("Level2.mp3");
+	GroundBGMPlayer.Off();
 
 
 }
@@ -293,10 +305,26 @@ void UPlayLevel::Tick(float _DeltaTime)
 {
 	if (MarioHelper::SoundOff) {
 		BGMPlayer.Off();
+		return;
+	}
+
+	if (MarioHelper::Stage1Sound) {
+		BGMPlayer.On();
+		GroundBGMPlayer.Off();
+	}
+	else {
+		BGMPlayer.Off();
+		GroundBGMPlayer.On();
 	}
 }
 
 void UPlayLevel::LevelStart(ULevel* Level)
 {
 	MarioHelper::SetPrevLevel("Stage1");
+}
+
+void UPlayLevel::LevelEnd(ULevel* Level)
+{
+	BGMPlayer.Off();
+	GroundBGMPlayer.Off();
 }

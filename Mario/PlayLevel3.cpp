@@ -181,14 +181,23 @@ void PlayLevel3::BeginPlay()
 	Door* door = SpawnActor<Door>(MarioRenderOrder::UI);
 	door->SetActorLocation({ 10050, 490 });
 	door->DoorNextLevel("LastStage");
-
+	BGMPlayer = UEngineSound::SoundPlay("Level1.mp3");
 }
 
 void PlayLevel3::Tick(float _DeltaTime)
 {
+	if (MarioHelper::SoundOff) {
+		BGMPlayer.Off();
+		return;
+	}
 }
 
 void PlayLevel3::LevelStart(ULevel* Level)
 {
 	MarioHelper::SetPrevLevel("Stage3");
+}
+
+void PlayLevel3::LevelEnd(ULevel* Level)
+{
+	BGMPlayer.Off();
 }

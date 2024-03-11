@@ -12,6 +12,7 @@ KoopaFire::~KoopaFire()
 
 void KoopaFire::BeginPlay()
 {
+	BGMPlayer = UEngineSound::SoundPlay("KoopaFlame.mp3");
 	SetName("Koopa");
 	Renderer = CreateImageRenderer(MarioRenderOrder::Fire);
 	Renderer->SetTransform({ { 0,0 }, { 512,512 } });

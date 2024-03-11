@@ -17,13 +17,15 @@ public:
 	PlayLevel2& operator=(PlayLevel2&& _Other) noexcept = delete;
 
 protected:
+	UEngineSoundPlayer StartBGMPlayer;
 	UEngineSoundPlayer BGMPlayer;
+	UEngineSoundPlayer GroundBGMPlayer;
+	bool SoundStart = false;
 	float Level2SoundTime = 6;
-	bool Level2SoundStart = false;
-	bool Level2SoundEnd = false;
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void LevelStart(ULevel* Level) override;
+	void LevelEnd(ULevel* Level) override;
 private:
 
 };

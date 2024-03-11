@@ -110,7 +110,7 @@ void Mario::Tick(float _DeltaTime)
 		Debug = false;
 	}
 
-	if (UEngineInput::IsDown('O')) {
+	if (UEngineInput::IsDown('Q')) {
 		GEngine->ChangeLevel("Loading");
 	}
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "PhysicsActor.h"
+#include <EnginePlatform/EngineSound.h>
 // Ό³Έν :
 class Flat : public PhysicsActor
 {
@@ -19,6 +20,7 @@ protected:
 	UImageRenderer* AxeRenderer = nullptr;
 	UCollision* FloatCollision = nullptr;
 	UCollision* AxeCollision = nullptr;
+	UEngineSoundPlayer BGMPlayer;
 
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

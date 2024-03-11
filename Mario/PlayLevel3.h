@@ -1,6 +1,6 @@
 #pragma once
 #include <EngineCore\Level.h>
-
+#include <EnginePlatform/EngineSound.h>
 
 // Ό³Έν :
 class PlayLevel3 : public ULevel
@@ -17,9 +17,11 @@ public:
 	PlayLevel3& operator=(PlayLevel3&& _Other) noexcept = delete;
 
 protected:
+	UEngineSoundPlayer BGMPlayer;
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void LevelStart(ULevel* Level) override;
+	void LevelEnd(ULevel* Level) override;
 private:
 
 };

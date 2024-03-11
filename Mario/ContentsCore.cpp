@@ -77,11 +77,14 @@ void ContentsCore::BeginPlay()
 	MainWindow.SetWindowPosition({ 800/* * 1.5f*/, 0/* * 1.5f*/ });
 
 
-	CreateLevel<UPlayLevel>("Stage1");
-	CreateLevel<PlayLevel2>("Stage2");
+	//CreateLevel<UPlayLevel>("Stage1");
+	//CreateLevel<PlayLevel2>("Stage2");
+	//CreateLevel<PlayLevel3>("Stage3");
+	CreateLevel<LastLevel>("LastStage");
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<UTitleLevel>("Title");
-	ChangeLevel("Stage2");
+	//CreateLevel<LastLevel>("LastStage");
+	ChangeLevel("LastStage");
 }
 
 void ContentsCore::Tick(float _DeltaTime)

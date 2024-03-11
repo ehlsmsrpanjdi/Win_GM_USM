@@ -29,6 +29,9 @@ void MarioUI::SetMarioTimeUI(float _DeltaTime)
 	if (MarioHelper::GameEnd) {
 		return;
 	}
+	if (MarioHelper::SoundOff == true && MarioHelper::LevelEnd == false) {
+		return;
+	}
 	if (MarioHelper::LevelEnd) {
 		if (MarioHelper::MarioTime > 1000 && MinusTime < 0)
 		{

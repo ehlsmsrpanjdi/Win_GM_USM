@@ -204,7 +204,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="SoundCheatActor.h">
+    <ClInclude Include="SoundCheat.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -412,7 +412,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="SoundCheatActor.cpp">
+    <ClCompile Include="SoundCheat.cpp">
       <SubType>
       </SubType>
     </ClCompile>

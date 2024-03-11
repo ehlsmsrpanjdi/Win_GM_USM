@@ -1,6 +1,7 @@
 #pragma once
 #include "PhysicsActor.h"
 #include "MarioHelper.h"
+#include <EnginePlatform/EngineSound.h>
 
 class Koopa;
 class TrapFire;
@@ -25,6 +26,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 	void CollisionEvent(float _DeltaTime);
 	void SetDir(EActorDir _KoopaDir);
+	UEngineSoundPlayer BGMPlayer;
 private:
 
 };

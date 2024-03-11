@@ -12,6 +12,9 @@ MarioClass MarioHelper::MyMarioClass = MarioClass::Fire;
 float MarioHelper::MonsterScoreResetTime = 5.f;
 bool MarioHelper::SoundOff = false;
 
+bool MarioHelper::Stage1Sound = true;
+bool MarioHelper::Stage2Sound = true;
+
 int MarioHelper::MarioTime = 1400;
 int MarioHelper::MarioCoinCount = 200;
 int MarioHelper::MarioWorldCount = 11;
@@ -32,12 +35,11 @@ std::string MarioHelper::GetNextLevel() {
 	return MarioHelper::NextLevelName;
 }
 
-std::string MarioHelper::NextLevelName = "Stage1";
+std::string MarioHelper::NextLevelName = "Stage3";
 
 
 bool MarioHelper::StageOneInit = false;
 bool MarioHelper::StageTwoInit = false;
-bool MarioHelper::Stage2GroundOut = false;
 bool MarioHelper::StageThreeInit = false;
 bool MarioHelper::LastStageInit = false;
 
