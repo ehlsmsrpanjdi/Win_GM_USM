@@ -27,7 +27,7 @@ void FireWall::BeginPlay()
 	}
 
 	for (int i = 0; i < 6; ++i) {
-		FireWallCollision[i] = CreateCollision(MarioCollisionOrder::Monster);
+		FireWallCollision[i] = CreateCollision(MarioCollisionOrder::Object);
 		FireWallCollision[i]->SetTransform({ {0 + i * 16, 16}, {32 , 32} });
 	}
 	//BodyCollision = CreateCollision(MarioCollisionOrder::Fire);

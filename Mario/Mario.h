@@ -40,6 +40,7 @@ protected:
 	void StateUpdate(float _DeltaTime) override;
 	void AddSpeed(float _DeltaTime, FVector _FVector);
 	void SubtractSpeed(float _DeltaTime, FVector _FVector);
+	void FireAttack(float _DeltaTime);
 
 	UImageRenderer* MushRoomRenderer = nullptr;
 	UImageRenderer* FlowerRenderer = nullptr;

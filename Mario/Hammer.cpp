@@ -14,7 +14,7 @@ void Hammer::BeginPlay()
 {
 	SetName("Hammer");
 	Renderer = CreateImageRenderer(MarioRenderOrder::Fire);
-	Renderer->SetTransform({ { 0,0 }, { 512,512 } });
+	Renderer->SetTransform({ { 0,0 }, { 64,64 } });
 	AnimationAuto(Renderer, "Idle", 0, 3, 0.1f);
 	BodyCollision = CreateCollision(MarioCollisionOrder::Object);
 	BodyCollision->SetTransform({ {0,-10}, {100,20} });

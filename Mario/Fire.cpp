@@ -55,12 +55,12 @@ void AFire::Tick(float _DeltaTime)
 	if (CurLocationX < CameraX - 32) {
 		Destroy();
 	}
-		SpeedX.X = Speed * static_cast<int>(DirState);
+	SpeedX.X = Speed * static_cast<int>(DirState);
 
-		WallCheck(_DeltaTime);
-		CollisionEvent(_DeltaTime);
+	WallCheck(_DeltaTime);
+	CollisionEvent(_DeltaTime);
 
-		ResultMove(_DeltaTime);
+	ResultMove(_DeltaTime);
 }
 
 void AFire::CollisionEvent(float _DeltaTime) {
@@ -70,32 +70,29 @@ void AFire::CollisionEvent(float _DeltaTime) {
 
 		UCollision* Collision = Result[0];
 		BlockBase* Block = static_cast<BlockBase*>(Collision->GetOwner());
-		FVector BlockVector = Block->GetActorLocation();
+		//FVector BlockVector = Block->GetActorLocation();
+		FTransform BCollision = Collision->GetActorBaseTransform();
 
-		float LeftX = BlockVector.X - 32.f;
-		float RightX = BlockVector.X + 32.f;
-		float TopY = BlockVector.Y - 62.f;
-		float BottomY = BlockVector.Y;
+		BCollision.Left();
 
-		if (ThisPosition.Y <= TopY) {
+		if (ThisPosition.Y - 5 <= BCollision.Top()) {
 			GravitySpeed = FVector::Zero;
 			SpeedY.Y = -300.f;
 		}
 
 		else if (DirState == EActorDir::Left) {
-			if (ThisPosition.X - 16 > RightX)
+			if (ThisPosition.X> BCollision.Right())
 			{
 				Destroy();
 			}
 		}
 
 		else if (DirState == EActorDir::Right) {
-			if (ThisPosition.X + 16 > LeftX)
+			if (ThisPosition.X> BCollision.Left())
 			{
 				Destroy();
 			}
 		}
-
 	}
 
 	std::vector<UCollision*> MResult;

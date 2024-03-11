@@ -158,6 +158,12 @@
     <ClInclude Include="SoundCheatActor.h">
       <Filter>Actor\Object</Filter>
     </ClInclude>
+    <ClInclude Include="PipePlant.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="TrapFire.h">
+      <Filter>Actor\Monster\Koopa</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -316,6 +322,12 @@
     </ClCompile>
     <ClCompile Include="SoundCheatActor.cpp">
       <Filter>Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PipePlant.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="TrapFire.cpp">
+      <Filter>Actor\Monster\Koopa</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

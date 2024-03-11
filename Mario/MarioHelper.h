@@ -64,6 +64,7 @@ enum class BlockState {
 	ItemBrick,
 	Interactive,
 	Default,
+	Moving,
 };
 
 enum class ItemState {

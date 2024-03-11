@@ -14,6 +14,8 @@
 #include "EndingMessage.h"
 #include "MarioBlock.h"
 #include "CameraOffCollisionActor.h"
+#include "MovingBlock.h"
+#include "TrapFire.h"
 
 LastLevel::LastLevel() 
 {
@@ -45,13 +47,19 @@ void LastLevel::BeginPlay()
 			UEngineResourcesManager::GetInst().LoadImg(FullPath);
 		}
 	}
+	TrapFire* TF;
+	TF = SpawnActor<TrapFire>(MarioRenderOrder::Monster);
+	TF->SetActorLocation({ 6247,500 });
+
 	BackGroundMap* Map;
 	Map = this->SpawnActor<BackGroundMap>(0);
 	Map->SetCollisionActorImage(GetName());
 	
 	Mario* TestMario;
 	TestMario = this->SpawnActor<Mario>(2);
-	TestMario->SetActorLocation({ 200,440 });
+	//TestMario->SetActorLocation({ 200,440 });
+	TestMario->SetActorLocation({ 8200,440 });
+
 
 	Flat* Flats = SpawnActor<Flat>(MarioRenderOrder::Cheat);
 	Flats->SetActorLocation({ 8224,672 });
@@ -105,6 +113,11 @@ void LastLevel::BeginPlay()
 
 	CameraOffCollisionActor* BanCamera = SpawnActor<CameraOffCollisionActor>(MarioRenderOrder::UI);
 	BanCamera->SetActorLocation({ 8700.f,800.f });
+
+	MovingBlock* MB;
+	MB = SpawnActor<MovingBlock>(MarioRenderOrder::Block);
+	MB->SetActorLocation({ 8800,400 });
+	MB->MovingBlockInit({ 8400,400 }, { 8800,400 }, false);
 
 }
 

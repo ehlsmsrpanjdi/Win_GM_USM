@@ -22,6 +22,11 @@ protected:
 	void Tick(float _DeltaTime) override;
 	void Attack(float _DeltaTime);
 	void CollisionEvent(float _DeltaTime);
+	void ExcuteStart() override;
+	void Excute(float _DeltaTime) override;
+	bool KoopaExcute = false;
+
+	int HP = 5;
 
 	float FireTime = 2.0f;
 	float HammerTime = 4.0f;

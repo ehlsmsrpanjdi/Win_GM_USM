@@ -27,7 +27,11 @@ void Koopa::Tick(float _DeltaTime)
 {
 	PhysicsActor::Tick(_DeltaTime);
 
+
 	if (KoopaDead(_DeltaTime)) {
+		return;
+	}
+	if (KoopaExcute == true) {
 		return;
 	}
 
@@ -103,7 +107,7 @@ void Koopa::Jump(float _DeltaTime)
 	}
 	else {
 		JumpTime = 3.0f;
-		SpeedY.Y = -600.f;
+		SpeedY.Y = -400.f;
 		AddActorLocation(FVector::Up * 5);
 	}
 }
@@ -145,4 +149,22 @@ void Koopa::CollisionEvent(float _DeltaTime)
 		SpeedY.Y = 0;
 	}
 
+}
+
+void Koopa::ExcuteStart()
+{
+	if (HP > 0) {
+		HP--;
+		return;
+	}
+	BGMPlayer = UEngineSound::SoundPlay("Stomp.wav");
+	GravitySpeed.Y = 0.f;
+	SpeedX.X = 0.f;
+	SpeedY.Y = -500.f;
+	BodyCollision->Destroy();
+	KoopaExcute = true;
+}
+
+void Koopa::Excute(float _DeltaTime)
+{
 }

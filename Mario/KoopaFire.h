@@ -3,6 +3,7 @@
 #include "MarioHelper.h"
 
 class Koopa;
+class TrapFire;
 // Ό³Έν :
 class KoopaFire : public PhysicsActor
 {
@@ -10,7 +11,7 @@ public:
 	// constrcuter destructer
 	KoopaFire();
 	~KoopaFire();
-
+	friend TrapFire;
 	friend Koopa;
 
 	// delete Function

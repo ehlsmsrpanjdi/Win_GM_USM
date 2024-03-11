@@ -43,7 +43,7 @@ protected:
 	void CrouchStart();
 	void CrouchMoveStart();
 	void DeadStart();
-	void ExcuteStart();
+	virtual void ExcuteStart();
 	void FlyStart();
 
 

@@ -159,15 +159,15 @@ void BlockBase::InteractiveStart()
 	std::vector<UCollision*> MResult;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Item, MResult)) {
 		for (UCollision* CoinCollision : MResult) {
-			GroundCoin* Coin = dynamic_cast<GroundCoin*>(CoinCollision->GetOwner());
-			if (Coin == nullptr) {
+			GroundCoin* GCoin = dynamic_cast<GroundCoin*>(CoinCollision->GetOwner());
+			if (GCoin == nullptr) {
 				continue;
 			}
 			else {
-				MarioHelper::MarioCoinCount++;
-				MarioHelper::MarioTotalScore += 200;
+				Coin* SpawnCoin = GetWorld()->SpawnActor<Coin>(MarioRenderOrder::Item);
+				SpawnCoin->SetActorLocation({ GetActorLocation().X, GetActorLocation().Y});
 				UEngineSoundPlayer BGMPlayer = UEngineSound::SoundPlay("GainCoin.wav");
-				Coin->Destroy();
+				GCoin->Destroy();
 			}
 		}
 	}

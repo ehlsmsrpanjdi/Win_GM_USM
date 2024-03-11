@@ -17,17 +17,18 @@ public:
 
 protected:
 	void BeginPlay() override;
-	void Tick(float _DeltaTime) override;
-	void Update(float _DeltaTime);
-	//void StateUpdate(float _DeltaTime) override;
-	//void CollisionEvent(MonsterState _State);
+	virtual void StateUpdate(float _DeltaTime) override;
+	void CollisionEvent(float _DeltaTime) override;
 
+	UCollision* CheatCollision = nullptr;
 	FVector StartLocation = { 0.f,0.f,0.f,0.f };
 	FVector NextLocation = {};
-	float SpawnTime = -64.f;
-	float TotalMove = 2.f;
+	float SpawnTime = 64.f;
+	float TotalMove = 0.f;
 
-	bool IsUp = true;
+	int PlantState = 1;
+
+	bool IsUp = false;
 
 
 private:

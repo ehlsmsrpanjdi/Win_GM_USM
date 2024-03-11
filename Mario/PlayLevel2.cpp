@@ -18,6 +18,8 @@
 #include "Door.h"
 #include "GreenTroopa.h"
 #include "SoundCheatActor.h"
+#include "Plant.h"
+#include "PipePlant.h"
 
 
 PlayLevel2::PlayLevel2()
@@ -64,6 +66,21 @@ void PlayLevel2::BeginPlay()
 	Mario* TestMario;
 	TestMario = SpawnActor<Mario>(MarioRenderOrder::Player);
 	TestMario->SetActorLocation({ 200,831 });
+
+	PipeCheat* CheatPipe;
+	CheatPipe = SpawnActor<PipeCheat>(MarioRenderOrder::Cheat);
+	CheatPipe->SetActorLocation({ 7040,1600 });
+
+	Plant* PP;
+	PP = SpawnActor<Plant>(MarioRenderOrder::Monster);
+	PP->SetActorLocation({ 6655,1600 });
+
+	PP = SpawnActor<Plant>(MarioRenderOrder::Monster);
+	PP->SetActorLocation({ 7040,1536});
+
+	PipePlant* PPP;
+	PPP = SpawnActor<PipePlant>(MarioRenderOrder::Monster);
+	PPP->SetActorLocation({ 10305, 770});
 
 	MovingBlock* MBlock;
 	MBlock = SpawnActor<MovingBlock>(MarioRenderOrder::Block);
@@ -117,7 +134,7 @@ void PlayLevel2::BeginPlay()
 	GroundPipe->SetActorLocation({ 6656,1664 });
 	GroundPipe->SetTotalLocation({ 6276,2280 }, { 6145,1920 });
 
-	PipeCheat* CheatPipe;
+
 	CheatPipe = SpawnActor<PipeCheat>(MarioRenderOrder::Cheat);
 	CheatPipe->SetActorLocation({ 10304,768 });
 
@@ -128,7 +145,7 @@ void PlayLevel2::BeginPlay()
 
 	GIBlock = SpawnActor<GroundBlock>(MarioRenderOrder::Block);
 	GIBlock->SetActorLocation({ 674,1600 });
-	GIBlock->SetItemBlockDefault(1,ItemState::MushRoom);
+	GIBlock->SetItemBlockDefault(1, ItemState::MushRoom);
 
 	for (int i = 0; i < 5; ++i) {
 		GIBlock = SpawnActor<GroundBlock>(MarioRenderOrder::Block);
@@ -390,11 +407,11 @@ void PlayLevel2::BeginPlay()
 
 
 void PlayLevel2::Tick(float _DeltaTime)
-{  
+{
 	if (Level2SoundTime >= 0 && Level2SoundStart == false) {
 		Level2SoundTime -= _DeltaTime;
 	}
-	else if(Level2SoundStart == false){
+	else if (Level2SoundStart == false) {
 		BGMPlayer = UEngineSound::SoundPlay("Level2.mp3");
 		Level2SoundStart = true;
 		Level2SoundTime = 6.0f;

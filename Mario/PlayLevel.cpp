@@ -5,7 +5,6 @@
 #include <EngineBase\EngineFile.h>
 #include "CollisionActor.h"
 #include "GreenTroopa.h"
-#include "Plant.h"
 #include "MarioBlock.h"
 #include "MarioBrick.h"
 #include "MarioUI.h"
@@ -202,6 +201,10 @@ void UPlayLevel::BeginPlay()
 	itemblock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
 	itemblock->SetItemBlockDefault(1, ItemState::Coin);
 	itemblock->SetActorLocation({ 6192,400 });
+
+	brick = SpawnActor<MarioBrick>(MarioRenderOrder::Block);
+	brick->SetItemBrickDefault(5, ItemState::Coin);
+	brick->SetActorLocation({ 6192,650 });
 
 	itemblock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
 	itemblock->SetItemBlockDefault(1, ItemState::Coin);

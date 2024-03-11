@@ -190,4 +190,5 @@ void PlayLevel3::Tick(float _DeltaTime)
 
 void PlayLevel3::LevelStart(ULevel* Level)
 {
+	MarioHelper::SetPrevLevel("Stage3");
 }

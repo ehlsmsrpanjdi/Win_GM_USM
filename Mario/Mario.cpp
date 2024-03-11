@@ -11,6 +11,7 @@
 #include "BlockBase.h"
 #include <EngineCore/EngineDebug.h>
 #include <EnginePlatform/EngineSound.h>
+#include "MovingBlock.h"
 
 FVector Mario::PlayerLocation = {};
 
@@ -33,6 +34,7 @@ void Mario::BeginPlay()
 	Renderer->SetTransform({ {0,0}, {256, 256} });
 
 	AnimationAuto(Renderer, "Idle", 0, 0);
+	AnimationAuto(Renderer, "Crouch", 0, 0);
 	AnimationAuto(Renderer, "Move", 1, 3);
 	AnimationAuto(Renderer, "DirChange", 4, 4);
 	AnimationAuto(Renderer, "Jump", 5, 5);
@@ -122,13 +124,7 @@ void Mario::Tick(float _DeltaTime)
 		AccelerateX = { 400.f,0.f,0.f,0.f };
 		MaxSpeedX = 400.f;
 	}
-	if (MarioHelper::MyMarioClass == MarioClass::Fire && UEngineInput::IsDown('Z') && AFire::FireCount < 2) {
-		AFire* Fire = GetWorld()->SpawnActor<AFire>(MarioRenderOrder::Fire);
-		Fire->SetActorLocation(FVector{ PlayerLocation.X, PlayerLocation.Y - 64 });
-		BGMPlayer = UEngineSound::SoundPlay("FireBall.wav");
-		Fire->SetDirState(DirState);
-		++AFire::FireCount;
-	}
+
 	if (GodTime >= 0.f) {
 		GodTime -= _DeltaTime;
 	}
@@ -260,6 +256,17 @@ void Mario::SubtractSpeed(float _DeltaTime, FVector _FVector)
 	}
 	else if (CurSpeedDir == 1) {
 		SpeedX -= (_FVector * _DeltaTime);
+	}
+}
+
+void Mario::FireAttack(float _DeltaTime)
+{
+	if (MarioHelper::MyMarioClass == MarioClass::Fire && UEngineInput::IsDown('Z') && AFire::FireCount < 2) {
+		AFire* Fire = GetWorld()->SpawnActor<AFire>(MarioRenderOrder::Fire);
+		Fire->SetActorLocation(FVector{ PlayerLocation.X, PlayerLocation.Y - 64 });
+		BGMPlayer = UEngineSound::SoundPlay("FireBall.wav");
+		Fire->SetDirState(DirState);
+		++AFire::FireCount;
 	}
 }
 
@@ -429,6 +436,8 @@ void Mario::Idle(float _DeltaTime)
 {
 	ResultMove(_DeltaTime);
 
+	FireAttack(_DeltaTime);
+
 	if (0 == CurSpeedDir) {
 		SpeedX.X = 0;
 	}
@@ -489,6 +498,8 @@ void Mario::EndMoveStart()
 
 void Mario::Move(float _DeltaTime)
 {
+	FireAttack(_DeltaTime);
+
 	if (UEngineInput::IsDown(VK_SPACE) && false == Jumping) {
 		SetState(MarioState::Jump);
 		return;
@@ -567,7 +578,7 @@ void Mario::ChangingStart()
 
 void Mario::TelePortingStart()
 {
-
+	GodTime = 10.f;
 	SpeedX.X = 0;
 	SpeedY.Y = 0;
 	switch (MarioHelper::MyMarioClass)
@@ -606,6 +617,8 @@ void Mario::EndMove(float _DeltaTime)
 }
 void Mario::Jump(float _DeltaTime)
 {
+	FireAttack(_DeltaTime);
+
 	if (true == UEngineInput::IsUp(VK_SPACE) && CurSpeed.Y < 0.f) {
 		SpeedY.Y = 0;
 		GravitySpeed.Y = 10;
@@ -614,7 +627,7 @@ void Mario::Jump(float _DeltaTime)
 	MoveFun(_DeltaTime, AccelerateX);
 	GravityCheck(_DeltaTime);
 
-	if (StopSpeed.Y == SpeedY.Y &&  10 > abs(GravitySpeed.Y)) {
+	if (StopSpeed.Y == SpeedY.Y && 10 > abs(GravitySpeed.Y)) {
 		if (abs(SpeedX.X) > 5) {
 			SetState(MarioState::Move);
 			Jumping = false;
@@ -747,6 +760,7 @@ void Mario::Interactive(float _DeltaTime)
 void Mario::Crouch(float _DeltaTime)
 {
 	GravityCheck(_DeltaTime);
+	FireAttack(_DeltaTime);
 
 	SetAnimation("Crouch");
 
@@ -814,7 +828,7 @@ bool Mario::LeftEdgeCheck()
 	int EdgeLocation_Top = static_cast<int>(CurLocation.Y - 32.f);
 	int EdgeLocation_Bottom = static_cast<int>(CurLocation.Y - 3.f);
 
-	Color8Bit CheckColor_LeftTop = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Top, Color8Bit(0,0,0,0));
+	Color8Bit CheckColor_LeftTop = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Top, Color8Bit(0, 0, 0, 0));
 	Color8Bit CheckColor_LeftBottom = MarioHelper::ColMapImage->GetColor(EdgeLocation_Left, EdgeLocation_Bottom - 2, Color8Bit(0, 0, 0, 0));
 
 	bool FirstCondition = (Color8Bit(255, 0, 255, 0) == CheckColor_LeftBottom);
@@ -903,27 +917,30 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, Result))
 	{
 		for (UCollision* ResultCollision : Result) {
+
 			BlockBase* Block = static_cast<BlockBase*>(ResultCollision->GetOwner());
 			FTransform MarioTransform = BodyCollision->GetActorBaseTransform();
 			FTransform ResultTransform = ResultCollision->GetActorBaseTransform();
 
-			bool Beside = (MarioTransform.GetPosition().X > ResultTransform.Left() && MarioTransform.GetPosition().X < ResultTransform.Right());
+			bool Beside = (MarioTransform.GetPosition().X > ResultTransform.Left() - 8 && MarioTransform.GetPosition().X < ResultTransform.Right() + 8);
 
 			if (MarioTransform.Top() + 30 > ResultTransform.Bottom()) {
 				if (MarioState::EndMove != State && Beside && (SpeedY.Y + GravitySpeed.Y) < -10) {
+					BlockBase* Test = dynamic_cast<BlockBase*>(ResultCollision->GetOwner());
+					if(Test != nullptr){
 					Block->SetBoxState(BlockState::Interactive);
+					}
 				}
 				SpeedY.Y = 0.f;
-				SetActorLocation({ MarioTransform.GetPosition().X,ResultTransform.Bottom() + MarioTransform.GetScale().Y });
 			}
 
 			else if (MarioTransform.Bottom() > ResultTransform.Top() + 10) {
 
-				if (CurSpeedDir == 1) {
+				if (CurSpeedDir == 1 && ResultTransform.Left() < MarioTransform.Right()) {
 					SpeedX.X = 0;
 					AddActorLocation(FVector::Left);
 				}
-				else if (CurSpeedDir == -1) {
+				else if (CurSpeedDir == -1 && ResultTransform.Right() > MarioTransform.Left()) {
 					SpeedX.X = 0;
 					AddActorLocation(FVector::Right);
 				}
@@ -931,7 +948,6 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 			else {
 				SpeedY.Y = 0;
 				GravitySpeed.Y = 0;
-				SetActorLocation({ MarioTransform.GetPosition().X,ResultTransform.Top() });
 			}
 		}
 	}
