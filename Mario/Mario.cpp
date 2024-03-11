@@ -126,7 +126,11 @@ void Mario::Tick(float _DeltaTime)
 	}
 
 	if (GodTime >= 0.f) {
+		Renderer->SetAlpha(0.5f);
 		GodTime -= _DeltaTime;
+	}
+	else {
+		Renderer->SetAlpha(1.f);
 	}
 
 	if (Debug) {
