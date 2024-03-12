@@ -108,6 +108,13 @@ void Mario::Tick(float _DeltaTime)
 
 	if (UEngineInput::IsDown('K')) {
 		Debug = false;
+		GodTime = 0.f;
+	}
+	if (UEngineInput::IsDown('U')) {
+		GodTime = 1000.f;
+	}
+	if (UEngineInput::IsDown('I')) {
+		GodTime = 0.f;
 	}
 
 	if (UEngineInput::IsDown('Q')) {

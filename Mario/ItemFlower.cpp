@@ -15,7 +15,7 @@ void ItemFlower::BeginPlay()
 	NoDir = true;
 	Renderer = CreateImageRenderer(MarioRenderOrder::Item);
 	Renderer->SetImage("Item.png");
-	Renderer->SetTransform({ {0,10 }, { 128,128 } });
+	Renderer->SetTransform({ {0,0 }, { 128,128 } });
 
 	State = ItemState::Flower;
 
@@ -25,6 +25,6 @@ void ItemFlower::BeginPlay()
 	SetAnimation("Idle");
 
 	BodyCollision = CreateCollision(MarioCollisionOrder::Item);
-	BodyCollision->SetTransform({ { 0, -22 }, { 64, 64} });
+	BodyCollision->SetTransform({ { 0, 0 }, { 64, 64} });
 }
 

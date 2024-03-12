@@ -27,11 +27,6 @@ protected:
 	virtual bool GravityCheck(float _DeltaTime);
 	virtual void ResultMove(float _DeltaTime);
 
-	virtual void StateUpdate(float _DeltaTime) {};
-
-	virtual void BoxCollisionEvent(BlockState _BlockState) {};
-
-
 	std::string CurAnimationName = "";
 	UImageRenderer* Renderer = nullptr;
 	UCollision* BodyCollision = nullptr;

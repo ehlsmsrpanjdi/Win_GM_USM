@@ -37,7 +37,7 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void SetActorCameraPos();
-	void StateUpdate(float _DeltaTime) override;
+	void StateUpdate(float _DeltaTime);
 	void AddSpeed(float _DeltaTime, FVector _FVector);
 	void SubtractSpeed(float _DeltaTime, FVector _FVector);
 	void FireAttack(float _DeltaTime);

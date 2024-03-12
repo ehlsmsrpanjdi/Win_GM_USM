@@ -33,7 +33,6 @@ void BlockBase::Tick(float _DeltaTime)
 		BlockInit();
 	}
 	StateUpdate(_DeltaTime);
-	//BoxCollisionEvent(StartState);
 
 	if (CurLocationX < MarioHelper::CameraX - 32) {
 		Destroy();
@@ -44,23 +43,8 @@ void BlockBase::StateUpdate(float _DeltaTime)
 {
 	switch (BoxState)
 	{
-	case BlockState::None:
-		None(_DeltaTime);
-		break;
-	case BlockState::ItemBlock:
-		ItemBlock(_DeltaTime);
-		break;
-	case BlockState::Brick:
-		Brick(_DeltaTime);
-		break;
-	case BlockState::ItemBrick:
-		ItemBrick(_DeltaTime);
-		break;
 	case BlockState::Interactive:
 		Interactive(_DeltaTime);
-		break;
-	case BlockState::Default:
-		Default(_DeltaTime);
 		break;
 	default:
 		break;
@@ -74,9 +58,6 @@ void BlockBase::SetBoxState(BlockState _MarioBlockState)
 
 	switch (BoxState)
 	{
-	case BlockState::None:
-		NoneStart();
-		break;
 	case BlockState::ItemBlock:
 		ItemBlockStart();
 		break;
@@ -131,10 +112,6 @@ BlockState BlockBase::GetState()
 	return BoxState;
 }
 
-void BlockBase::NoneStart()
-{
-}
-
 void BlockBase::ItemBlockStart()
 {
 	SetAnimation("ItemBlock");
@@ -165,7 +142,7 @@ void BlockBase::InteractiveStart()
 			}
 			else {
 				Coin* SpawnCoin = GetWorld()->SpawnActor<Coin>(MarioRenderOrder::Item);
-				SpawnCoin->SetActorLocation({ GetActorLocation().X, GetActorLocation().Y});
+				SpawnCoin->SetActorLocation({ GetActorLocation().X, GetActorLocation().Y });
 				UEngineSoundPlayer BGMPlayer = UEngineSound::SoundPlay("GainCoin.wav");
 				GCoin->Destroy();
 			}
@@ -202,23 +179,6 @@ void BlockBase::DefaultStart()
 	SetAnimation("Default");
 }
 
-void BlockBase::None(float _DeltaTime)
-{
-}
-
-void BlockBase::ItemBlock(float _DeltaTime)
-{
-
-}
-
-void BlockBase::Brick(float _DeltaTime)
-{
-}
-
-void BlockBase::ItemBrick(float _DeltaTime)
-{
-
-}
 
 void BlockBase::Interactive(float _DeltaTime)
 {
@@ -280,10 +240,6 @@ void BlockBase::Interactive(float _DeltaTime)
 		}
 		SetBoxState(StartState);
 	}
-}
-
-void BlockBase::Default(float _DeltaTime)
-{
 }
 
 void BlockBase::BlockInit()

@@ -28,22 +28,15 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-	void StateUpdate(float _DeltaTime) override;
+	void StateUpdate(float _DeltaTime);
 
-	void NoneStart();
 	void ItemBlockStart();
 	void BrickStart();
 	void ItemBrickStart();
 	void InteractiveStart();
 	void DefaultStart();
 
-
-	void None(float _DeltaTime);
-	void ItemBlock(float _DeltaTime);
-	void Brick(float _DeltaTime);
-	void ItemBrick(float _DeltaTime);
 	void Interactive(float _DeltaTime);
-	void Default(float _DeltaTime);
 
 	bool IsInit = false;
 	virtual void BlockInit();

@@ -343,7 +343,7 @@ void PlayLevel2::BeginPlay()
 		}
 	}
 
-	for (int i = 0; i < 4; ++i) {
+	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 2; ++j) {
 			GBrick = SpawnActor<GroundBrick>(MarioRenderOrder::Block);
 			GBrick->SetActorLocation({ 4381 + j * 64, 1408 + i * 64 });

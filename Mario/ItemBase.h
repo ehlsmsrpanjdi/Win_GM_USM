@@ -15,26 +15,18 @@ public:
 	ItemBase& operator=(const ItemBase& _Other) = delete;
 	ItemBase& operator=(ItemBase&& _Other) noexcept = delete;
 
-	virtual void SetItemState(ItemState _State);
-
 protected:
 
 	virtual void Tick(float _DeltaTime) override;
 
-	void MushRoomStart();
-	void FlowerStart();
-	void StarStart();
-
 	void Spawn(float _DeltaTime);
 	void MushRoom(float _DeltaTime);
-	void Flower(float _DeltaTime);
-	void Star(float _DeltaTime);
 	void SpawnScore();
 
 	virtual void IsEdge(float _DeltaTime);
 	void ReverseDir();
 
-	virtual void StateUpdate(float _DeltaTime) override;
+	virtual void StateUpdate(float _DeltaTime);
 
 	virtual void CollisionEvent();
 

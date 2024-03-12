@@ -24,7 +24,7 @@ protected:
 	virtual void IsEdge(float _DeltaTime);
 	void ReverseDir();
 
-	virtual void StateUpdate(float _DeltaTime) override;
+	virtual void StateUpdate(float _DeltaTime);
 	
 	virtual void CollisionEvent(float _DeltaTime);
 
