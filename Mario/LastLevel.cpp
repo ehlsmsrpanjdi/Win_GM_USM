@@ -118,6 +118,7 @@ void LastLevel::BeginPlay()
 	MB->SetActorLocation({ 8800,400 });
 	MB->MovingBlockInit({ 8400,400 }, { 8800,400 }, false);
 	BGMPlayer = UEngineSound::SoundPlay("LastStage.mp3");
+	BGMPlayer.SetVolume(0.7f);
 }
 
 void LastLevel::Tick(float _DeltaTime)

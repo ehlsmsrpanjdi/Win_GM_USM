@@ -182,6 +182,7 @@ void PlayLevel3::BeginPlay()
 	door->SetActorLocation({ 10050, 490 });
 	door->DoorNextLevel("LastStage");
 	BGMPlayer = UEngineSound::SoundPlay("Level1.mp3");
+	BGMPlayer.SetVolume(0.7f);
 }
 
 void PlayLevel3::Tick(float _DeltaTime)

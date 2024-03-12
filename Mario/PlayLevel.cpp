@@ -295,8 +295,10 @@ void UPlayLevel::BeginPlay()
 	door->DoorNextLevel("Stage2");
 
 	BGMPlayer = UEngineSound::SoundPlay("Level1.mp3");
+	BGMPlayer.SetVolume(0.7f);
 	GroundBGMPlayer = UEngineSound::SoundPlay("Level2.mp3");
 	GroundBGMPlayer.Off();
+	GroundBGMPlayer.SetVolume(0.7f);
 
 
 }
