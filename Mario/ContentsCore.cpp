@@ -80,8 +80,9 @@ void ContentsCore::BeginPlay()
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<UTitleLevel>("Title");
 	CreateLevel<UPlayLevel>("Stage1");
+	CreateLevel<LastLevel>("LastStage");
 
-	ChangeLevel("Stage1");
+	ChangeLevel("LastStage");
 }
 
 void ContentsCore::Tick(float _DeltaTime)
