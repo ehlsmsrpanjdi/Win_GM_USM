@@ -3,11 +3,11 @@
 #include "Mario.h"
 
 
-Flat::Flat() 
+Flat::Flat()
 {
 }
 
-Flat::~Flat() 
+Flat::~Flat()
 {
 }
 
@@ -45,39 +45,39 @@ void Flat::Tick(float _DeltaTime)
 
 void Flat::CollisionEvent(float _DeltaTime)
 {
-		std::vector<UCollision*> Result;
-		if (true == AxeCollision->CollisionCheck(MarioCollisionOrder::Player, Result)) {
-			Mario* Player = (Mario*)Result[0]->GetOwner();
-			AxeDestroy = true;
-			AxeRenderer->Destroy();
-			AxeCollision->Destroy();
-			FloatCollision->Destroy();
-			GetWorld()->SetOtherTimeScale(static_cast<int>(MarioRenderOrder::Cheat), 0.0f);
-			Player->SetState(MarioState::EndingMove);
-			MarioHelper::GameEnd = true;
-			BGMPlayer = UEngineSound::SoundPlay("KoopaFall.mp3");
-		}
-}
-
-void Flat::FlatDestroy(float _DeltaTime)
-{
-	if (!AxeDestroy) {
-		return;
+	std::vector<UCollision*> Result;
+	if (true == AxeCollision->CollisionCheck(MarioCollisionOrder::Player, Result)) {
+		Mario* Player = (Mario*)Result[0]->GetOwner();
+		AxeDestroy = true;
+		AxeRenderer->Destroy();
+		AxeCollision->Destroy();
+		FloatCollision->Destroy();
+		GetWorld()->SetOtherTimeScale(static_cast<int>(MarioRenderOrder::Cheat), 0.0f);
+		Player->SetState(MarioState::EndingMove);
+		MarioHelper::GameEnd = true;
+		BGMPlayer = UEngineSound::SoundPlay("KoopaFall.mp3");
+		MarioHelper::SetNextLevel("Stage1");
 	}
-	else {
-		if (DestroyTime >= 0.f) {
-			DestroyTime -= _DeltaTime;
-		}
-		else if(FlatCount >= 0){
-			FloatRenderer[FlatCount]->Destroy();
-			--FlatCount;
-			DestroyTime = 0.1f;
+}
+	void Flat::FlatDestroy(float _DeltaTime)
+	{
+		if (!AxeDestroy) {
+			return;
 		}
 		else {
-			GetWorld()->SetAllTimeScale(1.0f);
-			MarioHelper::CameraOff = false;
-			Destroy();
-			BGMPlayer = UEngineSound::SoundPlay("Ending.wav");
+			if (DestroyTime >= 0.f) {
+				DestroyTime -= _DeltaTime;
+			}
+			else if (FlatCount >= 0) {
+				FloatRenderer[FlatCount]->Destroy();
+				--FlatCount;
+				DestroyTime = 0.1f;
+			}
+			else {
+				GetWorld()->SetAllTimeScale(1.0f);
+				MarioHelper::CameraOff = false;
+				Destroy();
+				BGMPlayer = UEngineSound::SoundPlay("Ending.wav");
+			}
 		}
 	}
-}

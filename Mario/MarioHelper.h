@@ -103,8 +103,10 @@ public:
 	static bool GameEnd;
 	static MarioClass MyMarioClass;
 	static int MonsterScore;
+	static int ItemScore;
 	static float MonsterScoreResetTime;
 	static void AddMonsterScore(int _Score);
+	static void SetItemScore(int _Score);
 	static bool SoundOff;
 	static bool Stage1Sound;
 	static bool Stage2Sound;

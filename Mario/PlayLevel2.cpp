@@ -437,6 +437,7 @@ void PlayLevel2::Tick(float _DeltaTime)
 void PlayLevel2::LevelStart(ULevel* Level)
 {
 	MarioHelper::SetPrevLevel("Stage2");
+	Level2SoundTime = 6.0f;
 	BGMPlayer.Off();
 }
 

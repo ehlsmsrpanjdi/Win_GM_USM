@@ -21,14 +21,6 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	//ScoreRendererLocation += {0.f, -0.1f};
-	//ScoreRenderer->SetTransform({ ScoreRendererLocation, {60,20} });
-	
-	//ScoreRenderer = CreateImageRenderer(MarioRenderOrder::UI);
-	//FVector OwnerLocation = this->GetActorLocation();
-	//ScoreRenderer->SetImage("100.png");
-	//ScoreRenderer->SetTransform({ {0,-20}, {60,20} });
-	//ScoreRendererLocation = ScoreRenderer->GetTransform().GetPosition();
-	//MarioHelper::MarioTotalScore += 100;
+
 };
 

@@ -57,8 +57,7 @@ void LastLevel::BeginPlay()
 	
 	Mario* TestMario;
 	TestMario = this->SpawnActor<Mario>(2);
-	//TestMario->SetActorLocation({ 200,440 });
-	TestMario->SetActorLocation({ 8200,440 });
+	TestMario->SetActorLocation({ 200,440 });
 
 
 	Flat* Flats = SpawnActor<Flat>(MarioRenderOrder::Cheat);
@@ -141,4 +140,5 @@ void LastLevel::LevelStart(ULevel* Level)
 void LastLevel::LevelEnd(ULevel* Level)
 {
 	BGMPlayer.Off();
+	MarioHelper::GameEnd = false;
 }

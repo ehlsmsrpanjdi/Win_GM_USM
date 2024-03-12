@@ -158,6 +158,9 @@
     <ClInclude Include="SoundCheat.h">
       <Filter>Actor\Object</Filter>
     </ClInclude>
+    <ClInclude Include="ItemScore.h">
+      <Filter>Actor\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -316,6 +319,9 @@
     </ClCompile>
     <ClCompile Include="SoundCheat.cpp">
       <Filter>Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemScore.cpp">
+      <Filter>Actor\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

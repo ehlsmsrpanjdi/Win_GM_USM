@@ -2,7 +2,7 @@
 #include "MarioHelper.h"
 #include "BlockBase.h"
 #include "Mario.h"
-#include "MonsterScore.h"
+#include "ItemScore.h"
 
 ItemBase::ItemBase()
 {
@@ -10,15 +10,7 @@ ItemBase::ItemBase()
 
 ItemBase::~ItemBase()
 {
-	if (!ScoreSpawn) {
-		ScoreSpawn = true;
-		MarioHelper::MonsterScore = 0;
-		MarioHelper::AddMonsterScore(1000);
-		MonsterScore* Score = GetWorld()->SpawnActor<MonsterScore>(MarioRenderOrder::UI);
-		Score->SetActorLocation(GetActorLocation());
-		MarioHelper::MonsterScore = 0;
-		BGMPlayer = UEngineSound::SoundPlay("GainMushRoom.wav");
-	}
+
 }
 
 
@@ -86,6 +78,17 @@ void ItemBase::Flower(float _DeltaTime)
 
 void ItemBase::Star(float _DeltaTime)
 {
+}
+
+void ItemBase::SpawnScore()
+{
+	if (!ScoreSpawn) {
+		ScoreSpawn = true;
+		MarioHelper::SetItemScore(1000);
+		ItemScore* Score = GetWorld()->SpawnActor<ItemScore>(MarioRenderOrder::UI);
+		Score->SetActorLocation(GetActorLocation());
+		BGMPlayer = UEngineSound::SoundPlay("GainMushRoom.wav");
+	}
 }
 
 void ItemBase::IsEdge(float _DeltaTime)
@@ -163,10 +166,12 @@ void ItemBase::CollisionEvent()
 		{
 		case ItemState::MushRoom:
 			MyMario->SetMarioClassState(MarioClass::Big);
+			SpawnScore();
 			Destroy();
 			break;
 		case ItemState::Flower:
 			MyMario->SetMarioClassState(MarioClass::Fire);
+			SpawnScore();
 			Destroy();
 			break;
 		case ItemState::Star:

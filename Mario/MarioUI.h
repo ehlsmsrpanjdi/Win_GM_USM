@@ -36,6 +36,7 @@ protected:
 	FTransform WorldUITransform = { {430 ,-95}, {20,20} };
 	FTransform TimeUITransform { {640 , -95}, {20,20} };
 	int PlusSize = 35;
+	int CoinSound = 0;
 
 	void IsLevelEnd(float _DeltaTime);
 	float ChangeLevelTime = 7.0f;

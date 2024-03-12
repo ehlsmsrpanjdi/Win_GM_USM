@@ -1,6 +1,6 @@
 #include "Coin.h"
 #include "MarioHelper.h"
-#include "MonsterScore.h"
+#include "ItemScore.h"
 #include <EnginePlatform/EngineSound.h>
 
 Coin::Coin() 
@@ -12,8 +12,8 @@ Coin::~Coin()
 {
 	if (!ScoreSpawn) {
 		ScoreSpawn = true;
-		MarioHelper::AddMonsterScore(200);
-		MonsterScore* Score = GetWorld()->SpawnActor<MonsterScore>(MarioRenderOrder::UI);
+		MarioHelper::SetItemScore(200);
+		ItemScore* Score = GetWorld()->SpawnActor<ItemScore>(MarioRenderOrder::UI);
 		Score->SetActorLocation(GetActorLocation());
 	}
 	MarioHelper::MarioCoinCount += 1;

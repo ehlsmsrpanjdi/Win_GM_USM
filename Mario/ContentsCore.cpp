@@ -77,10 +77,10 @@ void ContentsCore::BeginPlay()
 	MainWindow.SetWindowPosition({ 800/* * 1.5f*/, 0/* * 1.5f*/ });
 
 
-	CreateLevel<UPlayLevel>("Stage1");
-
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<UTitleLevel>("Title");
+	CreateLevel<UPlayLevel>("Stage1");
+
 	ChangeLevel("Stage1");
 }
 

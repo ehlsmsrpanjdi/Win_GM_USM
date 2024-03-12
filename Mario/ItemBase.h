@@ -29,6 +29,7 @@ protected:
 	void MushRoom(float _DeltaTime);
 	void Flower(float _DeltaTime);
 	void Star(float _DeltaTime);
+	void SpawnScore();
 
 	virtual void IsEdge(float _DeltaTime);
 	void ReverseDir();

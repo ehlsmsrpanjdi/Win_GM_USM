@@ -21,6 +21,7 @@ int MarioHelper::MarioWorldCount = 11;
 int MarioHelper::MarioTotalScore = 1000000;
 int MarioHelper::MarioLife = 3;
 int MarioHelper::MonsterScore = 0;
+int MarioHelper::ItemScore = 0;
 std::string MarioHelper::PrevLevelName = "Stage1";
 bool MarioHelper::LevelEnd = false;
 bool MarioHelper::GameEnd = false;
@@ -134,6 +135,10 @@ void MarioHelper::AddMonsterScore(int _Score)
 {
 	MarioHelper::MonsterScore += _Score;
 	MarioHelper::MonsterScoreResetTime = 2.0f;
+}
+
+void MarioHelper::SetItemScore(int _Score) {
+	MarioHelper::ItemScore = _Score;
 }
 
 FVector MarioHelper::GetBottomLeftVector(FVector _NextVector) {

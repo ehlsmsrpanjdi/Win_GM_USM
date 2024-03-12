@@ -494,12 +494,13 @@ void Mario::Idle(float _DeltaTime)
 
 void Mario::DeadStart()
 {
+	BGMPlayer = UEngineSound::SoundPlay("MarioDie.wav");
 	GravitySpeed.Y = 0.f;
 	SpeedX.X = 0.f;
 	SpeedY.Y = -500.f;
 	SetAnimation("Dead");
 	BodyCollision->Destroy();
-
+	MarioHelper::SoundOff = true;
 }
 
 void Mario::EndStart()
