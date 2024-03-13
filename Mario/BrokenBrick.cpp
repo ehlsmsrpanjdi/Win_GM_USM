@@ -28,7 +28,7 @@ void BrokenBrick::Tick(float _DeltaTime)
 {
 	GravitySpeed += MarioHelper::Gravity * _DeltaTime;
 	SpeedY.Y = -600.f;
-	SpeedX.X = 200 * static_cast<int>(DirState);
+	SpeedX.X = float(200) * static_cast<int>(DirState);
 	ResultMove(_DeltaTime);
 }
 
