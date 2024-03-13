@@ -95,6 +95,7 @@ protected:
 
 	bool Debug = false;
 	bool DirChanging = false;
+	bool IsCollision = false;
 
 	const float MinSpeed = 10.f;
 	float MaxSpeedX = 400.f;

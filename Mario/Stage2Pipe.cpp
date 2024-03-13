@@ -57,7 +57,6 @@ void Stage2Pipe::Tick(float _DeltaTime)
 		Mario* Player;
 		UCollision* Collision = Result[0];
 		Player = (Mario*)Collision->GetOwner();
-
 		Player->SetState(MarioState::TelePorting);
 		Player->AddActorLocation(FVector::Right * _DeltaTime * 100);
 		Player->SetAnimation("Move");

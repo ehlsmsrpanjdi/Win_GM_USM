@@ -427,14 +427,14 @@ void Mario::JumpStart()
 	}
 	else {
 		Jumping = true;
-		if (GravitySpeed.Y < 10) {
+		if (GravitySpeed.Y < 20) {
 			SpeedY.Y = JumpPower;
 		}
 		else {
 			return;
 		}
 		GravitySpeed.Y = 0;
-		AddActorLocation({ 0.f,-4.f });
+		AddActorLocation({ 0.f,-10.f });
 		SetAnimation("Jump");
 	}
 }
@@ -474,7 +474,7 @@ void Mario::Idle(float _DeltaTime)
 
 	FireAttack(_DeltaTime);
 	std::vector<UCollision*> Result;
-	if(BodyCollision->CollisionCheck(MarioCollisionOrder::Block, Result)) {
+	if (BodyCollision->CollisionCheck(MarioCollisionOrder::Block, Result)) {
 		FTransform BlockTrans = Result[0]->GetActorBaseTransform();
 		if (BlockTrans.Bottom() < BodyCollision->GetActorBaseTransform().Bottom()) {
 			if (Mario::PlayerLocation.X < BlockTrans.GetPosition().X) {
@@ -667,8 +667,19 @@ void Mario::EndMove(float _DeltaTime)
 void Mario::Jump(float _DeltaTime)
 {
 	FireAttack(_DeltaTime);
-
-	if (true == UEngineInput::IsUp(VK_SPACE) && CurSpeed.Y < 0.f) {
+	std::vector<UCollision*> Result;
+	if (BodyCollision->CollisionCheck(MarioCollisionOrder::Block, Result)) {
+		FTransform BlockTrans = Result[0]->GetActorBaseTransform();
+		if (BlockTrans.Bottom() < BodyCollision->GetActorBaseTransform().Bottom()) {
+			if (Mario::PlayerLocation.X < BlockTrans.GetPosition().X) {
+				AddActorLocation(FVector::Left * _DeltaTime * 100);
+			}
+			else {
+				AddActorLocation(FVector::Right * _DeltaTime * 100);
+			}
+		}
+	}
+	if (true == UEngineInput::IsUp(VK_SPACE) && CurSpeed.Y <= 0.f) {
 		SpeedY.Y = 0;
 		GravitySpeed.Y = 10;
 	}
@@ -676,7 +687,7 @@ void Mario::Jump(float _DeltaTime)
 	MoveFun(_DeltaTime, AccelerateX);
 	GravityCheck(_DeltaTime);
 
-	if (StopSpeed.Y == SpeedY.Y && 10 > abs(GravitySpeed.Y)) {
+	if (StopSpeed.Y == SpeedY.Y && 10 > abs(GravitySpeed.Y) || IsCollision) {
 		if (abs(SpeedX.X) > 5) {
 			SetState(MarioState::Move);
 			Jumping = false;
@@ -962,6 +973,7 @@ void Mario::MarioFall()
 
 void Mario::MarioCollisionEvent(float _DeltaTime)
 {
+	IsCollision = false;
 	std::vector<UCollision*> Result;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::Block, Result))
 	{
@@ -973,30 +985,44 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 
 			bool Beside = (MarioTransform.GetPosition().X > ResultTransform.Left() - 8 && MarioTransform.GetPosition().X < ResultTransform.Right() + 8);
 
+			float CenterY = MarioTransform.Top() + MarioTransform.GetScale().hY() - 20;
+			float CenterX = MarioTransform.Right() - MarioTransform.GetScale().hX();
+
+			bool BoolX = (CenterX > ResultTransform.Left() && ResultTransform.Right() > CenterX);
+			bool BoolY = (CenterY > ResultTransform.Top() && ResultTransform.Bottom() > CenterY);
+
 			if (MarioTransform.Top() + 30 > ResultTransform.Bottom()) {
 				if (MarioState::EndMove != State && Beside && (SpeedY.Y + GravitySpeed.Y) < -10) {
 					BlockBase* Test = dynamic_cast<BlockBase*>(ResultCollision->GetOwner());
-					if(Test != nullptr){
-					Block->SetBoxState(BlockState::Interactive);
+					if (Test != nullptr) {
+						Block->SetBoxState(BlockState::Interactive);
 					}
+					SpeedY.Y = 0.f;
 				}
-				SpeedY.Y = 0.f;
 			}
 
 			else if (MarioTransform.Bottom() > ResultTransform.Top() + 10) {
-
-				if (CurSpeedDir == 1 && ResultTransform.Left() < MarioTransform.Right()) {
-					SpeedX.X = 0;
-					AddActorLocation(FVector::Left);
+				if (BoolX && BoolY) {
+					Block->SetBoxState(BlockState::Interactive);
 				}
-				else if (CurSpeedDir == -1 && ResultTransform.Right() > MarioTransform.Left()) {
-					SpeedX.X = 0;
-					AddActorLocation(FVector::Right);
-				}
+					if (CurSpeedDir == 1 && ResultTransform.Left() < MarioTransform.Right()) {
+						SpeedX.X = 0;
+						AddActorLocation(FVector::Left);
+					}
+					else if (CurSpeedDir == -1 && ResultTransform.Right() > MarioTransform.Left()) {
+						SpeedX.X = 0;
+						AddActorLocation(FVector::Right);
+					}
 			}
-			else {
+			else if (ResultTransform.Left() < MarioTransform.Right() || MarioTransform.Left() > ResultTransform.Right()) {
 				SpeedY.Y = 0;
 				GravitySpeed.Y = 0;
+				IsCollision = true;
+				while (MarioTransform.Bottom() - 2 > ResultTransform.Top())
+				{
+					AddActorLocation(FVector::Up);
+					MarioTransform = BodyCollision->GetActorBaseTransform();
+				}
 			}
 		}
 	}
@@ -1059,6 +1085,7 @@ void Mario::Ending(float _DeltaTime)
 }
 void Mario::TelePorting(float _DeltaTime)
 {
+	DirState = EActorDir::Right;
 }
 void Mario::TelePortEnding(float _DeltaTime)
 {
