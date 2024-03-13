@@ -36,7 +36,7 @@ std::string MarioHelper::GetNextLevel() {
 	return MarioHelper::NextLevelName;
 }
 
-std::string MarioHelper::NextLevelName = "Stage1";
+std::string MarioHelper::NextLevelName = "Stage2";
 
 
 bool MarioHelper::StageOneInit = false;

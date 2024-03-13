@@ -501,6 +501,7 @@ void Mario::Idle(float _DeltaTime)
 
 void Mario::DeadStart()
 {
+	MarioHelper::Stage2Sound = true;
 	BGMPlayer = UEngineSound::SoundPlay("MarioDie.wav");
 	GravitySpeed.Y = 0.f;
 	SpeedX.X = 0.f;

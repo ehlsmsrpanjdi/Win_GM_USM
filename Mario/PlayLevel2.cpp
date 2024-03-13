@@ -400,7 +400,7 @@ void PlayLevel2::BeginPlay()
 	GroundBGMPlayer.Off();
 	GroundBGMPlayer.SetVolume(0.7f);
 	BGMPlayer = UEngineSound::SoundPlay("Level1.mp3");
-	BGMPlayer.On();
+	BGMPlayer.Off();
 	BGMPlayer.SetVolume(0.7f);
 
 	SoundCheat* CheatSound = SpawnActor<SoundCheat>(MarioRenderOrder::Cheat);

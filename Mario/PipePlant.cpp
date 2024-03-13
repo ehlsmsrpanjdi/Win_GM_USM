@@ -12,6 +12,7 @@ void PipePlant::StateUpdate(float _DeltaTime)
 {
 	std::vector<UCollision*> MResult;
 	if (CheatCollision->CollisionCheck(MarioCollisionOrder::Player, MResult) && !Start) {
+		BodyCollision->ActiveOff();
 		Start = true;
 	}
 
@@ -48,6 +49,7 @@ void PipePlant::StateUpdate(float _DeltaTime)
 		}
 	break;
 	case 3:
+		BodyCollision->ActiveOn();
 		TotalMove += _DeltaTime;
 		if (TotalMove >= 2.0f) {
 			PlantState++;
