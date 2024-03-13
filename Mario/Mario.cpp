@@ -118,7 +118,26 @@ void Mario::Tick(float _DeltaTime)
 		GEngine->ChangeLevel("Loading");
 	}
 
-
+	if (UEngineInput::IsDown('0')) {
+		DebugMod++;
+		if (DebugMod == 3){
+			Debug = 0;
+		}
+		switch (DebugMod)
+		{
+		case 0:
+			SetMarioClassState(MarioClass::Small);
+			break;
+		case 1:
+			SetMarioClassState(MarioClass::Big);
+			break;
+		case 2:
+			SetMarioClassState(MarioClass::Fire);
+			break;
+		default:
+			break;
+		}
+	}
 
 
 	if (UEngineInput::IsDown('J')) {

@@ -46,7 +46,7 @@ void AFire::Tick(float _DeltaTime)
 	float CameraX = GetWorld()->GetCameraPos().X;
 	float WindowCenter = GEngine->MainWindow.GetWindowScale().X;
 	float CurLocationX = GetActorLocation().X;
-	if (CameraX + WindowCenter < CurLocationX)
+	if (CameraX + WindowCenter < CurLocationX - 300)
 	{
 		Destroy();
 		return;

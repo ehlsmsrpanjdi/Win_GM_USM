@@ -283,6 +283,7 @@ void MonsterBase::DeadStart()
 void MonsterBase::ExcuteStart()
 {
 	BGMPlayer = UEngineSound::SoundPlay("Stomp.wav");
+	SetAnimation("Excute");
 	GravitySpeed.Y = 0.f;
 	SpeedX.X = 0.f;
 	SpeedY.Y = -500.f;

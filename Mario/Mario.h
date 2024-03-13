@@ -112,6 +112,8 @@ protected:
 	float GodTime = 0.f;
 	float TeleportingTime = 1.f;
 	float EndingTime = 16.f;
+
+	int DebugMod = 0;
 private:
 	MarioState State = MarioState::None;
 	MarioState PrevState = MarioState::None;

@@ -48,12 +48,12 @@ void ContentsCore::BeginPlay()
 
 	UEngineResourcesManager::GetInst().CuttingImage("Mario_Right.png", 5, 7);
 	UEngineResourcesManager::GetInst().CuttingImage("Mario_Left.png", 5, 7);
-	UEngineResourcesManager::GetInst().CuttingImage("Goomba.png", 3,1);
-	UEngineResourcesManager::GetInst().CuttingImage("BlackGoomba.png", 3, 1);
-	UEngineResourcesManager::GetInst().CuttingImage("GreenTroopa_Left.png", 6, 1);
-	UEngineResourcesManager::GetInst().CuttingImage("GreenTroopa_Right.png", 6, 1);
-	UEngineResourcesManager::GetInst().CuttingImage("RedTroopa_Left.png", 6, 1);
-	UEngineResourcesManager::GetInst().CuttingImage("RedTroopa_Right.png", 6, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("Goomba.png", 4,1);
+	UEngineResourcesManager::GetInst().CuttingImage("BlackGoomba.png", 4, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("GreenTroopa_Left.png", 7, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("GreenTroopa_Right.png", 7, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("RedTroopa_Left.png", 7, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("RedTroopa_Right.png", 7, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("Plant.png", 2, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("MarioBlock.png", 6, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("MarioBrick.png", 5, 1);
@@ -79,10 +79,9 @@ void ContentsCore::BeginPlay()
 
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<UTitleLevel>("Title");
-	//CreateLevel<UPlayLevel>("Stage1");
-	CreateLevel<PlayLevel2>("Stage2");
+	CreateLevel<UPlayLevel>("Stage1");
 
-	ChangeLevel("Stage2");
+	ChangeLevel("Title");
 }
 
 void ContentsCore::Tick(float _DeltaTime)

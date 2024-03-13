@@ -23,5 +23,6 @@ void RedTroopa::BeginPlay()
 	SetAnimation("Idle");
 	AnimationAuto(Renderer, "Crouch", 4, 4);
 	AnimationAuto(Renderer, "Fly", 2, 3, 0.2f);
+	AnimationAuto(Renderer, "Excute", 6, 6, 0.2f,false);
 }
 

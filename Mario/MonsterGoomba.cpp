@@ -20,7 +20,7 @@ void MonsterGoomba::BeginPlay()
 	SetAnimation("Idle");
 
 	AnimationAuto(Renderer, "Dead", 2, 2);
-
+	AnimationAuto(Renderer, "Excute", 3, 3, 0.2f, false);
 
 }
 
