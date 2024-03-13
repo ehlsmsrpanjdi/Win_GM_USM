@@ -45,3 +45,8 @@ void UTitleLevel::Tick(float _DeltaTime)
 	}
 }
 
+void UTitleLevel::LevelStart(ULevel* _Level)
+{
+	MarioHelper::SoundOff = true;
+}
+

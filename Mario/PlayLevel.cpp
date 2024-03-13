@@ -219,7 +219,7 @@ void UPlayLevel::BeginPlay()
 
 	GreenTroopa* Green;
 	Green = SpawnActor<GreenTroopa>(MarioRenderOrder::Monster);
-	Green->SetActorLocation({ 7600,800 });
+	Green->SetActorLocation({ 7700,800 });
 
 	itemblock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);
 	itemblock->SetItemBlockDefault(1, ItemState::MushRoom);
@@ -296,6 +296,7 @@ void UPlayLevel::BeginPlay()
 
 	BGMPlayer = UEngineSound::SoundPlay("Level1.mp3");
 	BGMPlayer.SetVolume(0.7f);
+	BGMPlayer.Off();
 	GroundBGMPlayer = UEngineSound::SoundPlay("Level2.mp3");
 	GroundBGMPlayer.Off();
 	GroundBGMPlayer.SetVolume(0.7f);
@@ -323,6 +324,7 @@ void UPlayLevel::Tick(float _DeltaTime)
 void UPlayLevel::LevelStart(ULevel* Level)
 {
 	MarioHelper::SetPrevLevel("Stage1");
+	BGMPlayer.On();
 }
 
 void UPlayLevel::LevelEnd(ULevel* Level)
