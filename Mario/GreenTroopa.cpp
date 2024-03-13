@@ -28,6 +28,7 @@ void GreenTroopa::BeginPlay()
 	AnimationAuto(Renderer, "Idle", 0, 1, 0.2f);
 	SetAnimation("Idle");
 	AnimationAuto(Renderer, "Crouch", 4, 4);
+	AnimationAuto(Renderer, "CrouchChange", 4, 5, 0.4f);
 	AnimationAuto(Renderer, "Fly", 2, 3, 0.2f);
 	AnimationAuto(Renderer, "Excute", 6, 6, 0.2f, false);
 }	

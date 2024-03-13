@@ -8,6 +8,7 @@ EndingMessage::EndingMessage()
 
 EndingMessage::~EndingMessage()
 {
+	BGMPlayer.Off();
 }
 
 void EndingMessage::BeginPlay()
@@ -48,6 +49,7 @@ void EndingMessage::CollisionEvent(float _DeltaTime)
 	std::vector<UCollision*> Result;
 	if (true == EndingMessageBoxCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
 	{
+		BGMPlayer = UEngineSound::SoundPlay("Ending.mp3");
 		Mario* Player = (Mario*)Result[0]->GetOwner();
 		Player->SetState(MarioState::Ending);
 		IsEnd = true;

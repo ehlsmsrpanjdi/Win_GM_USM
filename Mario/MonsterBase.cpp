@@ -50,6 +50,9 @@ void MonsterBase::IsEdge(float _DeltaTime)
 
 	GreenTroopa* GTroopa = dynamic_cast<GreenTroopa*>(this);
 	if (GTroopa != nullptr) {
+		if (State != MonsterState::Idle) {
+			return;
+		}
 		bool LeftBottom = MarioHelper::LeftCheck({ CurLocation.X + 8, CurLocation.Y + 4 });
 		bool RightBottom = MarioHelper::RightCheck({ CurLocation.X - 8, CurLocation.Y + 4 });
 		if (!LeftBottom) {
@@ -141,6 +144,7 @@ void MonsterBase::SetMonsterState(MonsterState _State)
 		break;
 	case MonsterState::Fly:
 		FlyStart();
+		break;
 	default:
 		break;
 	}
@@ -218,6 +222,17 @@ void MonsterBase::Idle(float _DeltaTime)
 
 void MonsterBase::Crouch(float _DeltaTime)
 {
+	if (ChangeTime >= 0) {
+		ChangeTime -= _DeltaTime;
+	}
+	
+	if (ChangeTime <= 4.0f && ChangeTime >= 0) {
+		SetAnimation("CrouchChange");
+	}
+	else if(ChangeTime <= 0){
+		SetMonsterState(MonsterState::Idle);
+	}
+
 }
 
 void MonsterBase::CrouchMove(float _DeltaTime)
@@ -262,6 +277,7 @@ void MonsterBase::IdleStart()
 
 void MonsterBase::CrouchStart()
 {
+	ChangeTime = 8.0f;
 	BGMPlayer = UEngineSound::SoundPlay("Stomp.wav");
 	BodyCollision->SetScale({ 32,36 });
 	SetAnimation("Crouch");

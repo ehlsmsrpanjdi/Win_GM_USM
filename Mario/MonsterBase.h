@@ -33,7 +33,7 @@ protected:
 
 
 	void Idle(float _DeltaTime);
-	void Crouch(float _DeltaTime);
+	virtual void Crouch(float _DeltaTime);
 	void CrouchMove(float _DeltaTime);
 	void Dead(float _DeltaTime);
 	virtual void Excute(float _DeltaTime);
@@ -51,6 +51,7 @@ protected:
 
 	float MonsterDefaultSpeed = 200.f;
 	float CrouchDefaultMoveSpeed = 600.f;
+	float ChangeTime = 8.f;
 
 	bool IsInit = false;
 	bool ScoreSpawn = false;

@@ -1,5 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EnginePlatform/EngineSound.h>
+
 // Ό³Έν :
 class EndingMessage : public AActor
 {
@@ -23,6 +25,8 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void CollisionEvent(float _DeltaTime);
+
+	UEngineSoundPlayer BGMPlayer;
 
 	bool IsEnd = false;
 	float NextPageTime = 2.0f;
