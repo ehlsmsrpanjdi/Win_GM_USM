@@ -101,6 +101,26 @@ void Mario::Tick(float _DeltaTime)
 
 	MarioFall();
 
+	if (UEngineInput::IsDown('1')) {
+		MarioHelper::SetNextLevel("Stage1");
+		GEngine->ChangeLevel("Loading");
+	}
+	if (UEngineInput::IsDown('2')) {
+		MarioHelper::SetNextLevel("Stage2");
+		GEngine->ChangeLevel("Loading");
+	}
+	if (UEngineInput::IsDown('3')) {
+		MarioHelper::SetNextLevel("Stage3");
+		GEngine->ChangeLevel("Loading");
+	}
+	if (UEngineInput::IsDown('4')) {
+		MarioHelper::SetNextLevel("LastStage");
+		GEngine->ChangeLevel("Loading");
+	}
+
+
+
+
 	if (UEngineInput::IsDown('J')) {
 		Debug = true;
 		GodTime = 1000.f;
