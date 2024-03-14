@@ -3,6 +3,7 @@
 #include "MarioHelper.h"
 #include "CollisionActor.h"
 #include "LoadingUI.h"
+#include "Mario.h"
 
 LoadingLevel::LoadingLevel() 
 {
@@ -56,6 +57,8 @@ void LoadingLevel::Tick(float _DeltaTime)
 
 void LoadingLevel::LevelStart(ULevel* Level)
 {
+	Mario::PlayerLocation = { 0,0 };
+	MarioHelper::CameraX = 0;
 	MarioHelper::GameEnd = false;
 	MarioHelper::MarioWorldSet();
 	MarioHelper::CameraOff = false;

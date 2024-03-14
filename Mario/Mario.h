@@ -114,6 +114,10 @@ protected:
 	float EndingTime = 16.f;
 
 	int DebugMod = 0;
+	float CurFrame = 0;
+	float CurFrameTime = 2;
+	int CurFrameCount = 0;
+	float TotalFrame = 0;
 private:
 	MarioState State = MarioState::None;
 	MarioState PrevState = MarioState::None;

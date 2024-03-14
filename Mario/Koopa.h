@@ -32,6 +32,8 @@ protected:
 	float HammerTime = 4.0f;
 	float HammerCoolTime = 0.2f;
 
+	float ChangeDirTime = 2.0f;
+
 	void Jump(float _DeltaTime);
 	float JumpTime = 3.0f;
 

@@ -12,6 +12,7 @@ GroundBrick::~GroundBrick()
 
 void GroundBrick::BeginPlay()
 {
+	BlockBase::BeginPlay();
 	NoDir = true;
 	StartState = BlockState::Brick;
 	SetName("GroundBrick");

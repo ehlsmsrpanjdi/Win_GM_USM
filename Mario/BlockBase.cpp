@@ -18,7 +18,6 @@ BlockBase::~BlockBase()
 
 void BlockBase::BeginPlay()
 {
-
 }
 
 void BlockBase::Tick(float _DeltaTime)
@@ -32,8 +31,8 @@ void BlockBase::Tick(float _DeltaTime)
 		IsInit = true;
 		BlockInit();
 	}
-	StateUpdate(_DeltaTime);
 
+	StateUpdate(_DeltaTime);
 	if (CurLocationX < MarioHelper::CameraX - 32) {
 		Destroy();
 	}

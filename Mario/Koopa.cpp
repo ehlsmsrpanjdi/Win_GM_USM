@@ -46,14 +46,21 @@ void Koopa::Tick(float _DeltaTime)
 	}
 
 	SetAnimation("Idle");
-	if (Mario::PlayerLocation.X > GetActorLocation().X) {
-		DirState = EActorDir::Right;
-		SpeedX.X = 50.f;
+	if (ChangeTime >= 0) {
+		ChangeTime -= _DeltaTime;
+		if (Mario::PlayerLocation.X > GetActorLocation().X) {
+			DirState = EActorDir::Right;
+			SpeedX.X = 50.f;
+		}
+		else {
+			DirState = EActorDir::Left;
+			SpeedX.X = -50.f;
+		}
 	}
 	else {
-		DirState = EActorDir::Left;
-		SpeedX.X = -50.f;
+		ChangeTime = 2.0f;
 	}
+
 	GravityCheck(_DeltaTime);
 	CollisionEvent(_DeltaTime);
 	ResultMove(_DeltaTime);

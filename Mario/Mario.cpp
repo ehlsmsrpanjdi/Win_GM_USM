@@ -22,6 +22,7 @@ Mario::Mario()
 
 Mario::~Mario()
 {
+	Mario::PlayerLocation = { 0,0 };
 }
 
 void Mario::BeginPlay()
@@ -91,13 +92,21 @@ void Mario::BeginPlay()
 
 void Mario::Tick(float _DeltaTime)
 {
-	const FVector  a = GEngine->MainWindow.GetMousePosition();
-	UEngineDebug::DebugTextPrint(std::to_string(Mario::PlayerLocation.X) + "     " + std::to_string(Mario::PlayerLocation.Y), 24);
-	UEngineDebug::DebugTextPrint(std::to_string(1 / _DeltaTime), 24);
-	UEngineDebug::DebugTextPrint(std::to_string(GetWorld()->GetCameraPos().X), 24);
+		if (CurFrameTime >= 0) {
+		CurFrameTime -= _DeltaTime;
+		CurFrame += (1/_DeltaTime);
+		CurFrameCount++;
+	}
+	else {
+		TotalFrame = CurFrame / CurFrameCount;
+		CurFrameTime = 2;
+		CurFrameCount = 0;
+		CurFrame = 0;
+	}
 
-	MarioHelper::CameraX = GetWorld()->GetCameraPos().X;
-	MarioHelper::WindowCenter = GEngine->MainWindow.GetWindowScale().X;
+	UEngineDebug::DebugTextPrint(std::to_string(Mario::PlayerLocation.X) + "     " + std::to_string(Mario::PlayerLocation.Y), 24);
+	UEngineDebug::DebugTextPrint(std::to_string(TotalFrame), 24);
+	UEngineDebug::DebugTextPrint(std::to_string(GetWorld()->GetCameraPos().X), 24);
 
 	MarioFall();
 
@@ -118,9 +127,16 @@ void Mario::Tick(float _DeltaTime)
 		GEngine->ChangeLevel("Loading");
 	}
 
+	if (UEngineInput::IsDown('5')) {
+		GetWorld()->SetAllTimeScale(0.0f);
+	}
+	if (UEngineInput::IsDown('6')) {
+		GetWorld()->SetAllTimeScale(1.0f);
+	}
+
 	if (UEngineInput::IsDown('0')) {
 		DebugMod++;
-		if (DebugMod == 3){
+		if (DebugMod == 3) {
 			Debug = 0;
 		}
 		switch (DebugMod)
@@ -160,29 +176,6 @@ void Mario::Tick(float _DeltaTime)
 		GEngine->ChangeLevel("Loading");
 	}
 
-
-	PhysicsActor::Tick(_DeltaTime);
-	PlayerLocation = GetActorLocation();
-
-	if (UEngineInput::IsPress('Z')) {
-		JumpPower = -1000.f;
-		AccelerateX = { 600.f,0.f,0.f,0.f };
-		MaxSpeedX = 500.f;
-	}
-	else {
-		JumpPower = -900.f;
-		AccelerateX = { 400.f,0.f,0.f,0.f };
-		MaxSpeedX = 400.f;
-	}
-
-	if (GodTime >= 0.f) {
-		Renderer->SetAlpha(0.5f);
-		GodTime -= _DeltaTime;
-	}
-	else {
-		Renderer->SetAlpha(1.f);
-	}
-
 	if (Debug) {
 		if (UEngineInput::IsPress(VK_RIGHT)) {
 			AddActorLocation(FVector::Right * 1000 * _DeltaTime);
@@ -201,6 +194,32 @@ void Mario::Tick(float _DeltaTime)
 			GetWorld()->AddCameraPos(FVector::Down * 1000 * _DeltaTime);
 		}
 		return;
+	}
+
+
+
+	PhysicsActor::Tick(_DeltaTime);
+	PlayerLocation = GetActorLocation();
+	MarioHelper::CameraX = GetWorld()->GetCameraPos().X;
+	MarioHelper::WindowCenter = GEngine->MainWindow.GetWindowScale().X;
+
+	if (UEngineInput::IsPress('Z')) {
+		JumpPower = -1000.f;
+		AccelerateX = { 600.f,0.f,0.f,0.f };
+		MaxSpeedX = 500.f;
+	}
+	else {
+		JumpPower = -900.f;
+		AccelerateX = { 400.f,0.f,0.f,0.f };
+		MaxSpeedX = 400.f;
+	}
+
+	if (GodTime >= 0.f) {
+		Renderer->SetAlpha(0.5f);
+		GodTime -= _DeltaTime;
+	}
+	else {
+		Renderer->SetAlpha(1.f);
 	}
 
 	StateUpdate(_DeltaTime);
@@ -1024,14 +1043,14 @@ void Mario::MarioCollisionEvent(float _DeltaTime)
 				if (BoolX && BoolY) {
 					Block->SetBoxState(BlockState::Interactive);
 				}
-					if (CurSpeedDir == 1 && ResultTransform.Left() < MarioTransform.Right()) {
-						SpeedX.X = 0;
-						AddActorLocation(FVector::Left);
-					}
-					else if (CurSpeedDir == -1 && ResultTransform.Right() > MarioTransform.Left()) {
-						SpeedX.X = 0;
-						AddActorLocation(FVector::Right);
-					}
+				if (CurSpeedDir == 1 && ResultTransform.Left() < MarioTransform.Right()) {
+					SpeedX.X = 0;
+					AddActorLocation(FVector::Left);
+				}
+				else if (CurSpeedDir == -1 && ResultTransform.Right() > MarioTransform.Left()) {
+					SpeedX.X = 0;
+					AddActorLocation(FVector::Right);
+				}
 			}
 			else if (ResultTransform.Left() < MarioTransform.Right() || MarioTransform.Left() > ResultTransform.Right()) {
 				SpeedY.Y = 0;
@@ -1163,8 +1182,10 @@ void Mario::ResultMove(float _DeltaTime)
 	FVector CurLocation = GetActorLocation();
 	float CameraX = GetWorld()->GetCameraPos().X;
 
-	if (CurLocation.X - 32.f + CurSpeed.X * _DeltaTime < CameraX) {
+	while (CurLocation.X - 32.f + CurSpeed.X * _DeltaTime < CameraX) {
+		AddActorLocation(FVector::Right * _DeltaTime);
 		CurSpeed.X = 0;
+		CurLocation = GetActorLocation();
 	}
 	AddActorLocation(CurSpeed * _DeltaTime);
 

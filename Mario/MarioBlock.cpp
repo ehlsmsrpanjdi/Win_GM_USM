@@ -12,6 +12,7 @@ MarioBlock::~MarioBlock()
 
 void MarioBlock::BeginPlay()
 {
+	BlockBase::BeginPlay();
 	NoDir = true;
 	HaveItem = ItemState::MushRoom;
 	ItemCount = 1;

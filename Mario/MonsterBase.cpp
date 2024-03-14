@@ -50,19 +50,22 @@ void MonsterBase::IsEdge(float _DeltaTime)
 
 	GreenTroopa* GTroopa = dynamic_cast<GreenTroopa*>(this);
 	if (GTroopa != nullptr) {
-		if (State != MonsterState::Idle) {
-			return;
-		}
-		bool LeftBottom = MarioHelper::LeftCheck({ CurLocation.X + 8, CurLocation.Y + 4 });
-		bool RightBottom = MarioHelper::RightCheck({ CurLocation.X - 8, CurLocation.Y + 4 });
-		if (!LeftBottom) {
-			ReverseDir();
-			return;
-		}
+		if (State == MonsterState::Idle) {
+			bool LeftBottom = MarioHelper::LeftCheck({ CurLocation.X + 8, CurLocation.Y + 4 });
+			bool RightBottom = MarioHelper::RightCheck({ CurLocation.X - 8, CurLocation.Y + 4 });
 
-		if (!RightBottom) {
-			ReverseDir();
-			return;
+			Color8Bit PosColor = MarioHelper::ColMapImage->GetColor(CurLocation.iX(), CurLocation.iY(), Color8Bit(0, 0, 0, 0));
+			bool PosColorCheck = (Color8Bit(255, 0, 255, 0) == PosColor);
+
+			if (!LeftBottom && PosColorCheck) {
+				ReverseDir();
+				return;
+			}
+
+			if (!RightBottom && PosColorCheck) {
+				ReverseDir();
+				return;
+			}
 		}
 	}
 
@@ -114,6 +117,7 @@ void MonsterBase::StateUpdate(float _DeltaTime)
 		break;
 	case MonsterState::Fly:
 		Fly(_DeltaTime);
+		break;
 	default:
 		break;
 	}
@@ -169,8 +173,8 @@ void MonsterBase::CollisionEvent(float _DeltaTime)
 			return;
 		}
 		else {
-			if(Player->GetState() != MarioState::TelePortEnd && Player->GetState() != MarioState::TelePorting){
-			Player->Hit();
+			if (Player->GetState() != MarioState::TelePortEnd && Player->GetState() != MarioState::TelePorting) {
+				Player->Hit();
 			}
 			return;
 		}
@@ -225,18 +229,18 @@ void MonsterBase::Crouch(float _DeltaTime)
 	if (ChangeTime >= 0) {
 		ChangeTime -= _DeltaTime;
 	}
-	
+
 	if (ChangeTime <= 4.0f && ChangeTime >= 0) {
 		SetAnimation("CrouchChange");
 	}
-	else if(ChangeTime <= 0){
+	else if (ChangeTime <= 0) {
 		SetMonsterState(MonsterState::Idle);
 	}
 
 }
 
 void MonsterBase::CrouchMove(float _DeltaTime)
-{
+{ 
 	IsEdge(_DeltaTime);
 	SpeedX.X = CrouchDefaultMoveSpeed * static_cast<int>(DirState);
 	GravityCheck(_DeltaTime);
@@ -272,7 +276,7 @@ void MonsterBase::Fly(float _DeltaTime)
 
 void MonsterBase::IdleStart()
 {
-	SetAnimation("Idle");   
+	SetAnimation("Idle");
 }
 
 void MonsterBase::CrouchStart()
@@ -287,6 +291,7 @@ void MonsterBase::CrouchMoveStart()
 {
 	BGMPlayer = UEngineSound::SoundPlay("Stomp.wav");
 	InteractiveDirCheck();
+	SetAnimation("Crouch");
 }
 
 void MonsterBase::DeadStart()

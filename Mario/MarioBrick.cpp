@@ -55,6 +55,7 @@ MarioBrick::~MarioBrick()
 
 void MarioBrick::BeginPlay()
 {
+	BlockBase::BeginPlay();
 	NoDir = true;
 	StartState = BlockState::Brick;
 	SetName("MarioBrick");
