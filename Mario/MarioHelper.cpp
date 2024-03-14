@@ -21,10 +21,10 @@ int MarioHelper::MarioTime = 1400;
 int MarioHelper::MarioCoinCount = 200;
 int MarioHelper::MarioWorldCount = 11;
 int MarioHelper::MarioTotalScore = 1000000;
-int MarioHelper::MarioLife = 0;
+int MarioHelper::MarioLife = 3;
 int MarioHelper::MonsterScore = 0;
 int MarioHelper::ItemScore = 0;
-std::string MarioHelper::PrevLevelName = "Stage1";
+std::string MarioHelper::PrevLevelName = "";
 bool MarioHelper::LevelEnd = false;
 bool MarioHelper::GameEnd = false;
 
@@ -38,7 +38,7 @@ std::string MarioHelper::GetNextLevel() {
 	return MarioHelper::NextLevelName;
 }
 
-std::string MarioHelper::NextLevelName = "Stage1";
+std::string MarioHelper::NextLevelName = "";
 
 
 bool MarioHelper::StageOneInit = false;
