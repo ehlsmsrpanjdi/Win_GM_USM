@@ -6,6 +6,7 @@
 #include <EnginePlatform/EngineSound.h>
 
 class MovingBlock;
+class ItemBase;
 // Ό³Έν :
 class Mario : public PhysicsActor
 {
@@ -15,6 +16,7 @@ public:
 	~Mario();
 
 	friend MovingBlock;
+	friend ItemBase;
 
 	// delete Function
 	Mario(const Mario& _Other) = delete;
@@ -24,16 +26,17 @@ public:
 	void SetState(MarioState _State);
 	void Hit();
 
-	void SetMarioClassState(MarioClass _MarioClass);
 
 	static FVector PlayerLocation;
 
 	void SetAnimation(std::string _Name) override;
+
 	MarioState GetState() {
 		return State;
 	}
 
 protected:
+	void SetMarioClassState(MarioClass _MarioClass);
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void SetActorCameraPos();

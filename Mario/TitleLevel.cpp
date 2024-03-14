@@ -15,7 +15,7 @@ UTitleLevel::~UTitleLevel()
 void UTitleLevel::BeginPlay()
 {
 	SpawnActor<TitleLogo>();
-	}
+}
 
 void UTitleLevel::Tick(float _DeltaTime)
 {

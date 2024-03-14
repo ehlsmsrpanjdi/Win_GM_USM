@@ -46,7 +46,7 @@ void EndingMessage::Tick(float _DeltaTime)
 
 void EndingMessage::CollisionEvent(float _DeltaTime)
 {
-	std::vector<UCollision*> Result;
+		std::vector<UCollision*> Result;
 	if (true == EndingMessageBoxCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
 	{
 		BGMPlayer = UEngineSound::SoundPlay("Ending.mp3");
