@@ -17,7 +17,7 @@ void Plant::BeginPlay()
 	NoDir = true;
 	Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 	Renderer->SetImage("Plant.png");
-	Renderer->SetTransform({ {0,0 }, { 512,512 } });
+	Renderer->SetTransform({ {0,0 }, { 768,768} });
 
 
 	AnimationAuto(Renderer, "Idle", 0, 1, 0.2f, true);
@@ -25,7 +25,7 @@ void Plant::BeginPlay()
 	SetAnimation("Idle");
 
 	BodyCollision = CreateCollision(MarioCollisionOrder::Monster);
-	BodyCollision->SetTransform({ { 0, -32 }, { 64, 64} });
+	BodyCollision->SetTransform({ { 0, -32 }, { 96, 96} });
 	CheatCollision = CreateCollision(MarioCollisionOrder::Object);
 	CheatCollision->SetTransform({ {0,0},{160,640} });
 }
@@ -34,7 +34,7 @@ void Plant::StateUpdate(float _DeltaTime)
 {
 	if (StartLocation.X == 0 && StartLocation.Y == 0) {
 		StartLocation = GetActorLocation();
-		NextLocation = StartLocation + FVector{ 0.f, +64.f };
+		NextLocation = StartLocation + FVector{ 0.f, +96.f };
 	}
 
 	FVector CurLocation = GetActorLocation();
@@ -49,6 +49,7 @@ void Plant::StateUpdate(float _DeltaTime)
 		break;
 	case 2:
 	{
+		BodyCollision->ActiveOff();
 		TotalMove += _DeltaTime;
 		std::vector<UCollision*> Result;
 		if (CheatCollision->CollisionCheck(MarioCollisionOrder::Player, Result)) {
@@ -61,6 +62,7 @@ void Plant::StateUpdate(float _DeltaTime)
 	}
 	break;
 	case 3:
+		BodyCollision->ActiveOn();
 		AddActorLocation(FVector::Up * _DeltaTime * SpawnTime);
 		if (CurLocation.Y < StartLocation.Y) {
 			PlantState++;

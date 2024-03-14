@@ -74,14 +74,10 @@ void LastLevel::BeginPlay()
 	ItemBlock->SetItemBlockDefault(1, ItemState::MushRoom);
 
 	FireWall* wall;
-	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
-	wall->SetActorLocation({ 1504,422});
 
 	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
 	wall->SetActorLocation({ 1952,677});
 
-	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
-	wall->SetActorLocation({ 2400,422 });
 
 	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
 	wall->SetActorLocation({ 3170,422 });
@@ -96,16 +92,10 @@ void LastLevel::BeginPlay()
 	wall->SetActorLocation({ 4895,615});
 
 	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
-	wall->SetActorLocation({ 5153,293});
-
-	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
 	wall->SetActorLocation({ 5407,615 });
 
 	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
 	wall->SetActorLocation({ 5663,293 });
-
-	wall = SpawnActor<FireWall>(MarioRenderOrder::Monster);
-	wall->SetActorLocation({ 5920,615 });
 	
 	Koopa* Boss = SpawnActor<Koopa>(MarioRenderOrder::Monster);
 	Boss->SetActorLocation({ 8800,615 });

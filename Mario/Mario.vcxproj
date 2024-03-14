@@ -67,6 +67,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GameOverLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameOverLogo.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GroundBlock.h">
       <SubType>
       </SubType>
@@ -276,6 +284,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Flat.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameOverLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameOverLogo.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -136,8 +136,8 @@ void Mario::Tick(float _DeltaTime)
 
 	if (UEngineInput::IsDown('0')) {
 		DebugMod++;
-		if (DebugMod == 3) {
-			Debug = 0;
+		if (DebugMod >= 3) {
+			DebugMod = 0;
 		}
 		switch (DebugMod)
 		{
@@ -790,6 +790,7 @@ void Mario::DirChange(float _DeltaTime)
 
 void Mario::SetAnimation(std::string _Name)
 {
+
 	std::string Name = GetAnimationName(_Name);
 	switch (MarioHelper::MyMarioClass)
 	{
@@ -803,10 +804,6 @@ void Mario::SetAnimation(std::string _Name)
 		break;
 	default:
 		break;
-	}
-
-	if (Name._Equal("Big_Bigger_Left") || Name._Equal("Big_Bigger_Right")) {
-		return;
 	}
 
 	Renderer->ChangeAnimation(Name);

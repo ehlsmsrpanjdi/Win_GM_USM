@@ -36,6 +36,7 @@ void FireWall::Tick(float _DeltaTime)
 {
 	PhysicsActor::Tick(_DeltaTime);
 	Spin(_DeltaTime);
+	CollisionEvent(_DeltaTime);
 }
 
 void FireWall::CollisionEvent(float _DeltaTime)

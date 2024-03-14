@@ -6,6 +6,7 @@
 #include "TitleLogo.h"
 #include "MarioHelper.h"
 #include "MarioUI.h"
+#include <conio.h>
 
 UTitleLevel::UTitleLevel()
 {
@@ -40,7 +41,7 @@ void UTitleLevel::BeginPlay()
 
 void UTitleLevel::Tick(float _DeltaTime)
 {
-	if (UEngineInput::IsDown(VK_TAB)) {
+	if (UEngineInput::IsAnykeyDown()) {
 		GEngine->ChangeLevel("Loading");
 	}
 }

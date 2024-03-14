@@ -23,7 +23,7 @@ protected:
 	UCollision* CheatCollision = nullptr;
 	FVector StartLocation = { 0.f,0.f,0.f,0.f };
 	FVector NextLocation = {};
-	float SpawnTime = 64.f;
+	float SpawnTime = 96.f;
 	float TotalMove = 0.f;
 
 	int PlantState = 1;

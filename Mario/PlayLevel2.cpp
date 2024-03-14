@@ -78,7 +78,7 @@ void PlayLevel2::BeginPlay()
 
 	PipePlant* PPP;
 	PPP = SpawnActor<PipePlant>(MarioRenderOrder::Monster);
-	PPP->SetActorLocation({ 10305, 770});
+	PPP->SetActorLocation({ 10305, 802});
 
 	MovingBlock* MBlock;
 	MBlock = SpawnActor<MovingBlock>(MarioRenderOrder::Block);

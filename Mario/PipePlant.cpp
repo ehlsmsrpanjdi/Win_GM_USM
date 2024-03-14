@@ -22,7 +22,7 @@ void PipePlant::StateUpdate(float _DeltaTime)
 
 	if (StartLocation.X == 0 && StartLocation.Y == 0) {
 		StartLocation = GetActorLocation();
-		NextLocation = StartLocation + FVector{ 0.f, -64.f };
+		NextLocation = StartLocation + FVector{ 0.f, -96.f };
 	}
 
 	FVector CurLocation = GetActorLocation();

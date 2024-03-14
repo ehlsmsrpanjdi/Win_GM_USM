@@ -161,6 +161,12 @@
     <ClInclude Include="ItemScore.h">
       <Filter>Actor\Item</Filter>
     </ClInclude>
+    <ClInclude Include="GameOverLevel.h">
+      <Filter>Level\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverLogo.h">
+      <Filter>Level\GameOver</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fire.cpp">
@@ -323,6 +329,12 @@
     <ClCompile Include="ItemScore.cpp">
       <Filter>Actor\Item</Filter>
     </ClCompile>
+    <ClCompile Include="GameOverLevel.cpp">
+      <Filter>Level\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverLogo.cpp">
+      <Filter>Level\GameOver</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Actor">
@@ -390,6 +402,9 @@
     </Filter>
     <Filter Include="Level\Stage3">
       <UniqueIdentifier>{ef32aa2c-2e4d-48d1-ba75-d9079be7ae1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\GameOver">
+      <UniqueIdentifier>{b1372223-9444-46af-b52e-7ffba9902319}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

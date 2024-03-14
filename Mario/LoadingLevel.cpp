@@ -5,11 +5,11 @@
 #include "LoadingUI.h"
 #include "Mario.h"
 
-LoadingLevel::LoadingLevel() 
+LoadingLevel::LoadingLevel()
 {
 }
 
-LoadingLevel::~LoadingLevel() 
+LoadingLevel::~LoadingLevel()
 {
 }
 
@@ -34,17 +34,24 @@ void LoadingLevel::BeginPlay()
 
 void LoadingLevel::Tick(float _DeltaTime)
 {
-	
+
 	if (LevelChangeTime <= 0) {
 		std::string LevelName = MarioHelper::GetPrevLevel();
 		std::string NextName = MarioHelper::GetNextLevel();
-		if (LevelName._Equal(NextName)) {
 		LevelChangeTime = 3.f;
-		MarioHelper::CreateLevel(LevelName);
-		GEngine->ChangeLevel(LevelName);
+
+		if (MarioHelper::MarioLife <= 0) {
+			GEngine->ChangeLevel("GameOver");
+
+			return;
 		}
+
+		if (LevelName._Equal(NextName)) {
+			MarioHelper::CreateLevel(LevelName);
+			GEngine->ChangeLevel(LevelName);
+		}
+
 		else {
-			LevelChangeTime = 3.f;
 			MarioHelper::CreateLevel(NextName);
 			GEngine->ChangeLevel(NextName);
 		}
@@ -59,7 +66,6 @@ void LoadingLevel::LevelStart(ULevel* Level)
 {
 	Mario::PlayerLocation = { 0,0 };
 	MarioHelper::CameraX = 0;
-	MarioHelper::GameEnd = false;
 	MarioHelper::MarioWorldSet();
 	MarioHelper::CameraOff = false;
 	MarioHelper::SoundOff = false;
