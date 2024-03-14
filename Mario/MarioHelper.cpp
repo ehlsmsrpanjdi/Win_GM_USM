@@ -5,6 +5,8 @@
 #include "Mario.h"
 #include "PlayLevel2.h"
 #include "PlayLevel3.h"
+#include "GameOverLevel.h"
+#include "TitleLevel.h"
 
 UWindowImage* MarioHelper::ColMapImage = nullptr;
 FVector MarioHelper::Gravity = { 0.f, 1500.0f };
@@ -58,6 +60,12 @@ MarioHelper::~MarioHelper()
 
 void MarioHelper::CreateLevel(std::string _LevelName)
 {
+	if (_LevelName == "Title") {
+		GEngine->CreateLevel<UTitleLevel>("Title");
+	}
+	if (_LevelName == "GameOver") {
+		GEngine->CreateLevel<GameOverLevel>("GameOver");
+	}
 	if (_LevelName == "Stage1") {
 		GEngine->CreateLevel<UPlayLevel>("Stage1");
 	}

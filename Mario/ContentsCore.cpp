@@ -80,8 +80,6 @@ void ContentsCore::BeginPlay()
 
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<UTitleLevel>("Title");
-	CreateLevel<UPlayLevel>("Stage1");
-	CreateLevel<GameOverLevel>("GameOver");
 
 	ChangeLevel("Title");
 }

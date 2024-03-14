@@ -41,6 +41,7 @@ void LoadingLevel::Tick(float _DeltaTime)
 		LevelChangeTime = 3.f;
 
 		if (MarioHelper::MarioLife <= 0) {
+			MarioHelper::CreateLevel("GameOver");
 			GEngine->ChangeLevel("GameOver");
 
 			return;

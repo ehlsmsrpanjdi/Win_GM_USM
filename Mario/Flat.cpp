@@ -56,7 +56,6 @@ void Flat::CollisionEvent(float _DeltaTime)
 		Player->SetState(MarioState::EndingMove);
 		MarioHelper::GameEnd = true;
 		BGMPlayer = UEngineSound::SoundPlay("KoopaFall.mp3");
-		MarioHelper::SetNextLevel("Stage1");
 	}
 }
 	void Flat::FlatDestroy(float _DeltaTime)

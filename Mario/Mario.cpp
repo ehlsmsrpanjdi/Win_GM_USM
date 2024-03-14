@@ -1114,6 +1114,7 @@ void Mario::Ending(float _DeltaTime)
 		EndingTime -= _DeltaTime;
 	}
 	else {
+		MarioHelper::CreateLevel("Title");
 		GEngine->ChangeLevel("Title");
 		EndingTime = 16.f;
 	}

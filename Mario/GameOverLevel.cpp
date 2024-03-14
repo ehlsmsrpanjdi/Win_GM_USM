@@ -13,20 +13,18 @@ GameOverLevel::~GameOverLevel()
 
 void GameOverLevel::BeginPlay()
 {
-
 	SpawnActor<GameOverLogo>();
 }
 
 void GameOverLevel::LevelStart(ULevel* _Level)
 {
-	
+	MarioHelper::SoundOff = true;
+	MarioHelper::SetPrevLevel("GameOver");
 }
 
 void GameOverLevel::LevelEnd(ULevel* _Level)
 {
-	MarioHelper::SetPrevLevel("Stage1");
 	MarioHelper::SetNextLevel("Stage1");
-	MarioHelper::CreateLevel("Stage1");
 }
 
 void GameOverLevel::Tick(float _DeltaTime)
@@ -38,6 +36,8 @@ void GameOverLevel::Tick(float _DeltaTime)
 		RestartTime = 5.0f;
 		MarioHelper::MarioLife = 3;
 		MarioHelper::MarioTotalScore = 1000000;
+		GEngine->DestroyLevel("GameOver");
+		MarioHelper::CreateLevel("Title");
 		GEngine->ChangeLevel("Title");
 	}
 }
