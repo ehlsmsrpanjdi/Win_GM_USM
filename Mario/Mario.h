@@ -116,7 +116,6 @@ protected:
 	float TeleportingTime = 1.f;
 	float EndingTime = 16.f;
 
-	int DebugMod = 0;
 	float CurFrame = 0;
 	float CurFrameTime = 2;
 	int CurFrameCount = 0;

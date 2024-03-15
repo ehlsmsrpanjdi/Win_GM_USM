@@ -224,10 +224,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="TestLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="TitleLogo.h">
       <SubType>
       </SubType>
@@ -441,10 +437,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Stage2Pipe.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="TestLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>

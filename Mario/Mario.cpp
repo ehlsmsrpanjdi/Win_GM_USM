@@ -135,20 +135,16 @@ void Mario::Tick(float _DeltaTime)
 	}
 
 	if (UEngineInput::IsDown('0')) {
-		DebugMod++;
-		if (DebugMod >= 3) {
-			DebugMod = 0;
-		}
-		switch (DebugMod)
+		switch (MarioHelper::MyMarioClass)
 		{
-		case 0:
-			SetMarioClassState(MarioClass::Small);
-			break;
-		case 1:
+		case MarioClass::Small:
 			SetMarioClassState(MarioClass::Big);
 			break;
-		case 2:
+		case MarioClass::Big:
 			SetMarioClassState(MarioClass::Fire);
+			break;
+		case MarioClass::Fire:
+			SetMarioClassState(MarioClass::Small);
 			break;
 		default:
 			break;

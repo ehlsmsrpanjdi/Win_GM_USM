@@ -30,10 +30,9 @@ void PlayLevel3::BeginPlay()
 		MarioHelper::StageThreeInit = true;
 		UEngineDirectory NewDir;
 
-		NewDir.MoveParent();
-		NewDir.Move("ContentsResources");
-		NewDir.Move("Map");
-		NewDir.Move("Stage3");
+		NewDir.MoveToSearchChild("ContentsResources");
+		NewDir.MoveToSearchChild("Map");
+		NewDir.MoveToSearchChild("Stage3");
 
 		std::list<UEngineFile> AllFileList = NewDir.AllFile({ ".png", ".bmp" }, true);
 

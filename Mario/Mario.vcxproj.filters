@@ -65,9 +65,6 @@
     <ClInclude Include="LoadingLevel.h">
       <Filter>Level\UtilityLevel</Filter>
     </ClInclude>
-    <ClInclude Include="TestLevel.h">
-      <Filter>Level\UtilityLevel</Filter>
-    </ClInclude>
     <ClInclude Include="LoadingUI.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -231,9 +228,6 @@
       <Filter>Actor\Fire</Filter>
     </ClCompile>
     <ClCompile Include="LoadingLevel.cpp">
-      <Filter>Level\UtilityLevel</Filter>
-    </ClCompile>
-    <ClCompile Include="TestLevel.cpp">
       <Filter>Level\UtilityLevel</Filter>
     </ClCompile>
     <ClCompile Include="LoadingUI.cpp">

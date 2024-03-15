@@ -28,10 +28,8 @@ void ContentsCore::BeginPlay()
 	UEngineCore::BeginPlay();
 	UEngineDirectory NewDir;
 
-	NewDir.MoveParent();
-
-	NewDir.Move("ContentsResources");
-	NewDir.Move("Global");
+	NewDir.MoveToSearchChild("ContentsResources");
+	NewDir.MoveToSearchChild("Global");
 
 	std::list<UEngineFile> NewList = NewDir.AllFile({ ".png", ".bmp" }, true);
 

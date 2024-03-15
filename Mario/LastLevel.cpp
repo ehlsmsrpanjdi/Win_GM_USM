@@ -33,10 +33,9 @@ void LastLevel::BeginPlay()
 		MarioHelper::LastStageInit = true;
 		UEngineDirectory NewDir;
 
-		NewDir.MoveParent();
-		NewDir.Move("ContentsResources");
-		NewDir.Move("Map");
-		NewDir.Move("LastStage");
+		NewDir.MoveToSearchChild("ContentsResources");
+		NewDir.MoveToSearchChild("Map");
+		NewDir.MoveToSearchChild("LastStage");
 
 		std::list<UEngineFile> AllFileList = NewDir.AllFile({ ".png", ".bmp" }, true);
 

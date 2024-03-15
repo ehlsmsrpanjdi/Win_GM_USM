@@ -37,10 +37,9 @@ void UPlayLevel::BeginPlay()
 		MarioHelper::StageOneInit = true;
 		UEngineDirectory NewDir;
 
-		NewDir.MoveParent();
-		NewDir.Move("ContentsResources");
-		NewDir.Move("Map");
-		NewDir.Move("Stage1");
+		NewDir.MoveToSearchChild("ContentsResources");
+		NewDir.MoveToSearchChild("Map");
+		NewDir.MoveToSearchChild("Stage1");
 
 		std::list<UEngineFile> AllFileList = NewDir.AllFile({ ".png", ".bmp" }, true);
 
@@ -141,7 +140,7 @@ void UPlayLevel::BeginPlay()
 
 	MarioBrick* Itembrick;
 	Itembrick = SpawnActor<MarioBrick>(MarioRenderOrder::Block);
-	Itembrick->SetItemBlockDefault(3, ItemState::Coin, BlockState::ItemBrick);
+	Itembrick->SetItemBrickDefault(3, ItemState::Coin, BlockState::ItemBrick);
 	Itembrick->SetActorLocation({ 5050,650 });
 
 	itemblock = SpawnActor<MarioBlock>(MarioRenderOrder::Block);

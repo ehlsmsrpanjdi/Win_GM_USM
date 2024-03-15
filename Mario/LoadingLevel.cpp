@@ -40,13 +40,6 @@ void LoadingLevel::Tick(float _DeltaTime)
 		std::string NextName = MarioHelper::GetNextLevel();
 		LevelChangeTime = 3.f;
 
-		if (MarioHelper::MarioLife <= 0) {
-			MarioHelper::CreateLevel("GameOver");
-			GEngine->ChangeLevel("GameOver");
-
-			return;
-		}
-
 		if (LevelName._Equal(NextName)) {
 			MarioHelper::CreateLevel(LevelName);
 			GEngine->ChangeLevel(LevelName);
@@ -71,6 +64,11 @@ void LoadingLevel::LevelStart(ULevel* Level)
 	MarioHelper::CameraOff = false;
 	MarioHelper::SoundOff = false;
 	GEngine->DestroyLevel(MarioHelper::GetPrevLevel());
+	if (MarioHelper::MarioLife <= 0) {
+		MarioHelper::CreateLevel("GameOver");
+		GEngine->ChangeLevel("GameOver");
+		return;
+	}
 }
 
 void LoadingLevel::LevelEnd(ULevel* Level)
