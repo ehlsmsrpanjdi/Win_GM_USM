@@ -26,6 +26,9 @@ void UTitleLevel::Tick(float _DeltaTime)
 
 void UTitleLevel::LevelStart(ULevel* _Level)
 {
+	if (MarioHelper::GetPrevLevel() == "LastStage") {
+		GEngine->DestroyLevel("LastStage");
+	}
 	MarioHelper::SoundOff = true;
 	MarioHelper::SetPrevLevel("Title");
 	MarioHelper::SetNextLevel("Stage1");
