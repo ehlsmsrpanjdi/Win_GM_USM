@@ -4,7 +4,7 @@
 
 
 // Ό³Έν :
-class MarioBrick : public MarioBlock
+class MarioBrick : public BlockBase
 {
 public:
 	// constrcuter destructer
